@@ -4,18 +4,21 @@ import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { UsertableComponent } from './usertable/usertable.component';
-import { MainComponent } from './main/main.component'; // Passe den Pfad entsprechend deiner Ordnerstruktur an
-
+import { MainComponent } from './main/main.component';
+import { InsertUserComponent } from './insert-user/insert-user.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     UsertableComponent,
-    MainComponent
+    MainComponent,
+    InsertUserComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
