@@ -8,11 +8,13 @@ import {HttpClient} from "@angular/common/http";
 })
 export class UsertableComponent implements OnInit {
   userTableData: any[] = [];
+  refreshInterval: any; // Variable to hold the interval reference
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.fetchUserData();
+    this.startAutoRefresh(); // Start the auto-refresh mechanism
   }
 
   fetchUserData(): void {
@@ -24,5 +26,17 @@ export class UsertableComponent implements OnInit {
         console.log('Error fetching user data:', error);
       }
     );
+  }
+
+  startAutoRefresh(): void {
+    // Set the refresh interval (e.g., every 5 seconds)
+    this.refreshInterval = setInterval(() => {
+      this.fetchUserData(); // Fetch the latest data
+    }, 5000); // Adjust the interval duration as needed
+  }
+
+  stopAutoRefresh(): void {
+    // Clear the refresh interval when needed
+    clearInterval(this.refreshInterval);
   }
 }
