@@ -175,10 +175,11 @@ input[type=checkbox]:not(old):checked+label>span:before {
     margin-right:0;
   }
   .signup-image {
-    margin-left:0;
-    margin-right:0;
-    margin-top:50px;
-    order:2;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 50px;
+    order: 2;
+    text-align: center;
   }
   .signup-form,
   .signup-image {

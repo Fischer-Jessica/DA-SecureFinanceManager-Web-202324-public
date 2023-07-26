@@ -176,10 +176,11 @@ input[type=checkbox]:not(old):checked+label>span:before {
     -webkit-justify-content:center;
   }
   .signin-image {
-    margin-left:0;
-    margin-right:0;
-    margin-top:50px;
-    order:2;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 50px;
+    order: 2;
+    text-align: center;
   }
   .signin-form,
   .signin-image {
@@ -188,13 +189,20 @@ input[type=checkbox]:not(old):checked+label>span:before {
   .form-button {
     text-align:center
   }
+
   .signin-form {
-    order:1;
-    margin-right:0;
-    margin-left:0;
-    padding:0 30px
+    order: 1;
+    margin-right: 0;
+    margin-left: 0;
+    padding: 0 30px
   }
+
   .form-title {
-    text-align:center
+    text-align: center
   }
+}
+
+.impressum {
+  padding: 0;
+  margin: 0;
 }
