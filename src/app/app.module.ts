@@ -7,6 +7,8 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import {SignInComponent} from './sign-in/sign-in.component';
 import {AuthentificationComponent} from './authentification/authentification.component';
 import {ImprintComponent} from './imprint/imprint.component';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import {ImprintComponent} from './imprint/imprint.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    HttpClientModule,
     AppRoutingModule // Add the AppRoutingModule to the imports array
   ],
   providers: [],

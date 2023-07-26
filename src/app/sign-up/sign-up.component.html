@@ -5,30 +5,35 @@
       <div class="signup-content">
         <div class="signup-form">
           <h2 class="form-title">Sign up</h2>
-          <form method="POST" class="register-form" id="register-form">
+          <form (ngSubmit)="insertNewUserInAPI()" class="register-form" id="register-form">
             <div class="form-group">
               <label for="firstName"></label>
-              <input type="text" name="firstName" id="firstName" placeholder="Your first name">
+              <input type="text" name="firstName" id="firstName" placeholder="Your first name"
+                     [(ngModel)]="newUser.firstName" required>
             </div>
             <div class="form-group">
               <label for="lastName"></label>
-              <input type="text" name="lastName" id="lastName" placeholder="Your last name">
+              <input type="text" name="lastName" id="lastName" placeholder="Your last name"
+                     [(ngModel)]="newUser.lastName" required>
             </div>
             <div class="form-group">
               <label for="username"><i></i></label>
-              <input type="text" name="username" id="username" placeholder="Your Username">
+              <input type="text" name="username" id="username" placeholder="Your Username"
+                     [(ngModel)]="newUser.username" required>
             </div>
             <div class="form-group">
               <label for="email"><i></i></label>
-              <input type="email" name="email" id="email" placeholder="Your Email">
+              <input type="email" name="email" id="email" placeholder="Your Email" [(ngModel)]="newUser.emailAddress"
+                     required>
             </div>
             <div class="form-group">
               <label for="pass"><i></i></label>
-              <input type="password" name="pass" id="pass" placeholder="Password">
+              <input type="password" name="pass" id="pass" placeholder="Password" [(ngModel)]="newUser.password"
+                     required>
             </div>
             <div class="form-group">
               <label for="re_pass"><i></i></label>
-              <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password">
+              <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" required>
             </div>
             <div class="form-group">
               <input type="checkbox" name="agree-term" id="agree-term" class="agree-term">
