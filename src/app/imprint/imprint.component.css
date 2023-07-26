@@ -8,7 +8,6 @@
 
 .site-footer hr {
   border-top-color: #bbb;
-  opacity: 0.5
 }
 
 .site-footer h6 {
@@ -16,7 +15,7 @@
   font-size: 16px;
   text-transform: uppercase;
   margin-top: 5px;
-  letter-spacing: 2px
+  letter-spacing: 2px;
 }
 
 .site-footer a {
@@ -30,15 +29,15 @@
 
 .footer-links {
   padding-left: 0;
-  list-style: none
+  list-style: none;
 }
 
 .footer-links li {
-  display: block
+  display: block;
 }
 
 .footer-links a {
-  color: #737373
+  color: #737373;
 }
 
 .footer-links a:active, .footer-links a:focus, .footer-links a:hover {
@@ -47,43 +46,41 @@
 }
 
 .footer-links.inline li {
-  display: inline-block
+  display: inline-block;
 }
 
 .copyright-text {
-  margin: 0
-}
-
-@media screen and (max-width: 1200px) {
-  .container {
-    width: calc(100% - 30px);
-    max-width: 100%
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .container {
-    max-width: 1200px
-  }
+  margin: 0;
 }
 
 @media screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding-right: 0px; /* Add padding to reduce the space between columns and the edge */
+    padding-left: 0px;
+  }
+
   .row {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: center;
+    align-items: center;
+    align-content: center;
+    margin: 0;
+    padding: 0;
   }
 
   .column {
-    width: 50%;
+    width: 100%;
+    padding-left: 0px;
+    margin-bottom: 20px;
   }
 
   #about {
     width: 100%;
+    text-align: center;
   }
 }
-
 
 .row {
   display: flex;
