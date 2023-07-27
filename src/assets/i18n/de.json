@@ -1,0 +1,10 @@
+{
+  "sign-in": {
+    "headline_sign_in": "Anmelden",
+    "placeholder_username": "Dein Benutzername",
+    "placeholder_password": "Dein Password",
+    "checkbox_remember_me": "Dieses Gerät speichern",
+    "button_sign_in": "Anmelden",
+    "text_create_account": "Registrieren"
+  }
+}

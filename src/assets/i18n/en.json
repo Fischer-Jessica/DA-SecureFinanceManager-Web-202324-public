@@ -1,0 +1,10 @@
+{
+  "sign-in": {
+    "headline_sign_in": "Sign in",
+    "placeholder_username": "Your username",
+    "placeholder_password": "Your password",
+    "checkbox_remember_me": "Remember me",
+    "button_sign_in": "Sign in",
+    "text_create_account": "Create an account."
+  }
+}

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserService} from "../services/userService";
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -16,7 +17,11 @@ export class SignInComponent {
 
   constructor(
     private router: Router,
-    private userService: UserService) {
+    private userService: UserService,
+    private translate: TranslateService) {
+    translate.addLangs(['en', 'de'])
+    translate.setDefaultLang('en');
+    translate.use('de');
   }
 
   logIntoTheOverview(): void {
