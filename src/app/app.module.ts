@@ -9,6 +9,7 @@ import {AuthentificationComponent} from './authentification/authentification.com
 import {ImprintComponent} from './imprint/imprint.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    CommonModule,
     AppRoutingModule // Add the AppRoutingModule to the imports array
   ],
   providers: [],

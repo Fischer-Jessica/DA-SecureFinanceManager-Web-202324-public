@@ -1,14 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-
-interface User {
-  username: string;
-  password: string;
-  emailAddress: string;
-  firstName: string;
-  lastName: string;
-}
+import {User} from "../models/user";
+import {UserService} from "../services/userService";
 
 @Component({
   selector: 'sign-up',
@@ -22,33 +15,21 @@ export class SignUpComponent {
     emailAddress: '',
     firstName: '',
     lastName: '',
-  }
+  };
 
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(private router: Router, private userService: UserService) {
   }
 
   insertNewUserInAPI(): void {
-    const apiUrl = 'http://localhost:8080/financial-overview/users';
 
-    const headers = new HttpHeaders().set('Content-Type', 'application/json');
-
-    const requestBody = {
-      username: this.newUser.username,
-      password: this.newUser.password,
-      eMailAddress: this.newUser.emailAddress,
-      firstName: this.newUser.firstName,
-      lastName: this.newUser.lastName,
-    };
-
-    this.http.post<number>(apiUrl, null, {headers, params: requestBody}).subscribe(
-      (response) => {
-        console.log('API Response:', response);
+    this.userService.signUp(this.newUser).subscribe({
+      next: (response) => {
+        console.log(response);
       },
-      (error) => {
-        console.log('Error adding user:', error);
+      error: (err) => {
+        console.log(err);
       }
-    );
-
+    });
   }
 
   goToSignIn() {
