@@ -6,6 +6,7 @@
 
 - [x] wenn die Größe des Fensters sich verringert sollten die Spalten untereinander angezeigt werden
 - [x] irgendwie werden die Sachen nicht mehr ganz mittig angezeigt
+- [] noch mehr Übersetzung von Nöten
 
 ### sign-up and sign-in
 

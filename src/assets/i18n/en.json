@@ -19,5 +19,13 @@
     "link_terms": "Terms of service",
     "button_sign_up": "Sign up",
     "text_sign_in": "I am already a member"
+  },
+  "imprint": {
+    "headline_about": "About",
+    "text_about": "FinancialOverview.com <i>Trust is good, control is better.</i> With our user-friendly interface, you can effortlessly track your bank accounts, credit cards, and expenses, gaining valuable insights into your financial health. We believe that having a clear overview of your finances is essential to making informed decisions and securing a stable financial future.",
+    "headline_app": "App",
+    "text_app": "We have our own app!",
+    "headline_quick_links": "Quick Links",
+    "link_about_us": "About Us"
   }
 }

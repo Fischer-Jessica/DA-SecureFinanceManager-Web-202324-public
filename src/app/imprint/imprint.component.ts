@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'imprint',
@@ -7,5 +8,9 @@ import {Component} from '@angular/core';
 })
 
 export class ImprintComponent {
-
+  constructor(private translate: TranslateService) {
+    translate.addLangs(['en', 'de'])
+    translate.setDefaultLang('en');
+    translate.use('de');
+  }
 }
