@@ -23,6 +23,7 @@ export class SignInComponent {
     this.userService.logIn(this.username, this.password).subscribe({
       next: (response) => {
         console.log(response);
+        this.router.navigateByUrl('/logged-in-homepage')
       },
       error: (err) => {
         console.log(err);

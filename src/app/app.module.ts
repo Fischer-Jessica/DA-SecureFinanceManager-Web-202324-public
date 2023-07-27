@@ -10,6 +10,7 @@ import {ImprintComponent} from './imprint/imprint.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from "@angular/common";
+import {LoggedInHomepageNavbarComponent} from './logged-in-homepage-navbar/logged-in-homepage-navbar.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {CommonModule} from "@angular/common";
     SignUpComponent,
     SignInComponent,
     AuthentificationComponent,
-    ImprintComponent
+    ImprintComponent,
+    LoggedInHomepageNavbarComponent
   ],
   imports: [
     BrowserModule,
