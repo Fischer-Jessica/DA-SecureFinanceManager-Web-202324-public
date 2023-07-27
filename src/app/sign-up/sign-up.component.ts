@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {User} from "../models/user";
 import {UserService} from "../services/userService";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'sign-up',
@@ -17,7 +18,12 @@ export class SignUpComponent {
     lastName: '',
   };
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router,
+              private userService: UserService,
+              private translate: TranslateService) {
+    translate.addLangs(['en', 'de'])
+    translate.setDefaultLang('en');
+    translate.use('en');
   }
 
   insertNewUserInAPI(): void {

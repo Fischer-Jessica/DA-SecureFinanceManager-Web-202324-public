@@ -6,5 +6,18 @@
     "checkbox_remember_me": "Dieses Gerät speichern",
     "button_sign_in": "Anmelden",
     "text_create_account": "Registrieren"
+  },
+  "sign-up": {
+    "headline_sign_up": "Registrieren",
+    "placeholder_first_name": "Dein Vorname",
+    "placeholder_last_name": "Dein Nachname",
+    "placeholder_username": "Dein Benutzername",
+    "placeholder_email": "Deine E-Mail-Adresse",
+    "placeholder_password": "Dein Passwort",
+    "placeholder_repeat_password": "Bitte wiederhole dein Passwort.",
+    "checkbox_agree": "Ich stimme zu",
+    "link_terms": "Allgemeinen Geschäftsbedingungen",
+    "button_sign_up": "Registrieren",
+    "text_sign_in": "Ich habe bereits ein Konto."
   }
 }

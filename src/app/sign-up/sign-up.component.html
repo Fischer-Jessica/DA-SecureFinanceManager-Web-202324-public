@@ -4,49 +4,58 @@
     <div class="container">
       <div class="signup-content">
         <div class="signup-form">
-          <h2 class="form-title">Sign up</h2>
+          <h2 class="form-title" translate="sign-up.headline_sign_up"></h2>
           <form (ngSubmit)="insertNewUserInAPI()" class="register-form" id="register-form">
             <div class="form-group">
               <label for="firstName"></label>
-              <input type="text" name="firstName" id="firstName" placeholder="Your first name"
+              <input type="text" name="firstName" id="firstName"
+                     placeholder="{{'sign-up.placeholder_first_name' | translate}}"
                      [(ngModel)]="newUser.firstName" required>
             </div>
             <div class="form-group">
               <label for="lastName"></label>
-              <input type="text" name="lastName" id="lastName" placeholder="Your last name"
+              <input type="text" name="lastName" id="lastName"
+                     placeholder="{{'sign-up.placeholder_last_name' | translate}}"
                      [(ngModel)]="newUser.lastName" required>
             </div>
             <div class="form-group">
               <label for="username"><i></i></label>
-              <input type="text" name="username" id="username" placeholder="Your Username"
+              <input type="text" name="username" id="username"
+                     placeholder="{{'sign-up.placeholder_username' | translate}}"
                      [(ngModel)]="newUser.username" required>
             </div>
             <div class="form-group">
               <label for="email"><i></i></label>
-              <input type="email" name="email" id="email" placeholder="Your Email" [(ngModel)]="newUser.emailAddress"
+              <input type="email" name="email" id="email" placeholder="{{'sign-up.placeholder_email' | translate}}"
+                     [(ngModel)]="newUser.emailAddress"
                      required>
             </div>
             <div class="form-group">
               <label for="pass"><i></i></label>
-              <input type="password" name="pass" id="pass" placeholder="Password" [(ngModel)]="newUser.password"
+              <input type="password" name="pass" id="pass" placeholder="{{'sign-up.placeholder_password' | translate}}"
+                     [(ngModel)]="newUser.password"
                      required>
             </div>
             <div class="form-group">
               <label for="re_pass"><i></i></label>
-              <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" required>
+              <input type="password" name="re_pass" id="re_pass"
+                     placeholder="{{'sign-up.placeholder_repeat_password' | translate}}" required>
             </div>
             <div class="form-group">
               <input type="checkbox" name="agree-term" id="agree-term" class="agree-term">
-              <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree to all statements in <a href="#" class="term-service">Terms of service</a></label>
+              <label for="agree-term" class="label-agree-term"
+                     translate="sign-up.checkbox_agree"><span><span></span></span><a href="#" class="term-service"
+                                                                                     translate="sign-up.link_terms"></a></label>
             </div>
             <div class="form-group form-button">
-              <input type="submit" name="signup" id="signup" class="form-submit" value="Register">
+              <input type="submit" name="signup" id="signup" class="form-submit"
+                     value="{{'sign-up.button_sign_up' | translate}}">
             </div>
           </form>
         </div>
         <div class="signup-image">
           <figure><img src="./../../assets/images/sign___in-up/sign-up.png" alt="sign up image"></figure>
-          <a (click)="goToSignIn()" class="signup-image-link">I am already a member</a>
+          <a (click)="goToSignIn()" class="signup-image-link" translate="sign-up.text_sign_in"></a>
         </div>
       </div>
     </div>

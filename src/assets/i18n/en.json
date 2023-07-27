@@ -6,5 +6,18 @@
     "checkbox_remember_me": "Remember me",
     "button_sign_in": "Sign in",
     "text_create_account": "Create an account."
+  },
+  "sign-up": {
+    "headline_sign_up": "Sign up",
+    "placeholder_first_name": "Your first name",
+    "placeholder_last_name": "Your last name",
+    "placeholder_username": "Your username",
+    "placeholder_email": "Your e-mail-address",
+    "placeholder_password": "Your password",
+    "placeholder_repeat_password": "Please repeat your password.",
+    "checkbox_agree": "I agree to all statements in the",
+    "link_terms": "Terms of service",
+    "button_sign_up": "Sign up",
+    "text_sign_in": "I am already a member"
   }
 }

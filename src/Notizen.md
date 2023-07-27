@@ -7,6 +7,10 @@
 - [x] wenn die Größe des Fensters sich verringert sollten die Spalten untereinander angezeigt werden
 - [x] irgendwie werden die Sachen nicht mehr ganz mittig angezeigt
 
+### sign-up and sign-in
+
+- [] der übersetzte Text wird links von der Checkbox angezeigt, nicht rechts
+
 --------------------------------------------
 
 ## Bugs, die ich erst recherchieren muss
