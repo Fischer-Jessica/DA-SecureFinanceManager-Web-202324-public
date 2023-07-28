@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module'; // Import the AppRoutingM
 import {AppComponent} from './app.component';
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {SignInComponent} from './sign-in/sign-in.component';
-import {AuthentificationComponent} from './authentification/authentification.component';
+import {AuthenticationComponent} from './authentication/authentication.component';
 import {ImprintComponent} from './imprint/imprint.component';
 import {FormsModule} from '@angular/forms';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
@@ -14,6 +14,8 @@ import {LoggedInHomepageNavbarComponent} from './logged-in-homepage-navbar/logge
 
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {LoggedInHomepageComponent} from './logged-in-homepage/logged-in-homepage.component';
+import {LoggedInOverviewComponent} from './logged-in-overview/logged-in-overview.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -24,9 +26,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     SignUpComponent,
     SignInComponent,
-    AuthentificationComponent,
+    AuthenticationComponent,
     ImprintComponent,
-    LoggedInHomepageNavbarComponent
+    LoggedInHomepageNavbarComponent,
+    LoggedInHomepageComponent,
+    LoggedInOverviewComponent
   ],
   imports: [
     BrowserModule,

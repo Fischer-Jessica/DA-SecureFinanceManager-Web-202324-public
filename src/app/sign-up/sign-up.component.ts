@@ -31,6 +31,7 @@ export class SignUpComponent {
     this.userService.signUp(this.newUser).subscribe({
       next: (response) => {
         console.log(response);
+        this.router.navigateByUrl('/logged-in-homepage')
       },
       error: (err) => {
         console.log(err);

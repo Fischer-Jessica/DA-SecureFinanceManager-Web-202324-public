@@ -2,29 +2,30 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
-import {AuthentificationComponent} from "./authentification/authentification.component";
-import {LoggedInHomepageNavbarComponent} from "./logged-in-homepage-navbar/logged-in-homepage-navbar.component";
+import {AuthenticationComponent} from "./authentication/authentication.component";
+import {LoggedInHomepageComponent} from "./logged-in-homepage/logged-in-homepage.component";
+import {LoggedInOverviewComponent} from "./logged-in-overview/logged-in-overview.component";
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: '/sign-up', // Die gewünschte Startseite
-    pathMatch: 'full'
-  },
-  {
-    path: '',
-    component: AuthentificationComponent,
+    path: 'authentication',
+    component: AuthenticationComponent,
     children: [
+      {path: '', redirectTo: 'sign-in', pathMatch: 'full'},
       {path: 'sign-up', component: SignUpComponent},
       {path: 'sign-in', component: SignInComponent},
-      {path: 'logged-in-homepage', component: LoggedInHomepageNavbarComponent}
+      {path: 'logged-in-homepage', component: LoggedInHomepageComponent}
     ]
   },
   {
-    path: '',
-    redirectTo: '/logged-in-homepage',
-    pathMatch: 'full'
-  }
+    path: 'logged-in-homepage',
+    component: LoggedInHomepageComponent,
+    children: [
+      {path: '', redirectTo: 'logged-in-overview', pathMatch: 'full'},
+      {path: 'logged-in-overview', component: LoggedInOverviewComponent}
+    ]
+  },
+  {path: '', redirectTo: 'authentication', pathMatch: 'full'},
 ];
 
 

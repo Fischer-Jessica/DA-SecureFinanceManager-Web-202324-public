@@ -201,8 +201,3 @@ input[type=checkbox]:not(old):checked+label>span:before {
     text-align: center
   }
 }
-
-.impressum {
-  padding: 0;
-  margin: 0;
-}
