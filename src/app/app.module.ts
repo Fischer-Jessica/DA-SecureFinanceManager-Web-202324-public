@@ -3,12 +3,23 @@ import {BrowserModule} from '@angular/platform-browser';
 
 // own Components
 import {AppComponent} from './app.component';
+
+
 import {AuthenticationComponent} from './authentication/authentication.component';
+
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {SignInComponent} from './sign-in/sign-in.component';
+
+
 import {LoggedInHomepageComponent} from './logged-in-homepage/logged-in-homepage.component';
+
 import {LoggedInHomepageNavbarComponent} from './logged-in-homepage-navbar/logged-in-homepage-navbar.component';
-import {LoggedInOverviewComponent} from './logged-in-overview/logged-in-overview.component';
+
+import {LoggedInOverviewComponent} from './logged-in-homepage/logged-in-overview/logged-in-overview.component';
+import {LoggedInCategoriesComponent} from './logged-in-homepage/logged-in-categories/logged-in-categories.component';
+import {LoggedInLabelsComponent} from './logged-in-homepage/logged-in-labels/logged-in-labels.component';
+import {LoggedInDiagramsComponent} from './logged-in-homepage/logged-in-diagrams/logged-in-diagrams.component';
+
 import {ImprintComponent} from './imprint/imprint.component';
 
 // routing - imports
@@ -40,7 +51,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImprintComponent,
     LoggedInHomepageNavbarComponent,
     LoggedInHomepageComponent,
-    LoggedInOverviewComponent
+    LoggedInOverviewComponent,
+    LoggedInCategoriesComponent,
+    LoggedInLabelsComponent,
+    LoggedInDiagramsComponent
   ],
   imports: [
     BrowserModule,
