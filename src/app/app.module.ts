@@ -5,24 +5,26 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 
 
-import {AuthenticationComponent} from './authentication/authentication.component';
+import {AuthenticationComponent} from './views/authentication/authentication.component';
 
-import {SignUpComponent} from "./authentication/sign-up/sign-up.component";
-import {SignInComponent} from './authentication/sign-in/sign-in.component';
+import {SignUpComponent} from "./views/authentication/sign-up/sign-up.component";
+import {SignInComponent} from './views/authentication/sign-in/sign-in.component';
 
 
-import {LoggedInHomepageComponent} from './logged-in-homepage/logged-in-homepage.component';
+import {LoggedInHomepageComponent} from './views/logged-in-homepage/logged-in-homepage.component';
 
 import {
   LoggedInHomepageNavbarComponent
-} from './logged-in-homepage/logged-in-homepage-navbar/logged-in-homepage-navbar.component';
+} from './views/logged-in-homepage/logged-in-homepage-navbar/logged-in-homepage-navbar.component';
 
-import {LoggedInOverviewComponent} from './logged-in-homepage/logged-in-overview/logged-in-overview.component';
-import {LoggedInCategoriesComponent} from './logged-in-homepage/logged-in-categories/logged-in-categories.component';
-import {LoggedInLabelsComponent} from './logged-in-homepage/logged-in-labels/logged-in-labels.component';
-import {LoggedInDiagramsComponent} from './logged-in-homepage/logged-in-diagrams/logged-in-diagrams.component';
+import {LoggedInOverviewComponent} from './views/logged-in-homepage/logged-in-overview/logged-in-overview.component';
+import {
+  LoggedInCategoriesComponent
+} from './views/logged-in-homepage/logged-in-categories/logged-in-categories.component';
+import {LoggedInLabelsComponent} from './views/logged-in-homepage/logged-in-labels/logged-in-labels.component';
+import {LoggedInDiagramsComponent} from './views/logged-in-homepage/logged-in-diagrams/logged-in-diagrams.component';
 
-import {ImprintComponent} from './imprint/imprint.component';
+import {ImprintComponent} from './views/imprint/imprint.component';
 
 // routing - imports
 import {AppRoutingModule} from './app-routing.module'; // Import the AppRoutingModule
