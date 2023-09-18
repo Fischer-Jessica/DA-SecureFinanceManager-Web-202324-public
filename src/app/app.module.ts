@@ -39,7 +39,6 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 // Design - imports
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from "@angular/material/button";
-import {AuthenticationPageComponent} from './authentication-page/authentication-page.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -57,8 +56,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoggedInOverviewComponent,
     LoggedInCategoriesComponent,
     LoggedInLabelsComponent,
-    LoggedInDiagramsComponent,
-    AuthenticationPageComponent
+    LoggedInDiagramsComponent
   ],
   imports: [
     BrowserModule,
