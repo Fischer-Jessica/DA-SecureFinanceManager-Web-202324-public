@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {User} from "../models/user";
-import {UserService} from "../services/userService";
+import {User} from "../../models/user";
+import {UserService} from "../../services/userService";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -40,6 +40,6 @@ export class SignUpComponent {
   }
 
   goToSignIn() {
-    this.router.navigateByUrl('/sign-in');
+    this.router.navigateByUrl('/authentication/sign-in');
   }
 }

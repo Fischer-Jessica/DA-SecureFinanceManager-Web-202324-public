@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {SignUpComponent} from "./sign-up/sign-up.component";
-import {SignInComponent} from "./sign-in/sign-in.component";
+import {SignUpComponent} from "./authentication/sign-up/sign-up.component";
+import {SignInComponent} from "./authentication/sign-in/sign-in.component";
 import {AuthenticationComponent} from "./authentication/authentication.component";
 import {LoggedInHomepageComponent} from "./logged-in-homepage/logged-in-homepage.component";
 import {LoggedInOverviewComponent} from "./logged-in-homepage/logged-in-overview/logged-in-overview.component";

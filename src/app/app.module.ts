@@ -7,13 +7,15 @@ import {AppComponent} from './app.component';
 
 import {AuthenticationComponent} from './authentication/authentication.component';
 
-import {SignUpComponent} from "./sign-up/sign-up.component";
-import {SignInComponent} from './sign-in/sign-in.component';
+import {SignUpComponent} from "./authentication/sign-up/sign-up.component";
+import {SignInComponent} from './authentication/sign-in/sign-in.component';
 
 
 import {LoggedInHomepageComponent} from './logged-in-homepage/logged-in-homepage.component';
 
-import {LoggedInHomepageNavbarComponent} from './logged-in-homepage-navbar/logged-in-homepage-navbar.component';
+import {
+  LoggedInHomepageNavbarComponent
+} from './logged-in-homepage/logged-in-homepage-navbar/logged-in-homepage-navbar.component';
 
 import {LoggedInOverviewComponent} from './logged-in-homepage/logged-in-overview/logged-in-overview.component';
 import {LoggedInCategoriesComponent} from './logged-in-homepage/logged-in-categories/logged-in-categories.component';
@@ -37,6 +39,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 // Design - imports
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from "@angular/material/button";
+import {AuthenticationPageComponent} from './authentication-page/authentication-page.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -54,7 +57,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoggedInOverviewComponent,
     LoggedInCategoriesComponent,
     LoggedInLabelsComponent,
-    LoggedInDiagramsComponent
+    LoggedInDiagramsComponent,
+    AuthenticationPageComponent
   ],
   imports: [
     BrowserModule,

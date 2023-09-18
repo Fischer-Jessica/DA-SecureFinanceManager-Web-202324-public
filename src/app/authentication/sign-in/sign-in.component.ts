@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {UserService} from "../services/userService";
+import {UserService} from "../../services/userService";
 import {TranslateService} from "@ngx-translate/core";
 
 
@@ -37,6 +37,6 @@ export class SignInComponent {
   }
 
   goToSignUp() {
-    this.router.navigateByUrl('/sign-up');
+    this.router.navigateByUrl('/authentication/sign-up');
   }
 }
