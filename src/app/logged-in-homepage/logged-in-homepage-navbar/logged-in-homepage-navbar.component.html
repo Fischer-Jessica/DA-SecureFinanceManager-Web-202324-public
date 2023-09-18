@@ -1,26 +1,17 @@
-<div id="navbar-animmenu">
-  <ul class="show-dropdown main-navbar">
-    <script src="./logged-in-homepage-navbar.js"></script>
-    <div class="hori-selector">
-      <div class="left"></div>
-      <div class="right"></div>
-    </div>
+<ul>
     <li>
-      <img id="navbar-logo" src="../../../assets/logos/Logo.ico">
+      <img src="../../../assets/logos/Logo.ico" width="45" height="45">
     </li>
     <li>
-      <a routerLink="/logged-in-overview"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+      <a (click)="goToOverview()">Overview</a>
     </li>
     <li>
-      <a routerLink="/logged-in-categories"><i class="far fa-clone"></i>Categories</a>
+      <a (click)="goToCategories()">Categories</a>
     </li>
     <li>
-      <a routerLink="/logged-in-labels"><i class="far fa-calendar-alt"></i>Labels</a>
+      <a (click)="goToLabels()">Labels</a>
     </li>
     <li>
-      <a routerLink="/logged-in-diagrams"><i class="far fa-chart-bar"></i>Charts</a>
+      <a (click)="goToDiagrams()">Diagrams</a>
     </li>
-
-
-  </ul>
-</div>
+</ul>
