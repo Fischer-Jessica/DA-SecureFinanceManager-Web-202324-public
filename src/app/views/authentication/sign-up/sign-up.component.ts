@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {User} from "../../../logic/models/User";
-import {UserService} from "../../../logic/services/userService";
+import {UserService} from "../../../logic/services/UserService";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({

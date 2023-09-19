@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {User} from "../models/User";
 import {map, Observable} from "rxjs";
+import {AppComponent} from "../../app.component";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
   }
 
   logIn(username: string, password: string): Observable<User> {
-    const apiUrl = 'http://localhost:8080/financial-overview/user';
+    const apiUrl = AppComponent.apiUrl + 'user';
 
     return this.http.get<User>(apiUrl, {
       params: {
@@ -30,7 +31,7 @@ export class UserService {
   }
 
   signUp(user: User) {
-    const apiUrl = 'http://localhost:8080/financial-overview/users';
+    const apiUrl = AppComponent.apiUrl + 'users';
 
     return this.http.post<number>(apiUrl, {}, {
       params: {
