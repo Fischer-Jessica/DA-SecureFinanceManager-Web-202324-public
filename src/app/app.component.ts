@@ -6,6 +6,6 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'FinancialOverview';
-  public static apiUrl: string = 'http://localhost:8080/financial-overview/';
+  title = 'SecureFinanceManager';
+  public static apiUrl: string = 'http://localhost:8080/secure-finance-manager/';
 }
