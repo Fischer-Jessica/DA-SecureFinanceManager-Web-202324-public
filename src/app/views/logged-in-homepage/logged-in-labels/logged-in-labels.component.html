@@ -1,1 +1,18 @@
-<p>logged-in-labels works!</p>
+<!-- category-list.component.html -->
+<h2>Labels</h2>
+<div *ngIf="labels && labels.length > 0; else noCategories" class="category-container">
+  <div *ngFor="let label of labels" class="category-item">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ label.labelName }}</mat-card-title>
+        <mat-card-subtitle>{{ label.labelDescription }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <h5>HELL YEAH</h5>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<ng-template #noCategories>
+  <p>No labels available.</p>
+</ng-template>

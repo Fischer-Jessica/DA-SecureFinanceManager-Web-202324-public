@@ -1,56 +1,28 @@
 import {Injectable} from "@angular/core";
-import {Label} from "../models/Label";
-import {HttpClient} from "@angular/common/http";
-import {map, Observable} from "rxjs";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {User} from "../models/User";
+import {catchError, map, Observable, throwError} from "rxjs";
 import {AppComponent} from "../../app.component";
+import {Category} from "../models/Category";
+import {Label} from "../models/Label";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class LabelService {
-  labels: Label[] | null = null;
 
   constructor(private http: HttpClient) {
   }
 
-  getLabels(userId: number, username: string, password: string, eMailAddress: string, firstName: string, lastName: string): Observable<Label[]> {
-    const apiUrl = AppComponent.apiUrl + 'labels/labels';
+  getLabels (username: string, password: string): Observable<Label[]> {
+    const apiUrl = AppComponent.apiUrl + 'labels';
 
-    return this.http.get<Label[]>(apiUrl, {
-      params: {
-        loggedInUserId: userId,
-        loggedInUsername: username,
-        loggedInPassword: password,
-        loggedInEMailAddress: eMailAddress,
-        loggedInFirstName: firstName,
-        loggedInLastName: lastName
-      }
-    }).pipe(
-      map((result) => {
-        this.labels=result;
-        return result;
-    })
-    );
-  }
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
 
-  getLabel(labelId: number, userId: number, username: string, password: string, eMailAddress: string, firstName: string, lastName: string): Observable<Label> {
-    const apiUrl = AppComponent.apiUrl + 'labels/labels/' + labelId;
-
-
-    return this.http.get<Label>(apiUrl, {
-      params: {
-        loggedInUserId: userId,
-        loggedInUsername: username,
-        loggedInPassword: password,
-        loggedInEMailAddress: eMailAddress,
-        loggedInFirstName: firstName,
-        loggedInLastName: lastName
-      }
-    }).pipe(
-      map((result) => {
-        return result;
-      })
-    );
+    return this.http.get<Label[]>(apiUrl, { headers });
   }
 }

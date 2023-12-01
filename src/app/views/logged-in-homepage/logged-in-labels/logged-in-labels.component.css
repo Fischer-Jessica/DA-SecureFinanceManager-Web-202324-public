@@ -1,0 +1,11 @@
+/* category-list.component.css */
+.category-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Abstand zwischen den Kategorien anpassen */
+}
+
+.category-item {
+  flex: 1 1 calc(33.33% - 16px); /* Hier wird die Breite auf 33.33% gesetzt, minus der Abstand */
+  max-width: calc(33.33% - 16px); /* Maximalbreite, um zu verhindern, dass sich Kategorien strecken */
+}
