@@ -1,1 +1,18 @@
-<p>logged-in-categories works!</p>
+<!-- category-list.component.html -->
+<h2>Categories</h2>
+<div *ngIf="categories && categories.length > 0; else noCategories" class="category-container">
+  <div *ngFor="let category of categories" class="category-item">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ category.categoryName }}</mat-card-title>
+        <mat-card-subtitle>{{ category.categoryDescription }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <h5>HELL YEAH</h5>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<ng-template #noCategories>
+  <p>No categories available.</p>
+</ng-template>
