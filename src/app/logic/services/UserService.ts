@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../models/User";
 import {map, Observable} from "rxjs";
 import {AppComponent} from "../../app.component";
@@ -9,7 +9,7 @@ import {AppComponent} from "../../app.component";
 })
 
 export class UserService {
-  loggedInUser: User | null = null;
+  static loggedInUser: User | null = null;
 
   constructor(private http: HttpClient) {
   }
@@ -17,36 +17,33 @@ export class UserService {
   logIn(username: string, password: string): Observable<User> {
     const apiUrl = AppComponent.apiUrl + 'user';
 
-    return this.http.get<User>(apiUrl, {
-      params: {
-        usernameToValidate: username,
-        passwordToValidate: password
-      }
-    }).pipe(
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': 'Basic ' + btoa(username + ':' + password)
+    });
+
+    return this.http.get<User>(apiUrl, { headers }).pipe(
       map((result) => {
-        this.loggedInUser = result;
+        UserService.loggedInUser = result;
         return result;
       })
     );
   }
 
-  signUp(user: User) {
+  signUp(newUser: User) {
     const apiUrl = AppComponent.apiUrl + 'users';
 
-    return this.http.post<number>(apiUrl, {}, {
-      params: {
-        username: user.username,
-        password: user.password,
-        eMailAddress: user.emailAddress,
-        firstName: user.firstName,
-        lastName: user.lastName
+    return this.http.post<User>(apiUrl, newUser, {
+      headers: {
+        'API-Version': '1'
       }
     }).pipe(
       map((result) => {
-        this.loggedInUser = user;
-        this.loggedInUser.userId = result;
+        UserService.loggedInUser = newUser;
+        UserService.loggedInUser.userId = result.userId;
         return result;
       })
     );
   }
+
 }

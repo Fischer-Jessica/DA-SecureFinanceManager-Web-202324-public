@@ -13,9 +13,9 @@ export class SignUpComponent {
   newUser: User = {
     username: '',
     password: '',
-    emailAddress: '',
-    firstName: '',
-    lastName: '',
+    emailAddress: undefined,
+    firstName: undefined,
+    lastName: undefined,
   };
 
   constructor(private router: Router,
@@ -27,7 +27,6 @@ export class SignUpComponent {
   }
 
   insertNewUserInAPI(): void {
-
     this.userService.signUp(this.newUser).subscribe({
       next: (response) => {
         console.log(response);
