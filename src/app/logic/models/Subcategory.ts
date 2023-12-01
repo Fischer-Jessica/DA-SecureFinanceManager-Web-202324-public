@@ -2,7 +2,7 @@ export interface Subcategory {
   subcategoryId?: number;
   categoryId: number;
   subcategoryName: string;
-  subcategoryDescription: string;
+  subcategoryDescription?: string;
   subcategoryColourId: number;
-  userId: number;
+  userId?: number;
 }
