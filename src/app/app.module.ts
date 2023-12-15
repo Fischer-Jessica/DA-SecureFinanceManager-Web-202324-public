@@ -13,7 +13,6 @@ import {SignInComponent} from './views/authentication/sign-in/sign-in.component'
 
 import {LoggedInHomepageComponent} from './views/logged-in-homepage/logged-in-homepage.component';
 
-import { EntriesComponent } from './views/logged-in-homepage/categories/subcategories/entries/entries.component';
 import {
   CreateSubcategoryComponent
 } from "./views/logged-in-homepage/categories/subcategories/create-subcategory/create-subcategory.component";
@@ -42,6 +41,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 // Design - imports
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from "@angular/material/button";
+import { Entries } from './views/logged-in-homepage/categories/subcategories/entries/entries.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -63,7 +63,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateCategoryComponent,
     Subcategories,
     CreateSubcategoryComponent,
-    EntriesComponent
+    Entries
   ],
   imports: [
     BrowserModule,

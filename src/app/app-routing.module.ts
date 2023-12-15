@@ -13,6 +13,7 @@ import {
 } from "./views/logged-in-homepage/categories/subcategories/create-subcategory/create-subcategory.component";
 import {LabelsComponent} from "./views/logged-in-homepage/labels/labels.component";
 import {DiagramsComponent} from "./views/logged-in-homepage/diagrams/diagrams.component";
+import {Entries} from "./views/logged-in-homepage/categories/subcategories/entries/entries.component";
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
         {path: 'create-category', component: CreateCategoryComponent},
         {path: 'subcategories/:categoryId', component: Subcategories},
         {path: 'create-subcategory/:categoryId', component: CreateSubcategoryComponent},
+        {path: 'entries/:categoryId/:subcategoryId', component: Entries},
       {path: 'labels', component: LabelsComponent},
       {path: 'diagrams', component: DiagramsComponent},
     ]

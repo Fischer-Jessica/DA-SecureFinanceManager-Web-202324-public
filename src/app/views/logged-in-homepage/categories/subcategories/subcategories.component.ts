@@ -47,4 +47,8 @@ export class Subcategories implements OnInit {
   addSubcategory() {
     this.router.navigateByUrl(`/logged-in-homepage/create-subcategory/${(this.categoryId)}`);
   }
+
+  showEntries(subcategoryId: number | undefined) {
+    this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(subcategoryId)}`);
+  }
 }
