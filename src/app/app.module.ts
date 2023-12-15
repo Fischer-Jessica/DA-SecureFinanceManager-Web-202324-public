@@ -42,6 +42,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from "@angular/material/button";
 import { CreateNewCategoryComponent } from './views/logged-in-homepage/logged-in-categories/create-new-category/create-new-category.component';
+import { SubcategoryComponent } from './views/logged-in-homepage/logged-in-categories/subcategory/subcategory.component';
+import { CreateNewSubcategoryComponent } from './views/logged-in-homepage/logged-in-categories/subcategory/create-new-subcategory/create-new-subcategory.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -60,7 +62,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoggedInCategoriesComponent,
     LoggedInLabelsComponent,
     LoggedInDiagramsComponent,
-    CreateNewCategoryComponent
+    CreateNewCategoryComponent,
+    SubcategoryComponent,
+    CreateNewSubcategoryComponent
   ],
   imports: [
     BrowserModule,

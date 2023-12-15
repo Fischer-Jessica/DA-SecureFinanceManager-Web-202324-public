@@ -39,4 +39,9 @@ export class LoggedInCategoriesComponent implements OnInit {
         }
       );
   }
+
+// In deiner aufrufenden Komponente
+  showSubcategories(categoryId: number | undefined) {
+    this.router.navigateByUrl(`/logged-in-homepage/subcategory/${categoryId}`);
+  }
 }
