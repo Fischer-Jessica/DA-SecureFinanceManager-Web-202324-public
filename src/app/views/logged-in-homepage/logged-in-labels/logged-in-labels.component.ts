@@ -1,22 +1,27 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Category} from "../../../logic/models/Category";
 import {CategoryService} from "../../../logic/services/CategoryService";
 import {UserService} from "../../../logic/services/UserService";
 import {Label} from "../../../logic/models/Label";
 import {LabelService} from "../../../logic/services/LabelService";
+import {LocalStorageService} from "../../../logic/LocalStorageService";
 
 @Component({
   selector: 'logged-in-labels',
   templateUrl: './logged-in-labels.component.html',
   styleUrls: ['./logged-in-labels.component.css']
 })
-export class LoggedInLabelsComponent {
+export class LoggedInLabelsComponent implements OnInit {
   labels: Label[] = [];
 
-  constructor(private apiService: LabelService) {}
+  constructor(private apiService: LabelService, private localStorageService: LocalStorageService) {}
 
   ngOnInit(): void {
-    this.fetchLabels();
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (storedUser) {
+      UserService.loggedInUser = JSON.parse(storedUser);
+      this.fetchLabels();
+    }
   }
 
   private fetchLabels(): void {
