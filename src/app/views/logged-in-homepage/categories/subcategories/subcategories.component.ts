@@ -7,10 +7,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-subcategory',
-  templateUrl: './subcategory.component.html',
-  styleUrls: ['./subcategory.component.css']
+  templateUrl: './subcategories.component.html',
+  styleUrls: ['./subcategories.component.css']
 })
-export class SubcategoryComponent implements OnInit {
+export class Subcategories implements OnInit {
   subcategories: Subcategory[] = [];
   private categoryId: number | undefined;
 

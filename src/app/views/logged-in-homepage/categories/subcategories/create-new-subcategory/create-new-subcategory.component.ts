@@ -4,7 +4,7 @@ import {SubcategoryService} from "../../../../../logic/services/SubcategoryServi
 import {LocalStorageService} from "../../../../../logic/LocalStorageService";
 import {UserService} from "../../../../../logic/services/UserService";
 import {Subcategory} from "../../../../../logic/models/Subcategory";
-import {SubcategoryComponent} from "../subcategory.component";
+import {Subcategories} from "../subcategories.component";
 
 @Component({
   selector: 'app-create-new-subcategory',

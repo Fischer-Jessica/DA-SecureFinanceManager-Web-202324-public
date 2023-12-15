@@ -3,10 +3,10 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'logged-in-homepage-navbar',
-  templateUrl: './logged-in-homepage-navbar.component.html',
-  styleUrls: ['./logged-in-homepage-navbar.component.css']
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
 })
-export class LoggedInHomepageNavbarComponent {
+export class NavbarComponent {
   constructor(private router: Router) {
   }
 

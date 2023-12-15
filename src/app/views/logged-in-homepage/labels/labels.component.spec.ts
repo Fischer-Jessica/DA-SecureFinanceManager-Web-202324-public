@@ -1,16 +1,16 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LoggedInLabelsComponent} from './logged-in-labels.component';
+import {LabelsComponent} from './labels.component';
 
 describe('LoggedInLabelsComponent', () => {
-  let component: LoggedInLabelsComponent;
-  let fixture: ComponentFixture<LoggedInLabelsComponent>;
+  let component: LabelsComponent;
+  let fixture: ComponentFixture<LabelsComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoggedInLabelsComponent]
+      declarations: [LabelsComponent]
     });
-    fixture = TestBed.createComponent(LoggedInLabelsComponent);
+    fixture = TestBed.createComponent(LabelsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

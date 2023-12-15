@@ -7,10 +7,10 @@ import {Router} from "@angular/router";
 
 @Component({
   selector: 'logged-in-categories',
-  templateUrl: './logged-in-categories.component.html',
-  styleUrls: ['./logged-in-categories.component.css'],
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css'],
 })
-export class LoggedInCategoriesComponent implements OnInit {
+export class CategoriesComponent implements OnInit {
   categories: Category[] = [];
 
   constructor(private router: Router, private apiService: CategoryService, private localStorageService: LocalStorageService) {}

@@ -1,16 +1,16 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LoggedInDiagramsComponent} from './logged-in-diagrams.component';
+import {DiagramsComponent} from './diagrams.component';
 
 describe('LoggedInDiagramsComponent', () => {
-  let component: LoggedInDiagramsComponent;
-  let fixture: ComponentFixture<LoggedInDiagramsComponent>;
+  let component: DiagramsComponent;
+  let fixture: ComponentFixture<DiagramsComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoggedInDiagramsComponent]
+      declarations: [DiagramsComponent]
     });
-    fixture = TestBed.createComponent(LoggedInDiagramsComponent);
+    fixture = TestBed.createComponent(DiagramsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

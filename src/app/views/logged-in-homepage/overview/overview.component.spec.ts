@@ -1,16 +1,16 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {LoggedInOverviewComponent} from './logged-in-overview.component';
+import {OverviewComponent} from './overview.component';
 
 describe('LoggedInOverviewComponent', () => {
-  let component: LoggedInOverviewComponent;
-  let fixture: ComponentFixture<LoggedInOverviewComponent>;
+  let component: OverviewComponent;
+  let fixture: ComponentFixture<OverviewComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [LoggedInOverviewComponent]
+      declarations: [OverviewComponent]
     });
-    fixture = TestBed.createComponent(LoggedInOverviewComponent);
+    fixture = TestBed.createComponent(OverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

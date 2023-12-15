@@ -14,15 +14,15 @@ import {SignInComponent} from './views/authentication/sign-in/sign-in.component'
 import {LoggedInHomepageComponent} from './views/logged-in-homepage/logged-in-homepage.component';
 
 import {
-  LoggedInHomepageNavbarComponent
-} from './views/logged-in-homepage/logged-in-homepage-navbar/logged-in-homepage-navbar.component';
+  NavbarComponent
+} from './views/logged-in-homepage/logged-in-homepage-navbar/navbar.component';
 
-import {LoggedInOverviewComponent} from './views/logged-in-homepage/logged-in-overview/logged-in-overview.component';
+import {OverviewComponent} from './views/logged-in-homepage/logged-in-overview/overview.component';
 import {
-  LoggedInCategoriesComponent
-} from './views/logged-in-homepage/logged-in-categories/logged-in-categories.component';
-import {LoggedInLabelsComponent} from './views/logged-in-homepage/logged-in-labels/logged-in-labels.component';
-import {LoggedInDiagramsComponent} from './views/logged-in-homepage/logged-in-diagrams/logged-in-diagrams.component';
+  CategoriesComponent
+} from './views/logged-in-homepage/logged-in-categories/categories.component';
+import {LabelsComponent} from './views/logged-in-homepage/logged-in-labels/labels.component';
+import {DiagramsComponent} from './views/logged-in-homepage/logged-in-diagrams/diagrams.component';
 
 import {ImprintComponent} from './views/imprint/imprint.component';
 
@@ -42,7 +42,7 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from "@angular/material/button";
 import { CreateNewCategoryComponent } from './views/logged-in-homepage/logged-in-categories/create-new-category/create-new-category.component';
-import { SubcategoryComponent } from './views/logged-in-homepage/logged-in-categories/subcategory/subcategory.component';
+import { Subcategories } from './views/logged-in-homepage/logged-in-categories/subcategory/subcategories.component';
 import { CreateNewSubcategoryComponent } from './views/logged-in-homepage/logged-in-categories/subcategory/create-new-subcategory/create-new-subcategory.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -56,14 +56,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     SignInComponent,
     AuthenticationComponent,
     ImprintComponent,
-    LoggedInHomepageNavbarComponent,
+    NavbarComponent,
     LoggedInHomepageComponent,
-    LoggedInOverviewComponent,
-    LoggedInCategoriesComponent,
-    LoggedInLabelsComponent,
-    LoggedInDiagramsComponent,
+    OverviewComponent,
+    CategoriesComponent,
+    LabelsComponent,
+    DiagramsComponent,
     CreateNewCategoryComponent,
-    SubcategoryComponent,
+    Subcategories,
     CreateNewSubcategoryComponent
   ],
   imports: [

@@ -6,10 +6,10 @@ import {LocalStorageService} from "../../../logic/LocalStorageService";
 
 @Component({
   selector: 'logged-in-labels',
-  templateUrl: './logged-in-labels.component.html',
-  styleUrls: ['./logged-in-labels.component.css']
+  templateUrl: './labels.component.html',
+  styleUrls: ['./labels.component.css']
 })
-export class LoggedInLabelsComponent implements OnInit {
+export class LabelsComponent implements OnInit {
   labels: Label[] = [];
 
   constructor(private apiService: LabelService, private localStorageService: LocalStorageService) {}
