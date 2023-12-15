@@ -14,6 +14,9 @@ import {
   CreateNewCategoryComponent
 } from "./views/logged-in-homepage/logged-in-categories/create-new-category/create-new-category.component";
 import {SubcategoryComponent} from "./views/logged-in-homepage/logged-in-categories/subcategory/subcategory.component";
+import {
+  CreateNewSubcategoryComponent
+} from "./views/logged-in-homepage/logged-in-categories/subcategory/create-new-subcategory/create-new-subcategory.component";
 
 const routes: Routes = [
   {
@@ -35,6 +38,7 @@ const routes: Routes = [
       {path: 'logged-in-categories', component: LoggedInCategoriesComponent},
         {path: 'add-category', component: CreateNewCategoryComponent},
         {path: 'subcategory/:categoryId', component: SubcategoryComponent},
+        {path: 'add-subcategory/:categoryId', component: CreateNewSubcategoryComponent},
       {path: 'logged-in-labels', component: LoggedInLabelsComponent},
       {path: 'logged-in-diagrams', component: LoggedInDiagramsComponent},
     ]

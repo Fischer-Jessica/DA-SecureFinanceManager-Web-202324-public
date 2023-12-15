@@ -1,27 +1,28 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LocalStorageService} from "../../../../logic/LocalStorageService";
 import {UserService} from "../../../../logic/services/UserService";
 import {Subcategory} from "../../../../logic/models/Subcategory";
 import {SubcategoryService} from "../../../../logic/services/SubcategoryService";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-subcategory',
   templateUrl: './subcategory.component.html',
   styleUrls: ['./subcategory.component.css']
 })
-export class SubcategoryComponent {
+export class SubcategoryComponent implements OnInit {
   subcategories: Subcategory[] = [];
+  private categoryId: number | undefined;
 
-  constructor(private route: ActivatedRoute, private apiService: SubcategoryService, private localStorageService: LocalStorageService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private apiService: SubcategoryService, private localStorageService: LocalStorageService) {}
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
       UserService.loggedInUser = JSON.parse(storedUser);
       this.route.params.subscribe(params => {
-        const categoryId = +params['categoryId'];
-        this.fetchSubcategories(categoryId);
+        this.categoryId = +params['categoryId'];
+        this.fetchSubcategories(this.categoryId);
       });
     }
   }
@@ -41,5 +42,9 @@ export class SubcategoryComponent {
           // Handle error (e.g., display an error message)
         }
       );
+  }
+
+  addSubcategory() {
+    this.router.navigateByUrl(`/logged-in-homepage/add-subcategory/${(this.categoryId)}`);
   }
 }

@@ -1,6 +1,6 @@
 <!-- category-list.component.html -->
 <h2>Subcategories</h2>
-<button mat-raised-button color="primary" routerLink='/logged-in-homepage/add-subcategory'>New Subcategory</button>
+<button mat-raised-button color="primary" (click)="addSubcategory()">New Subcategory</button>
 <button mat-raised-button color="warn" routerLink='/logged-in-homepage/logged-in-categories'>Return to Categories</button>
 <div *ngIf="subcategories && subcategories.length > 0; else noSubcategories" class="category-container">
   <div *ngFor="let subcategory of subcategories" class="subcategory-item">

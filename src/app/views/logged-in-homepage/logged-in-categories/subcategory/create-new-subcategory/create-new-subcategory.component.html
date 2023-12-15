@@ -1,0 +1,16 @@
+<form #subcategoryForm="ngForm" (ngSubmit)="onSubmit(subcategoryForm.value)">
+  <label for="subcategoryName">Subcategory Name:</label>
+  <input type="text" id="subcategoryName" name="subcategoryName" [(ngModel)]="subcategory.subcategoryName" required>
+  <br>
+
+  <label for="subcategoryDescription">Subcategory Description:</label>
+  <textarea id="subcategoryDescription" name="subcategoryDescription" [(ngModel)]="subcategory.subcategoryDescription"></textarea>
+  <br>
+
+  <label for="subcategoryColourId">Subcategory Colour ID:</label>
+  <input type="number" id="subcategoryColourId" name="subcategoryColourId" [(ngModel)]="subcategory.subcategoryColourId" required>
+  <br>
+
+  <button type="submit" mat-raised-button color="primary">Submit</button>
+  <button type="cancel" mat-raised-button color="warn" (click)="returnToSubcategories()">Cancel</button>
+</form>
