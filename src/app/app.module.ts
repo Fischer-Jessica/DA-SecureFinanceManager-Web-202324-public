@@ -13,16 +13,17 @@ import {SignInComponent} from './views/authentication/sign-in/sign-in.component'
 
 import {LoggedInHomepageComponent} from './views/logged-in-homepage/logged-in-homepage.component';
 
+import { EntriesComponent } from './views/logged-in-homepage/categories/subcategories/entries/entries.component';
 import {
-  NavbarComponent
-} from './views/logged-in-homepage/logged-in-homepage-navbar/navbar.component';
-
-import {OverviewComponent} from './views/logged-in-homepage/logged-in-overview/overview.component';
-import {
-  CategoriesComponent
-} from './views/logged-in-homepage/logged-in-categories/categories.component';
-import {LabelsComponent} from './views/logged-in-homepage/logged-in-labels/labels.component';
-import {DiagramsComponent} from './views/logged-in-homepage/logged-in-diagrams/diagrams.component';
+  CreateSubcategoryComponent
+} from "./views/logged-in-homepage/categories/subcategories/create-subcategory/create-subcategory.component";
+import {CreateCategoryComponent} from "./views/logged-in-homepage/categories/create-category/create-category.component";
+import {NavbarComponent} from "./views/logged-in-homepage/navbar/navbar.component";
+import {OverviewComponent} from "./views/logged-in-homepage/overview/overview.component";
+import {CategoriesComponent} from "./views/logged-in-homepage/categories/categories.component";
+import {LabelsComponent} from "./views/logged-in-homepage/labels/labels.component";
+import {DiagramsComponent} from "./views/logged-in-homepage/diagrams/diagrams.component";
+import {Subcategories} from "./views/logged-in-homepage/categories/subcategories/subcategories.component";
 
 import {ImprintComponent} from './views/imprint/imprint.component';
 
@@ -41,9 +42,6 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 // Design - imports
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from "@angular/material/button";
-import { CreateNewCategoryComponent } from './views/logged-in-homepage/logged-in-categories/create-new-category/create-new-category.component';
-import { Subcategories } from './views/logged-in-homepage/logged-in-categories/subcategory/subcategories.component';
-import { CreateNewSubcategoryComponent } from './views/logged-in-homepage/logged-in-categories/subcategory/create-new-subcategory/create-new-subcategory.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -62,9 +60,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     CategoriesComponent,
     LabelsComponent,
     DiagramsComponent,
-    CreateNewCategoryComponent,
+    CreateCategoryComponent,
     Subcategories,
-    CreateNewSubcategoryComponent
+    CreateSubcategoryComponent,
+    EntriesComponent
   ],
   imports: [
     BrowserModule,

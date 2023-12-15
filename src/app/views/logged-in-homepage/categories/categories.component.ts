@@ -42,6 +42,6 @@ export class CategoriesComponent implements OnInit {
 
 // In deiner aufrufenden Komponente
   showSubcategories(categoryId: number | undefined) {
-    this.router.navigateByUrl(`/logged-in-homepage/subcategory/${categoryId}`);
+    this.router.navigateByUrl(`/logged-in-homepage/subcategories/${categoryId}`);
   }
 }

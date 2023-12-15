@@ -1,17 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubcategoryService} from "../../../../../logic/services/SubcategoryService";
-import {LocalStorageService} from "../../../../../logic/LocalStorageService";
 import {UserService} from "../../../../../logic/services/UserService";
 import {Subcategory} from "../../../../../logic/models/Subcategory";
-import {Subcategories} from "../subcategories.component";
 
 @Component({
   selector: 'app-create-new-subcategory',
-  templateUrl: './create-new-subcategory.component.html',
-  styleUrls: ['./create-new-subcategory.component.css']
+  templateUrl: './create-subcategory.component.html',
+  styleUrls: ['./create-subcategory.component.css']
 })
-export class CreateNewSubcategoryComponent {
+export class CreateSubcategoryComponent {
   subcategory: Subcategory = {
     subcategoryName: '',
     subcategoryColourId: 0,
@@ -32,7 +30,7 @@ export class CreateNewSubcategoryComponent {
     this.apiService.insertSubcategory(UserService.loggedInUser.username, UserService.loggedInUser.password, categoryId, formData).subscribe({
       next: (response) => {
         console.log(response);
-        this.router.navigateByUrl(`/logged-in-homepage/subcategory/${categoryId}`)
+        this.router.navigateByUrl(`/logged-in-homepage/subcategories/${categoryId}`)
       },
       error: (err) => {
         console.log(err);
@@ -43,7 +41,7 @@ export class CreateNewSubcategoryComponent {
   returnToSubcategories() {
     this.route.params.subscribe(params => {
       let categoryId = +params['categoryId'];
-      this.router.navigateByUrl(`/logged-in-homepage/subcategory/${categoryId}`)
+      this.router.navigateByUrl(`/logged-in-homepage/subcategories/${categoryId}`)
     });
   }
 }

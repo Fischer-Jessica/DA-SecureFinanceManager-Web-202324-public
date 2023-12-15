@@ -6,10 +6,10 @@ import {UserService} from "../../../../logic/services/UserService";
 
 @Component({
   selector: 'app-create-new-category',
-  templateUrl: './create-new-category.component.html',
-  styleUrls: ['./create-new-category.component.css']
+  templateUrl: './create-category.component.html',
+  styleUrls: ['./create-category.component.css']
 })
-export class CreateNewCategoryComponent {
+export class CreateCategoryComponent {
   category: Category = {
     categoryName: '',
     categoryColourId: 0,
@@ -27,7 +27,7 @@ export class CreateNewCategoryComponent {
     this.categoryService.insertCategory(UserService.loggedInUser.username, UserService.loggedInUser.password,formData).subscribe({
       next: (response) => {
         console.log(response);
-        this.router.navigateByUrl('/logged-in-homepage/logged-in-categories')
+        this.router.navigateByUrl('/logged-in-homepage/categories')
       },
       error: (err) => {
         console.log(err);
