@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {Category} from "../../../logic/models/Category";
-import {CategoryService} from "../../../logic/services/CategoryService";
 import {UserService} from "../../../logic/services/UserService";
 import {Label} from "../../../logic/models/Label";
 import {LabelService} from "../../../logic/services/LabelService";

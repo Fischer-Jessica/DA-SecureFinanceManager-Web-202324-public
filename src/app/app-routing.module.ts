@@ -10,6 +10,9 @@ import {
 } from "./views/logged-in-homepage/logged-in-categories/logged-in-categories.component";
 import {LoggedInLabelsComponent} from "./views/logged-in-homepage/logged-in-labels/logged-in-labels.component";
 import {LoggedInDiagramsComponent} from "./views/logged-in-homepage/logged-in-diagrams/logged-in-diagrams.component";
+import {
+  CreateNewCategoryComponent
+} from "./views/logged-in-homepage/logged-in-categories/create-new-category/create-new-category.component";
 
 const routes: Routes = [
   {
@@ -29,6 +32,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'logged-in-overview', pathMatch: 'full'},
       {path: 'logged-in-overview', component: LoggedInOverviewComponent},
       {path: 'logged-in-categories', component: LoggedInCategoriesComponent},
+        {path: 'add-category', component: CreateNewCategoryComponent},
       {path: 'logged-in-labels', component: LoggedInLabelsComponent},
       {path: 'logged-in-diagrams', component: LoggedInDiagramsComponent},
     ]

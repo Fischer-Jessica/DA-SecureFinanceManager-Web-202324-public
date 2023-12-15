@@ -3,6 +3,7 @@ import { Category } from '../../../logic/models/Category';
 import { CategoryService } from '../../../logic/services/CategoryService';
 import { UserService } from '../../../logic/services/UserService';
 import {LocalStorageService} from "../../../logic/LocalStorageService";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'logged-in-categories',
@@ -12,7 +13,7 @@ import {LocalStorageService} from "../../../logic/LocalStorageService";
 export class LoggedInCategoriesComponent implements OnInit {
   categories: Category[] = [];
 
-  constructor(private apiService: CategoryService, private localStorageService: LocalStorageService) {}
+  constructor(private router: Router, private apiService: CategoryService, private localStorageService: LocalStorageService) {}
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');

@@ -24,4 +24,14 @@ export class CategoryService {
 
     return this.http.get<Category[]>(apiUrl, { headers });
   }
+
+  insertCategory(username: string, password: string, category: Category): Observable<Category> {
+    const apiUrl = AppComponent.apiUrl + 'categories';
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+    return this.http.post<Category>(apiUrl, category, { headers });
+  }
 }
