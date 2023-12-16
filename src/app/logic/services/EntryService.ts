@@ -25,8 +25,8 @@ export class EntryService {
     return this.http.get<Entry[]>(apiUrl, { headers });
   }
 
-  insertSubcategory(username: string, password: string, subcategoryId: number, entry: Entry): Observable<Entry> {
-    const apiUrl = AppComponent.apiUrl + `subcategories/${subcategoryId}/entries`;
+  insertEntry(username: string, password: string, subcategoryId: number | undefined, entry: Entry): Observable<Entry> {
+    const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',

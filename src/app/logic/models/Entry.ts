@@ -4,7 +4,7 @@ export interface Entry {
   entryDescription?: string;
   entryAmount: number;
   entryCreationTime?: string;
-  entryTimeOfExpense: string;
+  entryTimeOfTransaction: string;
   entryAttachment?: string;
   subcategoryId: number;
   userId?: number;

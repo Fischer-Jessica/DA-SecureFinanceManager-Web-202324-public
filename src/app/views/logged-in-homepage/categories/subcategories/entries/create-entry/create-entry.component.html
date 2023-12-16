@@ -1,0 +1,25 @@
+<form #entryForm="ngForm" (ngSubmit)="onSubmit(entryForm.value)">
+  <label for="entryName">Entry Name:</label>
+  <input type="text" id="entryName" name="entryName" [(ngModel)]="entry.entryName" required>
+  <br>
+
+  <label for="entryDescription">Entry Description:</label>
+  <textarea id="entryDescription" name="entryDescription" [(ngModel)]="entry.entryDescription"></textarea>
+  <br>
+
+  <label for="entryAmount">Entry Amount:</label>
+  <input type="number" id="entryAmount" name="entryAmount" [(ngModel)]="entry.entryAmount" required>
+  <br>
+
+  <label for="entryTimeOfTransaction">Entry Time of Transaction:</label>
+  <input type="datetime-local" id="entryTimeOfTransaction" name="entryTimeOfTransaction" [(ngModel)]="entry.entryTimeOfTransaction" required>
+  <br>
+
+  <label for="entryAttachment">Entry Attachment:</label>
+  <input type="file" id="entryAttachment" name="entryAttachment" [(ngModel)]="entry.entryAttachment">
+  <br>
+
+  <button type="submit" mat-raised-button color="primary">Submit</button>
+  <!-- Hier wird die Methode returnToSubcategories aufgerufen, wenn der "Cancel"-Button geklickt wird -->
+  <button type="button" mat-raised-button color="warn" (click)="returnToEntries()">Cancel</button>
+</form>

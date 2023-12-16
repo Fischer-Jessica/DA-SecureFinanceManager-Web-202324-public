@@ -22,7 +22,7 @@ import {OverviewComponent} from "./views/logged-in-homepage/overview/overview.co
 import {CategoriesComponent} from "./views/logged-in-homepage/categories/categories.component";
 import {LabelsComponent} from "./views/logged-in-homepage/labels/labels.component";
 import {DiagramsComponent} from "./views/logged-in-homepage/diagrams/diagrams.component";
-import {Subcategories} from "./views/logged-in-homepage/categories/subcategories/subcategories.component";
+import {SubcategoriesComponent} from "./views/logged-in-homepage/categories/subcategories/subcategories.component";
 
 import {ImprintComponent} from './views/imprint/imprint.component';
 
@@ -41,7 +41,8 @@ import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 // Design - imports
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from "@angular/material/button";
-import { Entries } from './views/logged-in-homepage/categories/subcategories/entries/entries.component';
+import { EntriesComponent } from './views/logged-in-homepage/categories/subcategories/entries/entries.component';
+import { CreateEntryComponent } from './views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -61,9 +62,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     LabelsComponent,
     DiagramsComponent,
     CreateCategoryComponent,
-    Subcategories,
+    SubcategoriesComponent,
     CreateSubcategoryComponent,
-    Entries
+    EntriesComponent,
+    CreateEntryComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 <h2>Entries</h2>
-<button mat-raised-button color="primary">New Entry</button>
+<button mat-raised-button color="primary" (click)="addEntry()">New Entry</button>
 <button mat-raised-button color="warn" routerLink='/logged-in-homepage/categories' (click)="returnToSubcategory()">Return to Subcategories</button>
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
   <div *ngFor="let entry of entries" class="entry-item">

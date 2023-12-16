@@ -11,7 +11,7 @@ import {Entry} from "../../../../../logic/models/Entry";
   styleUrls: ['./entries.component.css']
 })
 
-export class Entries implements OnInit {
+export class EntriesComponent implements OnInit {
   entries: Entry[] = [];
   private subcategoryId: number | undefined;
   private categoryId: number | undefined;
@@ -46,6 +46,10 @@ export class Entries implements OnInit {
           // Handle error (e.g., display an error message)
         }
       );
+  }
+
+  addEntry() {
+    this.router.navigateByUrl(`/logged-in-homepage/create-entry/${(this.categoryId)}/${(this.subcategoryId)}`);
   }
 
   returnToSubcategory() {

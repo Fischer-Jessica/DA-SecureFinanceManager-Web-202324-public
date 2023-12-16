@@ -10,7 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './subcategories.component.html',
   styleUrls: ['./subcategories.component.css']
 })
-export class Subcategories implements OnInit {
+export class SubcategoriesComponent implements OnInit {
   subcategories: Subcategory[] = [];
   private categoryId: number | undefined;
 

@@ -7,13 +7,16 @@ import {LoggedInHomepageComponent} from "./views/logged-in-homepage/logged-in-ho
 import {OverviewComponent} from "./views/logged-in-homepage/overview/overview.component";
 import {CategoriesComponent} from "./views/logged-in-homepage/categories/categories.component";
 import {CreateCategoryComponent} from "./views/logged-in-homepage/categories/create-category/create-category.component";
-import {Subcategories} from "./views/logged-in-homepage/categories/subcategories/subcategories.component";
+import {SubcategoriesComponent} from "./views/logged-in-homepage/categories/subcategories/subcategories.component";
 import {
   CreateSubcategoryComponent
 } from "./views/logged-in-homepage/categories/subcategories/create-subcategory/create-subcategory.component";
 import {LabelsComponent} from "./views/logged-in-homepage/labels/labels.component";
 import {DiagramsComponent} from "./views/logged-in-homepage/diagrams/diagrams.component";
-import {Entries} from "./views/logged-in-homepage/categories/subcategories/entries/entries.component";
+import {EntriesComponent} from "./views/logged-in-homepage/categories/subcategories/entries/entries.component";
+import {
+  CreateEntryComponent
+} from "./views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component";
 
 const routes: Routes = [
   {
@@ -34,9 +37,10 @@ const routes: Routes = [
       {path: 'overview', component: OverviewComponent},
       {path: 'categories', component: CategoriesComponent},
         {path: 'create-category', component: CreateCategoryComponent},
-        {path: 'subcategories/:categoryId', component: Subcategories},
+        {path: 'subcategories/:categoryId', component: SubcategoriesComponent},
         {path: 'create-subcategory/:categoryId', component: CreateSubcategoryComponent},
-        {path: 'entries/:categoryId/:subcategoryId', component: Entries},
+        {path: 'entries/:categoryId/:subcategoryId', component: EntriesComponent},
+        {path: 'create-entry/:categoryId/:subcategoryId', component: CreateEntryComponent},
       {path: 'labels', component: LabelsComponent},
       {path: 'diagrams', component: DiagramsComponent},
     ]
