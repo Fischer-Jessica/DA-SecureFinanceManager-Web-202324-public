@@ -17,6 +17,7 @@ import {EntriesComponent} from "./views/logged-in-homepage/categories/subcategor
 import {
   CreateEntryComponent
 } from "./views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component";
+import {CreateLabelComponent} from "./views/logged-in-homepage/labels/create-label/create-label.component";
 
 const routes: Routes = [
   {
@@ -37,11 +38,12 @@ const routes: Routes = [
       {path: 'overview', component: OverviewComponent},
       {path: 'categories', component: CategoriesComponent},
         {path: 'create-category', component: CreateCategoryComponent},
-        {path: 'subcategories/:categoryId', component: SubcategoriesComponent},
-        {path: 'create-subcategory/:categoryId', component: CreateSubcategoryComponent},
-        {path: 'entries/:categoryId/:subcategoryId', component: EntriesComponent},
-        {path: 'create-entry/:categoryId/:subcategoryId', component: CreateEntryComponent},
+          {path: 'subcategories/:categoryId', component: SubcategoriesComponent},
+          {path: 'create-subcategory/:categoryId', component: CreateSubcategoryComponent},
+            {path: 'entries/:categoryId/:subcategoryId', component: EntriesComponent},
+            {path: 'create-entry/:categoryId/:subcategoryId', component: CreateEntryComponent},
       {path: 'labels', component: LabelsComponent},
+        {path: 'create-label', component: CreateLabelComponent},
       {path: 'diagrams', component: DiagramsComponent},
     ]
   },

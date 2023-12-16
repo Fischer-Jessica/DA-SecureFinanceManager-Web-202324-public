@@ -43,6 +43,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from "@angular/material/button";
 import { EntriesComponent } from './views/logged-in-homepage/categories/subcategories/entries/entries.component';
 import { CreateEntryComponent } from './views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component';
+import { CreateLabelComponent } from './views/logged-in-homepage/labels/create-label/create-label.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -65,7 +66,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SubcategoriesComponent,
     CreateSubcategoryComponent,
     EntriesComponent,
-    CreateEntryComponent
+    CreateEntryComponent,
+    CreateLabelComponent
   ],
   imports: [
     BrowserModule,

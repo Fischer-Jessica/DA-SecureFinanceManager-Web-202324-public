@@ -1,0 +1,21 @@
+<form #labelForm="ngForm" (ngSubmit)="onSubmit(labelForm.value)">
+  <label for="labelName">Label Name:</label>
+  <input type="text" id="labelName" name="labelName" [(ngModel)]="label.labelName" required>
+  <br>
+
+  <label for="labelDescription">Label Description:</label>
+  <textarea id="labelDescription" name="labelDescription" [(ngModel)]="label.labelDescription"></textarea>
+  <br>
+
+  <label for="labelColourId">Label Colour ID:</label>
+  <input type="number" id="labelColourId" name="labelColourId" [(ngModel)]="label.labelColourId" required>
+  <br>
+
+  <label for="userId">User ID:</label>
+  <input type="number" id="userId" name="userId" [(ngModel)]="label.userId">
+  <br>
+
+  <button type="submit" mat-raised-button color="primary">Submit</button>
+  <!-- Hier wird die Methode returnToLabels aufgerufen, wenn der "Cancel"-Button geklickt wird -->
+  <button type="button" mat-raised-button color="warn" routerLink='/logged-in-homepage/labels'>Cancel</button>
+</form>

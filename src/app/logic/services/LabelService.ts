@@ -25,4 +25,15 @@ export class LabelService {
 
     return this.http.get<Label[]>(apiUrl, { headers });
   }
+
+  insertLabel(username: string, password: string, label: Label): Observable<Label> {
+    const apiUrl = AppComponent.apiUrl + 'labels';
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.post<Label>(apiUrl, label, { headers });
+  }
 }
