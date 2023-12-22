@@ -4,8 +4,9 @@
 <p>Eine Liste Ihrer Kategorien:</p>
 <div *ngIf="categoriesData && categoriesData.length > 0; else noCategories" class="category-container">
   <div *ngFor="let category of categoriesData" class="category-item" (click)="showSubcategories(category.category.categoryId)">
-    <mat-card [ngStyle]="{ 'background-color': category.colourName }" class="card">
-      <mat-card-header>
+    <mat-card class="card">
+      <mat-card-header id="header">
+        <div class="dot" [ngStyle]="{ 'background-color': category.colourName }"></div>
         <mat-card-title>{{ category.category.categoryName }}</mat-card-title>
         <mat-card-subtitle>{{ category.category.categoryDescription }}</mat-card-subtitle>
       </mat-card-header>

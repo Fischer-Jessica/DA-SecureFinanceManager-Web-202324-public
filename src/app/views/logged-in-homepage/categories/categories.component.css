@@ -12,4 +12,20 @@
 
 .card {
   min-height: 100px;
+  border: #111111 2px solid;
+  background: #e6e8fc;
+}
+
+.dot {
+  content: ""; /* Füge leeres Inhaltsattribut hinzu */
+  display: inline-block;
+  border: #111111 1px solid;
+  width: 26px; /* Passe die Breite an deine Anforderungen an */
+  height: 26px; /* Passe die Höhe an deine Anforderungen an */
+  border-radius: 50%;
+  position: absolute;
+  right: 0; /* Platziere es am rechten Ende der .card */
+  top: 50%; /* Zentriere es vertikal auf der .card */
+  transform: translateY(-50%); /* Korrigiere die vertikale Ausrichtung */
+  margin-right: 10px; /* Füge den gewünschten Abstand zur Überschrift hinzu */
 }
