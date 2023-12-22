@@ -4,6 +4,7 @@ import {UserService} from "../../../../logic/services/UserService";
 import {Subcategory} from "../../../../logic/models/Subcategory";
 import {SubcategoryService} from "../../../../logic/services/SubcategoryService";
 import {ActivatedRoute, Router} from "@angular/router";
+import {ColourService} from "../../../../logic/services/ColourService";
 
 @Component({
   selector: 'app-subcategory',
@@ -11,10 +12,10 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrls: ['./subcategories.component.css']
 })
 export class SubcategoriesComponent implements OnInit {
-  subcategories: Subcategory[] = [];
-  private categoryId: number | undefined;
+  subcategoriesData: { subcategory: Subcategory; colourName: string }[] = [];
+  protected categoryId: number | undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router, private apiService: SubcategoryService, private localStorageService: LocalStorageService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private colourService: ColourService, private apiService: SubcategoryService, private localStorageService: LocalStorageService) {}
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -35,7 +36,20 @@ export class SubcategoriesComponent implements OnInit {
     this.apiService.getSubcategories(UserService.loggedInUser.username, UserService.loggedInUser.password, categoryId)
       .subscribe(
         (result) => {
-          this.subcategories = result;
+          for (let subcategory of result) {
+            this.colourService.getColourName(subcategory.subcategoryColourId).subscribe(
+              (result) => {
+                this.subcategoriesData.push({
+                  subcategory: subcategory,
+                  colourName: result
+                });
+              },
+              (error) => {
+                console.error('Error fetching colour:', error);
+                // Handle error (e.g., display an error message)
+              }
+            );
+          }
         },
         (error) => {
           console.error('Error fetching subcategories:', error);
