@@ -1,15 +1,17 @@
 <h2>Entries</h2>
 <button mat-raised-button color="primary" (click)="addEntry()">New Entry</button>
 <button mat-raised-button color="warn" routerLink='/logged-in-homepage/categories' (click)="returnToSubcategory()">Return to Subcategories</button>
+<p>Dies sind die Entries aus der Subcategory mit der Id {{ subcategoryId }}</p>
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
   <div *ngFor="let entry of entries" class="entry-item">
-    <mat-card>
+    <mat-card class="card">
       <mat-card-header>
         <mat-card-title>{{ entry.entryName }}</mat-card-title>
-        <mat-card-subtitle>{{ entry.entryId }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ entry.entryDescription }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <h5>HELL YEAH</h5>
+        <h5>{{ entry.entryAmount }}</h5>
+        <h6>{{ entry.entryTimeOfTransaction }}</h6>
       </mat-card-content>
     </mat-card>
   </div>
