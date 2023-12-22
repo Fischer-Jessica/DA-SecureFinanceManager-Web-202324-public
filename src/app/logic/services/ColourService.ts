@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {Colour} from "../models/Colour";
 import {AppComponent} from "../../app.component";
@@ -17,7 +17,11 @@ export class ColourService {
   getColours(): Observable<Colour[]> {
     const apiUrl = AppComponent.apiUrl + 'colours';
 
-    return this.http.get<Colour[]>(apiUrl, {}).pipe(
+    const headers = new HttpHeaders({
+      'API-Version': '1'
+    });
+
+    return this.http.get<Colour[]>(apiUrl, { headers }).pipe(
       map((result) => {
         this.colours = result;
         return result;
@@ -28,9 +32,27 @@ export class ColourService {
   getColour(colourId: number): Observable<Colour> {
     const apiUrl: string = AppComponent.apiUrl + 'colours/' + colourId;
 
-    return this.http.get<Colour>(apiUrl, {}).pipe(
+    const headers = new HttpHeaders({
+      'API-Version': '1'
+    });
+
+    return this.http.get<Colour>(apiUrl, { headers }).pipe(
       map((result) => {
         return result;
+      })
+    );
+  }
+
+  getColourName(colourId: number): Observable<string> {
+    const apiUrl: string = AppComponent.apiUrl + 'colours/' + colourId;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1'
+    });
+
+    return this.http.get<Colour>(apiUrl, { headers }).pipe(
+      map((result) => {
+        return result.colourName;
       })
     );
   }

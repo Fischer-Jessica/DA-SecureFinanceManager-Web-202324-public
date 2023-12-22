@@ -4,6 +4,7 @@ import { CategoryService } from '../../../logic/services/CategoryService';
 import { UserService } from '../../../logic/services/UserService';
 import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
+import {ColourService} from "../../../logic/services/ColourService";
 
 @Component({
   selector: 'logged-in-categories',
@@ -11,9 +12,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  categories: Category[] = [];
+  categoriesData: { category: Category; colourName: string }[] = [];
 
-  constructor(private router: Router, private apiService: CategoryService, private localStorageService: LocalStorageService) {}
+  constructor(private router: Router, protected colourService: ColourService, private categoryService: CategoryService, private localStorageService: LocalStorageService) {}
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -28,10 +29,24 @@ export class CategoriesComponent implements OnInit {
       console.error('User is not logged in');
       return;
     }
-    this.apiService.getCategories(UserService.loggedInUser.username, UserService.loggedInUser.password)
+    this.categoryService.getCategories(UserService.loggedInUser.username, UserService.loggedInUser.password)
       .subscribe(
         (result) => {
-          this.categories = result;
+          for(let category of result) {
+            this.colourService.getColourName(category.categoryColourId).subscribe(
+              (result) => {
+                this.categoriesData.push({
+                  category: category,
+                  colourName: result
+                });
+              },
+              (error) => {
+                console.error('Error fetching colour:', error);
+                // Handle error (e.g., display an error message)
+              }
+            );
+
+          }
         },
         (error) => {
           console.error('Error fetching categories:', error);

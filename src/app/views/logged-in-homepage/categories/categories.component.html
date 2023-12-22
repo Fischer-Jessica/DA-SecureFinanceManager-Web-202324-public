@@ -1,16 +1,13 @@
 <!-- category-list.component.html -->
 <h2>Categories</h2>
 <button mat-raised-button color="primary" routerLink='/logged-in-homepage/create-category'>New Category</button>
-<div *ngIf="categories && categories.length > 0; else noCategories" class="category-container">
-  <div *ngFor="let category of categories" class="category-item" (click)="showSubcategories(category.categoryId)">
-    <mat-card>
+<div *ngIf="categoriesData && categoriesData.length > 0; else noCategories" class="category-container">
+  <div *ngFor="let category of categoriesData" class="category-item" (click)="showSubcategories(category.category.categoryId)">
+    <mat-card [ngStyle]="{ 'background-color': category.colourName }">
       <mat-card-header>
-        <mat-card-title>{{ category.categoryName }}</mat-card-title>
-        <mat-card-subtitle>{{ category.categoryDescription }}</mat-card-subtitle>
+        <mat-card-title>{{ category.category.categoryName }}</mat-card-title>
+        <mat-card-subtitle>{{ category.category.categoryDescription }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
-        <h5>HELL YEAH</h5>
-      </mat-card-content>
     </mat-card>
   </div>
 </div>
