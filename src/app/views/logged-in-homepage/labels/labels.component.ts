@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {UserService} from "../../../logic/services/UserService";
 import {Label} from "../../../logic/models/Label";
 import {LabelService} from "../../../logic/services/LabelService";
@@ -15,7 +15,7 @@ import {ColourService} from "../../../logic/services/ColourService";
 export class LabelsComponent implements OnInit {
   labelsData: { label: Label; colourName: string }[] = [];
 
-  constructor(private router: Router, private apiService: LabelService, private localStorageService: LocalStorageService, private colourService: ColourService) {
+  constructor(private router: Router, private apiService: LabelService, private localStorageService: LocalStorageService, private colourService: ColourService, private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -50,6 +50,24 @@ export class LabelsComponent implements OnInit {
         },
         (error) => {
           console.error('Error fetching labels:', error);
+          // Handle error (e.g., display an error message)
+        }
+      );
+  }
+
+  deleteLabel(labelId: number | undefined) {
+    if (UserService.loggedInUser == null) {
+      return;
+    }
+    this.apiService.deleteLabel(UserService.loggedInUser.username, UserService.loggedInUser.password, labelId)
+      .subscribe(
+        (result) => {
+          console.log('Deleted label:', result);
+          this.labelsData = this.labelsData.filter((item) => item.label.labelId !== labelId);
+          this.cdr.detectChanges(); // Trigger change detection
+        },
+        (error) => {
+          console.error('Error deleting label:', error);
           // Handle error (e.g., display an error message)
         }
       );

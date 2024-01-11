@@ -36,4 +36,14 @@ export class LabelService {
 
     return this.http.post<Label>(apiUrl, label, { headers });
   }
+
+  deleteLabel(username: string, password: string, labelId: number | undefined): Observable<number> {
+    const apiUrl = AppComponent.apiUrl + `labels/${labelId}`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+    return this.http.delete<number>(apiUrl, { headers });
+  }
 }

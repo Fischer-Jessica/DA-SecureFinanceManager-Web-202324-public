@@ -3,13 +3,14 @@
 <button mat-raised-button color="primary" routerLink='/logged-in-homepage/create-label'>New Label</button>
 <p>Eine Liste Ihrer Label:</p>
 <div *ngIf="labelsData && labelsData.length > 0; else noLabels" class="label-container">
-  <div *ngFor="let labelData of labelsData" class="label-item" (click)="showEntries(labelData.label.labelId)">
+  <div *ngFor="let labelData of labelsData" class="label-item">
     <mat-card class="card">
-      <mat-card-header>
+      <mat-card-header (click)="showEntries(labelData.label.labelId)">
         <div class="dot" [ngStyle]="{ 'background-color': labelData.colourName }"></div>
         <mat-card-title>{{ labelData.label.labelName }}</mat-card-title>
         <mat-card-subtitle>{{ labelData.label.labelDescription }}</mat-card-subtitle>
       </mat-card-header>
+      <button class="delete" (click)="deleteLabel(labelData.label.labelId)">Delete</button>
     </mat-card>
   </div>
 </div>
