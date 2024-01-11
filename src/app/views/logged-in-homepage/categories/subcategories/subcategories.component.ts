@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {LocalStorageService} from "../../../../logic/LocalStorageService";
 import {UserService} from "../../../../logic/services/UserService";
 import {Subcategory} from "../../../../logic/models/Subcategory";
@@ -15,7 +15,12 @@ export class SubcategoriesComponent implements OnInit {
   subcategoriesData: { subcategory: Subcategory; colourName: string }[] = [];
   protected categoryId: number | undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router, private colourService: ColourService, private apiService: SubcategoryService, private localStorageService: LocalStorageService) {}
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private colourService: ColourService,
+              private apiService: SubcategoryService,
+              private localStorageService: LocalStorageService,
+              private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -54,6 +59,29 @@ export class SubcategoriesComponent implements OnInit {
         (error) => {
           console.error('Error fetching subcategories:', error);
           // Handle error (e.g., display an error message)
+        }
+      );
+  }
+
+  deleteSubcategory(subcategoryId: number | undefined) {
+    if (UserService.loggedInUser == null) {
+      console.error('User is not logged in');
+      return;
+    }
+
+    this.apiService
+      .deleteSubcategory(UserService.loggedInUser.username, UserService.loggedInUser.password, this.categoryId, subcategoryId)
+      .subscribe(
+        (result) => {
+          console.log('Deleted subcategory:', result);
+          // Nach dem Löschen die Kategorie aus dem categoriesData-Array entfernen
+          this.subcategoriesData = this.subcategoriesData.filter((item) => item.subcategory.subcategoryId !== subcategoryId);
+          this.cdr.detectChanges(); // Trigger change detection
+          // Handle result (e.g., display success message)
+        },
+        (error) => {
+          console.error('Error deleting subcategory:', error);
+          window.location.reload();
         }
       );
   }

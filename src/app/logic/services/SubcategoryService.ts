@@ -35,4 +35,14 @@ export class SubcategoryService {
     });
     return this.http.post<Subcategory>(apiUrl, subcategory, { headers });
   }
+
+  deleteSubcategory(username: string, password: string, categoryId: number | undefined, subcategoryId: number | undefined) {
+    const apiUrl = AppComponent.apiUrl + `categories/${categoryId}/subcategories/` + subcategoryId;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+    return this.http.delete<number>(apiUrl, { headers });
+  }
 }
