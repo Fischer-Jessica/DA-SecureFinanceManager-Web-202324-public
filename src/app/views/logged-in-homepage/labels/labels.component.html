@@ -1,16 +1,14 @@
 <!-- category-list.component.html -->
 <h2>Labels</h2>
 <button mat-raised-button color="primary" routerLink='/logged-in-homepage/create-label'>New Label</button>
-<div *ngIf="labels && labels.length > 0; else noCategories" class="label-container">
-  <div *ngFor="let label of labels" class="label-item" (click)="showEntries(label.labelId)">
-    <mat-card>
+<div *ngIf="labelsData && labelsData.length > 0; else noCategories" class="label-container">
+  <div *ngFor="let labelData of labelsData" class="label-item" (click)="showEntries(labelData.label.labelId)">
+    <mat-card class="card">
       <mat-card-header>
-        <mat-card-title>{{ label.labelName }}</mat-card-title>
-        <mat-card-subtitle>{{ label.labelDescription }}</mat-card-subtitle>
+        <div class="dot" [ngStyle]="{ 'background-color': labelData.colourName }"></div>
+        <mat-card-title>{{ labelData.label.labelName }}</mat-card-title>
+        <mat-card-subtitle>{{ labelData.label.labelDescription }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content>
-        <h5>HELL YEAH</h5>
-      </mat-card-content>
     </mat-card>
   </div>
 </div>

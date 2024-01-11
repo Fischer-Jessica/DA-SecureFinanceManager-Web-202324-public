@@ -4,6 +4,8 @@ import {Label} from "../../../logic/models/Label";
 import {LabelService} from "../../../logic/services/LabelService";
 import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
+import {Subcategory} from "../../../logic/models/Subcategory";
+import {ColourService} from "../../../logic/services/ColourService";
 
 @Component({
   selector: 'logged-in-labels',
@@ -11,9 +13,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./labels.component.css']
 })
 export class LabelsComponent implements OnInit {
-  labels: Label[] = [];
+  labelsData: { label: Label; colourName: string }[] = [];
 
-  constructor(private router: Router, private apiService: LabelService, private localStorageService: LocalStorageService) {
+  constructor(private router: Router, private apiService: LabelService, private localStorageService: LocalStorageService, private colourService: ColourService) {
   }
 
   ngOnInit(): void {
@@ -31,7 +33,20 @@ export class LabelsComponent implements OnInit {
     this.apiService.getLabels(UserService.loggedInUser.username, UserService.loggedInUser.password)
       .subscribe(
         (result) => {
-          this.labels = result;
+          for (let label of result) {
+            this.colourService.getColourName(label.labelColourId).subscribe(
+              (result) => {
+                this.labelsData.push({
+                  label: label,
+                  colourName: result
+                });
+              },
+              (error) => {
+                console.error('Error fetching colour:', error);
+                // Handle error (e.g., display an error message)
+              }
+            );
+          }
         },
         (error) => {
           console.error('Error fetching labels:', error);
@@ -39,6 +54,7 @@ export class LabelsComponent implements OnInit {
         }
       );
   }
+
   showEntries(labelId: number | undefined) {
     console.log(labelId)
     this.router.navigateByUrl(`/logged-in-homepage/labels/${labelId}/entries`);
