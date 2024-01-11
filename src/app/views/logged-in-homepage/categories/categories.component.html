@@ -3,13 +3,14 @@
 <button mat-raised-button color="primary" routerLink='/logged-in-homepage/create-category'>New Category</button>
 <p>Eine Liste Ihrer Kategorien:</p>
 <div *ngIf="categoriesData && categoriesData.length > 0; else noCategories" class="category-container">
-  <div *ngFor="let category of categoriesData" class="category-item" (click)="showSubcategories(category.category.categoryId)">
+  <div *ngFor="let category of categoriesData" class="category-item">
     <mat-card class="card">
-      <mat-card-header id="header">
+      <mat-card-header id="header" (click)="showSubcategories(category.category.categoryId)">
         <div class="dot" [ngStyle]="{ 'background-color': category.colourName }"></div>
         <mat-card-title>{{ category.category.categoryName }}</mat-card-title>
         <mat-card-subtitle>{{ category.category.categoryDescription }}</mat-card-subtitle>
       </mat-card-header>
+      <button class="delete" (click)="deleteCategory(category.category.categoryId)">Delete</button>
     </mat-card>
   </div>
 </div>

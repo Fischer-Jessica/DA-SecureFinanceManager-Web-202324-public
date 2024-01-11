@@ -34,4 +34,14 @@ export class CategoryService {
     });
     return this.http.post<Category>(apiUrl, category, { headers });
   }
+
+  deleteCategory(username: string, password: string, categoryId: number | undefined): Observable<number> {
+    const apiUrl = AppComponent.apiUrl + 'categories/' + categoryId;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+    return this.http.delete<number>(apiUrl, { headers });
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import { Category } from '../../../logic/models/Category';
 import { CategoryService } from '../../../logic/services/CategoryService';
 import { UserService } from '../../../logic/services/UserService';
@@ -14,7 +14,13 @@ import {ColourService} from "../../../logic/services/ColourService";
 export class CategoriesComponent implements OnInit {
   categoriesData: { category: Category; colourName: string }[] = [];
 
-  constructor(private router: Router, protected colourService: ColourService, private categoryService: CategoryService, private localStorageService: LocalStorageService) {}
+  constructor(
+    private router: Router,
+    protected colourService: ColourService,
+    private categoryService: CategoryService,
+    private localStorageService: LocalStorageService,
+    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -29,15 +35,17 @@ export class CategoriesComponent implements OnInit {
       console.error('User is not logged in');
       return;
     }
-    this.categoryService.getCategories(UserService.loggedInUser.username, UserService.loggedInUser.password)
+    this.categoryService
+      .getCategories(UserService.loggedInUser.username, UserService.loggedInUser.password)
       .subscribe(
         (result) => {
-          for(let category of result) {
+          this.categoriesData = []; // Clear existing data
+          for (let category of result) {
             this.colourService.getColourName(category.categoryColourId).subscribe(
               (result) => {
                 this.categoriesData.push({
                   category: category,
-                  colourName: result
+                  colourName: result,
                 });
               },
               (error) => {
@@ -45,12 +53,35 @@ export class CategoriesComponent implements OnInit {
                 // Handle error (e.g., display an error message)
               }
             );
-
           }
+          this.cdr.detectChanges(); // Trigger change detection
         },
         (error) => {
           console.error('Error fetching categories:', error);
           // Handle error (e.g., display an error message)
+        }
+      );
+  }
+
+  deleteCategory(categoryId: number | undefined) {
+    if (UserService.loggedInUser == null) {
+      console.error('User is not logged in');
+      return;
+    }
+
+    this.categoryService
+      .deleteCategory(UserService.loggedInUser.username, UserService.loggedInUser.password, categoryId)
+      .subscribe(
+        (result) => {
+          console.log('Deleted category:', result);
+          // Nach dem Löschen die Kategorie aus dem categoriesData-Array entfernen
+          this.categoriesData = this.categoriesData.filter((item) => item.category.categoryId !== categoryId);
+          this.cdr.detectChanges(); // Trigger change detection
+          // Handle result (e.g., display success message)
+        },
+        (error) => {
+          console.error('Error deleting category:', error);
+          window.location.reload();
         }
       );
   }
