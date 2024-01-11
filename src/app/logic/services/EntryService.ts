@@ -45,4 +45,14 @@ export class EntryService {
     });
     return this.http.post<Entry>(apiUrl, entry, { headers });
   }
+
+  deleteEntry(username: string, password: string, subcategoryId: number | undefined, entryId: number | undefined) : Observable<number> {
+    const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries/${entryId}`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+    return this.http.delete<number>(apiUrl, { headers });
+  }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LocalStorageService} from "../../../../../logic/LocalStorageService";
 import {UserService} from "../../../../../logic/services/UserService";
@@ -16,7 +16,7 @@ export class EntriesComponent implements OnInit {
   protected subcategoryId: number | undefined;
   private categoryId: number | undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router, private apiService: EntryService, private localStorageService: LocalStorageService) {}
+  constructor(private route: ActivatedRoute, private router: Router, private apiService: EntryService, private localStorageService: LocalStorageService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -43,6 +43,25 @@ export class EntriesComponent implements OnInit {
         },
         (error) => {
           console.error('Error fetching subcategories:', error);
+          // Handle error (e.g., display an error message)
+        }
+      );
+  }
+
+  deleteEntry(entryId: number | undefined) {
+    if (UserService.loggedInUser == null) {
+      console.error('User is not logged in');
+      return;
+    }
+    this.apiService.deleteEntry(UserService.loggedInUser.username, UserService.loggedInUser.password, this.subcategoryId, entryId)
+      .subscribe(
+        (result) => {
+          console.log('Deleted entry:', result);
+          this.entries = this.entries.filter((item) => item.entryId !== entryId);
+          this.cdr.detectChanges(); // Trigger change detection
+        },
+        (error) => {
+          console.error('Error deleting entry:', error);
           // Handle error (e.g., display an error message)
         }
       );

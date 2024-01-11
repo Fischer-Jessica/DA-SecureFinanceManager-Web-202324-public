@@ -13,6 +13,7 @@
         <h5>{{ entry.entryAmount }}</h5>
         <h6>{{ entry.entryTimeOfTransaction }}</h6>
       </mat-card-content>
+      <button class="delete" (click)="deleteEntry(entry.entryId)">Delete</button>
     </mat-card>
   </div>
 </div>
