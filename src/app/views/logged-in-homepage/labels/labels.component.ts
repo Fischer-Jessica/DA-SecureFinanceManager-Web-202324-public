@@ -3,6 +3,7 @@ import {UserService} from "../../../logic/services/UserService";
 import {Label} from "../../../logic/models/Label";
 import {LabelService} from "../../../logic/services/LabelService";
 import {LocalStorageService} from "../../../logic/LocalStorageService";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'logged-in-labels',
@@ -12,7 +13,8 @@ import {LocalStorageService} from "../../../logic/LocalStorageService";
 export class LabelsComponent implements OnInit {
   labels: Label[] = [];
 
-  constructor(private apiService: LabelService, private localStorageService: LocalStorageService) {}
+  constructor(private router: Router, private apiService: LabelService, private localStorageService: LocalStorageService) {
+  }
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -36,5 +38,9 @@ export class LabelsComponent implements OnInit {
           // Handle error (e.g., display an error message)
         }
       );
+  }
+  showEntries(labelId: number | undefined) {
+    console.log(labelId)
+    this.router.navigateByUrl(`/logged-in-homepage/labels/${labelId}/entries`);
   }
 }

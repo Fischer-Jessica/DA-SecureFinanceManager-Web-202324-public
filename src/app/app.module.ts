@@ -44,6 +44,7 @@ import {MatButtonModule} from "@angular/material/button";
 import { EntriesComponent } from './views/logged-in-homepage/categories/subcategories/entries/entries.component';
 import { CreateEntryComponent } from './views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component';
 import { CreateLabelComponent } from './views/logged-in-homepage/labels/create-label/create-label.component';
+import {LabelEntriesComponent} from "./views/logged-in-homepage/labels/entries/label-entries.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -61,6 +62,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     OverviewComponent,
     CategoriesComponent,
     LabelsComponent,
+    LabelEntriesComponent,
     DiagramsComponent,
     CreateCategoryComponent,
     SubcategoriesComponent,

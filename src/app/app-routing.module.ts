@@ -18,6 +18,7 @@ import {
   CreateEntryComponent
 } from "./views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component";
 import {CreateLabelComponent} from "./views/logged-in-homepage/labels/create-label/create-label.component";
+import {LabelEntriesComponent} from "./views/logged-in-homepage/labels/entries/label-entries.component";
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
             {path: 'create-entry/:categoryId/:subcategoryId', component: CreateEntryComponent},
       {path: 'labels', component: LabelsComponent},
         {path: 'create-label', component: CreateLabelComponent},
+        {path: 'labels/:labelId/entries', component: LabelEntriesComponent},
       {path: 'diagrams', component: DiagramsComponent},
     ]
   },

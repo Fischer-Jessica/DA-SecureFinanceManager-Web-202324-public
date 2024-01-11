@@ -36,7 +36,7 @@ export class EntriesComponent implements OnInit {
       console.error('User is not logged in');
       return;
     }
-    this.apiService.getEntries(UserService.loggedInUser.username, UserService.loggedInUser.password, subcategoryId)
+    this.apiService.getEntriesBySubcategoryId(UserService.loggedInUser.username, UserService.loggedInUser.password, subcategoryId)
       .subscribe(
         (result) => {
           this.entries = result;
