@@ -48,7 +48,6 @@ export class ColourPickerComponent implements OnInit {
   }
 
   onColourSelected(): void {
-    console.log('selectedColourId:', this.selectedColourId);
     this.colourSelected.emit(this.selectedColourId);
   }
 }

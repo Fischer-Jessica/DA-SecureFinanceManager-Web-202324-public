@@ -19,7 +19,6 @@ export class CreateCategoryComponent {
   }
 
   onColourSelected(colourId: number): void {
-    console.log('Received colourId:', colourId);
     this.category.categoryColourId = colourId;
   }
 

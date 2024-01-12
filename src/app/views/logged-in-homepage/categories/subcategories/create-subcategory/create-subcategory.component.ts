@@ -18,7 +18,12 @@ export class CreateSubcategoryComponent {
 
   constructor(private route: ActivatedRoute, private router: Router, private apiService: SubcategoryService) {}
 
+  onColourSelected(colourId: number): void {
+    this.subcategory.subcategoryColourId = colourId;
+  }
+
   onSubmit(formData: Subcategory) {
+    formData.subcategoryColourId = this.subcategory.subcategoryColourId;
     if (UserService.loggedInUser == null) {
       console.error('User is not logged in');
       return;

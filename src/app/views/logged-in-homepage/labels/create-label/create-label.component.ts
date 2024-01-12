@@ -19,7 +19,12 @@ export class CreateLabelComponent {
   constructor(private labelService: LabelService, private router: Router) {
   }
 
+  onColourSelected(colourId: number): void {
+    this.label.labelColourId = colourId;
+  }
+
   onSubmit(formData: Label) {
+    formData.labelId = this.label.labelId;
     if (UserService.loggedInUser == null) {
       console.error('User is not logged in');
       return;
