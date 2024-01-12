@@ -18,8 +18,13 @@ export class CreateCategoryComponent {
   constructor(private categoryService: CategoryService, private router: Router) {
   }
 
+  onColourSelected(colourId: number): void {
+    console.log('Received colourId:', colourId);
+    this.category.categoryColourId = colourId;
+  }
 
   onSubmit(formData: Category) {
+    formData.categoryColourId = this.category.categoryColourId;
     if (UserService.loggedInUser == null) {
       console.error('User is not logged in');
       return;

@@ -1,0 +1,6 @@
+<div>
+  <label for="colourSelect">Wähle eine Farbe:</label>
+  <select id="colourSelect" [(ngModel)]="selectedColourId" (change)="onColourSelected()">
+    <option *ngFor="let colour of colourDatas" [value]="colour.colour.colourId">{{ colour.colourName }}</option>
+  </select>
+</div>

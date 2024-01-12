@@ -7,8 +7,7 @@
   <textarea id="categoryDescription" name="categoryDescription" [(ngModel)]="category.categoryDescription"></textarea>
   <br>
 
-  <label for="categoryColourId">Category Colour ID:</label>
-  <input type="number" id="categoryColourId" name="categoryColourId" [(ngModel)]="category.categoryColourId" required>
+  <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
   <br>
 
   <button type="submit" mat-raised-button color="primary">Submit</button>
