@@ -8,7 +8,7 @@ import {Colour} from "../../../logic/models/Colour";
   styleUrls: ['./colour-picker.component.css']
 })
 export class ColourPickerComponent implements OnInit {
-  colourDatas: { colour: Colour; colourName: string }[] = [];
+  colours: Colour[] = [];
   selectedColourId: number = 0;
 
   @Output() colourSelected = new EventEmitter<number>();
@@ -24,20 +24,9 @@ export class ColourPickerComponent implements OnInit {
       .getColours()
       .subscribe(
         (result) => {
-          this.colourDatas = []; // Clear existing data
+          this.colours = []; // Clear existing data
           for (let colour of result) {
-            this.colourService.getColourName(colour.colourId).subscribe(
-              (result) => {
-                this.colourDatas.push({
-                  colour: colour,
-                  colourName: result,
-                });
-              },
-              (error) => {
-                console.error('Error fetching colour-name:', error);
-                // Handle error (e.g., display an error message)
-              }
-            );
+            this.colours.push(colour);
           }
         },
         (error) => {
@@ -47,7 +36,8 @@ export class ColourPickerComponent implements OnInit {
       );
   }
 
-  onColourSelected(): void {
-    this.colourSelected.emit(this.selectedColourId);
+  onColourSelected(selectedColourId: number): void {
+    this.colourSelected.emit(selectedColourId);
+    this.selectedColourId = selectedColourId;
   }
 }

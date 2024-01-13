@@ -1,5 +1,8 @@
-<select id="colourSelect" [(ngModel)]="selectedColourId" (change)="onColourSelected()">
-  <option *ngFor="let colour of colourDatas" [style.background-color]="'#' + colour.colour.colourCode" [value]="colour.colour.colourId">
-    {{ colour.colourName }}
-  </option>
-</select>
+<div class="color-picker">
+  <div *ngFor="let colour of colours"
+       class="color-ball"
+       [style.background-color]="'#' + colour.colourCode"
+       [ngClass]="{'selected-color': selectedColourId === colour.colourId}"
+       (click)="onColourSelected(colour.colourId)">
+  </div>
+</div>
