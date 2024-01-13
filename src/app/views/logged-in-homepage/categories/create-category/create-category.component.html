@@ -1,16 +1,22 @@
-<form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm.value)">
-  <label for="categoryName">Category Name:</label>
-  <input type="text" id="categoryName" name="categoryName" [(ngModel)]="category.categoryName" required>
+<form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm.value)" class="category-form">
   <br>
+  <div class="form-group">
+    <label for="categoryName" class="form-label">Category Name:</label>
+    <input type="text" id="categoryName" name="categoryName" [(ngModel)]="category.categoryName" required class="form-input">
+  </div>
 
-  <label for="categoryDescription">Category Description:</label>
-  <textarea id="categoryDescription" name="categoryDescription" [(ngModel)]="category.categoryDescription"></textarea>
-  <br>
+  <div class="form-group">
+    <label for="categoryDescription" class="form-label">Category Description:</label>
+    <textarea id="categoryDescription" name="categoryDescription" [(ngModel)]="category.categoryDescription" class="form-textarea"></textarea>
+  </div>
 
-  <label>Category Colour:</label>
-  <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
-  <br>
+  <div class="form-group">
+    <label class="form-label">Category Colour:</label>
+    <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
+  </div>
 
-  <button type="submit" mat-raised-button color="primary">Submit</button>
-  <button type="cancel" mat-raised-button color="warn" routerLink='/logged-in-homepage/categories'>Cancel</button>
+  <div class="form-actions">
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button type="cancel" mat-raised-button color="warn" routerLink='/logged-in-homepage/categories'>Cancel</button>
+  </div>
 </form>
