@@ -24,7 +24,7 @@ export class CreateLabelComponent {
   }
 
   onSubmit(formData: Label) {
-    formData.labelId = this.label.labelId;
+    formData.labelColourId = this.label.labelColourId;
     if (UserService.loggedInUser == null) {
       console.error('User is not logged in');
       return;

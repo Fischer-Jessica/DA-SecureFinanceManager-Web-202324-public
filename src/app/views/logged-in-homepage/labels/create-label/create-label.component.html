@@ -1,17 +1,22 @@
-<form #labelForm="ngForm" (ngSubmit)="onSubmit(labelForm.value)">
-  <label for="labelName">Label Name:</label>
-  <input type="text" id="labelName" name="labelName" [(ngModel)]="label.labelName" required>
+<form #labelForm="ngForm" (ngSubmit)="onSubmit(labelForm.value)" class="label-form">
   <br>
+  <div class="form-group">
+    <label for="labelName" class="form-label">Label Name:</label>
+    <input type="text" id="labelName" name="labelName" [(ngModel)]="label.labelName" required class="form-input">
+  </div>
 
-  <label for="labelDescription">Label Description:</label>
-  <textarea id="labelDescription" name="labelDescription" [(ngModel)]="label.labelDescription"></textarea>
-  <br>
+  <div class="form-group">
+    <label for="labelDescription" class="form-label">Label Description:</label>
+    <textarea id="labelDescription" name="labelDescription" [(ngModel)]="label.labelDescription" class="form-textarea"></textarea>
+  </div>
 
-  <label>Label Colour:</label>
-  <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
-  <br>
+  <div class="form-group">
+    <label class="form-label">Label Colour:</label>
+    <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
+  </div>
 
-  <button type="submit" mat-raised-button color="primary">Submit</button>
-  <!-- Hier wird die Methode returnToLabels aufgerufen, wenn der "Cancel"-Button geklickt wird -->
-  <button type="button" mat-raised-button color="warn" routerLink='/logged-in-homepage/labels'>Cancel</button>
+  <div class="form-actions">
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button type="button" mat-raised-button color="warn" routerLink='/logged-in-homepage/labels'>Cancel</button>
+  </div>
 </form>
