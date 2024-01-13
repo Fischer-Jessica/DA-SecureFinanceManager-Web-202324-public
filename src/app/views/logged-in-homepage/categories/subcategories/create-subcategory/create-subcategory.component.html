@@ -1,16 +1,22 @@
-<form #subcategoryForm="ngForm" (ngSubmit)="onSubmit(subcategoryForm.value)">
-  <label for="subcategoryName">Subcategory Name:</label>
-  <input type="text" id="subcategoryName" name="subcategoryName" [(ngModel)]="subcategory.subcategoryName" required>
+<form #subcategoryForm="ngForm" (ngSubmit)="onSubmit(subcategoryForm.value)" class="subcategory-form">
   <br>
+  <div class="form-group">
+    <label for="subcategoryName" class="form-label">Subcategory Name:</label>
+    <input type="text" id="subcategoryName" name="subcategoryName" [(ngModel)]="subcategory.subcategoryName" required class="form-input">
+  </div>
 
-  <label for="subcategoryDescription">Subcategory Description:</label>
-  <textarea id="subcategoryDescription" name="subcategoryDescription" [(ngModel)]="subcategory.subcategoryDescription"></textarea>
-  <br>
+  <div class="form-group">
+    <label for="subcategoryDescription" class="form-label">Subcategory Description:</label>
+    <textarea id="subcategoryDescription" name="subcategoryDescription" [(ngModel)]="subcategory.subcategoryDescription" class="form-textarea"></textarea>
+  </div>
 
-  <label>Subcategory Colour:</label>
-  <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
-  <br>
+  <div class="form-group">
+    <label class="form-label">Subcategory Colour:</label>
+    <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
+  </div>
 
-  <button type="submit" mat-raised-button color="primary">Submit</button>
-  <button type="cancel" mat-raised-button color="warn" (click)="returnToSubcategories()">Cancel</button>
+  <div class="form-actions">
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button type="button" mat-raised-button color="warn" (click)="returnToSubcategories()">Cancel</button>
+  </div>
 </form>
