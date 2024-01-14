@@ -11,6 +11,7 @@ import {LocalStorageService} from "../LocalStorageService";
 export class UserService {
   static loggedInUser: User | null = null;
   private readonly localStorageKey = 'loggedInUser';
+  loggedInUser: any;
 
   constructor(private http: HttpClient, private localStorageService: LocalStorageService) {}
 

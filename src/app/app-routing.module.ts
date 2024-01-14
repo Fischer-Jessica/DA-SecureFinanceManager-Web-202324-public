@@ -19,6 +19,7 @@ import {
 } from "./views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component";
 import {CreateLabelComponent} from "./views/logged-in-homepage/labels/create-label/create-label.component";
 import {LabelEntriesComponent} from "./views/logged-in-homepage/labels/entries/label-entries.component";
+import {UpdateCategoryComponent} from "./views/logged-in-homepage/categories/update-category/update-category.component";
 
 const routes: Routes = [
   {
@@ -35,21 +36,22 @@ const routes: Routes = [
     path: 'logged-in-homepage',
     component: LoggedInHomepageComponent,
     children: [
-      {path: '', redirectTo: 'overview', pathMatch: 'full'},
-      {path: 'overview', component: OverviewComponent},
-      {path: 'categories', component: CategoriesComponent},
-        {path: 'create-category', component: CreateCategoryComponent},
-          {path: 'subcategories/:categoryId', component: SubcategoriesComponent},
-          {path: 'create-subcategory/:categoryId', component: CreateSubcategoryComponent},
-            {path: 'entries/:categoryId/:subcategoryId', component: EntriesComponent},
-            {path: 'create-entry/:categoryId/:subcategoryId', component: CreateEntryComponent},
-      {path: 'labels', component: LabelsComponent},
-        {path: 'create-label', component: CreateLabelComponent},
-        {path: 'labels/:labelId/entries', component: LabelEntriesComponent},
-      {path: 'diagrams', component: DiagramsComponent},
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      { path: 'overview', component: OverviewComponent },
+      { path: 'categories', component: CategoriesComponent },
+      { path: 'create-category', component: CreateCategoryComponent },
+      { path: 'update-category/:categoryId', component: UpdateCategoryComponent }, // Hier ist die UpdateCategory-Route
+      { path: 'subcategories/:categoryId', component: SubcategoriesComponent },
+      { path: 'create-subcategory/:categoryId', component: CreateSubcategoryComponent },
+      { path: 'entries/:categoryId/:subcategoryId', component: EntriesComponent },
+      { path: 'create-entry/:categoryId/:subcategoryId', component: CreateEntryComponent },
+      { path: 'labels', component: LabelsComponent },
+      { path: 'create-label', component: CreateLabelComponent },
+      { path: 'labels/:labelId/entries', component: LabelEntriesComponent },
+      { path: 'diagrams', component: DiagramsComponent },
     ]
   },
-  {path: '', redirectTo: 'authentication', pathMatch: 'full'},
+  { path: '', redirectTo: 'authentication', pathMatch: 'full' },
 ];
 
 
