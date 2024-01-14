@@ -6,7 +6,7 @@
   <div *ngFor="let labelData of labelsData" class="label-item">
     <mat-card class="card">
       <mat-card-header (click)="showEntries(labelData.label.labelId)">
-        <div class="dot" [ngStyle]="{ 'background-color': labelData.colourName }"></div>
+        <div class="dot" [style.background-color]="'#' + labelData.colourHex"></div>
         <mat-card-title>{{ labelData.label.labelName }}</mat-card-title>
         <mat-card-subtitle>{{ labelData.label.labelDescription }}</mat-card-subtitle>
       </mat-card-header>

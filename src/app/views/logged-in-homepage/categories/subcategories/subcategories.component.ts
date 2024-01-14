@@ -12,7 +12,7 @@ import {ColourService} from "../../../../logic/services/ColourService";
   styleUrls: ['./subcategories.component.css']
 })
 export class SubcategoriesComponent implements OnInit {
-  subcategoriesData: { subcategory: Subcategory; colourName: string }[] = [];
+  subcategoriesData: { subcategory: Subcategory; colourHex: string }[] = [];
   protected categoryId: number | undefined;
 
   constructor(private route: ActivatedRoute,
@@ -42,11 +42,11 @@ export class SubcategoriesComponent implements OnInit {
       .subscribe(
         (result) => {
           for (let subcategory of result) {
-            this.colourService.getColourName(subcategory.subcategoryColourId).subscribe(
+            this.colourService.getColourHex(subcategory.subcategoryColourId).subscribe(
               (result) => {
                 this.subcategoriesData.push({
                   subcategory: subcategory,
-                  colourName: result
+                  colourHex: result
                 });
               },
               (error) => {

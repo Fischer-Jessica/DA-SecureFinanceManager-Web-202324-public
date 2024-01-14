@@ -6,7 +6,7 @@
   <div *ngFor="let category of categoriesData" class="category-item">
     <mat-card class="card">
       <mat-card-header id="header" (click)="showSubcategories(category.category.categoryId)">
-        <div class="dot" [ngStyle]="{ 'background-color': category.colourName }"></div>
+        <div class="dot" [style.background-color]="'#' + category.colourHex"></div>
         <mat-card-title>{{ category.category.categoryName }}</mat-card-title>
         <mat-card-subtitle>{{ category.category.categoryDescription }}</mat-card-subtitle>
       </mat-card-header>

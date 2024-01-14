@@ -13,7 +13,7 @@ import {ColourService} from "../../../logic/services/ColourService";
   styleUrls: ['./labels.component.css']
 })
 export class LabelsComponent implements OnInit {
-  labelsData: { label: Label; colourName: string }[] = [];
+  labelsData: { label: Label; colourHex: string }[] = [];
 
   constructor(private router: Router, private apiService: LabelService, private localStorageService: LocalStorageService, private colourService: ColourService, private cdr: ChangeDetectorRef) {
   }
@@ -34,11 +34,11 @@ export class LabelsComponent implements OnInit {
       .subscribe(
         (result) => {
           for (let label of result) {
-            this.colourService.getColourName(label.labelColourId).subscribe(
+            this.colourService.getColourHex(label.labelColourId).subscribe(
               (result) => {
                 this.labelsData.push({
                   label: label,
-                  colourName: result
+                  colourHex: result
                 });
               },
               (error) => {

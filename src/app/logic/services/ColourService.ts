@@ -43,7 +43,7 @@ export class ColourService {
     );
   }
 
-  getColourName(colourId: number): Observable<string> {
+  getColourHex(colourId: number): Observable<string> {
     const apiUrl: string = AppComponent.apiUrl + 'colours/' + colourId;
 
     const headers = new HttpHeaders({
@@ -52,7 +52,7 @@ export class ColourService {
 
     return this.http.get<Colour>(apiUrl, { headers }).pipe(
       map((result) => {
-        return result.colourName;
+        return result.colourCode;
       })
     );
   }

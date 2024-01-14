@@ -12,7 +12,7 @@ import {ColourService} from "../../../logic/services/ColourService";
   styleUrls: ['./categories.component.css'],
 })
 export class CategoriesComponent implements OnInit {
-  categoriesData: { category: Category; colourName: string }[] = [];
+  categoriesData: { category: Category; colourHex: string }[] = [];
 
   constructor(
     private router: Router,
@@ -41,11 +41,11 @@ export class CategoriesComponent implements OnInit {
         (result) => {
           this.categoriesData = []; // Clear existing data
           for (let category of result) {
-            this.colourService.getColourName(category.categoryColourId).subscribe(
+            this.colourService.getColourHex(category.categoryColourId).subscribe(
               (result) => {
                 this.categoriesData.push({
                   category: category,
-                  colourName: result,
+                  colourHex: result,
                 });
               },
               (error) => {
