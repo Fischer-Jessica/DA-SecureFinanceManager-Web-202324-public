@@ -6,12 +6,13 @@
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
       <mat-card-header>
-        <mat-card-title>{{ entry.entryName }}</mat-card-title>
-        <mat-card-subtitle>{{ entry.entryDescription }}</mat-card-subtitle>
+        <mat-card-title>Entry name: {{ entry.entryName }}</mat-card-title>
+        <mat-card-subtitle>Entry description: {{ entry.entryDescription }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <h5>{{ entry.entryAmount }}</h5>
-        <h6>{{ entry.entryTimeOfTransaction }}</h6>
+        <h5>Entry amount:{{ entry.entryAmount }}</h5>
+        <p>Entry Time of Transaction: {{ entry.entryTimeOfTransaction }}<br>
+        Entry Time of Creation: {{ entry.entryCreationTime }}</p>
       </mat-card-content>
       <button class="delete" (click)="deleteEntry(entry.entryId)">Delete</button>
     </mat-card>

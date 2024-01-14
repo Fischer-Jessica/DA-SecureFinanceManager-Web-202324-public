@@ -1,25 +1,32 @@
-<form #entryForm="ngForm" (ngSubmit)="onSubmit(entryForm.value)">
-  <label for="entryName">Entry Name:</label>
-  <input type="text" id="entryName" name="entryName" [(ngModel)]="entry.entryName" required>
+<form #entryForm="ngForm" (ngSubmit)="onSubmit(entryForm.value)" class="entry-form">
   <br>
+  <div class="form-group">
+    <label for="entryName" class="form-label">Entry Name:</label>
+    <input type="text" id="entryName" name="entryName" [(ngModel)]="entry.entryName" required class="form-input">
+  </div>
 
-  <label for="entryDescription">Entry Description:</label>
-  <textarea id="entryDescription" name="entryDescription" [(ngModel)]="entry.entryDescription"></textarea>
-  <br>
+  <div class="form-group">
+    <label for="entryDescription" class="form-label">Entry Description:</label>
+    <textarea id="entryDescription" name="entryDescription" [(ngModel)]="entry.entryDescription" class="form-textarea"></textarea>
+  </div>
 
-  <label for="entryAmount">Entry Amount:</label>
-  <input type="number" id="entryAmount" name="entryAmount" [(ngModel)]="entry.entryAmount" required>
-  <br>
+  <div class="form-group">
+    <label for="entryAmount" class="form-label">Entry Amount:</label>
+    <input type="number" id="entryAmount" name="entryAmount" [(ngModel)]="entry.entryAmount" required class="form-input">
+  </div>
 
-  <label for="entryTimeOfTransaction">Entry Time of Transaction:</label>
-  <input type="datetime-local" id="entryTimeOfTransaction" name="entryTimeOfTransaction" [(ngModel)]="entry.entryTimeOfTransaction" required>
-  <br>
+  <div class="form-group">
+    <label for="entryTimeOfTransaction" class="form-label">Entry Time of Transaction:</label>
+    <input type="datetime-local" id="entryTimeOfTransaction" name="entryTimeOfTransaction" [(ngModel)]="entry.entryTimeOfTransaction" required class="form-input">
+  </div>
 
-  <label for="entryAttachment">Entry Attachment:</label>
-  <input type="file" id="entryAttachment" name="entryAttachment" [(ngModel)]="entry.entryAttachment">
-  <br>
+  <div class="form-group">
+    <label for="entryAttachment" class="form-label">Entry Attachment:</label>
+    <input type="file" id="entryAttachment" name="entryAttachment" [(ngModel)]="entry.entryAttachment" class="form-input">
+  </div>
 
-  <button type="submit" mat-raised-button color="primary">Submit</button>
-  <!-- Hier wird die Methode returnToSubcategories aufgerufen, wenn der "Cancel"-Button geklickt wird -->
-  <button type="button" mat-raised-button color="warn" (click)="returnToEntries()">Cancel</button>
+  <div class="form-actions">
+    <button type="submit" mat-raised-button color="primary">Submit</button>
+    <button type="button" mat-raised-button color="warn" (click)="returnToEntries()">Cancel</button>
+  </div>
 </form>

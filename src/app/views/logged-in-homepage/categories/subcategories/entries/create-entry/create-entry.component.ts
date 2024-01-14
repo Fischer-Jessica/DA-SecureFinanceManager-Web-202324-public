@@ -14,7 +14,7 @@ export class CreateEntryComponent {
   entry: Entry = {
     subcategoryId: 0,
     entryAmount: 0,
-    entryTimeOfTransaction: '1512123123'
+    entryTimeOfTransaction: ''
   };
 
   private categoryId: number | undefined;
