@@ -12,7 +12,6 @@ import { Category } from '../../../../logic/models/Category';
 })
 export class UpdateCategoryComponent implements OnInit {
   category: Category = {} as Category;
-  private categoryId: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -58,11 +57,8 @@ export class UpdateCategoryComponent implements OnInit {
   onSubmit(formData: any): void {
     if (!formData.valid) {
       console.error('Invalid form data provided');
-      console.log(this.category)
       return;
     }
-
-    console.log(this.category)
 
     if (this.category.categoryId != null) {
       this.categoryService.updateCategory(

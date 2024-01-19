@@ -20,6 +20,7 @@ import {
 import {CreateLabelComponent} from "./views/logged-in-homepage/labels/create-label/create-label.component";
 import {LabelEntriesComponent} from "./views/logged-in-homepage/labels/entries/label-entries.component";
 import {UpdateCategoryComponent} from "./views/logged-in-homepage/categories/update-category/update-category.component";
+import {UpdateLabelComponent} from "./views/logged-in-homepage/labels/update-label/update-label.component";
 
 const routes: Routes = [
   {
@@ -40,13 +41,14 @@ const routes: Routes = [
       { path: 'overview', component: OverviewComponent },
       { path: 'categories', component: CategoriesComponent },
       { path: 'create-category', component: CreateCategoryComponent },
-      { path: 'update-category/:categoryId', component: UpdateCategoryComponent }, // Hier ist die UpdateCategory-Route
+      { path: 'update-category/:categoryId', component: UpdateCategoryComponent },
       { path: 'subcategories/:categoryId', component: SubcategoriesComponent },
       { path: 'create-subcategory/:categoryId', component: CreateSubcategoryComponent },
       { path: 'entries/:categoryId/:subcategoryId', component: EntriesComponent },
       { path: 'create-entry/:categoryId/:subcategoryId', component: CreateEntryComponent },
       { path: 'labels', component: LabelsComponent },
       { path: 'create-label', component: CreateLabelComponent },
+      { path: 'update-label/:labelId', component: UpdateLabelComponent },
       { path: 'labels/:labelId/entries', component: LabelEntriesComponent },
       { path: 'diagrams', component: DiagramsComponent },
     ]

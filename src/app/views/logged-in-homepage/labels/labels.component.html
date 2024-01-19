@@ -11,6 +11,7 @@
         <mat-card-subtitle>{{ labelData.label.labelDescription }}</mat-card-subtitle>
       </mat-card-header>
       <button class="delete" (click)="deleteLabel(labelData.label.labelId)">Delete</button>
+      <button routerLink="/logged-in-homepage/update-label/{{labelData.label.labelId}}" class="edit">Update</button>
     </mat-card>
   </div>
 </div>

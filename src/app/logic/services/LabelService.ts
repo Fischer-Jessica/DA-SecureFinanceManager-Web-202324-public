@@ -26,6 +26,17 @@ export class LabelService {
     return this.http.get<Label[]>(apiUrl, { headers });
   }
 
+  getLabel(username: string, password: string, labelId: number): Observable<Label> {
+    const apiUrl = AppComponent.apiUrl + `labels/${labelId}`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.get<Label>(apiUrl, { headers });
+  }
+
   insertLabel(username: string, password: string, label: Label): Observable<Label> {
     const apiUrl = AppComponent.apiUrl + 'labels';
 
@@ -35,6 +46,17 @@ export class LabelService {
     });
 
     return this.http.post<Label>(apiUrl, label, { headers });
+  }
+
+  updateLabel(username: string, password: string, labelId: number, label: Label): Observable<Label> {
+    const apiUrl = AppComponent.apiUrl + `labels/${labelId}`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.patch<Label>(apiUrl, label, { headers });
   }
 
   deleteLabel(username: string, password: string, labelId: number | undefined): Observable<number> {
