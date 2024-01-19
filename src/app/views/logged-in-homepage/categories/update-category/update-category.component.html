@@ -12,7 +12,7 @@
 
   <div class="form-group">
     <label class="form-label">Category Colour:</label>
-    <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
+    <app-colour-picker [selectedColourId]="category.categoryColourId" (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
   <div class="form-actions">

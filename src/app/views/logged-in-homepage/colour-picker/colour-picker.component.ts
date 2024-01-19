@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ColourService} from "../../../logic/services/ColourService";
 import {Colour} from "../../../logic/models/Colour";
 
@@ -9,8 +9,8 @@ import {Colour} from "../../../logic/models/Colour";
 })
 export class ColourPickerComponent implements OnInit {
   colours: Colour[] = [];
-  selectedColourId: number = 0;
 
+  @Input() selectedColourId: number = 0;
   @Output() colourSelected = new EventEmitter<number>();
 
   constructor(private colourService: ColourService) { }
