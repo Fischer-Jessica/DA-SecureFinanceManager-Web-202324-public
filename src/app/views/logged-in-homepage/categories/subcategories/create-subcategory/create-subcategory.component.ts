@@ -13,7 +13,7 @@ export class CreateSubcategoryComponent {
   subcategory: Subcategory = {
     subcategoryName: '',
     subcategoryColourId: 0,
-    categoryId: 0,
+    subcategoryCategoryId: 0,
   };
 
   constructor(private route: ActivatedRoute, private router: Router, private apiService: SubcategoryService) {}

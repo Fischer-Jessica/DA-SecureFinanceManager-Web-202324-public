@@ -26,6 +26,17 @@ export class SubcategoryService {
     return this.http.get<Subcategory[]>(apiUrl, { headers });
   }
 
+  getSubcategory(username: string, password: string, categoryId: number, subcategoryId: number): Observable<Subcategory> {
+    const apiUrl = AppComponent.apiUrl + `categories/${categoryId}/subcategories/${subcategoryId}`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.get<Subcategory>(apiUrl, { headers });
+  }
+
   insertSubcategory(username: string, password: string, categoryId: number, subcategory: Subcategory): Observable<Subcategory> {
     const apiUrl = AppComponent.apiUrl + `categories/${categoryId}/subcategories`;
 
@@ -34,6 +45,16 @@ export class SubcategoryService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
     return this.http.post<Subcategory>(apiUrl, subcategory, { headers });
+  }
+
+  updateSubcategory(username: string, password: string, subcategory: Subcategory): Observable<Subcategory> {
+    const apiUrl = AppComponent.apiUrl + `categories/${subcategory.subcategoryCategoryId}/subcategories/${subcategory.subcategoryId}`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+    return this.http.patch<Subcategory>(apiUrl, subcategory, { headers });
   }
 
   deleteSubcategory(username: string, password: string, categoryId: number | undefined, subcategoryId: number | undefined) {

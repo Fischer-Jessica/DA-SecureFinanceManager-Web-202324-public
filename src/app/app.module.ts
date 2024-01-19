@@ -48,6 +48,7 @@ import {LabelEntriesComponent} from "./views/logged-in-homepage/labels/entries/l
 import { ColourPickerComponent } from './views/logged-in-homepage/colour-picker/colour-picker.component';
 import { UpdateCategoryComponent } from './views/logged-in-homepage/categories/update-category/update-category.component';
 import { UpdateLabelComponent } from './views/logged-in-homepage/labels/update-label/update-label.component';
+import { UpdateSubcategoryComponent } from './views/logged-in-homepage/categories/subcategories/update-subcategory/update-subcategory.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -75,7 +76,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CreateLabelComponent,
     ColourPickerComponent,
     UpdateCategoryComponent,
-    UpdateLabelComponent
+    UpdateLabelComponent,
+    UpdateSubcategoryComponent
   ],
   imports: [
     BrowserModule,

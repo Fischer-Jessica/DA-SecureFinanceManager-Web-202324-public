@@ -14,7 +14,7 @@ import {Entry} from "../../../../../logic/models/Entry";
 export class EntriesComponent implements OnInit {
   entries: Entry[] = [];
   protected subcategoryId: number | undefined;
-  private categoryId: number | undefined;
+  protected categoryId: number | undefined;
 
   constructor(private route: ActivatedRoute, private router: Router, private apiService: EntryService, private localStorageService: LocalStorageService, private cdr: ChangeDetectorRef) {}
 
