@@ -1,7 +1,6 @@
 <h2>Subcategories</h2>
 <button mat-raised-button color="primary" (click)="addSubcategory()">New Subcategory</button>
 <button mat-raised-button color="warn" routerLink='/logged-in-homepage/categories'>Return to Categories</button>
-<button mat-raised-button color="primary" routerLink='/logged-in-homepage/update-category/{{ this.categoryId }}'>Update current Category</button>
 <p>These are the subcategories for the category with the id {{ this.categoryId }}</p>
 <div *ngIf="subcategoriesData && subcategoriesData.length > 0; else noSubcategories" class="subcategory-container">
   <div *ngFor="let subcategoryData of subcategoriesData" class="subcategory-item">
@@ -12,6 +11,7 @@
         <mat-card-subtitle>{{ subcategoryData.subcategory.subcategoryDescription }}</mat-card-subtitle>
       </mat-card-header>
       <button class="delete" (click)="deleteSubcategory(subcategoryData.subcategory.subcategoryId)">Delete</button>
+      <button routerLink='/logged-in-homepage/update-subcategory/{{ categoryId }}/{{ subcategoryData.subcategory.subcategoryId }}' class="edit">Update</button>
     </mat-card>
   </div>
 </div>

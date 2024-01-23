@@ -42,3 +42,16 @@
   margin-right: 10px; /* Füge den gewünschten Abstand zur Überschrift hinzu */
   background: red;
 }
+
+.edit {
+  display: inline-block;
+  border: #466D1D 3px solid;
+  width: 66px; /* Passe die Breite an deine Anforderungen an */
+  height: 26px; /* Passe die Höhe an deine Anforderungen an */
+  position: absolute;
+  right: 0; /* Platziere es am rechten Ende der .card */
+  top: 77%; /* Zentriere es vertikal auf der .card */
+  transform: translateY(-50%); /* Korrigiere die vertikale Ausrichtung */
+  margin-right: 77px; /* Füge den gewünschten Abstand zur Überschrift hinzu */
+  background: #99EDC3;
+}
