@@ -15,7 +15,7 @@
 .delete,
 .edit {
   display: inline-block;
-  border: 2px solid;
+  border: 3px solid;
   width: 66px;
   height: 26px;
   position: absolute;
