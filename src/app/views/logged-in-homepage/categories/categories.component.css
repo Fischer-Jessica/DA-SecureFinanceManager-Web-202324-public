@@ -1,57 +1,58 @@
-/* category-list.component.css */
 .category-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px; /* Abstand zwischen den Kategorien anpassen */
+  gap: 16px;
+  overflow: scroll;
+  height: 566px;
 }
 
 .category-item {
-  flex: 1 1 calc(33.33% - 16px); /* Hier wird die Breite auf 33.33% gesetzt, minus der Abstand */
-  max-width: calc(33.33% - 16px); /* Maximalbreite, um zu verhindern, dass sich Kategorien strecken */
+  flex: 1 1 calc(33.33% - 16px);
+  max-width: calc(33.33% - 16px);
 }
 
 .card {
   min-height: 100px;
   border: #111111 2px solid;
-  background: #e6e8fc;
+  background: #40476D;
+  filter: brightness(3);
 }
 
 .dot {
-  content: ""; /* Füge leeres Inhaltsattribut hinzu */
+  content: "";
   display: inline-block;
-  border: #111111 1px solid;
-  width: 33px; /* Passe die Breite an deine Anforderungen an */
-  height: 33px; /* Passe die Höhe an deine Anforderungen an */
+  border: #111111 2px solid;
+  width: 33px;
+  height: 33px;
   border-radius: 50%;
   position: absolute;
-  right: 0; /* Platziere es am rechten Ende der .card */
-  top: 30%; /* Zentriere es vertikal auf der .card */
-  transform: translateY(-50%); /* Korrigiere die vertikale Ausrichtung */
-  margin-right: 10px; /* Füge den gewünschten Abstand zur Überschrift hinzu */
+  right: 0;
+  top: 30%;
+  transform: translateY(-50%);
+  margin-right: 10px;
+}
+
+.delete,
+.edit {
+  display: inline-block;
+  border: 2px solid;
+  width: 66px;
+  height: 26px;
+  position: absolute;
+  right: 0;
+  top: 77%;
+  transform: translateY(-50%);
+  border-radius: 5px;
+  filter: brightness(1);
+  font-weight: bold;
 }
 
 .delete {
-  display: inline-block;
-  border: #8B0000 3px solid;
-  width: 66px; /* Passe die Breite an deine Anforderungen an */
-  height: 26px; /* Passe die Höhe an deine Anforderungen an */
-  position: absolute;
-  right: 0; /* Platziere es am rechten Ende der .card */
-  top: 77%; /* Zentriere es vertikal auf der .card */
-  transform: translateY(-50%); /* Korrigiere die vertikale Ausrichtung */
-  margin-right: 10px; /* Füge den gewünschten Abstand zur Überschrift hinzu */
+  margin-right: 10px;
   background: red;
 }
 
 .edit {
-  display: inline-block;
-  border: #466D1D 3px solid;
-  width: 66px; /* Passe die Breite an deine Anforderungen an */
-  height: 26px; /* Passe die Höhe an deine Anforderungen an */
-  position: absolute;
-  right: 0; /* Platziere es am rechten Ende der .card */
-  top: 77%; /* Zentriere es vertikal auf der .card */
-  transform: translateY(-50%); /* Korrigiere die vertikale Ausrichtung */
-  margin-right: 77px; /* Füge den gewünschten Abstand zur Überschrift hinzu */
-  background: #99EDC3;
+  margin-right: 80px;
+  background: green;
 }

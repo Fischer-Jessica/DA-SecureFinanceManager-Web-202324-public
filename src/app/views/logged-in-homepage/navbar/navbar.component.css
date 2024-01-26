@@ -1,9 +1,10 @@
 ul {
   list-style-type: none;
-  margin: 0;
+  margin: 10px;
   padding: 0;
   overflow: hidden;
-  background-color: #333333;
+  background-color: #3586ff;
+  border-radius: 22px;
 }
 
 img {
@@ -14,11 +15,13 @@ img {
 
 li {
   float: left;
+  margin-left: 5px;
 }
 
 li a {
   display: block;
   color: white;
+  font-weight: bold;
   text-align: center;
   padding: 16px;
   font-size: 22px;
@@ -26,5 +29,5 @@ li a {
 }
 
 li a:hover {
-  background-color: #111111;
+  background-color: #4C94FF;
 }

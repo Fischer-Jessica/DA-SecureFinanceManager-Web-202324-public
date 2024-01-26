@@ -1,5 +1,17 @@
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 imprint {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.content {
+  margin: 10px;
 }

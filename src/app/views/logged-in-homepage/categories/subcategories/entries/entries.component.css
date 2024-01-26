@@ -1,18 +1,38 @@
+.entry-container {
+  gap: 16px;
+  overflow: scroll;
+  height: 566px;
+}
+
 .card {
   border: #111111 2px solid;
   margin-bottom: 5px;
   height: 180px;
+  background: #40476D;
+  filter: brightness(3);
+}
+
+.delete,
+.edit {
+  display: inline-block;
+  border: 2px solid;
+  width: 66px;
+  height: 26px;
+  position: absolute;
+  right: 0;
+  top: 88%;
+  transform: translateY(-50%);
+  border-radius: 5px;
+  filter: brightness(1);
+  font-weight: bold;
 }
 
 .delete {
-  display: inline-block;
-  border: #8B0000 3px solid;
-  width: 66px; /* Passe die Breite an deine Anforderungen an */
-  height: 26px; /* Passe die Höhe an deine Anforderungen an */
-  position: absolute;
-  right: 0; /* Platziere es am rechten Ende der .card */
-  top: 77%; /* Zentriere es vertikal auf der .card */
-  transform: translateY(-50%); /* Korrigiere die vertikale Ausrichtung */
-  margin-right: 10px; /* Füge den gewünschten Abstand zur Überschrift hinzu */
+  margin-right: 10px;
   background: red;
+}
+
+.edit {
+  margin-right: 80px;
+  background: green;
 }
