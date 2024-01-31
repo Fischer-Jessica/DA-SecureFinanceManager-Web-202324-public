@@ -29,5 +29,16 @@ li a {
 }
 
 li a:hover {
-  background-color: #4C94FF;
+  border-radius: 33px;
+  background-color: #3c76cc;
+}
+
+.active {
+  border-radius: 33px;
+  background-color: #2d5899;
+}
+
+ul li.active:hover a {
+  border-radius: 33px;
+  background-color: #2d5899;
 }

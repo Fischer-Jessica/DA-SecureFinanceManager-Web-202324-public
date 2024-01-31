@@ -2,16 +2,16 @@
   <li>
     <img src="../../../assets/logos/Logo.ico" width="45" height="45">
   </li>
-  <li>
+  <li [class.active]="isActive('/logged-in-homepage/overview')">
     <a routerLink="/logged-in-homepage/overview">Overview</a>
   </li>
-  <li>
+  <li [class.active]="isActive('/logged-in-homepage/categories')">
     <a routerLink="/logged-in-homepage/categories">Categories</a>
   </li>
-  <li>
+  <li [class.active]="isActive('/logged-in-homepage/labels')">
     <a routerLink="/logged-in-homepage/labels">Labels</a>
   </li>
-  <li>
+  <li [class.active]="isActive('/logged-in-homepage/diagrams')">
     <a routerLink="/logged-in-homepage/diagrams">Diagrams</a>
   </li>
 </ul>
