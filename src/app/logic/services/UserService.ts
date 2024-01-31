@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from '../models/User';
-import { map, Observable } from 'rxjs';
-import { AppComponent } from '../../app.component';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {User} from '../models/User';
+import {map, Observable} from 'rxjs';
+import {AppComponent} from '../../app.component';
 import {LocalStorageService} from "../LocalStorageService";
 
 @Injectable({
@@ -47,5 +47,16 @@ export class UserService {
         return result;
       })
     );
+  }
+
+  updateUser(username: string, password: string, updatedUser: User): Observable<Object> {
+    const url = AppComponent.apiUrl + `users`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.patch(url, updatedUser, {headers});
   }
 }

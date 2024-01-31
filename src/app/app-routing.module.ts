@@ -21,7 +21,10 @@ import {CreateLabelComponent} from "./views/logged-in-homepage/labels/create-lab
 import {LabelEntriesComponent} from "./views/logged-in-homepage/labels/entries/label-entries.component";
 import {UpdateCategoryComponent} from "./views/logged-in-homepage/categories/update-category/update-category.component";
 import {UpdateLabelComponent} from "./views/logged-in-homepage/labels/update-label/update-label.component";
-import {UpdateSubcategoryComponent} from "./views/logged-in-homepage/categories/subcategories/update-subcategory/update-subcategory.component";
+import {
+  UpdateSubcategoryComponent
+} from "./views/logged-in-homepage/categories/subcategories/update-subcategory/update-subcategory.component";
+import {UserComponent} from "./views/logged-in-homepage/user/user.component";
 
 const routes: Routes = [
   {
@@ -53,6 +56,7 @@ const routes: Routes = [
       { path: 'update-label/:labelId', component: UpdateLabelComponent },
       { path: 'labels/:labelId/entries', component: LabelEntriesComponent },
       { path: 'diagrams', component: DiagramsComponent },
+      {path: 'user', component: UserComponent},
     ]
   },
   { path: '', redirectTo: 'authentication', pathMatch: 'full' },

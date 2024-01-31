@@ -42,3 +42,8 @@ ul li.active:hover a {
   border-radius: 33px;
   background-color: #2d5899;
 }
+
+.user {
+  float: right;
+  margin-right: 10px;
+}
