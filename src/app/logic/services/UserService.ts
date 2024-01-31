@@ -49,7 +49,7 @@ export class UserService {
     );
   }
 
-  updateUser(username: string, password: string, updatedUser: User): Observable<Object> {
+  updateUser(username: string, password: string, updatedUser: User): Observable<User> {
     const url = AppComponent.apiUrl + `users`;
 
     const headers = new HttpHeaders({
@@ -57,6 +57,6 @@ export class UserService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.patch(url, updatedUser, {headers});
+    return this.http.patch<User>(url, updatedUser, {headers});
   }
 }

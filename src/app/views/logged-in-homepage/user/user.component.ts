@@ -13,6 +13,7 @@ export class UserComponent implements OnInit {
   }
 
   protected user: User = {} as User;
+  protected originalUser: User = {} as User;
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -32,7 +33,8 @@ export class UserComponent implements OnInit {
       (result) => {
         UserService.loggedInUser = result;
         localStorage.setItem('loggedInUser', JSON.stringify(result));
-        this.user = UserService.loggedInUser;
+        this.user = {...result}; // Kopie des Benutzers erstellen
+        this.originalUser = {...result}; // Kopie des ursprünglichen Benutzers erstellen
       },
       (error) => {
         console.error('Error fetching user:', error);
@@ -45,17 +47,26 @@ export class UserComponent implements OnInit {
       return;
     }
 
-    if (UserService.loggedInUser == null) {
+    if (!UserService.loggedInUser) {
       console.error('User is not logged in');
       return;
     }
+
+    console.log(UserService.loggedInUser.username + "   " + UserService.loggedInUser.password);
 
     this.userService.updateUser(
       UserService.loggedInUser.username,
       UserService.loggedInUser.password,
       this.user
     ).subscribe(
-      result => {
+      updatedUser => {
+        console.log('User successfully updated:', updatedUser);
+
+        // Aktualisiere die loggedInUser-Daten im Local Storage
+        localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
+
+        // Aktualisiere die loggedInUser-Daten im UserService
+        UserService.loggedInUser = updatedUser;
       },
       error => console.error('Error updating user:', error)
     );
