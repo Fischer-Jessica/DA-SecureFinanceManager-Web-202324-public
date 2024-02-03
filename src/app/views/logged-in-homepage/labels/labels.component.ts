@@ -4,8 +4,8 @@ import {Label} from "../../../logic/models/Label";
 import {LabelService} from "../../../logic/services/LabelService";
 import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
-import {Subcategory} from "../../../logic/models/Subcategory";
 import {ColourService} from "../../../logic/services/ColourService";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'logged-in-labels',
@@ -15,7 +15,7 @@ import {ColourService} from "../../../logic/services/ColourService";
 export class LabelsComponent implements OnInit {
   labelsData: { label: Label; colourHex: string }[] = [];
 
-  constructor(private router: Router, private apiService: LabelService, private localStorageService: LocalStorageService, private colourService: ColourService, private cdr: ChangeDetectorRef) {
+  constructor(private router: Router, private apiService: LabelService, private localStorageService: LocalStorageService, private colourService: ColourService, private cdr: ChangeDetectorRef, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -24,6 +24,15 @@ export class LabelsComponent implements OnInit {
       UserService.loggedInUser = JSON.parse(storedUser);
       this.fetchLabels();
     }
+  }
+
+  showAlert(message: string): void {
+    const config = new MatSnackBarConfig();
+    config.duration = 10000; // Anzeigedauer des Alerts in Millisekunden
+    config.horizontalPosition = 'center';
+    config.verticalPosition = 'top'; // Positionierung oben auf der Website
+
+    this.snackBar.open(message, 'Close', config);
   }
 
   private fetchLabels(): void {
@@ -49,8 +58,13 @@ export class LabelsComponent implements OnInit {
           }
         },
         (error) => {
-          console.error('Error fetching labels:', error);
-          // Handle error (e.g., display an error message)
+          if (error.status === 404) {
+            this.showAlert('You need to create a label.');
+          } else if (error.status === 401) {
+            this.showAlert('You are not authorized.');
+          } else {
+            this.showAlert('Error fetching labels.');
+          }
         }
       );
   }

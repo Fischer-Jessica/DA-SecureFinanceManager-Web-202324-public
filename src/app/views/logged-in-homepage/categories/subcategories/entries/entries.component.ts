@@ -4,6 +4,7 @@ import {LocalStorageService} from "../../../../../logic/LocalStorageService";
 import {UserService} from "../../../../../logic/services/UserService";
 import {EntryService} from "../../../../../logic/services/EntryService";
 import {Entry} from "../../../../../logic/models/Entry";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-entries',
@@ -16,7 +17,8 @@ export class EntriesComponent implements OnInit {
   protected subcategoryId: number | undefined;
   protected categoryId: number | undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router, private apiService: EntryService, private localStorageService: LocalStorageService, private cdr: ChangeDetectorRef) {}
+  constructor(private route: ActivatedRoute, private router: Router, private apiService: EntryService, private localStorageService: LocalStorageService, private cdr: ChangeDetectorRef, private snackBar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -28,6 +30,15 @@ export class EntriesComponent implements OnInit {
       });
       this.fetchEntries(this.subcategoryId);
     }
+  }
+
+  showAlert(message: string): void {
+    const config = new MatSnackBarConfig();
+    config.duration = 10000; // Anzeigedauer des Alerts in Millisekunden
+    config.horizontalPosition = 'center';
+    config.verticalPosition = 'top'; // Positionierung oben auf der Website
+
+    this.snackBar.open(message, 'Close', config);
   }
 
   private fetchEntries(subcategoryId: number | undefined): void {
@@ -42,8 +53,13 @@ export class EntriesComponent implements OnInit {
           this.entries = result;
         },
         (error) => {
-          console.error('Error fetching subcategories:', error);
-          // Handle error (e.g., display an error message)
+          if (error.status === 404) {
+            this.showAlert('You need to create a entry.');
+          } else if (error.status === 401) {
+            this.showAlert('You are not authorized.');
+          } else {
+            this.showAlert('Error fetching entries');
+          }
         }
       );
   }
