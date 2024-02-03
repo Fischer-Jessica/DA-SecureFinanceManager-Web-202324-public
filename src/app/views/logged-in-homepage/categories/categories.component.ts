@@ -1,10 +1,11 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import { Category } from '../../../logic/models/Category';
-import { CategoryService } from '../../../logic/services/CategoryService';
-import { UserService } from '../../../logic/services/UserService';
+import {Category} from '../../../logic/models/Category';
+import {CategoryService} from '../../../logic/services/CategoryService';
+import {UserService} from '../../../logic/services/UserService';
 import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
 import {ColourService} from "../../../logic/services/ColourService";
+import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'logged-in-categories',
@@ -19,7 +20,8 @@ export class CategoriesComponent implements OnInit {
     protected colourService: ColourService,
     private categoryService: CategoryService,
     private localStorageService: LocalStorageService,
-    private cdr: ChangeDetectorRef // Inject ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -28,6 +30,15 @@ export class CategoriesComponent implements OnInit {
       UserService.loggedInUser = JSON.parse(storedUser);
       this.fetchCategories();
     }
+  }
+
+  showAlert(message: string): void {
+    const config = new MatSnackBarConfig();
+    config.duration = 10000; // Anzeigedauer des Alerts in Millisekunden
+    config.horizontalPosition = 'center';
+    config.verticalPosition = 'top'; // Positionierung oben auf der Website
+
+    this.snackBar.open(message, 'Close', config);
   }
 
   private fetchCategories(): void {
@@ -57,8 +68,13 @@ export class CategoriesComponent implements OnInit {
           this.cdr.detectChanges(); // Trigger change detection
         },
         (error) => {
-          console.error('Error fetching categories:', error);
-          // Handle error (e.g., display an error message)
+          if (error.status === 404) {
+            this.showAlert('You need to create a category.');
+          } else if (error.status === 401) {
+            this.showAlert('You are not authorized.');
+          } else {
+            this.showAlert('Error fetching categories');
+          }
         }
       );
   }
