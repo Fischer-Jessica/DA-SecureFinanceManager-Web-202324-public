@@ -56,6 +56,9 @@ import {
 import {UserComponent} from './views/logged-in-homepage/user/user.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {
+  UpdateEntryComponent
+} from './views/logged-in-homepage/categories/subcategories/entries/update-entry/update-entry.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -85,7 +88,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UpdateCategoryComponent,
     UpdateLabelComponent,
     UpdateSubcategoryComponent,
-    UserComponent
+    UserComponent,
+    UpdateEntryComponent
   ],
   imports: [
     BrowserModule,

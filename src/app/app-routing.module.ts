@@ -25,6 +25,9 @@ import {
   UpdateSubcategoryComponent
 } from "./views/logged-in-homepage/categories/subcategories/update-subcategory/update-subcategory.component";
 import {UserComponent} from "./views/logged-in-homepage/user/user.component";
+import {
+  UpdateEntryComponent
+} from "./views/logged-in-homepage/categories/subcategories/entries/update-entry/update-entry.component";
 
 const routes: Routes = [
   {
@@ -51,6 +54,7 @@ const routes: Routes = [
       { path: 'update-subcategory/:categoryId/:subcategoryId', component: UpdateSubcategoryComponent },
       { path: 'entries/:categoryId/:subcategoryId', component: EntriesComponent },
       { path: 'create-entry/:categoryId/:subcategoryId', component: CreateEntryComponent },
+      {path: 'update-entry/:categoryId/:subcategoryId/:entryId', component: UpdateEntryComponent},
       { path: 'labels', component: LabelsComponent },
       { path: 'create-label', component: CreateLabelComponent },
       { path: 'update-label/:labelId', component: UpdateLabelComponent },

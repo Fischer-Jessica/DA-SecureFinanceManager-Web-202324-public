@@ -67,6 +67,10 @@ export class EntriesComponent implements OnInit {
       );
   }
 
+  updateEntry(entryId: number | undefined) {
+    this.router.navigateByUrl(`/logged-in-homepage/update-entry/${(this.categoryId)}/${(this.subcategoryId)}/${entryId}`);
+  }
+
   addEntry() {
     this.router.navigateByUrl(`/logged-in-homepage/create-entry/${(this.categoryId)}/${(this.subcategoryId)}`);
   }

@@ -14,6 +14,7 @@
         <p>Entry Time of Transaction: {{ entry.entryTimeOfTransaction }}<br>
         Entry Time of Creation: {{ entry.entryCreationTime }}</p>
       </mat-card-content>
+      <button class="edit" (click)="updateEntry(entry.entryId)">Update</button>
       <button class="delete" (click)="deleteEntry(entry.entryId)">Delete</button>
     </mat-card>
   </div>

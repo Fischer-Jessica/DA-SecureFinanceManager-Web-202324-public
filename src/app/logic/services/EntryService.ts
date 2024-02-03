@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Subcategory} from "../models/Subcategory";
 import {AppComponent} from "../../app.component";
 import {Entry} from "../models/Entry";
 
@@ -36,6 +35,17 @@ export class EntryService {
     return this.http.get<Entry[]>(apiUrl, { headers });
   }
 
+  getEntry(username: string, password: string, subcategoryId: number | undefined, entryId: number | undefined): Observable<Entry> {
+    const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries/${entryId}`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.get<Entry>(apiUrl, {headers});
+  }
+
   insertEntry(username: string, password: string, subcategoryId: number | undefined, entry: Entry): Observable<Entry> {
     const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries`;
 
@@ -44,6 +54,16 @@ export class EntryService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
     return this.http.post<Entry>(apiUrl, entry, { headers });
+  }
+
+  updateEntry(username: string, password: string, subcategoryId: number | undefined, entry: Entry): Observable<Entry> {
+    const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries/${entry.entryId}`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+    return this.http.patch<Entry>(apiUrl, entry, {headers});
   }
 
   deleteEntry(username: string, password: string, subcategoryId: number | undefined, entryId: number | undefined) : Observable<number> {
