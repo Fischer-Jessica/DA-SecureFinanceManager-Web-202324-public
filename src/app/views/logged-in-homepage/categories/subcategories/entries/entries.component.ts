@@ -47,7 +47,6 @@ export class EntriesComponent implements OnInit {
   }
 
   private fetchEntries(subcategoryId: number | undefined): void {
-    console.log('fetching entries' + subcategoryId);
     if (UserService.loggedInUser == null) {
       console.error('User is not logged in');
       return;
@@ -77,7 +76,6 @@ export class EntriesComponent implements OnInit {
     this.apiService.deleteEntry(UserService.loggedInUser.username, UserService.loggedInUser.password, this.subcategoryId, entryId)
       .subscribe(
         (result) => {
-          console.log('Deleted entry:', result);
           this.entries = this.entries.filter((item) => item.entryId !== entryId);
           this.cdr.detectChanges(); // Trigger change detection
         },

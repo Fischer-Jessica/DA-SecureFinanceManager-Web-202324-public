@@ -35,7 +35,6 @@ export class CreateLabelComponent {
     this.labelService.insertLabel(UserService.loggedInUser.username, UserService.loggedInUser.password, formData)
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.router.navigateByUrl('/logged-in-homepage/labels');
         },
         error: (err) => {

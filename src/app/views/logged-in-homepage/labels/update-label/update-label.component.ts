@@ -57,7 +57,6 @@ export class UpdateLabelComponent implements OnInit {
   onSubmit(formData: any): void {
     if (!formData.valid) {
       console.error('Invalid form data provided');
-      console.log(this.label);
       return;
     }
 
@@ -69,7 +68,6 @@ export class UpdateLabelComponent implements OnInit {
         this.label
       ).subscribe(
         result => {
-          console.log('Successfully updated label:', result);
           this.router.navigate(['logged-in-homepage/labels']);
         },
         error => console.error('Error updating label:', error)

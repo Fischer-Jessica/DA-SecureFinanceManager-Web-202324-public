@@ -91,11 +91,8 @@ export class CategoriesComponent implements OnInit {
       .deleteCategory(UserService.loggedInUser.username, UserService.loggedInUser.password, categoryId)
       .subscribe(
         (result) => {
-          console.log('Deleted category:', result);
-          // Nach dem Löschen die Kategorie aus dem categoriesData-Array entfernen
           this.categoriesData = this.categoriesData.filter((item) => item.category.categoryId !== categoryId);
           this.cdr.detectChanges(); // Trigger change detection
-          // Handle result (e.g., display success message)
         },
         (error) => {
           this.showAlert(this.translate.instant('categories.alert_error_deleting_category'));

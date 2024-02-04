@@ -44,7 +44,6 @@ export class CreateCategoryComponent {
     }
     this.categoryService.insertCategory(UserService.loggedInUser.username, UserService.loggedInUser.password,formData).subscribe({
       next: (response) => {
-        console.log(response);
         this.router.navigateByUrl('/logged-in-homepage/categories')
       },
       error: (err) => {

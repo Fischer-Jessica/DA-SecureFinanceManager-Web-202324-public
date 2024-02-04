@@ -32,7 +32,6 @@ export class LabelEntriesComponent implements OnInit {
   }
 
   private fetchEntries(labelId: number | undefined): void {
-    console.log('fetching entries' + labelId);
     if (UserService.loggedInUser == null) {
       console.error('User is not logged in');
       return;

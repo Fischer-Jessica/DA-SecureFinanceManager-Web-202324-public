@@ -83,7 +83,6 @@ export class LabelsComponent implements OnInit {
     this.apiService.deleteLabel(UserService.loggedInUser.username, UserService.loggedInUser.password, labelId)
       .subscribe(
         (result) => {
-          console.log('Deleted label:', result);
           this.labelsData = this.labelsData.filter((item) => item.label.labelId !== labelId);
           this.cdr.detectChanges(); // Trigger change detection
         },
@@ -95,7 +94,6 @@ export class LabelsComponent implements OnInit {
   }
 
   showEntries(labelId: number | undefined) {
-    console.log(labelId)
     this.router.navigateByUrl(`/logged-in-homepage/labels/${labelId}/entries`);
   }
 }

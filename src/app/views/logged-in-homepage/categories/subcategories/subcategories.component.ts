@@ -90,11 +90,8 @@ export class SubcategoriesComponent implements OnInit {
       .deleteSubcategory(UserService.loggedInUser.username, UserService.loggedInUser.password, this.categoryId, subcategoryId)
       .subscribe(
         (result) => {
-          console.log('Deleted subcategory:', result);
-          // Nach dem Löschen die Kategorie aus dem categoriesData-Array entfernen
           this.subcategoriesData = this.subcategoriesData.filter((item) => item.subcategory.subcategoryId !== subcategoryId);
           this.cdr.detectChanges(); // Trigger change detection
-          // Handle result (e.g., display success message)
         },
         (error) => {
           console.error('Error deleting subcategory:', error);

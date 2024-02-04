@@ -53,16 +53,12 @@ export class UserComponent implements OnInit {
       return;
     }
 
-    console.log(UserService.loggedInUser.username + "   " + UserService.loggedInUser.password);
-
     this.userService.updateUser(
       UserService.loggedInUser.username,
       UserService.loggedInUser.password,
       this.user
     ).subscribe(
       updatedUser => {
-        console.log('User successfully updated:', updatedUser);
-
         // Aktualisiere die loggedInUser-Daten im Local Storage
         localStorage.setItem('loggedInUser', JSON.stringify(updatedUser));
 

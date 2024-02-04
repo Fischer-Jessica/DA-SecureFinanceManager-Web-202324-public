@@ -42,10 +42,8 @@ export class CreateEntryComponent {
       console.error('User is not logged in');
       return;
     }
-    console.log(formData.entryTimeOfTransaction);
     this.apiService.insertEntry(UserService.loggedInUser.username, UserService.loggedInUser.password, this.subcategoryId, formData).subscribe({
       next: (response) => {
-        console.log(response);
         this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(this.subcategoryId)}`);
       },
       error: (err) => {

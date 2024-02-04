@@ -37,7 +37,6 @@ export class CreateSubcategoryComponent {
     });
     this.apiService.insertSubcategory(UserService.loggedInUser.username, UserService.loggedInUser.password, categoryId, formData).subscribe({
       next: (response) => {
-        console.log(response);
         this.router.navigateByUrl(`/logged-in-homepage/subcategories/${categoryId}`)
       },
       error: (err) => {
