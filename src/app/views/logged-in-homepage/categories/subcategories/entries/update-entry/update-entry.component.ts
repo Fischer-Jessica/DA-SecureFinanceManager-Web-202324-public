@@ -15,12 +15,11 @@ export class UpdateEntryComponent implements OnInit {
   subcategoryId: number | undefined = 0;
   categoryId: number | undefined = 0;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private entryService: EntryService,
-    private localStorageService: LocalStorageService,
-    private userService: UserService
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private entryService: EntryService,
+              private localStorageService: LocalStorageService,
+              private userService: UserService
   ) {
   }
 

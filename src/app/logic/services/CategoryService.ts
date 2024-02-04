@@ -1,7 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {User} from "../models/User";
-import {catchError, map, Observable, throwError} from "rxjs";
+import {Observable} from "rxjs";
 import {AppComponent} from "../../app.component";
 import {Category} from "../models/Category";
 
@@ -22,7 +21,7 @@ export class CategoryService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Category[]>(apiUrl, { headers });
+    return this.http.get<Category[]>(apiUrl, {headers});
   }
 
   getCategory(username: string, password: string, categoryId: number): Observable<Category> {
@@ -33,7 +32,7 @@ export class CategoryService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Category>(apiUrl, { headers });
+    return this.http.get<Category>(apiUrl, {headers});
   }
 
   insertCategory(username: string, password: string, category: Category): Observable<Category> {
@@ -43,7 +42,7 @@ export class CategoryService {
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.post<Category>(apiUrl, category, { headers });
+    return this.http.post<Category>(apiUrl, category, {headers});
   }
 
   updateCategory(username: string, password: string, categoryId: number, updatedCategory: Category): Observable<any> {
@@ -54,7 +53,7 @@ export class CategoryService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.patch(url, updatedCategory, { headers });
+    return this.http.patch(url, updatedCategory, {headers});
   }
 
   deleteCategory(username: string, password: string, categoryId: number | undefined): Observable<number> {
@@ -64,6 +63,6 @@ export class CategoryService {
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.delete<number>(apiUrl, { headers });
+    return this.http.delete<number>(apiUrl, {headers});
   }
 }

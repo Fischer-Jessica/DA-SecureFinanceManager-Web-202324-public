@@ -1,6 +1,8 @@
 <h2>Entries</h2>
 <button mat-raised-button color="primary" (click)="addEntry()">New Entry</button>
-<button mat-raised-button color="warn" routerLink='/logged-in-homepage/categories' (click)="returnToSubcategory()">Return to Subcategories</button>
+<button mat-raised-button color="warn" routerLink='/logged-in-homepage/categories' (click)="returnToSubcategory()">
+  Return to Subcategories
+</button>
 <p>Dies sind die Entries aus der Subcategory mit der Id {{ subcategoryId }}</p>
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
   <div *ngFor="let entry of entries" class="entry-item">
@@ -12,7 +14,7 @@
       <mat-card-content>
         <h5>Entry amount:{{ entry.entryAmount }}</h5>
         <p>Entry Time of Transaction: {{ entry.entryTimeOfTransaction }}<br>
-        Entry Time of Creation: {{ entry.entryCreationTime }}</p>
+          Entry Time of Creation: {{ entry.entryCreationTime }}</p>
       </mat-card-content>
       <button class="edit" (click)="updateEntry(entry.entryId)">Update</button>
       <button class="delete" (click)="deleteEntry(entry.entryId)">Delete</button>

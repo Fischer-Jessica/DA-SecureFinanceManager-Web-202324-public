@@ -4,7 +4,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {SubcategoryService} from "../../../../../logic/services/SubcategoryService";
 import {UserService} from "../../../../../logic/services/UserService";
 import {LocalStorageService} from "../../../../../logic/LocalStorageService";
-import {EntriesComponent} from "../entries/entries.component";
 
 @Component({
   selector: 'app-update-subcategory',
@@ -15,13 +14,13 @@ export class UpdateSubcategoryComponent implements OnInit {
   subcategory: Subcategory = {} as Subcategory;
   subcategoryId: number | undefined = 0;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private subcategoryService: SubcategoryService,
-    private localStorageService: LocalStorageService,
-    private userService: UserService
-  ) {}
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private subcategoryService: SubcategoryService,
+              private localStorageService: LocalStorageService,
+              private userService: UserService
+  ) {
+  }
 
   ngOnInit() {
     this.loadSubcategoryData();
@@ -52,7 +51,10 @@ export class UpdateSubcategoryComponent implements OnInit {
         categoryId,
         subcategoryId
       ).subscribe(
-        result => {this.subcategory = result; this.subcategoryId=result.subcategoryId;},
+        result => {
+          this.subcategory = result;
+          this.subcategoryId = result.subcategoryId;
+        },
         error => console.error('Error fetching category:', error)
       );
     });

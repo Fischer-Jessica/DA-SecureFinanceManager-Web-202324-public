@@ -7,12 +7,14 @@
 
   <div class="form-group">
     <label for="labelDescription" class="form-label">Label Description:</label>
-    <textarea id="labelDescription" name="labelDescription" [(ngModel)]="label.labelDescription" class="form-textarea"></textarea>
+    <textarea id="labelDescription" name="labelDescription" [(ngModel)]="label.labelDescription"
+              class="form-textarea"></textarea>
   </div>
 
   <div class="form-group">
     <label class="form-label">Label Colour:</label>
-    <app-colour-picker [selectedColourId]="label.labelColourId" (colourSelected)="onColourSelected($event)"></app-colour-picker>
+    <app-colour-picker [selectedColourId]="label.labelColourId"
+                       (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
   <div class="form-actions">

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CategoryService } from '../../../../logic/services/CategoryService';
-import { LocalStorageService } from '../../../../logic/LocalStorageService';
-import { UserService } from '../../../../logic/services/UserService';
-import { Category } from '../../../../logic/models/Category';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CategoryService} from '../../../../logic/services/CategoryService';
+import {LocalStorageService} from '../../../../logic/LocalStorageService';
+import {UserService} from '../../../../logic/services/UserService';
+import {Category} from '../../../../logic/models/Category';
 
 @Component({
   selector: 'app-update-category',
@@ -13,13 +13,13 @@ import { Category } from '../../../../logic/models/Category';
 export class UpdateCategoryComponent implements OnInit {
   category: Category = {} as Category;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private categoryService: CategoryService,
-    private localStorageService: LocalStorageService,
-    private userService: UserService
-  ) {}
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private categoryService: CategoryService,
+              private localStorageService: LocalStorageService,
+              private userService: UserService
+  ) {
+  }
 
   ngOnInit(): void {
     this.loadCategoryData();

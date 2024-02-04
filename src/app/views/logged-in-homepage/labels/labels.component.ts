@@ -15,7 +15,12 @@ import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 export class LabelsComponent implements OnInit {
   labelsData: { label: Label; colourHex: string }[] = [];
 
-  constructor(private router: Router, private apiService: LabelService, private localStorageService: LocalStorageService, private colourService: ColourService, private cdr: ChangeDetectorRef, private snackBar: MatSnackBar) {
+  constructor(private router: Router,
+              private apiService: LabelService,
+              private localStorageService: LocalStorageService,
+              private colourService: ColourService,
+              private cdr: ChangeDetectorRef,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {

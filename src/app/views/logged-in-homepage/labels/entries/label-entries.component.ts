@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Entry} from "../../../../logic/models/Entry";
 import {EntryService} from "../../../../logic/services/EntryService";
 import {LocalStorageService} from "../../../../logic/LocalStorageService";
@@ -15,7 +15,10 @@ export class LabelEntriesComponent implements OnInit {
   entries: Entry[] = [];
   protected labelId: number | undefined;
 
-  constructor(private route: ActivatedRoute, private apiService: EntryService, private localStorageService: LocalStorageService) {}
+  constructor(private route: ActivatedRoute,
+              private apiService: EntryService,
+              private localStorageService: LocalStorageService) {
+  }
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');

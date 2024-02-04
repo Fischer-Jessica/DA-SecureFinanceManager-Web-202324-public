@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Category} from "../../../../logic/models/Category";
 import {CategoryService} from "../../../../logic/services/CategoryService";
 import {Router} from "@angular/router";
@@ -15,7 +15,8 @@ export class CreateCategoryComponent {
     categoryColourId: 0,
   };
 
-  constructor(private categoryService: CategoryService, private router: Router) {
+  constructor(private categoryService: CategoryService,
+              private router: Router) {
   }
 
   onColourSelected(colourId: number): void {

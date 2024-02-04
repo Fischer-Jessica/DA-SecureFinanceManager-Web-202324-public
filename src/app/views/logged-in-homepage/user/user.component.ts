@@ -9,7 +9,8 @@ import {LocalStorageService} from "../../../logic/LocalStorageService";
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  constructor(private userService: UserService, private localStorageService: LocalStorageService) {
+  constructor(private userService: UserService,
+              private localStorageService: LocalStorageService) {
   }
 
   protected user: User = {} as User;

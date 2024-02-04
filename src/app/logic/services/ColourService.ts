@@ -21,7 +21,7 @@ export class ColourService {
       'API-Version': '1'
     });
 
-    return this.http.get<Colour[]>(apiUrl, { headers }).pipe(
+    return this.http.get<Colour[]>(apiUrl, {headers}).pipe(
       map((result) => {
         this.colours = result;
         return result;
@@ -36,7 +36,7 @@ export class ColourService {
       'API-Version': '1'
     });
 
-    return this.http.get<Colour>(apiUrl, { headers }).pipe(
+    return this.http.get<Colour>(apiUrl, {headers}).pipe(
       map((result) => {
         return result;
       })
@@ -50,7 +50,7 @@ export class ColourService {
       'API-Version': '1'
     });
 
-    return this.http.get<Colour>(apiUrl, { headers }).pipe(
+    return this.http.get<Colour>(apiUrl, {headers}).pipe(
       map((result) => {
         return result.colourCode;
       })

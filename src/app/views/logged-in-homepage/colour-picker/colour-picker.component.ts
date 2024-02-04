@@ -13,7 +13,8 @@ export class ColourPickerComponent implements OnInit {
   @Input() selectedColourId: number = 0;
   @Output() colourSelected = new EventEmitter<number>();
 
-  constructor(private colourService: ColourService) { }
+  constructor(private colourService: ColourService) {
+  }
 
   ngOnInit(): void {
     this.getColours();

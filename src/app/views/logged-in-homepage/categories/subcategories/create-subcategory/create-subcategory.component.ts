@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubcategoryService} from "../../../../../logic/services/SubcategoryService";
 import {UserService} from "../../../../../logic/services/UserService";
@@ -16,7 +16,10 @@ export class CreateSubcategoryComponent {
     subcategoryCategoryId: 0,
   };
 
-  constructor(private route: ActivatedRoute, private router: Router, private apiService: SubcategoryService) {}
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private apiService: SubcategoryService) {
+  }
 
   onColourSelected(colourId: number): void {
     this.subcategory.subcategoryColourId = colourId;

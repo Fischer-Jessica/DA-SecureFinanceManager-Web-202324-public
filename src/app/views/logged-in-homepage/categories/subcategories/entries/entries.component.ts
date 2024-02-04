@@ -17,7 +17,12 @@ export class EntriesComponent implements OnInit {
   protected subcategoryId: number | undefined;
   protected categoryId: number | undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router, private apiService: EntryService, private localStorageService: LocalStorageService, private cdr: ChangeDetectorRef, private snackBar: MatSnackBar) {
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private apiService: EntryService,
+              private localStorageService: LocalStorageService,
+              private cdr: ChangeDetectorRef,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {

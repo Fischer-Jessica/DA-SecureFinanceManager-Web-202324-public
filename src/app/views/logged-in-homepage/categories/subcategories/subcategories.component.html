@@ -11,7 +11,10 @@
         <mat-card-subtitle>{{ subcategoryData.subcategory.subcategoryDescription }}</mat-card-subtitle>
       </mat-card-header>
       <button class="delete" (click)="deleteSubcategory(subcategoryData.subcategory.subcategoryId)">Delete</button>
-      <button routerLink='/logged-in-homepage/update-subcategory/{{ categoryId }}/{{ subcategoryData.subcategory.subcategoryId }}' class="edit">Update</button>
+      <button
+        routerLink='/logged-in-homepage/update-subcategory/{{ categoryId }}/{{ subcategoryData.subcategory.subcategoryId }}'
+        class="edit">Update
+      </button>
     </mat-card>
   </div>
 </div>

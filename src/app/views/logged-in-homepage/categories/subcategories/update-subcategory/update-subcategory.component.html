@@ -2,17 +2,20 @@
   <br>
   <div class="form-group">
     <label for="subcategoryName" class="form-label">Subcategory Name:</label>
-    <input type="text" id="subcategoryName" name="subcategoryName" [(ngModel)]="subcategory.subcategoryName" required class="form-input">
+    <input type="text" id="subcategoryName" name="subcategoryName" [(ngModel)]="subcategory.subcategoryName" required
+           class="form-input">
   </div>
 
   <div class="form-group">
     <label for="subcategoryDescription" class="form-label">Subcategory Description:</label>
-    <textarea id="subcategoryDescription" name="subcategoryDescription" [(ngModel)]="subcategory.subcategoryDescription" class="form-textarea"></textarea>
+    <textarea id="subcategoryDescription" name="subcategoryDescription" [(ngModel)]="subcategory.subcategoryDescription"
+              class="form-textarea"></textarea>
   </div>
 
   <div class="form-group">
     <label class="form-label">Subcategory Colour:</label>
-    <app-colour-picker [selectedColourId]="subcategory.subcategoryColourId" (colourSelected)="onColourSelected($event)"></app-colour-picker>
+    <app-colour-picker [selectedColourId]="subcategory.subcategoryColourId"
+                       (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
   <div class="form-actions">

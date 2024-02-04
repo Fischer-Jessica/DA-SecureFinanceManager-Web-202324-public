@@ -21,7 +21,7 @@ export class EntryService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Entry[]>(apiUrl, { headers });
+    return this.http.get<Entry[]>(apiUrl, {headers});
   }
 
   getEntriesByLabelId(username: string, password: string, labelId: number | undefined): Observable<Entry[]> {
@@ -32,7 +32,7 @@ export class EntryService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Entry[]>(apiUrl, { headers });
+    return this.http.get<Entry[]>(apiUrl, {headers});
   }
 
   getEntry(username: string, password: string, subcategoryId: number | undefined, entryId: number | undefined): Observable<Entry> {
@@ -53,7 +53,7 @@ export class EntryService {
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.post<Entry>(apiUrl, entry, { headers });
+    return this.http.post<Entry>(apiUrl, entry, {headers});
   }
 
   updateEntry(username: string, password: string, subcategoryId: number | undefined, entry: Entry): Observable<Entry> {
@@ -66,13 +66,13 @@ export class EntryService {
     return this.http.patch<Entry>(apiUrl, entry, {headers});
   }
 
-  deleteEntry(username: string, password: string, subcategoryId: number | undefined, entryId: number | undefined) : Observable<number> {
+  deleteEntry(username: string, password: string, subcategoryId: number | undefined, entryId: number | undefined): Observable<number> {
     const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries/${entryId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.delete<number>(apiUrl, { headers });
+    return this.http.delete<number>(apiUrl, {headers});
   }
 }

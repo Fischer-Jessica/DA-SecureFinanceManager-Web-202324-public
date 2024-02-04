@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { Label } from '../../../../logic/models/Label'; // Stelle sicher, dass der Pfad korrekt ist
-import { LabelService } from '../../../../logic/services/LabelService'; // Annahme: Du hast einen entsprechenden Service
-import { Router } from '@angular/router';
-import { UserService } from '../../../../logic/services/UserService';
+import {Component} from '@angular/core';
+import {Label} from '../../../../logic/models/Label'; // Stelle sicher, dass der Pfad korrekt ist
+import {LabelService} from '../../../../logic/services/LabelService'; // Annahme: Du hast einen entsprechenden Service
+import {Router} from '@angular/router';
+import {UserService} from '../../../../logic/services/UserService';
 
 @Component({
   selector: 'app-create-new-label',
@@ -16,7 +16,8 @@ export class CreateLabelComponent {
     // userId: 0, // Falls du den userId initialisieren möchtest
   };
 
-  constructor(private labelService: LabelService, private router: Router) {
+  constructor(private labelService: LabelService,
+              private router: Router) {
   }
 
   onColourSelected(colourId: number): void {

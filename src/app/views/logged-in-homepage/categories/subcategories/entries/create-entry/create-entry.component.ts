@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserService} from "../../../../../../logic/services/UserService";
 import {EntryService} from "../../../../../../logic/services/EntryService";
@@ -20,7 +20,11 @@ export class CreateEntryComponent {
   private categoryId: number | undefined;
   private subcategoryId: number | undefined;
 
-  constructor(private route: ActivatedRoute, private localStorageService: LocalStorageService, private router: Router, private apiService: EntryService) {}
+  constructor(private route: ActivatedRoute,
+              private localStorageService: LocalStorageService,
+              private router: Router,
+              private apiService: EntryService) {
+  }
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');

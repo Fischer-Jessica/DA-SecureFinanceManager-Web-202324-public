@@ -13,13 +13,13 @@ import {UserService} from "../../../../logic/services/UserService";
 export class UpdateLabelComponent implements OnInit {
   label: Label = {} as Label;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private labelService: LabelService,
-    private localStorageService: LocalStorageService,
-    private userService: UserService
-  ) {}
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private labelService: LabelService,
+              private localStorageService: LocalStorageService,
+              private userService: UserService
+  ) {
+  }
 
   ngOnInit(): void {
     this.loadLabelData();

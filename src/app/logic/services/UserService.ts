@@ -13,7 +13,8 @@ export class UserService {
   private readonly localStorageKey = 'loggedInUser';
   loggedInUser: any;
 
-  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {}
+  constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
+  }
 
   logIn(username: string, password: string): Observable<User> {
     const apiUrl = AppComponent.apiUrl + 'user';
@@ -23,7 +24,7 @@ export class UserService {
       'Authorization': 'Basic ' + btoa(username + ':' + password),
     });
 
-    return this.http.get<User>(apiUrl, { headers }).pipe(
+    return this.http.get<User>(apiUrl, {headers}).pipe(
       map((result) => {
         UserService.loggedInUser = result;
         localStorage.setItem('loggedInUser', JSON.stringify(result));

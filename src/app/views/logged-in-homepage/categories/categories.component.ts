@@ -15,14 +15,14 @@ import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 export class CategoriesComponent implements OnInit {
   categoriesData: { category: Category; colourHex: string }[] = [];
 
-  constructor(
-    private router: Router,
-    protected colourService: ColourService,
-    private categoryService: CategoryService,
-    private localStorageService: LocalStorageService,
-    private cdr: ChangeDetectorRef,
-    private snackBar: MatSnackBar
-  ) {}
+  constructor(private router: Router,
+              protected colourService: ColourService,
+              private categoryService: CategoryService,
+              private localStorageService: LocalStorageService,
+              private cdr: ChangeDetectorRef,
+              private snackBar: MatSnackBar
+  ) {
+  }
 
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');

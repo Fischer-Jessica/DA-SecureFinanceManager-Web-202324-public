@@ -1,9 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {User} from "../models/User";
-import {catchError, map, Observable, throwError} from "rxjs";
+import {Observable} from "rxjs";
 import {AppComponent} from "../../app.component";
-import {Category} from "../models/Category";
 import {Subcategory} from "../models/Subcategory";
 
 @Injectable({
@@ -23,7 +21,7 @@ export class SubcategoryService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Subcategory[]>(apiUrl, { headers });
+    return this.http.get<Subcategory[]>(apiUrl, {headers});
   }
 
   getSubcategory(username: string, password: string, categoryId: number, subcategoryId: number): Observable<Subcategory> {
@@ -34,7 +32,7 @@ export class SubcategoryService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Subcategory>(apiUrl, { headers });
+    return this.http.get<Subcategory>(apiUrl, {headers});
   }
 
   insertSubcategory(username: string, password: string, categoryId: number, subcategory: Subcategory): Observable<Subcategory> {
@@ -44,7 +42,7 @@ export class SubcategoryService {
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.post<Subcategory>(apiUrl, subcategory, { headers });
+    return this.http.post<Subcategory>(apiUrl, subcategory, {headers});
   }
 
   updateSubcategory(username: string, password: string, subcategory: Subcategory): Observable<Subcategory> {
@@ -54,7 +52,7 @@ export class SubcategoryService {
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.patch<Subcategory>(apiUrl, subcategory, { headers });
+    return this.http.patch<Subcategory>(apiUrl, subcategory, {headers});
   }
 
   deleteSubcategory(username: string, password: string, categoryId: number | undefined, subcategoryId: number | undefined) {
@@ -64,6 +62,6 @@ export class SubcategoryService {
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.delete<number>(apiUrl, { headers });
+    return this.http.delete<number>(apiUrl, {headers});
   }
 }

@@ -1,9 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {User} from "../models/User";
-import {catchError, map, Observable, throwError} from "rxjs";
+import {Observable} from "rxjs";
 import {AppComponent} from "../../app.component";
-import {Category} from "../models/Category";
 import {Label} from "../models/Label";
 
 @Injectable({
@@ -15,7 +13,7 @@ export class LabelService {
   constructor(private http: HttpClient) {
   }
 
-  getLabels (username: string, password: string): Observable<Label[]> {
+  getLabels(username: string, password: string): Observable<Label[]> {
     const apiUrl = AppComponent.apiUrl + 'labels';
 
     const headers = new HttpHeaders({
@@ -23,7 +21,7 @@ export class LabelService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Label[]>(apiUrl, { headers });
+    return this.http.get<Label[]>(apiUrl, {headers});
   }
 
   getLabel(username: string, password: string, labelId: number): Observable<Label> {
@@ -34,7 +32,7 @@ export class LabelService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Label>(apiUrl, { headers });
+    return this.http.get<Label>(apiUrl, {headers});
   }
 
   insertLabel(username: string, password: string, label: Label): Observable<Label> {
@@ -45,7 +43,7 @@ export class LabelService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.post<Label>(apiUrl, label, { headers });
+    return this.http.post<Label>(apiUrl, label, {headers});
   }
 
   updateLabel(username: string, password: string, labelId: number, label: Label): Observable<Label> {
@@ -56,7 +54,7 @@ export class LabelService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.patch<Label>(apiUrl, label, { headers });
+    return this.http.patch<Label>(apiUrl, label, {headers});
   }
 
   deleteLabel(username: string, password: string, labelId: number | undefined): Observable<number> {
@@ -66,6 +64,6 @@ export class LabelService {
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.delete<number>(apiUrl, { headers });
+    return this.http.delete<number>(apiUrl, {headers});
   }
 }
