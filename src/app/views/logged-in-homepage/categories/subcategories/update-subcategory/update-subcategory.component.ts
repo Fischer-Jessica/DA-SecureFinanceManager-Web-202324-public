@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Subcategory} from "../../../../../logic/models/Subcategory";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubcategoryService} from "../../../../../logic/services/SubcategoryService";
-import {UserService} from "../../../../../logic/services/UserService";
 import {LocalStorageService} from "../../../../../logic/LocalStorageService";
 
 @Component({
@@ -17,8 +16,7 @@ export class UpdateSubcategoryComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private subcategoryService: SubcategoryService,
-              private localStorageService: LocalStorageService,
-              private userService: UserService
+              private localStorageService: LocalStorageService
   ) {
   }
 
@@ -34,7 +32,7 @@ export class UpdateSubcategoryComponent implements OnInit {
       return;
     }
 
-    this.userService.loggedInUser = JSON.parse(loggedInUser);
+    const user = JSON.parse(loggedInUser);
 
     this.route.params.subscribe(params => {
       const categoryId = +params['categoryId'];
@@ -46,8 +44,8 @@ export class UpdateSubcategoryComponent implements OnInit {
       }
 
       this.subcategoryService.getSubcategory(
-        this.userService.loggedInUser.username,
-        this.userService.loggedInUser.password,
+        user.username,
+        user.password,
         categoryId,
         subcategoryId
       ).subscribe(
@@ -68,9 +66,11 @@ export class UpdateSubcategoryComponent implements OnInit {
 
     if (this.subcategory.subcategoryId != null) {
       this.subcategory.subcategoryId = this.subcategoryId;
+      const user = JSON.parse(<string>this.localStorageService.getItem('loggedInUser'));
+
       this.subcategoryService.updateSubcategory(
-        this.userService.loggedInUser.username,
-        this.userService.loggedInUser.password,
+        user.username,
+        user.password,
         this.subcategory
       ).subscribe(
         result => this.router.navigateByUrl(`logged-in-homepage/subcategories/${this.subcategory.subcategoryCategoryId}`),

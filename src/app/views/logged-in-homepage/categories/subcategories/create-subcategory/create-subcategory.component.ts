@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubcategoryService} from "../../../../../logic/services/SubcategoryService";
-import {UserService} from "../../../../../logic/services/UserService";
+import {LocalStorageService} from "../../../../../logic/LocalStorageService";
 import {Subcategory} from "../../../../../logic/models/Subcategory";
 
 @Component({
@@ -18,7 +18,8 @@ export class CreateSubcategoryComponent {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private apiService: SubcategoryService) {
+              private apiService: SubcategoryService,
+              private localStorageService: LocalStorageService) {
   }
 
   onColourSelected(colourId: number): void {
@@ -26,16 +27,19 @@ export class CreateSubcategoryComponent {
   }
 
   onSubmit(formData: Subcategory) {
-    formData.subcategoryColourId = this.subcategory.subcategoryColourId;
-    if (UserService.loggedInUser == null) {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
       console.error('User is not logged in');
       return;
     }
+    const loggedInUser = JSON.parse(storedUser);
+
+    formData.subcategoryColourId = this.subcategory.subcategoryColourId;
     let categoryId = 0;
     this.route.params.subscribe(params => {
       categoryId = +params['categoryId'];
     });
-    this.apiService.insertSubcategory(UserService.loggedInUser.username, UserService.loggedInUser.password, categoryId, formData).subscribe({
+    this.apiService.insertSubcategory(loggedInUser.username, loggedInUser.password, categoryId, formData).subscribe({
       next: (response) => {
         this.router.navigateByUrl(`/logged-in-homepage/subcategories/${categoryId}`)
       },

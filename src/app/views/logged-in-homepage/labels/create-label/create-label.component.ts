@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
-import {Label} from '../../../../logic/models/Label'; // Stelle sicher, dass der Pfad korrekt ist
-import {LabelService} from '../../../../logic/services/LabelService'; // Annahme: Du hast einen entsprechenden Service
+import {Label} from '../../../../logic/models/Label';
+import {LabelService} from '../../../../logic/services/LabelService';
 import {Router} from '@angular/router';
-import {UserService} from '../../../../logic/services/UserService';
+import {LocalStorageService} from '../../../../logic/LocalStorageService';
 
 @Component({
   selector: 'app-create-new-label',
@@ -13,11 +13,11 @@ export class CreateLabelComponent {
   label: Label = {
     labelName: '',
     labelColourId: 0,
-    // userId: 0, // Falls du den userId initialisieren möchtest
   };
 
   constructor(private labelService: LabelService,
-              private router: Router) {
+              private router: Router,
+              private localStorageService: LocalStorageService) {
   }
 
   onColourSelected(colourId: number): void {
@@ -26,13 +26,17 @@ export class CreateLabelComponent {
 
   onSubmit(formData: Label) {
     formData.labelColourId = this.label.labelColourId;
-    if (UserService.loggedInUser == null) {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+
+    if (!storedUser) {
       console.error('User is not logged in');
       return;
     }
 
+    const loggedInUser = JSON.parse(storedUser);
+
     // Hier die Anpassungen für den Label-Service vornehmen
-    this.labelService.insertLabel(UserService.loggedInUser.username, UserService.loggedInUser.password, formData)
+    this.labelService.insertLabel(loggedInUser.username, loggedInUser.password, formData)
       .subscribe({
         next: (response) => {
           this.router.navigateByUrl('/logged-in-homepage/labels');

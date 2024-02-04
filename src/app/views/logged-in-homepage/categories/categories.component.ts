@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Category} from '../../../logic/models/Category';
 import {CategoryService} from '../../../logic/services/CategoryService';
-import {UserService} from '../../../logic/services/UserService';
 import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
 import {ColourService} from "../../../logic/services/ColourService";
@@ -29,8 +28,8 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
-      UserService.loggedInUser = JSON.parse(storedUser);
-      this.fetchCategories();
+      const loggedInUser = JSON.parse(storedUser);
+      this.fetchCategories(loggedInUser);
     }
   }
 
@@ -43,13 +42,13 @@ export class CategoriesComponent implements OnInit {
     this.snackBar.open(message, 'Close', config);
   }
 
-  private fetchCategories(): void {
-    if (UserService.loggedInUser == null) {
+  private fetchCategories(loggedInUser: any): void {
+    if (!loggedInUser) {
       console.error('User is not logged in');
       return;
     }
     this.categoryService
-      .getCategories(UserService.loggedInUser.username, UserService.loggedInUser.password)
+      .getCategories(loggedInUser.username, loggedInUser.password)
       .subscribe(
         (result) => {
           this.categoriesData = []; // Clear existing data
@@ -82,13 +81,16 @@ export class CategoriesComponent implements OnInit {
   }
 
   deleteCategory(categoryId: number | undefined) {
-    if (UserService.loggedInUser == null) {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
       console.error('User is not logged in');
       return;
     }
 
+    const loggedInUser = JSON.parse(storedUser);
+
     this.categoryService
-      .deleteCategory(UserService.loggedInUser.username, UserService.loggedInUser.password, categoryId)
+      .deleteCategory(loggedInUser.username, loggedInUser.password, categoryId)
       .subscribe(
         (result) => {
           this.categoriesData = this.categoriesData.filter((item) => item.category.categoryId !== categoryId);
@@ -101,7 +103,7 @@ export class CategoriesComponent implements OnInit {
       );
   }
 
-// In deiner aufrufenden Komponente
+  // In deiner aufrufenden Komponente
   showSubcategories(categoryId: number | undefined) {
     this.router.navigateByUrl(`/logged-in-homepage/subcategories/${categoryId}`);
   }

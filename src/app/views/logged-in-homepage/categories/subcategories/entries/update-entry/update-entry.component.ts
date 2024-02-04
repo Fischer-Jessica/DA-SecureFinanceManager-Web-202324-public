@@ -28,14 +28,14 @@ export class UpdateEntryComponent implements OnInit {
   }
 
   private loadEntry() {
-    const loggedInUser = this.localStorageService.getItem('loggedInUser');
+    const storedUser = this.localStorageService.getItem('loggedInUser');
 
-    if (!loggedInUser) {
+    if (!storedUser) {
       console.error('User is not logged in');
       return;
     }
 
-    this.userService.loggedInUser = JSON.parse(loggedInUser);
+    const user = JSON.parse(storedUser);
 
     this.route.params.subscribe(params => {
       this.categoryId = +params['categoryId'];
@@ -48,8 +48,8 @@ export class UpdateEntryComponent implements OnInit {
       }
 
       this.entryService.getEntry(
-        this.userService.loggedInUser.username,
-        this.userService.loggedInUser.password,
+        user.username,
+        user.password,
         this.subcategoryId,
         entryId
       ).subscribe(
@@ -67,10 +67,19 @@ export class UpdateEntryComponent implements OnInit {
       return;
     }
 
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+
+    if (!storedUser) {
+      console.error('User is not logged in');
+      return;
+    }
+
+    const user = JSON.parse(storedUser);
+
     if (this.entry.entryId != null) {
       this.entryService.updateEntry(
-        this.userService.loggedInUser.username,
-        this.userService.loggedInUser.password,
+        user.username,
+        user.password,
         this.subcategoryId,
         this.entry
       ).subscribe(

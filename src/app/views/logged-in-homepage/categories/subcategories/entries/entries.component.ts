@@ -1,7 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {LocalStorageService} from "../../../../../logic/LocalStorageService";
-import {UserService} from "../../../../../logic/services/UserService";
 import {EntryService} from "../../../../../logic/services/EntryService";
 import {Entry} from "../../../../../logic/models/Entry";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
@@ -28,12 +27,12 @@ export class EntriesComponent implements OnInit {
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
-      UserService.loggedInUser = JSON.parse(storedUser);
+      const loggedInUser = JSON.parse(storedUser);
       this.route.params.subscribe(params => {
         this.categoryId = +params['categoryId'];
         this.subcategoryId = +params['subcategoryId'];
       });
-      this.fetchEntries(this.subcategoryId);
+      this.fetchEntries(this.subcategoryId, loggedInUser.username, loggedInUser.password);
     }
   }
 
@@ -46,19 +45,15 @@ export class EntriesComponent implements OnInit {
     this.snackBar.open(message, 'Close', config);
   }
 
-  private fetchEntries(subcategoryId: number | undefined): void {
-    if (UserService.loggedInUser == null) {
-      console.error('User is not logged in');
-      return;
-    }
-    this.apiService.getEntriesBySubcategoryId(UserService.loggedInUser.username, UserService.loggedInUser.password, subcategoryId)
+  private fetchEntries(subcategoryId: number | undefined, username: string, password: string): void {
+    this.apiService.getEntriesBySubcategoryId(username, password, subcategoryId)
       .subscribe(
         (result) => {
           this.entries = result;
         },
         (error) => {
           if (error.status === 404) {
-            this.showAlert('You need to create a entry.');
+            this.showAlert('You need to create an entry.');
           } else if (error.status === 401) {
             this.showAlert('You are not authorized.');
           } else {
@@ -69,11 +64,13 @@ export class EntriesComponent implements OnInit {
   }
 
   deleteEntry(entryId: number | undefined) {
-    if (UserService.loggedInUser == null) {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
       console.error('User is not logged in');
       return;
     }
-    this.apiService.deleteEntry(UserService.loggedInUser.username, UserService.loggedInUser.password, this.subcategoryId, entryId)
+    const loggedInUser = JSON.parse(storedUser);
+    this.apiService.deleteEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, entryId)
       .subscribe(
         (result) => {
           this.entries = this.entries.filter((item) => item.entryId !== entryId);

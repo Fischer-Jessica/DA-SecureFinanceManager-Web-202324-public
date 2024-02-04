@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryService} from '../../../../logic/services/CategoryService';
 import {LocalStorageService} from '../../../../logic/LocalStorageService';
-import {UserService} from '../../../../logic/services/UserService';
 import {Category} from '../../../../logic/models/Category';
 
 @Component({
@@ -16,8 +15,7 @@ export class UpdateCategoryComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private categoryService: CategoryService,
-              private localStorageService: LocalStorageService,
-              private userService: UserService
+              private localStorageService: LocalStorageService
   ) {
   }
 
@@ -33,7 +31,7 @@ export class UpdateCategoryComponent implements OnInit {
       return;
     }
 
-    this.userService.loggedInUser = JSON.parse(loggedInUser);
+    const user = JSON.parse(loggedInUser);
 
     this.route.params.subscribe(params => {
       const categoryId = +params['categoryId'];
@@ -44,8 +42,8 @@ export class UpdateCategoryComponent implements OnInit {
       }
 
       this.categoryService.getCategory(
-        this.userService.loggedInUser.username,
-        this.userService.loggedInUser.password,
+        user.username,
+        user.password,
         categoryId
       ).subscribe(
         result => this.category = result,
@@ -61,9 +59,11 @@ export class UpdateCategoryComponent implements OnInit {
     }
 
     if (this.category.categoryId != null) {
+      const user = JSON.parse(<string>this.localStorageService.getItem('loggedInUser'));
+
       this.categoryService.updateCategory(
-        this.userService.loggedInUser.username,
-        this.userService.loggedInUser.password,
+        user.username,
+        user.password,
         this.category.categoryId,
         this.category
       ).subscribe(

@@ -3,7 +3,6 @@ import {Label} from "../../../../logic/models/Label";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LabelService} from "../../../../logic/services/LabelService";
 import {LocalStorageService} from "../../../../logic/LocalStorageService";
-import {UserService} from "../../../../logic/services/UserService";
 
 @Component({
   selector: 'app-update-label',
@@ -16,8 +15,7 @@ export class UpdateLabelComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private labelService: LabelService,
-              private localStorageService: LocalStorageService,
-              private userService: UserService
+              private localStorageService: LocalStorageService
   ) {
   }
 
@@ -26,14 +24,14 @@ export class UpdateLabelComponent implements OnInit {
   }
 
   private loadLabelData(): void {
-    const loggedInUser = this.localStorageService.getItem('loggedInUser');
+    const storedUser = this.localStorageService.getItem('loggedInUser');
 
-    if (!loggedInUser) {
+    if (!storedUser) {
       console.error('User is not logged in');
       return;
     }
 
-    this.userService.loggedInUser = JSON.parse(loggedInUser);
+    const loggedInUser = JSON.parse(storedUser);
 
     this.route.params.subscribe(params => {
       const labelId = +params['labelId'];
@@ -44,8 +42,8 @@ export class UpdateLabelComponent implements OnInit {
       }
 
       this.labelService.getLabel(
-        this.userService.loggedInUser.username,
-        this.userService.loggedInUser.password,
+        loggedInUser.username,
+        loggedInUser.password,
         labelId
       ).subscribe(
         result => this.label = result,
@@ -60,10 +58,18 @@ export class UpdateLabelComponent implements OnInit {
       return;
     }
 
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
+      console.error('User is not logged in');
+      return;
+    }
+
+    const loggedInUser = JSON.parse(storedUser);
+
     if (this.label.labelId != null) {
       this.labelService.updateLabel(
-        this.userService.loggedInUser.username,
-        this.userService.loggedInUser.password,
+        loggedInUser.username,
+        loggedInUser.password,
         this.label.labelId,
         this.label
       ).subscribe(

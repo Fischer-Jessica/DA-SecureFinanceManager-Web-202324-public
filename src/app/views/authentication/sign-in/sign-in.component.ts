@@ -38,7 +38,7 @@ export class SignInComponent {
       },
       error: (err) => {
         if (err.status === 401) {
-          this.showAlert(this.translate.instant('sign-in.alert_wrong_credentials'));
+          this.showAlert(this.translate.instant('authorisation.sign-in.alert_wrong_credentials'));
         }
       }
     });

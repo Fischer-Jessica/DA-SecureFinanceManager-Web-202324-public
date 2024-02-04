@@ -1,5 +1,4 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {UserService} from "../../../logic/services/UserService";
 import {Label} from "../../../logic/models/Label";
 import {LabelService} from "../../../logic/services/LabelService";
 import {LocalStorageService} from "../../../logic/LocalStorageService";
@@ -28,8 +27,8 @@ export class LabelsComponent implements OnInit {
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
-      UserService.loggedInUser = JSON.parse(storedUser);
-      this.fetchLabels();
+      const loggedInUser = JSON.parse(storedUser);
+      this.fetchLabels(loggedInUser.username, loggedInUser.password);
     }
   }
 
@@ -42,19 +41,16 @@ export class LabelsComponent implements OnInit {
     this.snackBar.open(message, 'Close', config);
   }
 
-  private fetchLabels(): void {
-    if (UserService.loggedInUser == null) {
-      return;
-    }
-    this.apiService.getLabels(UserService.loggedInUser.username, UserService.loggedInUser.password)
+  private fetchLabels(username: string, password: string): void {
+    this.apiService.getLabels(username, password)
       .subscribe(
         (result) => {
           for (let label of result) {
             this.colourService.getColourHex(label.labelColourId).subscribe(
-              (result) => {
+              (colourResult) => {
                 this.labelsData.push({
                   label: label,
-                  colourHex: result
+                  colourHex: colourResult
                 });
               },
               (error) => {
@@ -77,10 +73,12 @@ export class LabelsComponent implements OnInit {
   }
 
   deleteLabel(labelId: number | undefined) {
-    if (UserService.loggedInUser == null) {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
       return;
     }
-    this.apiService.deleteLabel(UserService.loggedInUser.username, UserService.loggedInUser.password, labelId)
+    const loggedInUser = JSON.parse(storedUser);
+    this.apiService.deleteLabel(loggedInUser.username, loggedInUser.password, labelId)
       .subscribe(
         (result) => {
           this.labelsData = this.labelsData.filter((item) => item.label.labelId !== labelId);

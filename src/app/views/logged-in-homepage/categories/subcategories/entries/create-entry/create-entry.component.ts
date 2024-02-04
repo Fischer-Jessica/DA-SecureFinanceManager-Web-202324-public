@@ -1,6 +1,5 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {UserService} from "../../../../../../logic/services/UserService";
 import {EntryService} from "../../../../../../logic/services/EntryService";
 import {Entry} from "../../../../../../logic/models/Entry";
 import {LocalStorageService} from "../../../../../../logic/LocalStorageService";
@@ -10,7 +9,7 @@ import {LocalStorageService} from "../../../../../../logic/LocalStorageService";
   templateUrl: './create-entry.component.html',
   styleUrls: ['./create-entry.component.css']
 })
-export class CreateEntryComponent {
+export class CreateEntryComponent implements OnInit {
   entry: Entry = {
     subcategoryId: 0,
     entryAmount: 0,
@@ -29,7 +28,7 @@ export class CreateEntryComponent {
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
-      UserService.loggedInUser = JSON.parse(storedUser);
+      const loggedInUser = JSON.parse(storedUser);
       this.route.params.subscribe(params => {
         this.categoryId = +params['categoryId'];
         this.subcategoryId = +params['subcategoryId'];
@@ -38,11 +37,13 @@ export class CreateEntryComponent {
   }
 
   onSubmit(formData: Entry) {
-    if (UserService.loggedInUser == null) {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
       console.error('User is not logged in');
       return;
     }
-    this.apiService.insertEntry(UserService.loggedInUser.username, UserService.loggedInUser.password, this.subcategoryId, formData).subscribe({
+    const loggedInUser = JSON.parse(storedUser);
+    this.apiService.insertEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, formData).subscribe({
       next: (response) => {
         this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(this.subcategoryId)}`);
       },
@@ -53,9 +54,6 @@ export class CreateEntryComponent {
   }
 
   returnToEntries() {
-    this.route.params.subscribe(params => {
-      let categoryId = +params['categoryId'];
-      this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(this.subcategoryId)}`);
-    });
+    this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(this.subcategoryId)}`);
   }
 }

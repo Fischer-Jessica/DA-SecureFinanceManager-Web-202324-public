@@ -1,6 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {LocalStorageService} from "../../../../logic/LocalStorageService";
-import {UserService} from "../../../../logic/services/UserService";
 import {Subcategory} from "../../../../logic/models/Subcategory";
 import {SubcategoryService} from "../../../../logic/services/SubcategoryService";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -28,10 +27,10 @@ export class SubcategoriesComponent implements OnInit {
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
-      UserService.loggedInUser = JSON.parse(storedUser);
+      const user = JSON.parse(storedUser);
       this.route.params.subscribe(params => {
         this.categoryId = +params['categoryId'];
-        this.fetchSubcategories(this.categoryId);
+        this.fetchSubcategories(user.username, user.password, this.categoryId);
       });
     }
   }
@@ -45,12 +44,8 @@ export class SubcategoriesComponent implements OnInit {
     this.snackBar.open(message, 'Close', config);
   }
 
-  private fetchSubcategories(categoryId: number): void {
-    if (UserService.loggedInUser == null) {
-      console.error('User is not logged in');
-      return;
-    }
-    this.apiService.getSubcategories(UserService.loggedInUser.username, UserService.loggedInUser.password, categoryId)
+  private fetchSubcategories(username: string, password: string, categoryId: number): void {
+    this.apiService.getSubcategories(username, password, categoryId)
       .subscribe(
         (result) => {
           for (let subcategory of result) {
@@ -81,23 +76,22 @@ export class SubcategoriesComponent implements OnInit {
   }
 
   deleteSubcategory(subcategoryId: number | undefined) {
-    if (UserService.loggedInUser == null) {
-      console.error('User is not logged in');
-      return;
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      this.apiService
+        .deleteSubcategory(user.username, user.password, this.categoryId, subcategoryId)
+        .subscribe(
+          (result) => {
+            this.subcategoriesData = this.subcategoriesData.filter((item) => item.subcategory.subcategoryId !== subcategoryId);
+            this.cdr.detectChanges(); // Trigger change detection
+          },
+          (error) => {
+            console.error('Error deleting subcategory:', error);
+            window.location.reload();
+          }
+        );
     }
-
-    this.apiService
-      .deleteSubcategory(UserService.loggedInUser.username, UserService.loggedInUser.password, this.categoryId, subcategoryId)
-      .subscribe(
-        (result) => {
-          this.subcategoriesData = this.subcategoriesData.filter((item) => item.subcategory.subcategoryId !== subcategoryId);
-          this.cdr.detectChanges(); // Trigger change detection
-        },
-        (error) => {
-          console.error('Error deleting subcategory:', error);
-          window.location.reload();
-        }
-      );
   }
 
   addSubcategory() {
