@@ -26,6 +26,7 @@ export class UserService {
 
     return this.http.get<User>(apiUrl, {headers}).pipe(
       map((result) => {
+        result.password = password;
         UserService.loggedInUser = result;
         localStorage.setItem('loggedInUser', JSON.stringify(result));
         return result;
@@ -42,6 +43,7 @@ export class UserService {
       },
     }).pipe(
       map((result) => {
+        result.password = newUser.password;
         UserService.loggedInUser = newUser;
         UserService.loggedInUser.userId = result.userId;
         localStorage.setItem('loggedInUser', JSON.stringify(newUser));
@@ -58,6 +60,13 @@ export class UserService {
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.patch<User>(url, updatedUser, {headers});
+    return this.http.patch<User>(url, updatedUser, {headers}).pipe(
+      map((result) => {
+        result.password = updatedUser.password;
+        UserService.loggedInUser = result;
+        localStorage.setItem('loggedInUser', JSON.stringify(result));
+        return result;
+      })
+    );
   }
 }
