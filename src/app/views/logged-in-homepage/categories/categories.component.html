@@ -1,7 +1,8 @@
-<!-- category-list.component.html -->
-<h2>Categories</h2>
-<button mat-raised-button color="primary" routerLink='/logged-in-homepage/create-category'>New Category</button>
-<p>Eine Liste Ihrer Kategorien:</p>
+<h2>{{ 'logged-in-homepage.categories.headline_categories' | translate }}</h2>
+<button mat-raised-button color="primary"
+        routerLink='/logged-in-homepage/create-category'>{{ 'logged-in-homepage.categories.button_create_category' | translate }}
+</button>
+<p>{{ 'logged-in-homepage.categories.text_your_categories' | translate }}</p>
 <div *ngIf="categoriesData && categoriesData.length > 0; else noCategories" class="category-container">
   <div *ngFor="let category of categoriesData" class="category-item">
     <mat-card class="card">
@@ -10,12 +11,15 @@
         <mat-card-title>{{ category.category.categoryName }}</mat-card-title>
         <mat-card-subtitle>{{ category.category.categoryDescription }}</mat-card-subtitle>
       </mat-card-header>
-      <button class="delete" (click)="deleteCategory(category.category.categoryId)">Delete</button>
-      <button routerLink='/logged-in-homepage/update-category/{{ category.category.categoryId }}' class="edit">Update
+      <button class="delete"
+              (click)="deleteCategory(category.category.categoryId)">{{ 'logged-in-homepage.button_delete' | translate }}
+      </button>
+      <button routerLink='/logged-in-homepage/update-category/{{ category.category.categoryId }}'
+              class="edit">{{ 'logged-in-homepage.button_update' | translate }}
       </button>
     </mat-card>
   </div>
 </div>
 <ng-template #noCategories>
-  <p>No categories available.</p>
+  <p>{{ 'logged-in-homepage.categories.text_no_categories' | translate }}</p>
 </ng-template>

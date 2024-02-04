@@ -1,23 +1,29 @@
 <form #labelForm="ngForm" (ngSubmit)="onSubmit(labelForm.value)" class="label-form">
   <br>
   <div class="form-group">
-    <label for="labelName" class="form-label">Label Name:</label>
+    <label for="labelName"
+           class="form-label">{{ 'logged-in-homepage.labels.create-label.label_name' | translate }}</label>
     <input type="text" id="labelName" name="labelName" [(ngModel)]="label.labelName" required class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="labelDescription" class="form-label">Label Description:</label>
+    <label for="labelDescription"
+           class="form-label">{{ 'logged-in-homepage.labels.create-label.label_description' | translate }}</label>
     <textarea id="labelDescription" name="labelDescription" [(ngModel)]="label.labelDescription"
               class="form-textarea"></textarea>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Label Colour:</label>
+    <label class="form-label">{{ 'logged-in-homepage.labels.create-label.label_colour' | translate }}</label>
     <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
   <div class="form-actions">
-    <button type="submit" mat-raised-button color="primary">Submit</button>
-    <button type="button" mat-raised-button color="warn" routerLink='/logged-in-homepage/labels'>Cancel</button>
+    <button type="submit" mat-raised-button
+            color="primary">{{ 'logged-in-homepage.labels.button_create_label' | translate }}
+    </button>
+    <button type="button" mat-raised-button color="warn"
+            routerLink='/logged-in-homepage/labels'>{{ 'logged-in-homepage.cancel-action' | translate }}
+    </button>
   </div>
 </form>

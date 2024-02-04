@@ -1,6 +1,8 @@
-<h2>Entries</h2>
-<button mat-raised-button color="warn" routerLink='/logged-in-homepage/labels'>Return to Labels</button>
-<p>Dies sind die Entries mit dem Label mit der Id: {{ labelId }}</p>
+<h2>{{ 'logged-in-homepage.labels.label-entries.headline_label_entries' | translate }}</h2>
+<button mat-raised-button color="warn"
+        routerLink='/logged-in-homepage/labels'>{{ 'logged-in-homepage.labels.label-entries.button_return_to_labels' | translate }}
+</button>
+<p>{{ 'logged-in-homepage.labels.label-entries.text_your_label_entries' | translate }} {{ labelId }}</p>
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
@@ -16,5 +18,5 @@
   </div>
 </div>
 <ng-template #noEntries>
-  <p>No entries available.</p>
+  <p>{{ 'logged-in-homepage.labels.label-entries.text_no_label_entries' | translate }}</p>
 </ng-template>

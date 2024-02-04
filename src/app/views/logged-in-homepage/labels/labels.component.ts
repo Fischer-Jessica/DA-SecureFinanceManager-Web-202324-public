@@ -6,6 +6,7 @@ import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
 import {ColourService} from "../../../logic/services/ColourService";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'logged-in-labels',
@@ -20,7 +21,8 @@ export class LabelsComponent implements OnInit {
               private localStorageService: LocalStorageService,
               private colourService: ColourService,
               private cdr: ChangeDetectorRef,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -64,11 +66,11 @@ export class LabelsComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            this.showAlert('You need to create a label.');
+            this.showAlert(this.translate.instant('logged-in-homepage.labels.alert_create_label_first'));
           } else if (error.status === 401) {
-            this.showAlert('You are not authorized.');
+            this.showAlert(this.translate.instant('authorisation.alert_user_not_logged_in'));
           } else {
-            this.showAlert('Error fetching labels.');
+            this.showAlert(this.translate.instant('logged-in-homepage.labels.error_fetching_labels'));
           }
         }
       );

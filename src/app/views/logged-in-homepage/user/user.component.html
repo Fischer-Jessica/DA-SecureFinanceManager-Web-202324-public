@@ -1,31 +1,33 @@
 <form #userForm="ngForm" class="user-form" (ngSubmit)="onSubmit(userForm)">
   <br>
   <div class="form-group">
-    <label for="username" class="form-label">Username:</label>
+    <label for="username" class="form-label">{{ 'logged-in-homepage.user.label_username' | translate }}</label>
     <input type="text" id="username" name="username" [(ngModel)]="user.username" required class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="password" class="form-label">Password:</label>
+    <label for="password" class="form-label">{{ 'logged-in-homepage.user.label_password' | translate }}</label>
     <input type="password" id="password" name="password" [(ngModel)]="user.password" required class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="email" class="form-label">Email Address:</label>
+    <label for="email" class="form-label">{{ 'logged-in-homepage.user.label_email' | translate }}</label>
     <input type="email" id="email" name="email" [(ngModel)]="user.emailAddress" class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="firstName" class="form-label">First Name:</label>
+    <label for="firstName" class="form-label">{{ 'logged-in-homepage.user.label_first_name' | translate }}</label>
     <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="lastName" class="form-label">Last Name:</label>
+    <label for="lastName" class="form-label">{{ 'logged-in-homepage.user.label_last_name' | translate }}</label>
     <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" class="form-input">
   </div>
 
   <div class="form-actions">
-    <button type="submit" mat-raised-button color="primary">Update</button>
+    <button type="submit" mat-raised-button
+            color="primary">{{ 'logged-in-homepage.user.button_update_user' | translate }}
+    </button>
   </div>
 </form>

@@ -3,18 +3,18 @@
     <img src="../../../assets/logos/Logo.ico" width="45" height="45">
   </li>
   <li [class.active]="isActive('/logged-in-homepage/overview')">
-    <a routerLink="/logged-in-homepage/overview">Overview</a>
+    <a routerLink="/logged-in-homepage/overview">{{ 'logged-in-homepage.navbar.link_overview' | translate }}</a>
   </li>
   <li [class.active]="isActive('/logged-in-homepage/categories')">
-    <a routerLink="/logged-in-homepage/categories">Categories</a>
+    <a routerLink="/logged-in-homepage/categories">{{ 'logged-in-homepage.navbar.link_categories' | translate }}</a>
   </li>
   <li [class.active]="isActive('/logged-in-homepage/labels')">
-    <a routerLink="/logged-in-homepage/labels">Labels</a>
+    <a routerLink="/logged-in-homepage/labels">{{ 'logged-in-homepage.navbar.link_labels' | translate }}</a>
   </li>
   <li [class.active]="isActive('/logged-in-homepage/diagrams')">
-    <a routerLink="/logged-in-homepage/diagrams">Diagrams</a>
+    <a routerLink="/logged-in-homepage/diagrams">{{ 'logged-in-homepage.navbar.link_diagrams' | translate }}</a>
   </li>
   <li [class.active]="isActive('/logged-in-homepage/user')" class="user">
-    <a routerLink="/logged-in-homepage/user">User</a>
+    <a routerLink="/logged-in-homepage/user">{{ 'logged-in-homepage.navbar.link_user' | translate }}</a>
   </li>
 </ul>

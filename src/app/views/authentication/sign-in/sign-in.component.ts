@@ -20,9 +20,6 @@ export class SignInComponent {
               private userService: UserService,
               private translate: TranslateService,
               private snackBar: MatSnackBar) {
-    translate.addLangs(['en', 'de'])
-    translate.setDefaultLang('en');
-    translate.use('de');
   }
 
   showAlert(message: string): void {
@@ -37,12 +34,11 @@ export class SignInComponent {
   logIntoTheOverview(): void {
     this.userService.logIn(this.username, this.password).subscribe({
       next: (response) => {
-        console.log(response);
         this.router.navigateByUrl('/logged-in-homepage')
       },
       error: (err) => {
         if (err.status === 401) {
-          this.showAlert('Wrong username or password');
+          this.showAlert(this.translate.instant('sign-in.alert_wrong_credentials'));
         }
       }
     });

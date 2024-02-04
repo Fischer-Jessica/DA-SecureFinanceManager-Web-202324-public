@@ -21,9 +21,6 @@ export class SignUpComponent {
   constructor(private router: Router,
               private userService: UserService,
               private translate: TranslateService) {
-    translate.addLangs(['en', 'de'])
-    translate.setDefaultLang('en');
-    translate.use('en');
   }
 
   insertNewUserInAPI(): void {

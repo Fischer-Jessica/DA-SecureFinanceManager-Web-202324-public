@@ -1,31 +1,119 @@
 {
-  "sign-in": {
-    "headline_sign_in": "Sign in",
-    "placeholder_username": "Your username",
-    "placeholder_password": "Your password",
-    "checkbox_remember_me": "Remember me",
-    "button_sign_in": "Sign in",
-    "text_create_account": "Create an account."
+  "authorisation": {
+    "alert_user_not_logged_in": "You are not logged in.",
+    "sign-in": {
+      "headline_sign_in": "Sign In",
+      "placeholder_username": "Your username",
+      "placeholder_password": "Your password",
+      "button_sign_in": "Sign In",
+      "text_create_account": "Sign Up",
+      "alert_wrong_credentials": "Incorrect login credentials. Please try again."
+    },
+    "sign-up": {
+      "headline_sign_up": "Sign Up",
+      "placeholder_first_name": "Your first name",
+      "placeholder_last_name": "Your last name",
+      "placeholder_username": "Your username",
+      "placeholder_email": "Your email address",
+      "placeholder_password": "Your password",
+      "button_sign_up": "Sign Up",
+      "text_sign_in": "I already have an account."
+    }
   },
-  "sign-up": {
-    "headline_sign_up": "Sign up",
-    "placeholder_first_name": "Your first name",
-    "placeholder_last_name": "Your last name",
-    "placeholder_username": "Your username",
-    "placeholder_email": "Your e-mail-address",
-    "placeholder_password": "Your password",
-    "placeholder_repeat_password": "Please repeat your password.",
-    "checkbox_agree": "I agree to all statements in the",
-    "link_terms": "Terms of service",
-    "button_sign_up": "Sign up",
-    "text_sign_in": "I am already a member"
+  "logged-in-homepage": {
+    "cancel-action": "Cancel",
+    "button_delete": "Delete",
+    "button_update": "Update",
+    "navbar": {
+      "link_overview": "Overview",
+      "link_categories": "Categories",
+      "link_labels": "Labels",
+      "link_diagrams": "Diagrams",
+      "link_user": "User"
+    },
+    "categories": {
+      "headline_categories": "Categories",
+      "button_create_category": "Create new category",
+      "text_your_categories": "Your categories:",
+      "text_no_categories": "No categories available.",
+      "alert_create_category_first": "You haven't created any categories yet.",
+      "alert_error_fetching_categories": "Error fetching categories.",
+      "alert_error_deleting_category": "Error deleting category.",
+      "create-category": {
+        "label_category_name": "Category Name:",
+        "label_category_description": "Category Description:",
+        "label_category_colour": "Category Color:"
+      },
+      "update-category": {
+        "button_update_category": "Update Category"
+      },
+      "subcategories": {
+        "headline_subcategories": "Subcategories",
+        "button_create_subcategory": "Create new subcategory",
+        "button_return_categories": "Back to Categories",
+        "text_your_subcategories": "Your subcategories belonging to the category with the following Id:",
+        "create-subcategory": {
+          "label_subcategory_name": "Subcategory Name:",
+          "label_subcategory_description": "Subcategory Description:",
+          "label_subcategory_colour": "Subcategory Color:"
+        },
+        "update-subcategory": {
+          "button_update_subcategory": "Update Subcategory"
+        },
+        "entries": {
+          "headline_entries": "Entries",
+          "button_create_entry": "Create new entry",
+          "button_return_subcategories": "Back to Subcategories",
+          "text_your_entries": "Your entries belonging to the subcategory with the following Id:",
+          "text_no_entries": "No entries available.",
+          "label_entry_name": "Entry Name:",
+          "label_entry_description": "Entry Description:",
+          "label_entry_amount": "Entry Value:",
+          "label_entry_date": "Entry Date:",
+          "create-entry": {
+            "label_entry_attachment": "Entry Attachment:"
+          },
+          "update-entry": {
+            "button_update_entry": "Update Entry"
+          }
+        }
+      }
+    },
+    "labels": {
+      "headline_labels": "Labels",
+      "button_create_label": "Create new label",
+      "text_your_labels": "Your labels:",
+      "text_no_labels": "No labels available.",
+      "alert_create_label_first": "You haven't created any labels yet.",
+      "alert_user_not_logged_in": "You are not logged in.",
+      "alert_error_fetching_labels": "Error fetching labels.",
+      "create-label": {
+        "label_name": "Label Name:",
+        "label_description": "Label Description:",
+        "label_colour": "Label Color:",
+        "button_create_label": "Create Label"
+      },
+      "update-label": {
+        "button_update_label": "Update Label"
+      },
+      "label-entries": {
+        "headline_label_entries": "Label Entries",
+        "button_return_to_labels": "Back to Labels",
+        "text_your_label_entries": "Your entries associated with the label with the following Id:",
+        "text_no_label_entries": "No label entries available."
+      }
+    },
+    "user": {
+      "label_username": "Username:",
+      "label_password": "Password:",
+      "label_email": "Email Address:",
+      "label_first_name": "First Name:",
+      "label_last_name": "Last Name:",
+      "button_update_user": "Update User Data"
+    }
   },
   "imprint": {
-    "headline_about": "About",
-    "text_about": "SecureFinanceManager.com <i>Trust is good, control is better.</i> With our user-friendly interface, you can effortlessly track your bank accounts, credit cards, and expenses, gaining valuable insights into your financial health. We believe that having a clear overview of your finances is essential to making informed decisions and securing a stable financial future.",
-    "headline_app": "App",
-    "text_app": "We have our own app!",
-    "headline_quick_links": "Quick Links",
-    "link_about_us": "About Us"
+    "text_team": "Team",
+    "text_rights": "all rights reserved"
   }
 }

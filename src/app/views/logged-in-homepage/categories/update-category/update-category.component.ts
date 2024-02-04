@@ -67,14 +67,14 @@ export class UpdateCategoryComponent implements OnInit {
         this.category.categoryId,
         this.category
       ).subscribe(
-        result => this.router.navigateByUrl(`/logged-in-homepage/subcategories/${this.category.categoryId}`),
+        result => this.router.navigateByUrl(`/logged-in-homepage/categories`),
         error => console.error('Error updating category:', error)
       );
     }
   }
 
   onCancel(): void {
-    this.router.navigateByUrl(`/logged-in-homepage/subcategories/${this.category.categoryId}`);
+    this.router.navigateByUrl(`/logged-in-homepage/categories`);
   }
 
   onColourSelected(colourId: number): void {

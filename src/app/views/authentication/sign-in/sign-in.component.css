@@ -1,7 +1,7 @@
 display-flex,
 .display-flex,
 .display-flex-center,
-.signin-content,
+.sign-in-content,
 .social-login,
 .socials {
   display: flex;
@@ -56,8 +56,8 @@ body {
   -webkit-border-radius: 20px;
 }
 
-.signin-form,
-.signin-image {
+.sign-in-form,
+.sign-in-image {
   width: 50%;
   overflow: hidden
 }
@@ -84,11 +84,11 @@ body {
   background: #4292dc
 }
 
-#signin {
+#sign-in {
   margin-top: 16px
 }
 
-.register-form {
+.sign-in-form {
   width: 100%
 }
 
@@ -155,25 +155,25 @@ input[type=checkbox]:not(old):checked + label > span:before {
   font-weight: 700
 }
 
-.signin-image-link {
+.sign-in-image-link {
   font-size: 14px;
   color: #222;
   display: block;
   text-align: center
 }
 
-.signin-content {
+.sign-in-content {
   padding-top: 110px;
   padding-bottom: 87px;
   margin-top: 90px
 }
 
-.signin-form {
+.sign-in-form {
   margin-right: 90px;
   margin-left: 80px
 }
 
-.signin-image {
+.sign-in-image {
   margin-left: 110px;
   margin-right: 20px;
   margin-top: 10px
@@ -193,7 +193,7 @@ input[type=checkbox]:not(old):checked + label > span:before {
 }
 
 @media screen and (max-width: 768px) {
-  .signin-content {
+  .sign-in-content {
     flex-direction: column;
     -webkit-flex-direction: column;
     -ms-flex-direction: column;
@@ -201,7 +201,7 @@ input[type=checkbox]:not(old):checked + label > span:before {
     -webkit-justify-content: center;
   }
 
-  .signin-image {
+  .sign-in-image {
     margin-left: 0;
     margin-right: 0;
     margin-top: 50px;
@@ -209,8 +209,8 @@ input[type=checkbox]:not(old):checked + label > span:before {
     text-align: center;
   }
 
-  .signin-form,
-  .signin-image {
+  .sign-in-form,
+  .sign-in-image {
     width: auto
   }
 
@@ -218,7 +218,7 @@ input[type=checkbox]:not(old):checked + label > span:before {
     text-align: center
   }
 
-  .signin-form {
+  .sign-in-form {
     order: 1;
     margin-right: 0;
     margin-left: 0;

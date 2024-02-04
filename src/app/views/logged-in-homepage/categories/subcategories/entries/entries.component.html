@@ -1,26 +1,29 @@
-<h2>Entries</h2>
-<button mat-raised-button color="primary" (click)="addEntry()">New Entry</button>
-<button mat-raised-button color="warn" routerLink='/logged-in-homepage/categories' (click)="returnToSubcategory()">
-  Return to Subcategories
+<h2>{{ 'logged-in-homepage.categories.subcategories.entries.headline_entries' | translate }}</h2>
+<button mat-raised-button color="primary"
+        (click)="addEntry()">{{ 'logged-in-homepage.categories.subcategories.entries.button_create_entry' | translate }}
 </button>
-<p>Dies sind die Entries aus der Subcategory mit der Id {{ subcategoryId }}</p>
+<button mat-raised-button color="warn" routerLink='/logged-in-homepage/categories'
+        (click)="returnToSubcategory()">{{ 'logged-in-homepage.categories.subcategories.entries.button_return_subcategories' | translate }}
+</button>
+<p>{{ 'logged-in-homepage.categories.subcategories.entries.text_your_entries' | translate }} {{ subcategoryId }}</p>
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
       <mat-card-header>
-        <mat-card-title>Entry name: {{ entry.entryName }}</mat-card-title>
-        <mat-card-subtitle>Entry description: {{ entry.entryDescription }}</mat-card-subtitle>
+        <mat-card-title>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_name' | translate }} {{ entry.entryName }}</mat-card-title>
+        <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_description' | translate }} {{ entry.entryDescription }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <h5>Entry amount:{{ entry.entryAmount }}</h5>
-        <p>Entry Time of Transaction: {{ entry.entryTimeOfTransaction }}<br>
-          Entry Time of Creation: {{ entry.entryCreationTime }}</p>
+        <h5>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount' | translate }} {{ entry.entryAmount }}</h5>
+        <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date' | translate }} {{ entry.entryTimeOfTransaction }}</p>
       </mat-card-content>
-      <button class="edit" (click)="updateEntry(entry.entryId)">Update</button>
-      <button class="delete" (click)="deleteEntry(entry.entryId)">Delete</button>
+      <button class="edit" (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }}
+      </button>
+      <button class="delete" (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }}
+      </button>
     </mat-card>
   </div>
 </div>
 <ng-template #noEntries>
-  <p>No entries available.</p>
+  <p>{{ 'logged-in-homepage.categories.subcategories.entries.text_no_entries' | translate }}</p>
 </ng-template>

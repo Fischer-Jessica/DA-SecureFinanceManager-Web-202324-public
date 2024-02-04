@@ -35,7 +35,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {CommonModule} from "@angular/common";
 
 // Translation - imports
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 // Design - imports
@@ -113,4 +113,10 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private translate: TranslateService) {
+    translate.addLangs(['en', 'de'])
+    translate.setDefaultLang('en');
+    translate.use('de');
+  }
+}

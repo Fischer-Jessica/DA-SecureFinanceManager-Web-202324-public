@@ -1,7 +1,8 @@
-<!-- category-list.component.html -->
-<h2>Labels</h2>
-<button mat-raised-button color="primary" routerLink='/logged-in-homepage/create-label'>New Label</button>
-<p>Eine Liste Ihrer Label:</p>
+<h2>{{ 'logged-in-homepage.labels.headline_labels' | translate }}</h2>
+<button mat-raised-button color="primary"
+        routerLink='/logged-in-homepage/create-label'>{{ 'logged-in-homepage.labels.button_create_label' | translate }}
+</button>
+<p>{{ 'logged-in-homepage.labels.text_your_labels' | translate }}</p>
 <div *ngIf="labelsData && labelsData.length > 0; else noLabels" class="label-container">
   <div *ngFor="let labelData of labelsData" class="label-item">
     <mat-card class="card">
@@ -10,11 +11,15 @@
         <mat-card-title>{{ labelData.label.labelName }}</mat-card-title>
         <mat-card-subtitle>{{ labelData.label.labelDescription }}</mat-card-subtitle>
       </mat-card-header>
-      <button class="delete" (click)="deleteLabel(labelData.label.labelId)">Delete</button>
-      <button routerLink="/logged-in-homepage/update-label/{{labelData.label.labelId}}" class="edit">Update</button>
+      <button class="delete"
+              (click)="deleteLabel(labelData.label.labelId)">{{ 'logged-in-homepage.button_delete' | translate }}
+      </button>
+      <button routerLink="/logged-in-homepage/update-label/{{labelData.label.labelId}}"
+              class="edit">{{ 'logged-in-homepage.button_update' | translate }}
+      </button>
     </mat-card>
   </div>
 </div>
 <ng-template #noLabels>
-  <p>No labels available.</p>
+  <p>{{ 'logged-in-homepage.labels.text_no_labels' | translate }}</p>
 </ng-template>

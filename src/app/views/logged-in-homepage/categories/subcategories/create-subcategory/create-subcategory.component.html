@@ -1,24 +1,31 @@
 <form #subcategoryForm="ngForm" (ngSubmit)="onSubmit(subcategoryForm.value)" class="subcategory-form">
   <br>
   <div class="form-group">
-    <label for="subcategoryName" class="form-label">Subcategory Name:</label>
+    <label for="subcategoryName"
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.label_subcategory_name' | translate }}</label>
     <input type="text" id="subcategoryName" name="subcategoryName" [(ngModel)]="subcategory.subcategoryName" required
            class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="subcategoryDescription" class="form-label">Subcategory Description:</label>
+    <label for="subcategoryDescription"
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.label_subcategory_description' | translate }}</label>
     <textarea id="subcategoryDescription" name="subcategoryDescription" [(ngModel)]="subcategory.subcategoryDescription"
               class="form-textarea"></textarea>
   </div>
 
   <div class="form-group">
-    <label class="form-label">Subcategory Colour:</label>
+    <label
+      class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.label_subcategory_colour' | translate }}</label>
     <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
   <div class="form-actions">
-    <button type="submit" mat-raised-button color="primary">Submit</button>
-    <button type="button" mat-raised-button color="warn" (click)="returnToSubcategories()">Cancel</button>
+    <button type="submit" mat-raised-button
+            color="primary">{{ 'logged-in-homepage.categories.subcategories.button_create_subcategory' | translate }}
+    </button>
+    <button type="button" mat-raised-button color="warn"
+            (click)="returnToSubcategories()">{{ 'logged-in-homepage.cancel-action' | translate }}
+    </button>
   </div>
 </form>

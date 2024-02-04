@@ -1,31 +1,119 @@
 {
-  "sign-in": {
-    "headline_sign_in": "Anmelden",
-    "placeholder_username": "Dein Benutzername",
-    "placeholder_password": "Dein Password",
-    "checkbox_remember_me": "Dieses Gerät speichern",
-    "button_sign_in": "Anmelden",
-    "text_create_account": "Registrieren"
+  "authorisation": {
+    "alert_user_not_logged_in": "Sie sind nicht angemeldet.",
+    "sign-in": {
+      "headline_sign_in": "Anmelden",
+      "placeholder_username": "Dein Benutzername",
+      "placeholder_password": "Dein Password",
+      "button_sign_in": "Anmelden",
+      "text_create_account": "Registrieren",
+      "alert_wrong_credentials": "Falsche Anmeldedaten. Bitte versuchen Sie es erneut."
+    },
+    "sign-up": {
+      "headline_sign_up": "Registrieren",
+      "placeholder_first_name": "Dein Vorname",
+      "placeholder_last_name": "Dein Nachname",
+      "placeholder_username": "Dein Benutzername",
+      "placeholder_email": "Deine E-Mail-Adresse",
+      "placeholder_password": "Dein Passwort",
+      "button_sign_up": "Registrieren",
+      "text_sign_in": "Ich habe bereits ein Konto."
+    }
   },
-  "sign-up": {
-    "headline_sign_up": "Registrieren",
-    "placeholder_first_name": "Dein Vorname",
-    "placeholder_last_name": "Dein Nachname",
-    "placeholder_username": "Dein Benutzername",
-    "placeholder_email": "Deine E-Mail-Adresse",
-    "placeholder_password": "Dein Passwort",
-    "placeholder_repeat_password": "Bitte wiederhole dein Passwort.",
-    "checkbox_agree": "Ich stimme zu",
-    "link_terms": "Allgemeinen Geschäftsbedingungen",
-    "button_sign_up": "Registrieren",
-    "text_sign_in": "Ich habe bereits ein Konto."
+  "logged-in-homepage": {
+    "cancel-action": "Abbrechen",
+    "button_delete": "löschen",
+    "button_update": "ändern",
+    "navbar": {
+      "link_overview": "Übersicht",
+      "link_categories": "Kategorien",
+      "link_labels": "Labels",
+      "link_diagrams": "Diagramme",
+      "link_user": "Benutzer"
+    },
+    "categories": {
+      "headline_categories": "Kategorien",
+      "button_create_category": "neue Kategorie erstellen",
+      "text_your_categories": "Ihre Kategorien:",
+      "text_no_categories": "Keine Kategorien vorhanden.",
+      "alert_create_category_first": "Sie haben noch keine Kategorie erstellt.",
+      "alert_error_fetching_categories": "Fehler beim Laden der Kategorien.",
+      "alert_error_deleting_category": "Fehler beim Löschen der Kategorie.",
+      "create-category": {
+        "label_category_name": "Name der Kategorie:",
+        "label_category_description": "Beschreibung der Kategorie:",
+        "label_category_colour": "Farbe der Kategorie:"
+      },
+      "update-category": {
+        "button_update_category": "Kategorie aktualisieren"
+      },
+      "subcategories": {
+        "headline_subcategories": "Unterkategorien",
+        "button_create_subcategory": "neue Unterkategorie erstellen",
+        "button_return_categories": "Zurück zu Kategorien",
+        "text_your_subcategories": "Ihre Unterkategorien, der Kategorie mit folgender Id angehörig:",
+        "create-subcategory": {
+          "label_subcategory_name": "Name der Unterkategorie:",
+          "label_subcategory_description": "Beschreibung der Unterkategorie:",
+          "label_subcategory_colour": "Farbe der Unterkategorie:"
+        },
+        "update-subcategory": {
+          "button_update_subcategory": "Unterkategorie aktualisieren"
+        },
+        "entries": {
+          "headline_entries": "Einträge",
+          "button_create_entry": "neuen Eintrag erstellen",
+          "button_return_subcategories": "Zurück zu Unterkategorien",
+          "text_your_entries": "Ihre Einträge, der Unterkategorie mit folgender Id angehörig:",
+          "text_no_entries": "Keine Einträge vorhanden.",
+          "label_entry_name": "Name des Eintrags:",
+          "label_entry_description": "Beschreibung des Eintrags:",
+          "label_entry_amount": "Wert des Eintrags:",
+          "label_entry_date": "Datum des Eintrags:",
+          "create-entry": {
+            "label_entry_attachment": "Anhang des Eintrags:"
+          },
+          "update-entry": {
+            "button_update_entry": "Eintrag aktualisieren"
+          }
+        }
+      }
+    },
+    "labels": {
+      "headline_labels": "Labels",
+      "button_create_label": "neues Label erstellen",
+      "text_your_labels": "Ihre Labels:",
+      "text_no_labels": "Keine Labels vorhanden.",
+      "alert_create_label_first": "Sie haben noch kein Label erstellt.",
+      "alert_user_not_logged_in": "Sie sind nicht angemeldet.",
+      "alert_error_fetching_labels": "Fehler beim Laden der Labels.",
+      "create-label": {
+        "label_name": "Name des Labels:",
+        "label_description": "Beschreibung des Labels:",
+        "label_colour": "Farbe des Labels:",
+        "button_create_label": "Label erstellen"
+      },
+      "update-label": {
+        "button_update_label": "Label aktualisieren"
+      },
+      "label-entries": {
+        "headline_label_entries": "Label-Einträge",
+        "button_return_to_labels": "Zurück zu Labels",
+        "text_your_label_entries": "Ihre Einträge, die mit dem Label mit folgender Id verbunden sind: ",
+        "text_no_label_entries": "Keine Label-Einträge vorhanden."
+      }
+    },
+    "user": {
+      "label_username": "Benutzername:",
+      "label_password": "Passwort:",
+      "label_email": "E-Mail-Adresse:",
+      "label_first_name": "Vorname:",
+      "label_last_name": "Nachname:",
+      "button_update_user": "Benutzerdaten aktualisieren"
+    }
   },
   "imprint": {
-    "headline_about": "Über uns",
-    "text_about": "SecureFinanceManager.com - Vertrauen ist gut, Kontrolle ist besser - Mit unserer benutzerfreundlichen Oberfläche können Sie mühelos Ihre Bankkonten, Kreditkarten und Ausgaben verfolgen und so wertvolle Einblicke in Ihre finanzielle Situation gewinnen. Wir glauben, dass ein klarer Überblick über Ihre Finanzen unerlässlich ist, um fundierte Entscheidungen zu treffen und eine stabile finanzielle Zukunft zu sichern.",
-    "headline_app": "App",
-    "text_app": "Wir haben unsere eigene App!",
-    "headline_quick_links": "Schnelle Links",
-    "link_about_us": "Über uns"
+    "text_team": "Team",
+    "text_rights": "alle Rechte vorbehalten"
   }
 }

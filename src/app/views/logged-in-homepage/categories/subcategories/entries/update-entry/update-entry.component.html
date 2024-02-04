@@ -1,36 +1,45 @@
 <form #entryForm="ngForm" (ngSubmit)="onSubmit(entryForm)" class="entry-form">
   <br>
   <div class="form-group">
-    <label for="entryName" class="form-label">Entry Name:</label>
+    <label for="entryName"
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_name' | translate }}</label>
     <input type="text" id="entryName" name="entryName" [(ngModel)]="entry.entryName" required class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="entryDescription" class="form-label">Entry Description:</label>
+    <label for="entryDescription"
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_description' | translate }}</label>
     <textarea id="entryDescription" name="entryDescription" [(ngModel)]="entry.entryDescription"
               class="form-textarea"></textarea>
   </div>
 
   <div class="form-group">
-    <label for="entryAmount" class="form-label">Entry Amount:</label>
+    <label for="entryAmount"
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount' | translate }}</label>
     <input type="number" id="entryAmount" name="entryAmount" [(ngModel)]="entry.entryAmount" required
            class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="entryTimeOfTransaction" class="form-label">Entry Time of Transaction:</label>
+    <label for="entryTimeOfTransaction"
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date' | translate }}</label>
     <input type="datetime-local" id="entryTimeOfTransaction" name="entryTimeOfTransaction"
            [(ngModel)]="entry.entryTimeOfTransaction" required class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="entryAttachment" class="form-label">Entry Attachment:</label>
+    <label for="entryAttachment"
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.create-entry.label_entry_attachment' | translate }}</label>
     <input type="file" id="entryAttachment" name="entryAttachment" [(ngModel)]="entry.entryAttachment"
            class="form-input">
   </div>
 
   <div class="form-actions">
-    <button type="submit" mat-raised-button color="primary">Submit</button>
-    <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+    <button type="submit" mat-raised-button
+            color="primary">{{ 'logged-in-homepage.categories.subcategories.entries.update-entry.button_update_entry' | translate }}
+    </button>
+    <button type="button" mat-raised-button color="warn"
+            (click)="onCancel()">{{ 'logged-in-homepage.cancel-action' | translate }}
+    </button>
   </div>
 </form>

@@ -6,6 +6,7 @@ import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
 import {ColourService} from "../../../logic/services/ColourService";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'logged-in-categories',
@@ -20,7 +21,8 @@ export class CategoriesComponent implements OnInit {
               private categoryService: CategoryService,
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
-              private snackBar: MatSnackBar
+              private snackBar: MatSnackBar,
+              private translate: TranslateService
   ) {
   }
 
@@ -69,11 +71,11 @@ export class CategoriesComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            this.showAlert('You need to create a category.');
+            this.showAlert(this.translate.instant('logged-in-homepage.categories.alert_create_category_first'));
           } else if (error.status === 401) {
-            this.showAlert('You are not authorized.');
+            this.showAlert(this.translate.instant('authorisation.alert_user_not_logged_in'));
           } else {
-            this.showAlert('Error fetching categories');
+            this.showAlert(this.translate.instant('logged-in-homepage.categories.alert_error_fetching_categories'));
           }
         }
       );
@@ -96,7 +98,7 @@ export class CategoriesComponent implements OnInit {
           // Handle result (e.g., display success message)
         },
         (error) => {
-          console.error('Error deleting category:', error);
+          this.showAlert(this.translate.instant('categories.alert_error_deleting_category'));
           window.location.reload();
         }
       );

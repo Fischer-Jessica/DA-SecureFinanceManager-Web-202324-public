@@ -1,33 +1,28 @@
 <section class="sign-in">
   <div class="container">
-    <div class="signin-content">
-      <div class="signin-image">
-        <figure><img src="./../../assets/images/sign___in-up/sign-in.jpeg" alt="sign up image"></figure>
-        <a (click)="goToSignUp()" class="signin-image-link" translate="sign-in.text_create_account"></a>
+    <div class="sign-in-content">
+      <div class="sign-in-image">
+        <figure><img src="./../../assets/images/sign___in-up/sign-in.jpeg" alt="sign in image"></figure>
+        <a (click)="goToSignUp()" class="sign-in-image-link" translate="authorisation.sign-in.text_create_account"></a>
       </div>
-      <div class="signin-form">
-        <h2 class="form-title" translate="sign-in.headline_sign_in"></h2>
-        <form (ngSubmit)="logIntoTheOverview()" class="register-form" id="login-form">
+      <div class="sign-in-form">
+        <h2 class="form-title" translate="authorisation.sign-in.headline_sign_in"></h2>
+        <form (ngSubmit)="logIntoTheOverview()" class="sign-in-form" id="login-form">
           <div class="form-group">
             <label for="username"><i></i></label>
             <input type="text" name="username" id="username"
-                   placeholder="{{'sign-in.placeholder_username' | translate}}" [(ngModel)]="username"
+                   placeholder="{{'authorisation.sign-in.placeholder_username' | translate}}" [(ngModel)]="username"
                    required>
           </div>
           <div class="form-group">
             <label for="your_pass"><i></i></label>
             <input type="password" name="your_pass" id="your_pass"
-                   placeholder="{{'sign-in.placeholder_password' | translate}}" [(ngModel)]="password"
+                   placeholder="{{'authorisation.sign-in.placeholder_password' | translate}}" [(ngModel)]="password"
                    required>
           </div>
-          <div class="form-group">
-            <input type="checkbox" name="remember-me" id="remember-me" class="agree-term">
-            <label for="remember-me" class="label-agree-term"
-                   translate="sign-in.checkbox_remember_me"><span><span></span></span></label>
-          </div>
           <div class="form-group form-button">
-            <input type="submit" name="signin" id="signin" class="form-submit"
-                   value="{{'sign-in.button_sign_in' | translate}}">
+            <input type="submit" name="sign-in" id="sign-in" class="form-submit"
+                   value="{{'authorisation.sign-in.button_sign_in' | translate}}">
           </div>
         </form>
       </div>

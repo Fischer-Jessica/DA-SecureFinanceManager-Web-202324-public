@@ -73,14 +73,14 @@ export class UpdateSubcategoryComponent implements OnInit {
         this.userService.loggedInUser.password,
         this.subcategory
       ).subscribe(
-        result => this.router.navigateByUrl(`logged-in-homepage/entries/${this.subcategory.subcategoryCategoryId}/${this.subcategory.subcategoryId}`),
+        result => this.router.navigateByUrl(`logged-in-homepage/subcategories/${this.subcategory.subcategoryCategoryId}`),
         error => console.error('Error updating category:', error)
       );
     }
   }
 
   onCancel(): void {
-    this.router.navigateByUrl(`logged-in-homepage/entries/${this.subcategory.subcategoryCategoryId}/${this.subcategory.subcategoryId}`);
+    this.router.navigateByUrl(`logged-in-homepage/subcategories/${this.subcategory.subcategoryCategoryId}`);
   }
 
   onColourSelected(colourId: number): void {
