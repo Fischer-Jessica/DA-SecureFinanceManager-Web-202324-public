@@ -1,4 +1,4 @@
-.sign-in-content {
+.login-div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,52 +6,41 @@
   background-color: #40476D;
 }
 
-.sign-in {
-  width: 22%;
-  height: 36%;
+.login-section {
   background-color: #3586ff;
   padding: 40px;
   border-radius: 10px;
 }
 
-.signin-content {
+.login-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.sign-up-place {
-  margin-left: 11px;
+.register-div {
   margin-right: 22px;
-  width: 22%; /* Erhöhte Breite des Rechtecks */
+  width: 45%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#go-to-sign-in {
-  margin-right: 44px;
-}
-
-.sign-in-form {
-  background-color: #3586ff;
+.login-form {
+  width: 70%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 40px;
   border-radius: 15px;
-  width: 77%;
-  height: 88%;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .form-title {
+  font-weight: bolder;
   text-align: center;
   color: #fff;
-  margin-bottom: 20px; /* Platz unter dem Titel hinzufügen */
+  margin-bottom: 20px;
 }
 
-.form-group {
+form > div {
   margin-bottom: 15px;
 }
 
@@ -65,14 +54,15 @@ input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid black;
   border-radius: 5px;
   box-sizing: border-box;
-  background-color: #E6F0FF;
+  background-color: #c6e1ff;
   color: #2C5282;
 }
 
-.form-submit {
+#login,
+#go-to-register {
   width: 100%;
   padding: 10px;
   border: none;
@@ -84,6 +74,6 @@ input[type="password"] {
 }
 
 #sign-in:hover,
-#go-to-sign-up:hover {
+#go-to-register:hover {
   background-color: #45a049;
 }
