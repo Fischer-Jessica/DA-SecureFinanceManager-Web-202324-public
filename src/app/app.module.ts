@@ -7,8 +7,8 @@ import {AppComponent} from './app.component';
 
 import {AuthenticationComponent} from './views/authentication/authentication.component';
 
-import {SignUpComponent} from "./views/authentication/sign-up/sign-up.component";
-import {SignInComponent} from './views/authentication/sign-in/sign-in.component';
+import {RegisterComponent} from "./views/authentication/register/register.component";
+import {LoginComponent} from './views/authentication/login/login.component';
 
 
 import {LoggedInHomepageComponent} from './views/logged-in-homepage/logged-in-homepage.component';
@@ -67,8 +67,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    SignUpComponent,
-    SignInComponent,
+    RegisterComponent,
+    LoginComponent,
     AuthenticationComponent,
     ImprintComponent,
     NavbarComponent,

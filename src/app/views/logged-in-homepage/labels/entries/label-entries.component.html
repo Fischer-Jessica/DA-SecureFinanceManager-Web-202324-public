@@ -7,12 +7,12 @@
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
       <mat-card-header>
-        <mat-card-title>{{ entry.entryName }}</mat-card-title>
-        <mat-card-subtitle>{{ entry.entryDescription }}</mat-card-subtitle>
+        <mat-card-title>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_name'| translate }} {{ entry.entryName }}</mat-card-title>
+        <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_description'| translate }} {{ entry.entryDescription }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <h5>{{ entry.entryAmount }}</h5>
-        <h6>{{ entry.entryTimeOfTransaction }}</h6>
+        <h5>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount'| translate }} {{ entry.entryAmount }}</h5>
+        <h6>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date'| translate }} {{ entry.entryTimeOfTransaction }}</h6>
       </mat-card-content>
     </mat-card>
   </div>

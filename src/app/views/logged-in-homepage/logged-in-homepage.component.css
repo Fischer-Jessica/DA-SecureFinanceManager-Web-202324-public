@@ -1,17 +1,18 @@
 * {
   font-family: 'Roboto', sans-serif;
-}
-
-imprint {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  color: white;
 }
 
 body {
   margin: 0;
 }
 
-.content {
+.page-div {
+  height: 100vh;
+  background-color: #40476D;
+  padding-top: 10px; /* Neuer Abstand oben */
+}
+
+.page-content {
   margin: 10px;
 }

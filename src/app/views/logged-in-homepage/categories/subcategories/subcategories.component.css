@@ -6,6 +6,10 @@
   height: 566px;
 }
 
+.go-back {
+  margin-left: 20px;
+}
+
 .subcategory-item {
   flex: 1 1 calc(33.33% - 16px);
   max-width: calc(33.33% - 16px);
@@ -13,6 +17,7 @@
 
 .card {
   min-height: 100px;
+  color: black;
   border: #111111 2px solid;
   background: #40476D;
   filter: brightness(3);

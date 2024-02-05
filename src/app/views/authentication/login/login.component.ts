@@ -6,11 +6,11 @@ import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 
 
 @Component({
-  selector: 'sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.css']
+  selector: 'login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class SignInComponent {
+export class LoginComponent {
 
   username: string = '';
 
@@ -32,7 +32,7 @@ export class SignInComponent {
   }
 
   logIntoTheOverview(): void {
-    this.userService.logIn(this.username, this.password).subscribe({
+    this.userService.loginUser(this.username, this.password).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/logged-in-homepage')
       },
@@ -44,7 +44,7 @@ export class SignInComponent {
     });
   }
 
-  goToSignUp() {
-    this.router.navigateByUrl('/authentication/sign-up');
+  goToRegister() {
+    this.router.navigateByUrl('/authentication/register');
   }
 }

@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {SignUpComponent} from "./views/authentication/sign-up/sign-up.component";
-import {SignInComponent} from "./views/authentication/sign-in/sign-in.component";
+import {RegisterComponent} from "./views/authentication/register/register.component";
+import {LoginComponent} from "./views/authentication/login/login.component";
 import {AuthenticationComponent} from "./views/authentication/authentication.component";
 import {LoggedInHomepageComponent} from "./views/logged-in-homepage/logged-in-homepage.component";
 import {OverviewComponent} from "./views/logged-in-homepage/overview/overview.component";
@@ -34,9 +34,9 @@ const routes: Routes = [
     path: 'authentication',
     component: AuthenticationComponent,
     children: [
-      {path: '', redirectTo: 'sign-in', pathMatch: 'full'},
-      {path: 'sign-up', component: SignUpComponent},
-      {path: 'sign-in', component: SignInComponent},
+      {path: '', redirectTo: 'login', pathMatch: 'full'},
+      {path: 'register', component: RegisterComponent},
+      {path: 'login', component: LoginComponent},
       {path: 'logged-in-homepage', component: LoggedInHomepageComponent}
     ]
   },

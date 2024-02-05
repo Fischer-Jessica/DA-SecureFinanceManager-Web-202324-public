@@ -14,7 +14,7 @@ export class UserService {
   constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
   }
 
-  logIn(username: string, password: string): Observable<User> {
+  loginUser(username: string, password: string): Observable<User> {
     const apiUrl = AppComponent.apiUrl + 'user';
 
     const headers = new HttpHeaders({
@@ -31,7 +31,7 @@ export class UserService {
     );
   }
 
-  signUp(newUser: User) {
+  registerUser(newUser: User) {
     const apiUrl = AppComponent.apiUrl + 'users';
 
     return this.http.post<User>(apiUrl, newUser, {

@@ -2,7 +2,7 @@
 <button mat-raised-button color="primary"
         (click)="addSubcategory()">{{ 'logged-in-homepage.categories.subcategories.button_create_subcategory' | translate }}
 </button>
-<button mat-raised-button color="warn"
+<button class="go-back" mat-raised-button color="warn"
         routerLink='/logged-in-homepage/categories'>{{ 'logged-in-homepage.categories.subcategories.button_return_categories' | translate }}
 </button>
 <p>{{ 'logged-in-homepage.categories.subcategories.text_your_subcategories' | translate }} {{ this.categoryId }}</p>

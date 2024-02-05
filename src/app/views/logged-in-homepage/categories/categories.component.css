@@ -13,6 +13,7 @@
 
 .card {
   min-height: 100px;
+  color: black;
   border: #111111 2px solid;
   background: #40476D;
   filter: brightness(3);

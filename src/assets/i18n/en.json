@@ -10,7 +10,7 @@
       "text_create_account": "Sign Up",
       "alert_wrong_credentials": "Incorrect login credentials. Please try again."
     },
-    "sign-up": {
+    "register": {
       "headline_sign_up": "Sign Up",
       "placeholder_first_name": "Your first name",
       "placeholder_last_name": "Your last name",

@@ -5,11 +5,11 @@ import {UserService} from "../../../logic/services/UserService";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-  selector: 'sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  selector: 'register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class SignUpComponent {
+export class RegisterComponent {
   newUser: User = {
     username: '',
     password: '',
@@ -24,7 +24,7 @@ export class SignUpComponent {
   }
 
   insertNewUserInAPI(): void {
-    this.userService.signUp(this.newUser).subscribe({
+    this.userService.registerUser(this.newUser).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/logged-in-homepage')
       },
@@ -34,7 +34,7 @@ export class SignUpComponent {
     });
   }
 
-  goToSignIn() {
-    this.router.navigateByUrl('/authentication/sign-in');
+  goToLogin() {
+    this.router.navigateByUrl('/authentication/login');
   }
 }

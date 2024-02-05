@@ -4,8 +4,13 @@
   height: 566px;
 }
 
+.go-back {
+  margin-left: 20px;
+}
+
 .card {
   border: #111111 2px solid;
+  color: black;
   margin-bottom: 5px;
   height: 180px;
   background: #40476D;
