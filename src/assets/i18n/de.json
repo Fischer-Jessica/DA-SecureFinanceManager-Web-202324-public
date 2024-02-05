@@ -2,10 +2,11 @@
   "authorisation": {
     "alert_user_not_logged_in": "Sie sind nicht angemeldet.",
     "sign-in": {
-      "headline_sign_in": "Anmelden",
+      "text_sign_in": "Anmelden",
+      "label_username": "Benutzername:",
       "placeholder_username": "Dein Benutzername",
+      "label_password": "Passwort:",
       "placeholder_password": "Dein Password",
-      "button_sign_in": "Anmelden",
       "text_create_account": "Registrieren",
       "alert_wrong_credentials": "Falsche Anmeldedaten. Bitte versuchen Sie es erneut."
     },

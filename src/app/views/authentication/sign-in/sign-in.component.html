@@ -1,31 +1,33 @@
-<section class="sign-in">
-  <div class="container">
-    <div class="sign-in-content">
-      <div class="sign-in-image">
-        <figure><img src="./../../assets/images/sign___in-up/sign-in.jpeg" alt="sign in image"></figure>
-        <a (click)="goToSignUp()" class="sign-in-image-link" translate="authorisation.sign-in.text_create_account"></a>
+<div class="sign-in-content">
+  <section class="sign-in">
+    <div class="signin-content">
+      <div class="sign-up-place">
+        <button (click)="goToSignUp()" id="go-to-sign-up" class="form-submit"
+                translate="authorisation.sign-in.text_create_account"></button>
       </div>
       <div class="sign-in-form">
-        <h2 class="form-title" translate="authorisation.sign-in.headline_sign_in"></h2>
-        <form (ngSubmit)="logIntoTheOverview()" class="sign-in-form" id="login-form">
+        <form (ngSubmit)="logIntoTheOverview()" id="login-form">
+          <h2 class="form-title" translate="authorisation.sign-in.text_sign_in"></h2>
           <div class="form-group">
-            <label for="username"><i></i></label>
+            <label for="username"><i></i>{{ 'authorisation.sign-in.label_username' | translate }}</label>
             <input type="text" name="username" id="username"
                    placeholder="{{'authorisation.sign-in.placeholder_username' | translate}}" [(ngModel)]="username"
                    required>
           </div>
           <div class="form-group">
-            <label for="your_pass"><i></i></label>
+            <label for="your_pass"><i></i>{{ 'authorisation.sign-in.label_password' | translate }}</label>
             <input type="password" name="your_pass" id="your_pass"
                    placeholder="{{'authorisation.sign-in.placeholder_password' | translate}}" [(ngModel)]="password"
                    required>
           </div>
           <div class="form-group form-button">
             <input type="submit" name="sign-in" id="sign-in" class="form-submit"
-                   value="{{'authorisation.sign-in.button_sign_in' | translate}}">
+                   value="{{'authorisation.sign-in.text_sign_in' | translate}}">
           </div>
         </form>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
+
+<imprint></imprint>

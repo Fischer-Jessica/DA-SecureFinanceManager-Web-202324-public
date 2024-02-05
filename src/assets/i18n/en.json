@@ -2,10 +2,11 @@
   "authorisation": {
     "alert_user_not_logged_in": "You are not logged in.",
     "sign-in": {
-      "headline_sign_in": "Sign In",
+      "text_sign_in": "Sign In",
+      "label_username": "Username:",
       "placeholder_username": "Your username",
+      "label_password": "Password:",
       "placeholder_password": "Your password",
-      "button_sign_in": "Sign In",
       "text_create_account": "Sign Up",
       "alert_wrong_credentials": "Incorrect login credentials. Please try again."
     },
