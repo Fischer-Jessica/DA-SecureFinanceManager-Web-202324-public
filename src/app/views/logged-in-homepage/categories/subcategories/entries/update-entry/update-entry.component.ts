@@ -74,6 +74,13 @@ export class UpdateEntryComponent implements OnInit {
       return;
     }
 
+    const date = this.entry.entryTimeOfTransaction.split('T')[0];
+    const time = this.entry.entryTimeOfTransaction.split('T')[1];
+
+    const formattedDateTime = date + ' ' + time;
+
+    this.entry.entryTimeOfTransaction = formattedDateTime;
+
     const user = JSON.parse(storedUser);
 
     if (this.entry.entryId != null) {

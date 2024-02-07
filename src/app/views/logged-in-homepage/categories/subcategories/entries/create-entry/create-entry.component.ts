@@ -42,6 +42,14 @@ export class CreateEntryComponent implements OnInit {
       console.error('User is not logged in');
       return;
     }
+
+    const date = formData.entryTimeOfTransaction.split('T')[0];
+    const time = formData.entryTimeOfTransaction.split('T')[1];
+
+    const formattedDateTime = date + ' ' + time;
+
+    formData.entryTimeOfTransaction = formattedDateTime;
+
     const loggedInUser = JSON.parse(storedUser);
     this.apiService.insertEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, formData).subscribe({
       next: (response) => {
