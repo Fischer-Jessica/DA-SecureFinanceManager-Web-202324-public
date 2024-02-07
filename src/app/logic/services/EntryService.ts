@@ -24,17 +24,6 @@ export class EntryService {
     return this.http.get<Entry[]>(apiUrl, {headers});
   }
 
-  getEntriesByLabelId(username: string, password: string, labelId: number | undefined): Observable<Entry[]> {
-    const apiUrl = AppComponent.apiUrl + `entry-labels/labels/${labelId}/entries`;
-
-    const headers = new HttpHeaders({
-      'API-Version': '1',
-      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
-    });
-
-    return this.http.get<Entry[]>(apiUrl, {headers});
-  }
-
   getEntry(username: string, password: string, subcategoryId: number | undefined, entryId: number | undefined): Observable<Entry> {
     const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries/${entryId}`;
 

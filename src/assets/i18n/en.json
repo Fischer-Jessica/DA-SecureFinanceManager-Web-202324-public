@@ -101,7 +101,8 @@
         "headline_label_entries": "Label Entries",
         "button_return_to_labels": "Back to Labels",
         "text_your_label_entries": "Your entries associated with the label with the following Id:",
-        "text_no_label_entries": "No label entries available."
+        "text_no_label_entries": "No label entries available.",
+        "button_remove_entry": "remove entry"
       }
     },
     "user": {

@@ -1,3 +1,21 @@
 .card {
   color: black;
+  background: #40476D;
+  filter: brightness(3);
+}
+
+.remove {
+  display: inline-block;
+  border: 3px solid;
+  width: 222px;
+  height: 26px;
+  position: absolute;
+  right: 0;
+  top: 88%;
+  transform: translateY(-50%);
+  border-radius: 5px;
+  filter: brightness(1);
+  font-weight: bold;
+  margin-right: 10px;
+  background: red;
 }

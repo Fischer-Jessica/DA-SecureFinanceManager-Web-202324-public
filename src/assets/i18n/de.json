@@ -101,7 +101,8 @@
         "headline_label_entries": "Label-Einträge",
         "button_return_to_labels": "Zurück zu Labels",
         "text_your_label_entries": "Ihre Einträge, die mit dem Label mit folgender Id verbunden sind: ",
-        "text_no_label_entries": "Keine Label-Einträge vorhanden."
+        "text_no_label_entries": "Keine Label-Einträge vorhanden.",
+        "button_remove_entry": "Eintrag entfernen"
       }
     },
     "user": {

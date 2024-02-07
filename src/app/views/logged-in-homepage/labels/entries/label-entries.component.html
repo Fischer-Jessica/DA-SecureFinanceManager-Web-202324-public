@@ -14,6 +14,9 @@
         <h5>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount'| translate }} {{ entry.entryAmount }}</h5>
         <h6>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date'| translate }} {{ entry.entryTimeOfTransaction }}</h6>
       </mat-card-content>
+      <button class="remove"
+              (click)="removeEntry(entry.entryId)">{{ 'logged-in-homepage.labels.label-entries.button_remove_entry' | translate }}
+      </button>
     </mat-card>
   </div>
 </div>
