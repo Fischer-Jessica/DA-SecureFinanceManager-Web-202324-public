@@ -4,6 +4,9 @@ import {LocalStorageService} from "../../../../../logic/LocalStorageService";
 import {EntryService} from "../../../../../logic/services/EntryService";
 import {Entry} from "../../../../../logic/models/Entry";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {LabelService} from "../../../../../logic/services/LabelService";
+import {EntryLabelService} from "../../../../../logic/services/EntryLabelService";
+import {Label} from "../../../../../logic/models/Label";
 
 @Component({
   selector: 'app-entries',
@@ -15,10 +18,13 @@ export class EntriesComponent implements OnInit {
   entries: Entry[] = [];
   protected subcategoryId: number | undefined;
   protected categoryId: number | undefined;
+  protected selectedLabelForEntries: Map<number, Label[]> = new Map<number, Label[]>();
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private apiService: EntryService,
+              private entryService: EntryService,
+              private labelService: LabelService,
+              private entryLabelService: EntryLabelService,
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
               private snackBar: MatSnackBar) {
@@ -45,11 +51,29 @@ export class EntriesComponent implements OnInit {
     this.snackBar.open(message, 'Close', config);
   }
 
+  fetchLabelsOfEntry(username: string, password: string): void {
+    for (const entry of this.entries) {
+      this.entryLabelService.getLabelsByEntryId(username, password, entry.entryId)
+        .subscribe(
+          (result) => {
+            if (entry.entryId != null) {
+              this.selectedLabelForEntries.set(entry.entryId, result);
+            }
+          },
+          (error) => {
+            console.error('Error fetching labels of entry:', error);
+            // Handle error (e.g., display an error message)
+          }
+        );
+    }
+  }
+
   private fetchEntries(subcategoryId: number | undefined, username: string, password: string): void {
-    this.apiService.getEntriesBySubcategoryId(username, password, subcategoryId)
+    this.entryService.getEntriesBySubcategoryId(username, password, subcategoryId)
       .subscribe(
         (result) => {
           this.entries = result;
+          this.fetchLabelsOfEntry(username, password);
         },
         (error) => {
           if (error.status === 404) {
@@ -70,7 +94,7 @@ export class EntriesComponent implements OnInit {
       return;
     }
     const loggedInUser = JSON.parse(storedUser);
-    this.apiService.deleteEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, entryId)
+    this.entryService.deleteEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, entryId)
       .subscribe(
         (result) => {
           this.entries = this.entries.filter((item) => item.entryId !== entryId);
@@ -93,5 +117,9 @@ export class EntriesComponent implements OnInit {
 
   returnToSubcategory() {
     this.router.navigateByUrl(`/logged-in-homepage/subcategories/${(this.categoryId)}`);
+  }
+
+  getLabels(entryId: number | undefined) {
+    return this.selectedLabelForEntries.get(typeof entryId === "number" ? entryId : -1);
   }
 }

@@ -3,6 +3,7 @@ import {Entry} from "../models/Entry";
 import {AppComponent} from "../../app.component";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
+import {Label} from "../models/Label";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,17 @@ export class EntryLabelService {
     });
 
     return this.http.get<Entry[]>(apiUrl, {headers});
+  }
+
+  getLabelsByEntryId(username: string, password: string, entryId: number | undefined): Observable<Label[]> {
+    const apiUrl = AppComponent.apiUrl + `entry-labels/entries/${entryId}/labels`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.get<Label[]>(apiUrl, {headers});
   }
 
   removeLabelFromEntry(username: string, password: string, labelId: number | undefined, entryId: number | undefined): Observable<number> {

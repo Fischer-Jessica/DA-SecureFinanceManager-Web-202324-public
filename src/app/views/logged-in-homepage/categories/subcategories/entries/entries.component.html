@@ -17,6 +17,11 @@
         <h5>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount' | translate }} {{ entry.entryAmount }}</h5>
         <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date' | translate }} {{ entry.entryTimeOfTransaction }}</p>
       </mat-card-content>
+      <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="selected-labels">
+        <div class="label-container" *ngFor="let label of getLabels(entry.entryId)">
+          <p class="selected-label">{{ label.labelName }}</p>
+        </div>
+      </div>
       <button class="edit" (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }}
       </button>
       <button class="delete" (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }}

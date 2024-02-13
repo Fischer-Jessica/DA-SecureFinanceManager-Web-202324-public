@@ -41,3 +41,21 @@
   margin-right: 80px;
   background: green;
 }
+
+.selected-labels {
+  position: absolute;
+  right: 15px;
+  top: 55%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+}
+
+.selected-label {
+  margin-right: 5px;
+  filter: brightness(0.4);
+  background-color: #3586ff;
+  padding: 5px;
+  border-radius: 5px;
+}
