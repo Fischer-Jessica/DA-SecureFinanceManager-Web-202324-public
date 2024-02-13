@@ -28,6 +28,7 @@ import {UserComponent} from "./views/logged-in-homepage/user/user.component";
 import {
   UpdateEntryComponent
 } from "./views/logged-in-homepage/categories/subcategories/entries/update-entry/update-entry.component";
+import {TeamComponent} from "./views/imprint/team/team.component";
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
     ]
   },
   { path: '', redirectTo: 'authentication', pathMatch: 'full' },
+  {path: 'team', component: TeamComponent},
 ];
 
 

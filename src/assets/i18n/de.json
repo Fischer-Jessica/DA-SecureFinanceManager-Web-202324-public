@@ -116,6 +116,21 @@
   },
   "imprint": {
     "text_team": "Team",
-    "text_rights": "alle Rechte vorbehalten"
+    "text_rights": "alle Rechte vorbehalten",
+    "team": {
+      "headline_team": "Team",
+      "headline_project_team": "Projektteam",
+      "text_project_member_founder": "Gründer und Full-Stack-Entwickler",
+      "text_project_member_ios": "iOS-Entwickler",
+      "text_project_member_android": "Android-Entwickler",
+      "headline_website_team": "Webseitenteam",
+      "text_website_member_programmer": "Webseitenentwickler",
+      "text_website_member_designer": "Webseitendesigner",
+      "text_website_member_marketing": "Webseitenvermarkter",
+      "headline_backend_team": "Backend-Team",
+      "text_backend_member_programmer": "Backend-Entwickler",
+      "text_backend_member_database": "Datenbank-Entwickler",
+      "text_backend_member_support": "Support und Sicherheit"
+    }
   }
 }

@@ -1,0 +1,41 @@
+.page-div {
+  background-color: #40476D;
+  padding-top: 10px; /* Neuer Abstand oben */
+}
+
+.page-title {
+  color: white;
+  text-align: center;
+  font-size: 44px;
+  margin-bottom: 10px; /* Neuer Abstand unten */
+}
+
+h2 {
+  font-size: 36px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin-top: 66px; /* Neuer Abstand oben */
+  margin-bottom: 10px; /* Neuer Abstand unten */
+}
+
+img {
+  border-radius: 50%;
+}
+
+.team-members {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+
+.team-member {
+  margin: 50px 50px 10px;
+}
+
+figcaption {
+  color: white;
+  font-size: 20px;
+}

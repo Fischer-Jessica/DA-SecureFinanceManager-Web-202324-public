@@ -59,6 +59,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
   UpdateEntryComponent
 } from './views/logged-in-homepage/categories/subcategories/entries/update-entry/update-entry.component';
+import {TeamComponent} from './views/imprint/team/team.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -89,7 +90,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UpdateLabelComponent,
     UpdateSubcategoryComponent,
     UserComponent,
-    UpdateEntryComponent
+    UpdateEntryComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
