@@ -116,6 +116,7 @@
   },
   "imprint": {
     "text_team": "Team",
+    "text_contact": "Kontakt",
     "text_rights": "alle Rechte vorbehalten",
     "team": {
       "headline_team": "Team",
@@ -131,6 +132,11 @@
       "text_backend_member_programmer": "Backend-Entwickler",
       "text_backend_member_database": "Datenbank-Entwickler",
       "text_backend_member_support": "Support und Sicherheit"
+    },
+    "contact": {
+      "text_business_card": "Visitenkarte",
+      "text_programmer": "Programmierer",
+      "text_education": "Ausbildung"
     }
   }
 }

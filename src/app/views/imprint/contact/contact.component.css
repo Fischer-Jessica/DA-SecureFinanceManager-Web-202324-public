@@ -1,0 +1,17 @@
+.page-div {
+  display: flex; /* Flexbox aktivieren */
+  align-items: center; /* Elemente vertikal zentrieren */
+  justify-content: center; /* Elemente horizontal zentrieren */
+  height: 100vh;
+  background-color: #40476D;
+  padding-top: 10px; /* Neuer Abstand oben */
+}
+
+
+.business-card {
+  font-size: 33px;
+  border-radius: 21px;
+  background-color: #2b2b2b;
+  margin: 10px;
+  width: 66%;
+}

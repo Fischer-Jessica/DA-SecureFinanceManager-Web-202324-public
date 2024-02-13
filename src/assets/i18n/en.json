@@ -116,6 +116,7 @@
   },
   "imprint": {
     "text_team": "Team",
+    "text_contact": "Contact",
     "text_rights": "all rights reserved",
     "team": {
       "headline_team": "Team",
@@ -131,6 +132,11 @@
       "text_backend_member_programmer": "Backend Developer",
       "text_backend_member_database": "Database Developer",
       "text_backend_member_support": "Support and Security"
+    },
+    "contact": {
+      "text_business_card": "BusinessCard",
+      "text_programmer": "Programmer",
+      "text_education": "Education"
     }
   }
 }

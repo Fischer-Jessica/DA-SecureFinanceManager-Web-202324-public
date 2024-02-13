@@ -60,6 +60,7 @@ import {
   UpdateEntryComponent
 } from './views/logged-in-homepage/categories/subcategories/entries/update-entry/update-entry.component';
 import {TeamComponent} from './views/imprint/team/team.component';
+import {ContactComponent} from './views/imprint/contact/contact.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -91,7 +92,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UpdateSubcategoryComponent,
     UserComponent,
     UpdateEntryComponent,
-    TeamComponent
+    TeamComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
