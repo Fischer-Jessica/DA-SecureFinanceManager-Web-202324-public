@@ -7,6 +7,7 @@ import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {LabelService} from "../../../../../logic/services/LabelService";
 import {EntryLabelService} from "../../../../../logic/services/EntryLabelService";
 import {Label} from "../../../../../logic/models/Label";
+import {ColourService} from "../../../../../logic/services/ColourService";
 
 @Component({
   selector: 'app-entries',
@@ -18,6 +19,7 @@ export class EntriesComponent implements OnInit {
   entries: Entry[] = [];
   protected subcategoryId: number | undefined;
   protected categoryId: number | undefined;
+  protected availableLabels: { label: Label; labelId: number; colourHex: string }[] = [];
   protected selectedLabelForEntries: Map<number, Label[]> = new Map<number, Label[]>();
 
   constructor(private route: ActivatedRoute,
@@ -25,6 +27,7 @@ export class EntriesComponent implements OnInit {
               private entryService: EntryService,
               private labelService: LabelService,
               private entryLabelService: EntryLabelService,
+              private colourService: ColourService,
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
               private snackBar: MatSnackBar) {
@@ -39,6 +42,7 @@ export class EntriesComponent implements OnInit {
         this.subcategoryId = +params['subcategoryId'];
       });
       this.fetchEntries(this.subcategoryId, loggedInUser.username, loggedInUser.password);
+      this.fetchLabels(loggedInUser.username, loggedInUser.password);
     }
   }
 
@@ -51,6 +55,38 @@ export class EntriesComponent implements OnInit {
     this.snackBar.open(message, 'Close', config);
   }
 
+  fetchLabels(username: string, password: string): void {
+    this.labelService.getLabels(username, password)
+      .subscribe(
+        (result) => {
+          for (let label of result) {
+            this.colourService.getColour(label.labelColourId).subscribe(
+              (result) => {
+                if (label.labelId != null)
+                  this.availableLabels.push({
+                    label: label,
+                    labelId: label.labelId,
+                    colourHex: result.colourCode
+                  });
+              },
+              (error) => {
+                console.error('Error fetching colour:', error);
+              }
+            );
+          }
+        },
+        (error) => {
+          if (error.status === 404) {
+            this.showAlert('You need to create a label.');
+          } else if (error.status === 401) {
+            this.showAlert('You are not authorized.');
+          } else {
+            this.showAlert('Error fetching labels');
+          }
+        }
+      );
+  }
+
   fetchLabelsOfEntry(username: string, password: string): void {
     for (const entry of this.entries) {
       this.entryLabelService.getLabelsByEntryId(username, password, entry.entryId)
@@ -61,8 +97,13 @@ export class EntriesComponent implements OnInit {
             }
           },
           (error) => {
-            console.error('Error fetching labels of entry:', error);
-            // Handle error (e.g., display an error message)
+            if (error.status === 404) {
+              this.showAlert('The entry with the following ID does not have a label added: ' + entry.entryId);
+            } else if (error.status === 401) {
+              this.showAlert('You are not authorized.');
+            } else {
+              this.showAlert('Error fetching labels');
+            }
           }
         );
     }
@@ -121,5 +162,9 @@ export class EntriesComponent implements OnInit {
 
   getLabels(entryId: number | undefined) {
     return this.selectedLabelForEntries.get(typeof entryId === "number" ? entryId : -1);
+  }
+
+  getLabelColour(labelId: number | undefined) {
+    return this.availableLabels.find(item => item.labelId === labelId)?.colourHex;
   }
 }
