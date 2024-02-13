@@ -15,8 +15,7 @@
   min-height: 100px;
   color: black;
   border: #111111 2px solid;
-  background: #40476D;
-  filter: brightness(3);
+  background: #a6accb;
 }
 
 .dot {
@@ -44,7 +43,6 @@
   top: 77%;
   transform: translateY(-50%);
   border-radius: 5px;
-  filter: brightness(1);
   font-weight: bold;
 }
 

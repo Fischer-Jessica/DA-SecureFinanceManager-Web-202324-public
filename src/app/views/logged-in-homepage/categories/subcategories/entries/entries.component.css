@@ -13,8 +13,7 @@
   color: black;
   margin-bottom: 5px;
   height: 180px;
-  background: #40476D;
-  filter: brightness(3);
+  background: #a6accb;
 }
 
 .delete,
@@ -28,7 +27,6 @@
   top: 88%;
   transform: translateY(-50%);
   border-radius: 5px;
-  filter: brightness(1);
   font-weight: bold;
 }
 
@@ -54,7 +52,6 @@
 
 .selected-label {
   margin-right: 5px;
-  filter: brightness(1);
   padding: 5px;
   border-radius: 5px;
 }
