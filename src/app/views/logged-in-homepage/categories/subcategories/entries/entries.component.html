@@ -20,14 +20,12 @@
 
           <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="chosen-labels">
             <button (click)="toggleDropdown(entry.entryId)" class="dropdown-button">Labels auswählen</button>
-            <div *ngFor="let labelEntry of entries">
-              <div class="dropdown-menu" [id]="'dropdown-' + (labelEntry.entryId || '')" [hidden]="!dropdownOpen[labelEntry.entryId || '']">
-                <div *ngFor="let label of availableLabels" class="dropdown-menu-item">
-                  <label>
-                    <input type="checkbox" [value]="label" (change)="toggleLabel(labelEntry.entryId || '', label)">
-                    {{ label.label.labelName }}
-                  </label>
-                </div>
+            <div class="dropdown-menu" [id]="'dropdown-' + (entry.entryId || '')" [hidden]="!dropdownOpen[entry.entryId || '']">
+              <div *ngFor="let label of availableLabels" class="dropdown-menu-item">
+                <label>
+                  <input type="checkbox" [value]="label" (change)="toggleLabel(entry.entryId || '', label)">
+                  {{ label.label.labelName }}
+                </label>
               </div>
             </div>
           </div>

@@ -38,9 +38,15 @@ export class EntriesComponent implements OnInit {
   // Methode zum Umschalten des Dropdown-Status
   toggleDropdown(entryId: number | undefined) {
     if (entryId) {
+      // Falls der Status für diesen Eintrag noch nicht vorhanden ist, setzen Sie ihn auf false (geschlossen)
+      if (!this.dropdownOpen.hasOwnProperty(entryId)) {
+        this.dropdownOpen[entryId] = false;
+      }
+      // Umschalten des Dropdown-Status für diesen Eintrag
       this.dropdownOpen[entryId] = !this.dropdownOpen[entryId];
     }
   }
+
 
 
   // Methode zum Umschalten eines Labels für einen Eintrag
