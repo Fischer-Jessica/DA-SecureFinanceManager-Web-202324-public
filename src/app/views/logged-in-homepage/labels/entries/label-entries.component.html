@@ -6,17 +6,25 @@
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
+      <div class="mat-card-content">
       <mat-card-header>
         <mat-card-title>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_name'| translate }} {{ entry.entryName }}</mat-card-title>
         <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_description'| translate }} {{ entry.entryDescription }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount'| translate }} {{ entry.entryAmount }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <h5>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount'| translate }} {{ entry.entryAmount }}</h5>
-        <h6>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date'| translate }} {{ entry.entryTimeOfTransaction }}</h6>
+        <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date' | translate }} {{ entry.entryTimeOfTransaction }}</p>
+        <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_creation_date' | translate }} {{ entry.entryCreationTime }}</p>
+        <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_attachment' | translate }} {{ entry.entryAttachment }}</p>
       </mat-card-content>
-      <button class="remove"
-              (click)="removeEntry(entry.entryId)">{{ 'logged-in-homepage.labels.label-entries.button_remove_entry' | translate }}
-      </button>
+      <div class="right-column">
+        <div class="elements-right-column">
+          <button class="remove"
+                  (click)="removeEntry(entry.entryId)">{{ 'logged-in-homepage.labels.label-entries.button_remove_entry' | translate }}
+          </button>
+        </div>
+      </div>
+      </div>
     </mat-card>
   </div>
 </div>
