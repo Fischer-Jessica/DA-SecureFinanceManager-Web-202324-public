@@ -12,8 +12,20 @@
   border: #111111 2px solid;
   color: black;
   margin-bottom: 5px;
-  height: 180px;
+  height: 156px;
   background: #a6accb;
+}
+
+mat-card-subtitle {
+  margin-top: 22px;
+  font-size: 19px;
+  color: black;
+}
+
+mat-card-content {
+  margin-top: 17px;
+  font-size: 17px;
+  color: black;
 }
 
 .delete,
@@ -54,4 +66,10 @@
   margin-right: 5px;
   padding: 5px;
   border-radius: 5px;
+}
+
+.mat-card-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; /* Abstand zwischen den Spalten */
 }

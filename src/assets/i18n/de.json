@@ -71,6 +71,8 @@
           "label_entry_description": "Beschreibung des Eintrags:",
           "label_entry_amount": "Wert des Eintrags:",
           "label_entry_date": "Datum des Eintrags:",
+          "label_entry_creation_date": "Erstellungsdatum des Eintrags:",
+          "label_entry_attachment": "Anhang des Eintrags:",
           "create-entry": {
             "label_entry_attachment": "Anhang des Eintrags:"
           },

@@ -71,6 +71,8 @@
           "label_entry_description": "Entry Description:",
           "label_entry_amount": "Entry Value:",
           "label_entry_date": "Entry Date:",
+          "label_entry_creation_date": "Entry Creation Date:",
+          "label_entry_attachment": "Entry Attachment:",
           "create-entry": {
             "label_entry_attachment": "Entry Attachment:"
           },

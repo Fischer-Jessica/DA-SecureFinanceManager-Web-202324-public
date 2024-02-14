@@ -9,24 +9,34 @@
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
+      <div class="mat-card-content">
       <mat-card-header>
         <mat-card-title>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_name' | translate }} {{ entry.entryName }}</mat-card-title>
         <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_description' | translate }} {{ entry.entryDescription }}</mat-card-subtitle>
+        <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount' | translate }} {{ entry.entryAmount }}
+          €
+        </mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <h5>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount' | translate }} {{ entry.entryAmount }}</h5>
         <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date' | translate }} {{ entry.entryTimeOfTransaction }}</p>
+        <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_creation_date' | translate }} {{ entry.entryCreationTime }}</p>
+        <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_attachment' | translate }} {{ entry.entryAttachment }}</p>
       </mat-card-content>
+        <div>
       <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="selected-labels">
         <div class="label-container" *ngFor="let label of getLabels(entry.entryId)">
           <p class="selected-label"
              [style.background-color]="'#' + getLabelColour(label.labelId)">{{ label.labelName }}</p>
         </div>
       </div>
-      <button class="edit" (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }}
-      </button>
-      <button class="delete" (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }}
-      </button>
+          <button class="edit"
+                  (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }}
+          </button>
+          <button class="delete"
+                  (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }}
+          </button>
+        </div>
+      </div>
     </mat-card>
   </div>
 </div>
