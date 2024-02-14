@@ -28,6 +28,17 @@ mat-card-content {
   color: black;
 }
 
+.right-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Zentriert die Elemente vertikal */
+  align-items: center;
+}
+
+.elements-right-column {
+  padding: 25px;
+}
+
 .delete,
 .edit {
   display: inline-block;
@@ -36,7 +47,6 @@ mat-card-content {
   height: 26px;
   position: absolute;
   right: 0;
-  top: 88%;
   transform: translateY(-50%);
   border-radius: 5px;
   font-weight: bold;
@@ -54,16 +64,16 @@ mat-card-content {
 
 .selected-labels {
   position: absolute;
-  right: 10px;
-  top: 55%;
+  right: 0;
   transform: translateY(-50%);
-  font-weight: bold;
   display: flex;
+  font-weight: bold;
   flex-direction: row;
 }
 
 .selected-label {
-  margin-right: 5px;
+  border: 2px solid;
+  margin-right: 10px;
   padding: 5px;
   border-radius: 5px;
 }
@@ -76,10 +86,12 @@ mat-card-content {
 
 .dropdown-button {
   position: absolute;
-  right: 10px;
+  background-color: #3586ff;
+  border: #111111 2px solid;
   transform: translateY(-50%);
+  right: 10px;
+  border-radius: 5px;
   font-weight: bold;
-  top: 15%;
   z-index: 9999; /* Stellt sicher, dass der Button über anderen Elementen liegt */
 }
 
@@ -89,9 +101,10 @@ mat-card-content {
   right: 15px; /* Ändere die Positionierung auf die gleiche Weise wie die anderen Elemente */
   top: 48%; /* Verwende die gleiche vertikale Position wie bei .selected-labels */
   transform: translateY(-50%); /* Zentriere das Menü vertikal */
-  background-color: white;
-  border: 1px solid #ccc;
+  background-color: #cbcfe1;
+  border: 1px solid;
   max-height: 200px;
+  border-radius: 5px;
   overflow-y: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
