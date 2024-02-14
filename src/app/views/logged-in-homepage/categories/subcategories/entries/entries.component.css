@@ -73,3 +73,31 @@ mat-card-content {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px; /* Abstand zwischen den Spalten */
 }
+
+.dropdown-button {
+  position: absolute;
+  right: 10px;
+  transform: translateY(-50%);
+  font-weight: bold;
+  top: 15%;
+  z-index: 9999; /* Stellt sicher, dass der Button über anderen Elementen liegt */
+}
+
+.dropdown-menu {
+  position: absolute;
+  font-weight: bold; /* Optional, wenn du den Text fett anzeigen möchtest */
+  right: 15px; /* Ändere die Positionierung auf die gleiche Weise wie die anderen Elemente */
+  top: 48%; /* Verwende die gleiche vertikale Position wie bei .selected-labels */
+  transform: translateY(-50%); /* Zentriere das Menü vertikal */
+  background-color: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 9998;
+}
+
+.dropdown-menu-item {
+  margin-bottom: 5px;
+}

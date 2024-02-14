@@ -1,40 +1,46 @@
 <h2>{{ 'logged-in-homepage.categories.subcategories.entries.headline_entries' | translate }}</h2>
-<button mat-raised-button color="primary"
-        (click)="addEntry()">{{ 'logged-in-homepage.categories.subcategories.entries.button_create_entry' | translate }}
-</button>
-<button class="go-back" mat-raised-button color="warn" routerLink='/logged-in-homepage/categories'
-        (click)="returnToSubcategory()">{{ 'logged-in-homepage.categories.subcategories.entries.button_return_subcategories' | translate }}
-</button>
+<button mat-raised-button color="primary" (click)="addEntry()">{{ 'logged-in-homepage.categories.subcategories.entries.button_create_entry' | translate }}</button>
+<button class="go-back" mat-raised-button color="warn" routerLink='/logged-in-homepage/categories' (click)="returnToSubcategory()">{{ 'logged-in-homepage.categories.subcategories.entries.button_return_subcategories' | translate }}</button>
 <p>{{ 'logged-in-homepage.categories.subcategories.entries.text_your_entries' | translate }} {{ subcategoryId }}</p>
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
       <div class="mat-card-content">
-      <mat-card-header>
-        <mat-card-title>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_name' | translate }} {{ entry.entryName }}</mat-card-title>
-        <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_description' | translate }} {{ entry.entryDescription }}</mat-card-subtitle>
-        <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount' | translate }} {{ entry.entryAmount }}
-          €
-        </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date' | translate }} {{ entry.entryTimeOfTransaction }}</p>
-        <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_creation_date' | translate }} {{ entry.entryCreationTime }}</p>
-        <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_attachment' | translate }} {{ entry.entryAttachment }}</p>
-      </mat-card-content>
+        <mat-card-header>
+          <mat-card-title>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_name' | translate }} {{ entry.entryName }}</mat-card-title>
+          <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_description' | translate }} {{ entry.entryDescription }}</mat-card-subtitle>
+          <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount' | translate }} {{ entry.entryAmount }} €</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date' | translate }} {{ entry.entryTimeOfTransaction }}</p>
+          <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_creation_date' | translate }} {{ entry.entryCreationTime }}</p>
+          <p>{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_attachment' | translate }} {{ entry.entryAttachment }}</p>
+        </mat-card-content>
         <div>
-      <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="selected-labels">
-        <div class="label-container" *ngFor="let label of getLabels(entry.entryId)">
-          <p class="selected-label"
-             [style.background-color]="'#' + getLabelColour(label.labelId)">{{ label.labelName }}</p>
-        </div>
-      </div>
-          <button class="edit"
-                  (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }}
-          </button>
-          <button class="delete"
-                  (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }}
-          </button>
+
+          <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="chosen-labels">
+            <button (click)="toggleDropdown(entry.entryId)" class="dropdown-button">Labels auswählen</button>
+            <div *ngFor="let labelEntry of entries">
+              <div class="dropdown-menu" [id]="'dropdown-' + (labelEntry.entryId || '')" [hidden]="!dropdownOpen[labelEntry.entryId || '']">
+                <div *ngFor="let label of availableLabels" class="dropdown-menu-item">
+                  <label>
+                    <input type="checkbox" [value]="label" (change)="toggleLabel(labelEntry.entryId || '', label)">
+                    {{ label.label.labelName }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="selected-labels">
+            <div class="label-container" *ngFor="let label of getLabels(entry.entryId)">
+              <p class="selected-label"
+                 [style.background-color]="'#' + getLabelColour(label.labelId)">{{ label.labelName }}</p>
+            </div>
+          </div>
+
+          <button class="edit" (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }} </button>
+          <button class="delete" (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }} </button>
         </div>
       </div>
     </mat-card>

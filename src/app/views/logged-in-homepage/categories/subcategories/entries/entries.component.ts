@@ -21,6 +21,8 @@ export class EntriesComponent implements OnInit {
   protected categoryId: number | undefined;
   protected availableLabels: { label: Label; labelId: number; colourHex: string }[] = [];
   protected selectedLabelForEntries: Map<number, Label[]> = new Map<number, Label[]>();
+  dropdownOpen: { [entryId: string]: boolean } = {}; // Objekt zur Verfolgung des Dropdown-Status für jeden Eintrag
+  selectedLabels: { [entryId: string]: any[] } = {}; // Objekt zur Verfolgung der ausgewählten Labels für jeden Eintrag
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -31,6 +33,26 @@ export class EntriesComponent implements OnInit {
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
               private snackBar: MatSnackBar) {
+  }
+
+  // Methode zum Umschalten des Dropdown-Status
+  toggleDropdown(entryId: number | undefined) {
+    if (entryId) {
+      this.dropdownOpen[entryId] = !this.dropdownOpen[entryId];
+    }
+  }
+
+
+  // Methode zum Umschalten eines Labels für einen Eintrag
+  toggleLabel(entryId: number | string, label: any) {
+    const index = this.selectedLabels[entryId].findIndex((l: any) => l.labelId === label.labelId);
+    if (index !== -1) {
+      // Wenn das Label bereits ausgewählt ist, entferne es aus der Liste der ausgewählten Labels
+      this.selectedLabels[entryId].splice(index, 1);
+    } else {
+      // Andernfalls füge es hinzu
+      this.selectedLabels[entryId].push(label);
+    }
   }
 
   ngOnInit(): void {
