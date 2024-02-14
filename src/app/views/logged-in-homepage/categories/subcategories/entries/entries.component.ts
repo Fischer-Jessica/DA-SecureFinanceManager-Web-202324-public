@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {LocalStorageService} from "../../../../../logic/LocalStorageService";
 import {EntryService} from "../../../../../logic/services/EntryService";
 import {Entry} from "../../../../../logic/models/Entry";
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {MatSnackBar} from "@angular/material/snack-bar";
 import {LabelService} from "../../../../../logic/services/LabelService";
 import {EntryLabelService} from "../../../../../logic/services/EntryLabelService";
 import {Label} from "../../../../../logic/models/Label";
@@ -22,7 +22,6 @@ export class EntriesComponent implements OnInit {
   protected availableLabels: { label: Label; labelId: number; colourHex: string }[] = [];
   protected selectedLabelForEntries: Map<number, Label[]> = new Map<number, Label[]>();
   dropdownOpen: { [entryId: string]: boolean } = {}; // Objekt zur Verfolgung des Dropdown-Status für jeden Eintrag
-  selectedLabels: { [entryId: string]: any[] } = {}; // Objekt zur Verfolgung der ausgewählten Labels für jeden Eintrag
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -33,32 +32,6 @@ export class EntriesComponent implements OnInit {
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
               private snackBar: MatSnackBar) {
-  }
-
-  // Methode zum Umschalten des Dropdown-Status
-  toggleDropdown(entryId: number | undefined) {
-    if (entryId) {
-      // Falls der Status für diesen Eintrag noch nicht vorhanden ist, setzen Sie ihn auf false (geschlossen)
-      if (!this.dropdownOpen.hasOwnProperty(entryId)) {
-        this.dropdownOpen[entryId] = false;
-      }
-      // Umschalten des Dropdown-Status für diesen Eintrag
-      this.dropdownOpen[entryId] = !this.dropdownOpen[entryId];
-    }
-  }
-
-
-
-  // Methode zum Umschalten eines Labels für einen Eintrag
-  toggleLabel(entryId: number | string, label: any) {
-    const index = this.selectedLabels[entryId].findIndex((l: any) => l.labelId === label.labelId);
-    if (index !== -1) {
-      // Wenn das Label bereits ausgewählt ist, entferne es aus der Liste der ausgewählten Labels
-      this.selectedLabels[entryId].splice(index, 1);
-    } else {
-      // Andernfalls füge es hinzu
-      this.selectedLabels[entryId].push(label);
-    }
   }
 
   ngOnInit(): void {
@@ -72,15 +45,6 @@ export class EntriesComponent implements OnInit {
       this.fetchEntries(this.subcategoryId, loggedInUser.username, loggedInUser.password);
       this.fetchLabels(loggedInUser.username, loggedInUser.password);
     }
-  }
-
-  showAlert(message: string): void {
-    const config = new MatSnackBarConfig();
-    config.duration = 10000; // Anzeigedauer des Alerts in Millisekunden
-    config.horizontalPosition = 'center';
-    config.verticalPosition = 'top'; // Positionierung oben auf der Website
-
-    this.snackBar.open(message, 'Close', config);
   }
 
   fetchLabels(username: string, password: string): void {
@@ -101,16 +65,10 @@ export class EntriesComponent implements OnInit {
                 console.error('Error fetching colour:', error);
               }
             );
-          }
-        },
+          }},
         (error) => {
-          if (error.status === 404) {
-            this.showAlert('You need to create a label.');
-          } else if (error.status === 401) {
-            this.showAlert('You are not authorized.');
-          } else {
-            this.showAlert('Error fetching labels');
-          }
+          console.error('Error fetching labels:', error);
+          // Handle error (e.g., display an error message)
         }
       );
   }
@@ -125,17 +83,119 @@ export class EntriesComponent implements OnInit {
             }
           },
           (error) => {
-            if (error.status === 404) {
-              this.showAlert('The entry with the following ID does not have a label added: ' + entry.entryId);
-            } else if (error.status === 401) {
-              this.showAlert('You are not authorized.');
-            } else {
-              this.showAlert('Error fetching labels');
-            }
+            console.error('Error fetching labels for entry:', error);
+            // Handle error (e.g., display an error message)
           }
         );
     }
   }
+
+  toggleDropdown(entryId: number | undefined) {
+    if (entryId) {
+      if (!this.dropdownOpen.hasOwnProperty(entryId)) {
+        this.dropdownOpen[entryId] = false;
+      }
+      this.dropdownOpen[entryId] = !this.dropdownOpen[entryId];
+    }
+  }
+
+  isLabelSelected(entryId: number | undefined, labelId: number): boolean {
+    if (entryId) {
+      const labelsForEntry = this.selectedLabelForEntries.get(entryId);
+      if (labelsForEntry) {
+        return labelsForEntry.some(label => label.labelId === labelId);
+      }
+    }
+      return false;
+  }
+
+
+  toggleLabel(entryId: number | undefined, label: any) {
+    if (entryId) {
+      const labelsForEntry = this.selectedLabelForEntries.get(entryId) || [];
+
+      const index = labelsForEntry.findIndex((l: any) => l.labelId === label.labelId);
+
+      if (index !== -1) {
+        const updatedLabels = [...labelsForEntry.slice(0, index), ...labelsForEntry.slice(index + 1)];
+        this.removeLabelFromEntry(entryId, label.labelId);
+
+      } else {
+        const updatedLabels = [...labelsForEntry, label];
+        this.addLabelToEntry(entryId, label.labelId);
+      }
+    }
+  }
+
+  addLabelToEntry(entryId: number, labelId: number) {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+
+    if (storedUser) {
+      const loggedInUser = JSON.parse(storedUser);
+
+      this.entryLabelService.addLabelToEntry(loggedInUser.username, loggedInUser.password, entryId, labelId)
+        .subscribe(
+          (result) => {
+            this.cdr.detectChanges(); // Trigger change detection
+
+
+
+            if (this.selectedLabelForEntries.has(entryId)) {
+              const labelList = this.selectedLabelForEntries.get(entryId);
+              if (labelList) {
+                const availableLabel = this.availableLabels.find(availableLabel => availableLabel.labelId === labelId);
+                if (availableLabel) {
+                  labelList.push(availableLabel.label);
+                }
+              }
+            } else {
+              const availableLabel = this.availableLabels.find(availableLabel => availableLabel.labelId === labelId);
+              if (availableLabel) {
+                this.selectedLabelForEntries.set(entryId, [availableLabel.label]);
+              }
+            }
+
+
+
+          },
+          (error) => {
+            console.error('Error adding label to entry:', error);
+          }
+        );
+    } else {
+      console.error('No user logged in');
+    }
+  }
+
+
+  removeLabelFromEntry(entryId: number, labelId: number) {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+
+    if (storedUser) {
+      const loggedInUser = JSON.parse(storedUser);
+
+      const labelsForEntry = this.selectedLabelForEntries.get(entryId) || [];
+      const updatedLabels = labelsForEntry.filter(label => label.labelId !== labelId);
+
+      this.selectedLabelForEntries.set(entryId, updatedLabels);
+
+      this.entryLabelService.removeLabelFromEntry(loggedInUser.username, loggedInUser.password, labelId, entryId)
+        .subscribe(
+          (result) => {
+            this.cdr.detectChanges(); // Trigger change detection
+          },
+          (error) => {
+            console.error('Error removing label from entry:', error);
+            // Zurücksetzen von this.selectedLabelForEntries auf den vorherigen Stand im Fehlerfall
+            this.selectedLabelForEntries.set(entryId, labelsForEntry);
+            // Handle error (e.g., display an error message)
+          }
+        );
+    } else {
+      console.error('No user logged in');
+    }
+  }
+
 
   private fetchEntries(subcategoryId: number | undefined, username: string, password: string): void {
     this.entryService.getEntriesBySubcategoryId(username, password, subcategoryId)
@@ -145,13 +205,8 @@ export class EntriesComponent implements OnInit {
           this.fetchLabelsOfEntry(username, password);
         },
         (error) => {
-          if (error.status === 404) {
-            this.showAlert('You need to create an entry.');
-          } else if (error.status === 401) {
-            this.showAlert('You are not authorized.');
-          } else {
-            this.showAlert('Error fetching entries');
-          }
+          console.error('Error fetching entries:', error);
+          // Handle error (e.g., display an error message)
         }
       );
   }

@@ -18,15 +18,13 @@
         </mat-card-content>
         <div>
 
-          <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="chosen-labels">
-            <button (click)="toggleDropdown(entry.entryId)" class="dropdown-button">Labels auswählen</button>
-            <div class="dropdown-menu" [id]="'dropdown-' + (entry.entryId || '')" [hidden]="!dropdownOpen[entry.entryId || '']">
-              <div *ngFor="let label of availableLabels" class="dropdown-menu-item">
-                <label>
-                  <input type="checkbox" [value]="label" (change)="toggleLabel(entry.entryId || '', label)">
-                  {{ label.label.labelName }}
-                </label>
-              </div>
+          <button (click)="toggleDropdown(entry.entryId)" class="dropdown-button">Labels auswählen</button>
+          <div class="dropdown-menu" [id]="'dropdown-' + (entry.entryId)" [hidden]="!dropdownOpen[entry.entryId || '']">
+            <div *ngFor="let label of availableLabels" class="dropdown-menu-item">
+              <label>
+                <input type="checkbox" [checked]="isLabelSelected(entry.entryId, label.labelId)" (change)="toggleLabel(entry.entryId, label)">
+                {{ label.label.labelName }}
+              </label>
             </div>
           </div>
 
