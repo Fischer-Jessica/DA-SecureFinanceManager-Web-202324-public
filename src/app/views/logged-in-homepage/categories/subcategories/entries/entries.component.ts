@@ -51,21 +51,29 @@ export class EntriesComponent implements OnInit {
     this.labelService.getLabels(username, password)
       .subscribe(
         (result) => {
+          this.availableLabels = []; // Clear existing data
           for (let label of result) {
-            this.colourService.getColour(label.labelColourId).subscribe(
-              (result) => {
-                if (label.labelId != null)
+            const labelId = label.labelId ?? 0; // Set labelId to 0 if it's undefined
+            if (labelId !== 0) { // Check if labelId is not 0
+              this.colourService.getColour(label.labelColourId).subscribe(
+                (result) => {
                   this.availableLabels.push({
                     label: label,
-                    labelId: label.labelId,
+                    labelId: labelId, // Use labelId here
                     colourHex: result.colourCode
                   });
-              },
-              (error) => {
-                console.error('Error fetching colour:', error);
-              }
-            );
-          }},
+                  // Sort availableLabels after each new entry
+                  this.availableLabels.sort((a, b) => {
+                    return a.labelId - b.labelId;
+                  });
+                },
+                (error) => {
+                  console.error('Error fetching colour:', error);
+                }
+              );
+            }
+          }
+        },
         (error) => {
           console.error('Error fetching labels:', error);
           // Handle error (e.g., display an error message)
@@ -75,20 +83,30 @@ export class EntriesComponent implements OnInit {
 
   fetchLabelsOfEntry(username: string, password: string): void {
     for (const entry of this.entries) {
-      this.entryLabelService.getLabelsByEntryId(username, password, entry.entryId)
-        .subscribe(
-          (result) => {
-            if (entry.entryId != null) {
-              this.selectedLabelForEntries.set(entry.entryId, result);
+      if (entry.entryId !== null && entry.entryId !== undefined) { // Check if entryId is not null or undefined
+        this.entryLabelService.getLabelsByEntryId(username, password, entry.entryId)
+          .subscribe(
+            (result) => {
+              // Sort labels after receiving them
+              result.sort((a, b) => {
+                if (a.labelId !== undefined && b.labelId !== undefined) {
+                  return a.labelId - b.labelId;
+                }
+                return 0;
+              });
+              if (entry.entryId != null) {
+                this.selectedLabelForEntries.set(entry.entryId, result);
+              }
+            },
+            (error) => {
+              console.error('Error fetching labels for entry:', error);
+              // Handle error (e.g., display an error message)
             }
-          },
-          (error) => {
-            console.error('Error fetching labels for entry:', error);
-            // Handle error (e.g., display an error message)
-          }
-        );
+          );
+      }
     }
   }
+
 
   toggleDropdown(entryId: number | undefined) {
     if (entryId) {
@@ -202,6 +220,13 @@ export class EntriesComponent implements OnInit {
       .subscribe(
         (result) => {
           this.entries = result;
+          // Sort entries after receiving them
+          this.entries.sort((a, b) => {
+            if (a.entryId !== undefined && b.entryId !== undefined) {
+              return a.entryId - b.entryId;
+            }
+            return 0;
+          });
           this.fetchLabelsOfEntry(username, password);
         },
         (error) => {

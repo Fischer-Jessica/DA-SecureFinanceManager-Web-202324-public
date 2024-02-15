@@ -53,18 +53,27 @@ export class CategoriesComponent implements OnInit {
         (result) => {
           this.categoriesData = []; // Clear existing data
           for (let category of result) {
-            this.colourService.getColourHex(category.categoryColourId).subscribe(
-              (result) => {
-                this.categoriesData.push({
-                  category: category,
-                  colourHex: result,
-                });
-              },
-              (error) => {
-                console.error('Error fetching colour:', error);
-                // Handle error (e.g., display an error message)
-              }
-            );
+            if (category.categoryId !== null) { // Check if categoryId is not null
+              this.colourService.getColourHex(category.categoryColourId).subscribe(
+                (result) => {
+                  this.categoriesData.push({
+                    category: category,
+                    colourHex: result,
+                  });
+                  // Sort categoriesData after each new entry
+                  this.categoriesData.sort((a, b) => {
+                    if (a.category.categoryId !== undefined && b.category.categoryId !== undefined) {
+                      return a.category.categoryId - b.category.categoryId;
+                    }
+                    return 0;
+                  });
+                },
+                (error) => {
+                  console.error('Error fetching colour:', error);
+                  // Handle error (e.g., display an error message)
+                }
+              );
+            }
           }
           this.cdr.detectChanges(); // Trigger change detection
         },

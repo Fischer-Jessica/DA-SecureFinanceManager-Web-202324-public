@@ -45,12 +45,20 @@ export class LabelsComponent implements OnInit {
     this.apiService.getLabels(username, password)
       .subscribe(
         (result) => {
+          this.labelsData = []; // Clear existing data
           for (let label of result) {
             this.colourService.getColourHex(label.labelColourId).subscribe(
               (colourResult) => {
                 this.labelsData.push({
                   label: label,
                   colourHex: colourResult
+                });
+                // Sort labelsData after each new entry
+                this.labelsData.sort((a, b) => {
+                  if (a.label.labelId !== undefined && b.label.labelId !== undefined) {
+                    return a.label.labelId - b.label.labelId;
+                  }
+                  return 0;
                 });
               },
               (error) => {

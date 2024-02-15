@@ -48,19 +48,29 @@ export class SubcategoriesComponent implements OnInit {
     this.apiService.getSubcategories(username, password, categoryId)
       .subscribe(
         (result) => {
+          this.subcategoriesData = []; // Clear existing data
           for (let subcategory of result) {
-            this.colourService.getColourHex(subcategory.subcategoryColourId).subscribe(
-              (result) => {
-                this.subcategoriesData.push({
-                  subcategory: subcategory,
-                  colourHex: result
-                });
-              },
-              (error) => {
-                console.error('Error fetching colour:', error);
-                // Handle error (e.g., display an error message)
-              }
-            );
+            if (subcategory.subcategoryId !== null && subcategory.subcategoryId !== undefined) { // Check if subcategoryId is not null or undefined
+              this.colourService.getColourHex(subcategory.subcategoryColourId).subscribe(
+                (result) => {
+                  this.subcategoriesData.push({
+                    subcategory: subcategory,
+                    colourHex: result
+                  });
+                  // Sort subcategoriesData after each new entry
+                  this.subcategoriesData.sort((a, b) => {
+                    if (a.subcategory.subcategoryId !== undefined && b.subcategory.subcategoryId !== undefined) {
+                      return a.subcategory.subcategoryId - b.subcategory.subcategoryId;
+                    }
+                    return 0;
+                  });
+                },
+                (error) => {
+                  console.error('Error fetching colour:', error);
+                  // Handle error (e.g., display an error message)
+                }
+              );
+            }
           }
         },
         (error) => {
