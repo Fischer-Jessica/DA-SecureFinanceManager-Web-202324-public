@@ -1,5 +1,4 @@
 <form #userForm="ngForm" class="user-form" (ngSubmit)="onSubmit(userForm)">
-  <br>
   <div class="form-group">
     <label for="username" class="form-label">{{ 'logged-in-homepage.user.label_username' | translate }}</label>
     <input type="text" id="username" name="username" [(ngModel)]="user.username" required class="form-input">
@@ -28,6 +27,9 @@
   <div class="form-actions">
     <button type="submit" mat-raised-button
             color="primary">{{ 'logged-in-homepage.user.button_update_user' | translate }}
+    </button>
+    <button mat-raised-button color="warn"
+            (click)="deleteUser()">{{ 'logged-in-homepage.user.button_delete_user' | translate }}
     </button>
   </div>
 </form>

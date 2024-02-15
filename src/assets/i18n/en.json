@@ -113,7 +113,8 @@
       "label_email": "Email Address:",
       "label_first_name": "First Name:",
       "label_last_name": "Last Name:",
-      "button_update_user": "Update User Data"
+      "button_update_user": "Update User Data",
+      "button_delete_user": "Delete User"
     }
   },
   "imprint": {

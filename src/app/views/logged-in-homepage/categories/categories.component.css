@@ -9,6 +9,7 @@
 .category-item {
   flex: 1 1 calc(33.33% - 16px);
   max-width: calc(33.33% - 16px);
+  height: 100px;
 }
 
 .card {

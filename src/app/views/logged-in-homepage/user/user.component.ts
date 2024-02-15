@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {User} from "../../../logic/models/User";
 import {UserService} from "../../../logic/services/UserService";
 import {LocalStorageService} from "../../../logic/LocalStorageService";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user',
@@ -10,6 +11,7 @@ import {LocalStorageService} from "../../../logic/LocalStorageService";
 })
 export class UserComponent implements OnInit {
   constructor(private userService: UserService,
+              private router: Router,
               private localStorageService: LocalStorageService) {
   }
 
@@ -49,11 +51,30 @@ export class UserComponent implements OnInit {
       this.user
     ).subscribe(
       updatedUser => {
-        // Aktualisiere die loggedInUser-Daten im Local Storage
+        updatedUser.password = this.user.password;
         this.localStorageService.setItem('loggedInUser', JSON.stringify(updatedUser));
-        // Keine Notwendigkeit, den UserService zu aktualisieren, da wir direkt auf den LocalStorage zugreifen
       },
       error => console.error('Error updating user:', error)
+    );
+  }
+
+  deleteUser() {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
+      console.error('User is not logged in');
+      return;
+    }
+
+    const loggedInUser: User = JSON.parse(storedUser);
+    this.userService.deleteUser(
+      loggedInUser.username,
+      loggedInUser.password
+    ).subscribe(
+      () => {
+        this.localStorageService.removeItem('loggedInUser');
+        this.router.navigate(['/']);
+      },
+      error => console.error('Error deleting user:', error)
     );
   }
 }

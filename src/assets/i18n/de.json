@@ -113,7 +113,8 @@
       "label_email": "E-Mail-Adresse:",
       "label_first_name": "Vorname:",
       "label_last_name": "Nachname:",
-      "button_update_user": "Benutzerdaten aktualisieren"
+      "button_update_user": "Benutzerdaten aktualisieren",
+      "button_delete_user": "Benutzer löschen"
     }
   },
   "imprint": {

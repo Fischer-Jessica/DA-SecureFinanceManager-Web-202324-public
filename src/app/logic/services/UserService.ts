@@ -63,4 +63,15 @@ export class UserService {
       })
     );
   }
+
+  deleteUser(username: string, password: string): Observable<number> {
+    const url = AppComponent.apiUrl + `users`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.delete<number>(url, {headers});
+  }
 }
