@@ -107,7 +107,7 @@
   }
 }
 
-@media screen and (max-height: 600px) {
+@media screen and (max-height: 700px) {
   .footer {
     margin-top: 100px;
   }

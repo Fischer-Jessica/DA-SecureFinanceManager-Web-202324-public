@@ -4,40 +4,29 @@
       <div class="register-form">
         <h1 class="form-title" translate="authorisation.register.headline_sign_up"></h1>
         <form (ngSubmit)="insertNewUserInAPI()" id="register-form">
-          <div class="form-group">
-            <label for="firstName"></label>
+
+        <label for="firstName"></label>
             <input type="text" name="firstName" id="firstName"
                    placeholder="{{'authorisation.register.placeholder_first_name' | translate}}"
                    [(ngModel)]="newUser.firstName" required>
-          </div>
-          <div class="form-group">
             <label for="lastName"></label>
             <input type="text" name="lastName" id="lastName"
                    placeholder="{{'authorisation.register.placeholder_last_name' | translate}}"
                    [(ngModel)]="newUser.lastName" required>
-          </div>
-          <div class="form-group">
             <label for="username"><i></i></label>
             <input type="text" name="username" id="username"
                    placeholder="{{'authorisation.register.placeholder_username' | translate}}"
                    [(ngModel)]="newUser.username" required>
-          </div>
-          <div class="form-group">
             <label for="email"><i></i></label>
             <input type="email" name="email" id="email"
                    placeholder="{{'authorisation.register.placeholder_email' | translate}}"
                    [(ngModel)]="newUser.emailAddress" required>
-          </div>
-          <div class="form-group">
             <label for="password"><i></i></label>
             <input type="password" name="pass" id="password"
                    placeholder="{{'authorisation.register.placeholder_password' | translate}}"
                    [(ngModel)]="newUser.password" required>
-          </div>
-          <div class="form-group">
             <input type="submit" name="register" id="register"
                    value="{{'authorisation.register.button_sign_up' | translate}}">
-          </div>
         </form>
       </div>
       <div class="login-div">
