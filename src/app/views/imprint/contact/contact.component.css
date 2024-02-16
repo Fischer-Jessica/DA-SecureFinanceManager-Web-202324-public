@@ -1,17 +1,29 @@
 .page-div {
-  display: flex; /* Flexbox aktivieren */
-  align-items: center; /* Elemente vertikal zentrieren */
-  justify-content: center; /* Elemente horizontal zentrieren */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 100vh;
   background-color: #40476D;
-  padding-top: 10px; /* Neuer Abstand oben */
+  padding-top: 1.5rem; /* Statt px eine relative Größe verwenden */
 }
 
-
 .business-card {
-  font-size: 33px;
-  border-radius: 21px;
+  font-size: 1.8vw;
+  border-radius: 2.5vw; /* Reduziere den Border-Radius entsprechend */
   background-color: #2b2b2b;
-  padding: 33px;
+  padding: 2.5vw; /* Nutze eine relative Größe für den Innenabstand */
   width: 66%;
+}
+
+@media (max-width: 768px) {
+  .business-card {
+    font-size: 2.5vw;
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .business-card {
+    width: 90%;
+  }
 }
