@@ -1,41 +1,61 @@
 .page-div {
   background-color: #40476D;
-  padding-top: 10px; /* Neuer Abstand oben */
+  padding-top: 1rem;
+  padding-bottom: 2rem;
 }
 
 .page-title {
   color: white;
   text-align: center;
-  font-size: 44px;
-  margin-bottom: 10px; /* Neuer Abstand unten */
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 2.5rem;
   color: white;
-  display: flex;
-  justify-content: center;
-  margin-top: 66px; /* Neuer Abstand oben */
-  margin-bottom: 10px; /* Neuer Abstand unten */
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 img {
   border-radius: 50%;
+  max-width: 100%;
+  height: auto;
 }
 
 .team-members {
   display: flex;
-  flex-direction: row;
-  text-align: center;
-  justify-content: center;
-  margin-bottom: 100px;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 7rem;
 }
 
 .team-member {
-  margin: 50px 50px 10px;
+  margin: 1rem;
+}
+
+figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 333px;
+  margin: 0 auto;
 }
 
 figcaption {
   color: white;
-  font-size: 20px;
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  max-width: 100%;
+}
+
+
+@media (min-width: 768px) {
+  .team-members {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
