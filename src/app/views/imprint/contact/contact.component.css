@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #40476D;
   padding-top: 1.5rem; /* Statt px eine relative Größe verwenden */
 }
 

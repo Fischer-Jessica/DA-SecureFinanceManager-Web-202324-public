@@ -1,9 +1,10 @@
 .login-div {
   display: flex;
+  padding: 1em;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #40476D;
+  margin-bottom: 1em;
 }
 
 .login-section {
@@ -27,7 +28,7 @@
 }
 
 .login-form {
-  width: 70%;
+  width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 40px;
   border-radius: 15px;
