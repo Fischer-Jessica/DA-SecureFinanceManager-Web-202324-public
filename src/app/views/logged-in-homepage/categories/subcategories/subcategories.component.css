@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   gap: 16px;
   overflow: scroll;
-  height: 566px;
+  height: 455px;
 }
 
 .go-back {
@@ -58,4 +58,24 @@
 .edit {
   margin-right: 80px;
   background: green;
+}
+
+@media screen and (max-width: 768px) {
+  .create-subcategory,
+  .go-back {
+    padding: 8px;
+  }
+
+  .go-back {
+    margin-left: 10px;
+  }
+
+  .subcategory-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .subcategory-container {
+    height: 333px;
+  }
 }

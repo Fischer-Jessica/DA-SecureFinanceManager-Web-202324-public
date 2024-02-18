@@ -3,7 +3,7 @@
   flex-wrap: wrap;
   gap: 16px;
   overflow: scroll;
-  height: 566px;
+  height: 455px;
 }
 
 .category-item {
@@ -55,4 +55,15 @@
 .edit {
   margin-right: 80px;
   background: green;
+}
+
+@media screen and (max-width: 768px) {
+  .category-item {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .category-container {
+    height: 333px;
+  }
 }

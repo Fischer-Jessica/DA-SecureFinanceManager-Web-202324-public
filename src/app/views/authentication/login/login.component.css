@@ -74,7 +74,7 @@ input[type="password"] {
   background-color: #4caf50;
 }
 
-#sign-in:hover,
+#login:hover,
 #go-to-register:hover {
   background-color: #45a049;
 }
