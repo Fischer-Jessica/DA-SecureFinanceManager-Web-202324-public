@@ -36,3 +36,18 @@ button {
   margin-left: 10px;
   font-size: 22px; /* Angepasste Schriftgröße */
 }
+
+.entry-form {
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    margin-top: 10px;
+  }
+}
