@@ -97,13 +97,12 @@ mat-card-content {
 
 .dropdown-menu {
   position: absolute;
-  font-weight: bold; /* Optional, wenn du den Text fett anzeigen möchtest */
-  right: 15px; /* Ändere die Positionierung auf die gleiche Weise wie die anderen Elemente */
-  top: 48%; /* Verwende die gleiche vertikale Position wie bei .selected-labels */
-  transform: translateY(-50%); /* Zentriere das Menü vertikal */
+  font-weight: bold;
+  right: 15px;
+  top: 33px;
   background-color: #cbcfe1;
   border: 1px solid;
-  max-height: 200px;
+  max-height: 88px;
   border-radius: 5px;
   overflow-y: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -113,4 +112,28 @@ mat-card-content {
 
 .dropdown-menu-item {
   margin-bottom: 5px;
+}
+
+@media (max-width: 600px) {
+  .mat-card-content {
+    display: block; /* Ändere den Wert auf block, um die Elemente untereinander anzuzeigen */
+    gap: 20px; /* Abstand zwischen den Elementen */
+  }
+
+  .entry-container {
+    height: 422px;
+  }
+
+  .dropdown-menu {
+    top: 300px;
+  }
+
+  .card {
+    height: auto;
+  }
+
+  .go-back,
+  .create {
+    padding: 10px;
+  }
 }
