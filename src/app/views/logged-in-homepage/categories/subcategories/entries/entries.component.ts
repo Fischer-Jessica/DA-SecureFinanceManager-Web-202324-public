@@ -163,25 +163,27 @@ export class EntriesComponent implements OnInit {
           (result) => {
             this.cdr.detectChanges(); // Trigger change detection
 
+            // Find the label that was added
+            const addedLabel = this.availableLabels.find(availableLabel => availableLabel.labelId === labelId);
 
-
-            if (this.selectedLabelForEntries.has(entryId)) {
-              const labelList = this.selectedLabelForEntries.get(entryId);
-              if (labelList) {
-                const availableLabel = this.availableLabels.find(availableLabel => availableLabel.labelId === labelId);
-                if (availableLabel) {
-                  labelList.push(availableLabel.label);
+            if (addedLabel) {
+              // Add the label to the selected labels for the entry
+              if (this.selectedLabelForEntries.has(entryId)) {
+                const labelList = this.selectedLabelForEntries.get(entryId);
+                if (labelList) {
+                  labelList.push(addedLabel.label);
+                  // Sort the labels after adding the new one
+                  labelList.sort((a, b) => {
+                    if (a.labelId && b.labelId) {
+                      return a.labelId - b.labelId;
+                    }
+                    return 0;
+                  });
                 }
-              }
-            } else {
-              const availableLabel = this.availableLabels.find(availableLabel => availableLabel.labelId === labelId);
-              if (availableLabel) {
-                this.selectedLabelForEntries.set(entryId, [availableLabel.label]);
+              } else {
+                this.selectedLabelForEntries.set(entryId, [addedLabel.label]);
               }
             }
-
-
-
           },
           (error) => {
             console.error('Error adding label to entry:', error);
@@ -221,20 +223,22 @@ export class EntriesComponent implements OnInit {
     }
   }
 
-  // TODO: Sortieren der Entries nach entryTimeOfTransaction, sodass der aktuellste Eintrag immer oben ist.
   private fetchEntries(subcategoryId: number | undefined, username: string, password: string): void {
-    if (this.labelId == undefined) {
+    if (this.labelId === undefined) {
       this.entryService.getEntriesBySubcategoryId(username, password, subcategoryId)
         .subscribe(
           (result) => {
-            this.entries = result;
-            // Sort entries after receiving them
-            this.entries.sort((a, b) => {
-              if (a.entryId !== undefined && b.entryId !== undefined) {
-                return a.entryId - b.entryId;
+            // Create a copy of the result array
+            const sortedEntries = [...result];
+            // Sort the copied array by entryTimeOfTransaction
+            sortedEntries.sort((a, b) => {
+              if (a.entryTimeOfTransaction && b.entryTimeOfTransaction) {
+                return new Date(b.entryTimeOfTransaction).getTime() - new Date(a.entryTimeOfTransaction).getTime();
               }
               return 0;
             });
+            // Assign the sorted entries to the original array
+            this.entries = sortedEntries;
             this.fetchLabelsOfEntry(username, password);
           },
           (error) => {
@@ -246,14 +250,17 @@ export class EntriesComponent implements OnInit {
       this.entryLabelService.getEntriesByLabelId(username, password, this.labelId)
         .subscribe(
           (result) => {
-            this.entries = result;
-            // Sort entries after receiving them
-            this.entries.sort((a, b) => {
-              if (a.entryId !== undefined && b.entryId !== undefined) {
-                return a.entryId - b.entryId;
+            // Create a copy of the result array
+            const sortedEntries = [...result];
+            // Sort the copied array by entryTimeOfTransaction
+            sortedEntries.sort((a, b) => {
+              if (a.entryTimeOfTransaction && b.entryTimeOfTransaction) {
+                return new Date(b.entryTimeOfTransaction).getTime() - new Date(a.entryTimeOfTransaction).getTime();
               }
               return 0;
             });
+            // Assign the sorted entries to the original array
+            this.entries = sortedEntries;
             this.fetchLabelsOfEntry(username, password);
           },
           (error) => {

@@ -36,7 +36,9 @@
         <div class="right-column">
           <div class="elements-right-column">
             <button (click)="toggleDropdown(entry.entryId)" class="dropdown-button">Labels auswählen</button>
-            <div class="dropdown-menu" [id]="'dropdown-' + (entry.entryId)" [hidden]="!dropdownOpen[entry.entryId || '']">
+            <div class="dropdown-menu" [id]="'dropdown-' + (entry.entryId)"
+                 [hidden]="!dropdownOpen[entry.entryId || '']"
+                 [ngClass]="{'dropdown-menu-in-label': this.labelId !== undefined}">
               <div *ngFor="let label of availableLabels" class="dropdown-menu-item">
                 <label>
                   <input type="checkbox" [checked]="isLabelSelected(entry.entryId, label.labelId)" (change)="toggleLabel(entry.entryId, label)">
