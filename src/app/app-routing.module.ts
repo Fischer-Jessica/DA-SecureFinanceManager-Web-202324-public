@@ -18,7 +18,6 @@ import {
   CreateEntryComponent
 } from "./views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component";
 import {CreateLabelComponent} from "./views/logged-in-homepage/labels/create-label/create-label.component";
-import {LabelEntriesComponent} from "./views/logged-in-homepage/labels/entries/label-entries.component";
 import {UpdateCategoryComponent} from "./views/logged-in-homepage/categories/update-category/update-category.component";
 import {UpdateLabelComponent} from "./views/logged-in-homepage/labels/update-label/update-label.component";
 import {
@@ -60,7 +59,7 @@ const routes: Routes = [
       { path: 'labels', component: LabelsComponent },
       { path: 'create-label', component: CreateLabelComponent },
       { path: 'update-label/:labelId', component: UpdateLabelComponent },
-      { path: 'labels/:labelId/entries', component: LabelEntriesComponent },
+      {path: 'labels/:labelId/entries', component: EntriesComponent},
       { path: 'diagrams', component: DiagramsComponent },
       {path: 'user', component: UserComponent},
     ]

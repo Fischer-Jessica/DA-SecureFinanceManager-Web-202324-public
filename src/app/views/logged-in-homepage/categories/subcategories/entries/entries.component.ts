@@ -22,6 +22,7 @@ export class EntriesComponent implements OnInit {
   protected availableLabels: { label: Label; labelId: number; colourHex: string }[] = [];
   protected selectedLabelForEntries: Map<number, Label[]> = new Map<number, Label[]>();
   dropdownOpen: { [entryId: string]: boolean } = {}; // Objekt zur Verfolgung des Dropdown-Status für jeden Eintrag
+  protected labelId: number | undefined = undefined;
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -41,6 +42,10 @@ export class EntriesComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.categoryId = +params['categoryId'];
         this.subcategoryId = +params['subcategoryId'];
+        this.labelId = isNaN(+params['labelId']) ? undefined : +params['labelId'];
+        console.log('labelId: ' + this.labelId);
+        console.log('subcategoryId: ' + this.subcategoryId);
+        console.log('categoryId: ' + this.categoryId);
       });
       this.fetchEntries(this.subcategoryId, loggedInUser.username, loggedInUser.password);
       this.fetchLabels(loggedInUser.username, loggedInUser.password);
@@ -216,24 +221,45 @@ export class EntriesComponent implements OnInit {
 
   // TODO: Sortieren der Entries nach entryTimeOfTransaction, sodass der aktuellste Eintrag immer oben ist.
   private fetchEntries(subcategoryId: number | undefined, username: string, password: string): void {
-    this.entryService.getEntriesBySubcategoryId(username, password, subcategoryId)
-      .subscribe(
-        (result) => {
-          this.entries = result;
-          // Sort entries after receiving them
-          this.entries.sort((a, b) => {
-            if (a.entryId !== undefined && b.entryId !== undefined) {
-              return a.entryId - b.entryId;
-            }
-            return 0;
-          });
-          this.fetchLabelsOfEntry(username, password);
-        },
-        (error) => {
-          console.error('Error fetching entries:', error);
-          // Handle error (e.g., display an error message)
-        }
-      );
+    if (this.labelId == undefined) {
+      this.entryService.getEntriesBySubcategoryId(username, password, subcategoryId)
+        .subscribe(
+          (result) => {
+            this.entries = result;
+            // Sort entries after receiving them
+            this.entries.sort((a, b) => {
+              if (a.entryId !== undefined && b.entryId !== undefined) {
+                return a.entryId - b.entryId;
+              }
+              return 0;
+            });
+            this.fetchLabelsOfEntry(username, password);
+          },
+          (error) => {
+            console.error('Error fetching entries:', error);
+            // Handle error (e.g., display an error message)
+          }
+        );
+    } else {
+      this.entryLabelService.getEntriesByLabelId(username, password, this.labelId)
+        .subscribe(
+          (result) => {
+            this.entries = result;
+            // Sort entries after receiving them
+            this.entries.sort((a, b) => {
+              if (a.entryId !== undefined && b.entryId !== undefined) {
+                return a.entryId - b.entryId;
+              }
+              return 0;
+            });
+            this.fetchLabelsOfEntry(username, password);
+          },
+          (error) => {
+            console.error('Error fetching entries:', error);
+            // Handle error (e.g., display an error message)
+          }
+        );
+    }
   }
 
   // TODO: Den User fragen, ob er wirklich löschen möchte

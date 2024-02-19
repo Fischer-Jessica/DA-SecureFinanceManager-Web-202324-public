@@ -1,9 +1,22 @@
-<h2>{{ 'logged-in-homepage.categories.subcategories.entries.headline_entries' | translate }}</h2>
-<button class="create" mat-raised-button color="primary"
-        (click)="addEntry()">{{ 'logged-in-homepage.categories.subcategories.entries.button_create_entry' | translate }}
-</button>
-<button class="go-back" mat-raised-button color="warn" routerLink='/logged-in-homepage/categories' (click)="returnToSubcategory()">{{ 'logged-in-homepage.categories.subcategories.entries.button_return_subcategories' | translate }}</button>
-<p>{{ 'logged-in-homepage.categories.subcategories.entries.text_your_entries' | translate }} {{ subcategoryId }}</p>
+<div *ngIf="this.labelId !== undefined; else subcategoryBlock">
+  <h2>{{ 'logged-in-homepage.labels.label-entries.headline_label_entries' | translate }}</h2>
+  <button mat-raised-button color="warn"
+          routerLink='/logged-in-homepage/labels'>{{ 'logged-in-homepage.labels.label-entries.button_return_to_labels' | translate }}
+  </button>
+  <p>{{ 'logged-in-homepage.labels.label-entries.text_your_label_entries' | translate }} {{ labelId }}</p>
+</div>
+
+<ng-template #subcategoryBlock>
+  <h2>{{ 'logged-in-homepage.categories.subcategories.entries.headline_entries' | translate }}</h2>
+  <button class="create" mat-raised-button color="primary"
+          (click)="addEntry()">{{ 'logged-in-homepage.categories.subcategories.entries.button_create_entry' | translate }}
+  </button>
+  <button class="go-back" mat-raised-button color="warn" routerLink='/logged-in-homepage/categories'
+          (click)="returnToSubcategory()">{{ 'logged-in-homepage.categories.subcategories.entries.button_return_subcategories' | translate }}
+  </button>
+  <p>{{ 'logged-in-homepage.categories.subcategories.entries.text_your_entries' | translate }} {{ subcategoryId }}</p>
+</ng-template>
+
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
@@ -42,7 +55,7 @@
           </div>
           </div>
 
-          <div class="elements-right-column">
+          <div class="elements-right-column" *ngIf="this.labelId === undefined">
           <button class="edit" (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }} </button>
           <button class="delete" (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }} </button>
         </div>
