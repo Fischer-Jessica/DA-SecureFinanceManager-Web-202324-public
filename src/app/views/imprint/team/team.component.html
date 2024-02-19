@@ -3,52 +3,60 @@
     <h1>{{ 'imprint.team.headline_team' | translate }}</h1>
   </div>
   <div class="page-content">
-    <!-- TODO: Wenn man auf eines der Bilder klickt sollte man zur entsprechenden Visitenkarte gelangen -->
     <h2>{{ 'imprint.team.headline_project_team' | translate }}</h2>
     <div class="team-members">
       <figure>
-        <img src="./assets/team-images/project-team/project-founder.jpg" width="333" height="333" class="team-member">
+        <img (click)="goToBusinessCard()" src="./assets/team-images/project-team/project-founder.jpg" width="333"
+             height="333" class="team-member">
         <figcaption>Fischer || {{ 'imprint.team.text_project_member_founder' | translate }}</figcaption>
       </figure>
       <figure>
-        <img src="./assets/team-images/project-team/member_iOS.jpg" width="333" height="333" class="team-member">
+        <img (click)="goToBusinessCard()" src="./assets/team-images/project-team/member_iOS.jpg" width="333"
+             height="333" class="team-member">
         <figcaption>Muth || {{ 'imprint.team.text_project_member_ios' | translate }}</figcaption>
       </figure>
       <figure>
-        <img src="./assets/team-images/project-team/member_android.jpg" width="333" height="333" class="team-member">
+        <img (click)="goToBusinessCard()" src="./assets/team-images/project-team/member_android.jpg" width="333"
+             height="333" class="team-member">
         <figcaption>Fiedler || {{ 'imprint.team.text_project_member_android' | translate }}</figcaption>
       </figure>
     </div>
     <h2>{{ 'imprint.team.headline_backend_team' | translate }}</h2>
     <div class="team-members">
       <figure>
-        <img src="./assets/team-images/team-backend/backend-programmer.jpg" width="333" height="333"
+        <img (click)="goToBusinessCard()" src="./assets/team-images/team-backend/backend-programmer.jpg" width="333"
+             height="333"
              class="team-member">
         <figcaption>Fischer || {{ 'imprint.team.text_backend_member_programmer' | translate }}</figcaption>
       </figure>
       <figure>
-        <img src="./assets/team-images/team-backend/backend-database-designer.jpg" width="333" height="333"
+        <img (click)="goToBusinessCard()" src="./assets/team-images/team-backend/backend-database-designer.jpg"
+             width="333" height="333"
              class="team-member">
         <figcaption>Fischer || {{ 'imprint.team.text_backend_member_database' | translate }}</figcaption>
       </figure>
       <figure>
-        <img src="./assets/team-images/team-backend/backend-support.jpg" width="333" height="333" class="team-member">
+        <img (click)="goToBusinessCard()" src="./assets/team-images/team-backend/backend-support.jpg" width="333"
+             height="333" class="team-member">
         <figcaption>Fischer || {{ 'imprint.team.text_backend_member_support' | translate }}</figcaption>
       </figure>
     </div>
     <h2>{{ 'imprint.team.headline_website_team' | translate }}</h2>
     <div class="team-members">
       <figure>
-        <img src="./assets/team-images/team-website/website-programmer.jpg" width="333" height="333"
+        <img (click)="goToBusinessCard()" src="./assets/team-images/team-website/website-programmer.jpg" width="333"
+             height="333"
              class="team-member">
         <figcaption>Fischer || {{ 'imprint.team.text_website_member_programmer' | translate }}</figcaption>
       </figure>
       <figure>
-        <img src="./assets/team-images/team-website/website-designer.jpg" width="333" height="333" class="team-member">
+        <img (click)="goToBusinessCard()" src="./assets/team-images/team-website/website-designer.jpg" width="333"
+             height="333" class="team-member">
         <figcaption>Fischer || {{ 'imprint.team.text_website_member_designer' | translate }}</figcaption>
       </figure>
       <figure>
-        <img src="./assets/team-images/team-website/website-marketing.jpg" width="333" height="333" class="team-member">
+        <img (click)="goToBusinessCard()" src="./assets/team-images/team-website/website-marketing.jpg" width="333"
+             height="333" class="team-member">
         <figcaption>Fischer || {{ 'imprint.team.text_website_member_marketing' | translate }}</figcaption>
       </figure>
     </div>
