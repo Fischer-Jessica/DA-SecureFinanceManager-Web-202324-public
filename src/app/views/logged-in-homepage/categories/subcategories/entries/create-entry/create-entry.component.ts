@@ -16,8 +16,6 @@ export class CreateEntryComponent implements OnInit {
     entryTimeOfTransaction: ''
   };
 
-  // TODO: entryTimeOfTransaction sollte beim Aufruf des Formulars auf das aktuelle Datum und die aktuelle Uhrzeit gesetzt werden
-
   private categoryId: number | undefined;
   private subcategoryId: number | undefined;
 
@@ -35,7 +33,21 @@ export class CreateEntryComponent implements OnInit {
         this.categoryId = +params['categoryId'];
         this.subcategoryId = +params['subcategoryId'];
       });
+      this.setInitialDateTime();
     }
+  }
+
+  setInitialDateTime() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + currentDate.getDate()).slice(-2);
+    const hours = ('0' + currentDate.getHours()).slice(-2);
+    const minutes = ('0' + currentDate.getMinutes()).slice(-2);
+    const seconds = ('0' + currentDate.getSeconds()).slice(-2);
+
+    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    this.entry.entryTimeOfTransaction = formattedDateTime;
   }
 
   onSubmit(formData: Entry) {
