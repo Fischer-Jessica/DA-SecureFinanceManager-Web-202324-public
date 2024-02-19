@@ -18,10 +18,8 @@ import {
 } from "./views/logged-in-homepage/categories/subcategories/create-subcategory/create-subcategory.component";
 import {CreateCategoryComponent} from "./views/logged-in-homepage/categories/create-category/create-category.component";
 import {NavbarComponent} from "./views/logged-in-homepage/navbar/navbar.component";
-import {OverviewComponent} from "./views/logged-in-homepage/overview/overview.component";
 import {CategoriesComponent} from "./views/logged-in-homepage/categories/categories.component";
 import {LabelsComponent} from "./views/logged-in-homepage/labels/labels.component";
-import {DiagramsComponent} from "./views/logged-in-homepage/diagrams/diagrams.component";
 import {SubcategoriesComponent} from "./views/logged-in-homepage/categories/subcategories/subcategories.component";
 
 import {ImprintComponent} from './views/imprint/imprint.component';
@@ -74,10 +72,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     ImprintComponent,
     NavbarComponent,
     LoggedInHomepageComponent,
-    OverviewComponent,
     CategoriesComponent,
     LabelsComponent,
-    DiagramsComponent,
     CreateCategoryComponent,
     SubcategoriesComponent,
     CreateSubcategoryComponent,

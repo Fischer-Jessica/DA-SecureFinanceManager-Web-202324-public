@@ -4,7 +4,6 @@ import {RegisterComponent} from "./views/authentication/register/register.compon
 import {LoginComponent} from "./views/authentication/login/login.component";
 import {AuthenticationComponent} from "./views/authentication/authentication.component";
 import {LoggedInHomepageComponent} from "./views/logged-in-homepage/logged-in-homepage.component";
-import {OverviewComponent} from "./views/logged-in-homepage/overview/overview.component";
 import {CategoriesComponent} from "./views/logged-in-homepage/categories/categories.component";
 import {CreateCategoryComponent} from "./views/logged-in-homepage/categories/create-category/create-category.component";
 import {SubcategoriesComponent} from "./views/logged-in-homepage/categories/subcategories/subcategories.component";
@@ -12,7 +11,6 @@ import {
   CreateSubcategoryComponent
 } from "./views/logged-in-homepage/categories/subcategories/create-subcategory/create-subcategory.component";
 import {LabelsComponent} from "./views/logged-in-homepage/labels/labels.component";
-import {DiagramsComponent} from "./views/logged-in-homepage/diagrams/diagrams.component";
 import {EntriesComponent} from "./views/logged-in-homepage/categories/subcategories/entries/entries.component";
 import {
   CreateEntryComponent
@@ -45,8 +43,7 @@ const routes: Routes = [
     path: 'logged-in-homepage',
     component: LoggedInHomepageComponent,
     children: [
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      { path: 'overview', component: OverviewComponent },
+      {path: '', redirectTo: 'categories', pathMatch: 'full'},
       { path: 'categories', component: CategoriesComponent },
       { path: 'create-category', component: CreateCategoryComponent },
       { path: 'update-category/:categoryId', component: UpdateCategoryComponent },
@@ -60,7 +57,6 @@ const routes: Routes = [
       { path: 'create-label', component: CreateLabelComponent },
       { path: 'update-label/:labelId', component: UpdateLabelComponent },
       {path: 'labels/:labelId/entries', component: EntriesComponent},
-      { path: 'diagrams', component: DiagramsComponent },
       {path: 'user', component: UserComponent},
     ]
   },
