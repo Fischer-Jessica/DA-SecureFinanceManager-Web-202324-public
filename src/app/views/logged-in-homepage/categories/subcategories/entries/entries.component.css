@@ -119,6 +119,11 @@ mat-card-content {
   margin-bottom: 5px;
 }
 
+.bold-label {
+  font-weight: bold;
+}
+
+
 @media (max-width: 999px) {
   .mat-card-content {
     display: block; /* Ändere den Wert auf block, um die Elemente untereinander anzuzeigen */
