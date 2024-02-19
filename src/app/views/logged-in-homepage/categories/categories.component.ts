@@ -89,8 +89,12 @@ export class CategoriesComponent implements OnInit {
       );
   }
 
-  // TODO: Den User fragen, ob er wirklich löschen möchte
   deleteCategory(categoryId: number | undefined) {
+    const confirmDelete = confirm(this.translate.instant('logged-in-homepage.categories.confirm_delete_category'));
+    if (!confirmDelete) {
+      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
+    }
+
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
       console.error('User is not logged in');

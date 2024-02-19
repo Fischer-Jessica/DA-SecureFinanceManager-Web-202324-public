@@ -8,6 +8,7 @@ import {LabelService} from "../../../../../logic/services/LabelService";
 import {EntryLabelService} from "../../../../../logic/services/EntryLabelService";
 import {Label} from "../../../../../logic/models/Label";
 import {ColourService} from "../../../../../logic/services/ColourService";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-entries',
@@ -32,7 +33,8 @@ export class EntriesComponent implements OnInit {
               private colourService: ColourService,
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -262,8 +264,12 @@ export class EntriesComponent implements OnInit {
     }
   }
 
-  // TODO: Den User fragen, ob er wirklich löschen möchte
   deleteEntry(entryId: number | undefined) {
+    const confirmDelete = confirm(this.translate.instant('logged-in-homepage.categories.subcategories.entries.confirm_delete_entry'));
+    if (!confirmDelete) {
+      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
+    }
+
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
       console.error('User is not logged in');

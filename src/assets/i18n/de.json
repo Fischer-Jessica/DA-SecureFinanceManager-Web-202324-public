@@ -40,6 +40,7 @@
       "alert_create_category_first": "Sie haben noch keine Kategorie erstellt.",
       "alert_error_fetching_categories": "Fehler beim Laden der Kategorien.",
       "alert_error_deleting_category": "Fehler beim Löschen der Kategorie.",
+      "confirm_delete_category": "Möchten Sie die Kategorie wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Alle Unterkategorien und Einträge, die dieser Kategorie angehören, werden ebenfalls gelöscht.",
       "create-category": {
         "label_category_name": "Name der Kategorie:",
         "label_category_description": "Beschreibung der Kategorie:",
@@ -53,6 +54,7 @@
         "button_create_subcategory": "neue Unterkategorie erstellen",
         "button_return_categories": "Zurück zu Kategorien",
         "text_your_subcategories": "Ihre Unterkategorien, der Kategorie mit folgender Id angehörig:",
+        "confirm_delete_subcategory": "Möchten Sie die Unterkategorie wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Alle Einträge, die dieser Unterkategorie angehören, werden ebenfalls gelöscht.",
         "create-subcategory": {
           "label_subcategory_name": "Name der Unterkategorie:",
           "label_subcategory_description": "Beschreibung der Unterkategorie:",
@@ -73,6 +75,7 @@
           "label_entry_date": "Datum des Eintrags:",
           "label_entry_creation_date": "Erstellungsdatum des Eintrags:",
           "label_entry_attachment": "Anhang des Eintrags:",
+          "confirm_delete_entry": "Möchten Sie den Eintrag wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
           "create-entry": {
             "label_entry_attachment": "Anhang des Eintrags:"
           },
@@ -90,6 +93,7 @@
       "alert_create_label_first": "Sie haben noch kein Label erstellt.",
       "alert_user_not_logged_in": "Sie sind nicht angemeldet.",
       "alert_error_fetching_labels": "Fehler beim Laden der Labels.",
+      "confirm_delete_label": "Möchten Sie das Label wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
       "create-label": {
         "label_name": "Name des Labels:",
         "label_description": "Beschreibung des Labels:",
@@ -114,7 +118,8 @@
       "label_first_name": "Vorname:",
       "label_last_name": "Nachname:",
       "button_update_user": "Benutzerdaten aktualisieren",
-      "button_delete_user": "Benutzer löschen"
+      "button_delete_user": "Benutzer löschen",
+      "confirm_delete_user": "Möchten Sie Ihren Account wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Sie verlieren alle Kategorien, Unterkategorien, Einträge und Labels."
     }
   },
   "imprint": {

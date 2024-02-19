@@ -80,8 +80,12 @@ export class LabelsComponent implements OnInit {
       );
   }
 
-  // TODO: Den User fragen, ob er wirklich löschen möchte
   deleteLabel(labelId: number | undefined) {
+    const confirmDelete = confirm(this.translate.instant('logged-in-homepage.labels.confirm_delete_label'));
+    if (!confirmDelete) {
+      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
+    }
+
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
       return;

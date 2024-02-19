@@ -3,6 +3,7 @@ import {User} from "../../../logic/models/User";
 import {UserService} from "../../../logic/services/UserService";
 import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-user',
@@ -12,7 +13,8 @@ import {Router} from "@angular/router";
 export class UserComponent implements OnInit {
   constructor(private userService: UserService,
               private router: Router,
-              private localStorageService: LocalStorageService) {
+              private localStorageService: LocalStorageService,
+              private translate: TranslateService) {
   }
 
   protected user: User = {} as User;
@@ -59,7 +61,11 @@ export class UserComponent implements OnInit {
   }
 
   deleteUser() {
-    // TODO: Vorm Löschen des Benutzers eine Bestätigung anfordern
+    const confirmDelete = confirm(this.translate.instant('logged-in-homepage.user.confirm_delete_user'));
+    if (!confirmDelete) {
+      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
+    }
+
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
       console.error('User is not logged in');

@@ -5,6 +5,7 @@ import {SubcategoryService} from "../../../../logic/services/SubcategoryService"
 import {ActivatedRoute, Router} from "@angular/router";
 import {ColourService} from "../../../../logic/services/ColourService";
 import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-subcategory',
@@ -21,7 +22,8 @@ export class SubcategoriesComponent implements OnInit {
               private apiService: SubcategoryService,
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private translate: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -85,8 +87,12 @@ export class SubcategoriesComponent implements OnInit {
       );
   }
 
-  // TODO: Den User fragen, ob er wirklich löschen möchte
   deleteSubcategory(subcategoryId: number | undefined) {
+    const confirmDelete = confirm(this.translate.instant('logged-in-homepage.categories.subcategories.confirm_delete_subcategory'));
+    if (!confirmDelete) {
+      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
+    }
+
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
       const user = JSON.parse(storedUser);
