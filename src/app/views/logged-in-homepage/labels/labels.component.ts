@@ -80,6 +80,7 @@ export class LabelsComponent implements OnInit {
       );
   }
 
+  // TODO: Den User fragen, ob er wirklich löschen möchte
   deleteLabel(labelId: number | undefined) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {

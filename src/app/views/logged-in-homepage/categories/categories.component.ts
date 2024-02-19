@@ -89,6 +89,7 @@ export class CategoriesComponent implements OnInit {
       );
   }
 
+  // TODO: Den User fragen, ob er wirklich löschen möchte
   deleteCategory(categoryId: number | undefined) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {

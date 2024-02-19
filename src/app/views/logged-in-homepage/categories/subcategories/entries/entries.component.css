@@ -1,7 +1,7 @@
 .entry-container {
   gap: 16px;
   overflow: scroll;
-  height: 566px;
+  height: 483px;
 }
 
 .go-back {
@@ -114,7 +114,7 @@ mat-card-content {
   margin-bottom: 5px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 999px) {
   .mat-card-content {
     display: block; /* Ändere den Wert auf block, um die Elemente untereinander anzuzeigen */
     gap: 20px; /* Abstand zwischen den Elementen */
@@ -137,3 +137,5 @@ mat-card-content {
     padding: 10px;
   }
 }
+
+/* TODO: Wenn die Höhe es nicht erlaubt soll der .category-container kleiner werden, damit alle Categories angezeigt werden können */

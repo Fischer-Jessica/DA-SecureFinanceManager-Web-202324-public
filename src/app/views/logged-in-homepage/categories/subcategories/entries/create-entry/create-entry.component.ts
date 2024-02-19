@@ -16,6 +16,8 @@ export class CreateEntryComponent implements OnInit {
     entryTimeOfTransaction: ''
   };
 
+  // TODO: entryTimeOfTransaction sollte beim Aufruf des Formulars auf das aktuelle Datum und die aktuelle Uhrzeit gesetzt werden
+
   private categoryId: number | undefined;
   private subcategoryId: number | undefined;
 

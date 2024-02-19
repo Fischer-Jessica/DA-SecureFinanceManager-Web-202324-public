@@ -214,7 +214,7 @@ export class EntriesComponent implements OnInit {
     }
   }
 
-
+  // TODO: Sortieren der Entries nach entryTimeOfTransaction, sodass der aktuellste Eintrag immer oben ist.
   private fetchEntries(subcategoryId: number | undefined, username: string, password: string): void {
     this.entryService.getEntriesBySubcategoryId(username, password, subcategoryId)
       .subscribe(
@@ -236,6 +236,7 @@ export class EntriesComponent implements OnInit {
       );
   }
 
+  // TODO: Den User fragen, ob er wirklich löschen möchte
   deleteEntry(entryId: number | undefined) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {

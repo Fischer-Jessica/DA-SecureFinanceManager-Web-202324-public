@@ -63,6 +63,8 @@
   }
 
   .label-container {
-    height: 333px;
+    height: 450px;
   }
 }
+
+/* TODO: Wenn die Höhe es nicht erlaubt soll der .label-container kleiner werden, damit alle Labels angezeigt werden können */

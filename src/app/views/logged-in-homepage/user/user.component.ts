@@ -59,6 +59,7 @@ export class UserComponent implements OnInit {
   }
 
   deleteUser() {
+    // TODO: Vorm Löschen des Benutzers eine Bestätigung anfordern
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
       console.error('User is not logged in');

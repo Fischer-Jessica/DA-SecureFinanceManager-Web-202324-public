@@ -85,6 +85,7 @@ export class SubcategoriesComponent implements OnInit {
       );
   }
 
+  // TODO: Den User fragen, ob er wirklich löschen möchte
   deleteSubcategory(subcategoryId: number | undefined) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
