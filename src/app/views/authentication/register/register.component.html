@@ -1,39 +1,87 @@
-<div class="register-div">
+<div class="register-container">
+
+  <!-- Register Section -->
   <section class="register-section">
+
+    <!-- Register Content -->
     <div class="register-content">
+
+      <!-- Register Form -->
       <div class="register-form">
-        <h1 class="form-title" translate="authorisation.register.headline_sign_up"></h1>
+
+        <!-- Form Title -->
+        <h1 translate="authorisation.register.ui_headline/button_sign_up"></h1>
+
+        <!-- Registration Form -->
         <form (ngSubmit)="insertNewUserInAPI()" id="register-form">
 
-        <label for="firstName"></label>
+          <!-- First Name Input -->
+          <div class="form-group">
+            <label for="firstName">{{ 'authorisation.register.ui_label_first_name' | translate }}</label>
             <input type="text" name="firstName" id="firstName"
-                   placeholder="{{'authorisation.register.placeholder_first_name' | translate}}"
+                   placeholder="{{ 'authorisation.register.ui_placeholder_first_name' | translate }}"
                    [(ngModel)]="newUser.firstName" required>
-            <label for="lastName"></label>
+          </div>
+
+          <!-- Last Name Input -->
+          <div class="form-group">
+            <label for="lastName">{{ 'authorisation.register.ui_label_last_name' | translate }}</label>
             <input type="text" name="lastName" id="lastName"
-                   placeholder="{{'authorisation.register.placeholder_last_name' | translate}}"
+                   placeholder="{{ 'authorisation.register.ui_placeholder_last_name' | translate }}"
                    [(ngModel)]="newUser.lastName" required>
-            <label for="username"><i></i></label>
+          </div>
+
+          <!-- Username Input -->
+          <div class="form-group">
+            <label for="username">{{ 'authorisation.register.ui_label_username' | translate }}</label>
             <input type="text" name="username" id="username"
-                   placeholder="{{'authorisation.register.placeholder_username' | translate}}"
+                   placeholder="{{ 'authorisation.register.ui_placeholder_username' | translate }}"
                    [(ngModel)]="newUser.username" required>
-            <label for="email"><i></i></label>
+          </div>
+
+          <!-- Email Address Input -->
+          <div class="form-group">
+            <label for="email">{{ 'authorisation.register.ui_label_email' | translate }}</label>
             <input type="email" name="email" id="email"
-                   placeholder="{{'authorisation.register.placeholder_email' | translate}}"
+                   placeholder="{{ 'authorisation.register.ui_placeholder_email' | translate }}"
                    [(ngModel)]="newUser.emailAddress" required>
-            <label for="password"><i></i></label>
-            <input type="password" name="pass" id="password"
-                   placeholder="{{'authorisation.register.placeholder_password' | translate}}"
+          </div>
+
+          <!-- Password Input -->
+          <div class="form-group">
+            <label for="password">{{ 'authorisation.register.ui_label_password' | translate }}</label>
+            <input id="password" name="password"
+                   placeholder="{{ 'authorisation.register.ui_placeholder_password' | translate }}"
+                   type="password"
                    [(ngModel)]="newUser.password" required>
+          </div>
+
+          <!-- Register Button -->
+          <div class="form-group">
             <input type="submit" name="register" id="register"
-                   value="{{'authorisation.register.button_sign_up' | translate}}">
+                   value="{{ 'authorisation.register.ui_headline/button_sign_up' | translate }}">
+          </div>
+
         </form>
+        <!-- End Registration Form -->
+
       </div>
-      <div class="login-div">
-        <button (click)="goToLogin()" id="go-to-login" translate="authorisation.register.text_sign_in"></button>
+      <!-- End Register Form -->
+
+      <!-- Login Button Container -->
+      <div class="login-button-container">
+        <button id="go-to-login" routerLink="/authentication/login"
+                translate="authorisation.register.ui_button_login"></button>
       </div>
+      <!-- End Login Button Container -->
+
     </div>
+    <!-- End Register Content -->
+
   </section>
+  <!-- End Register Section -->
+
 </div>
+<!-- End Register Container -->
 
 <imprint></imprint>

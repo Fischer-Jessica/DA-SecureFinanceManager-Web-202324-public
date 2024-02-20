@@ -84,4 +84,6 @@ export class UserComponent implements OnInit {
       error => console.error('Error deleting user:', error)
     );
   }
+
+  // TODO: Logout-Funktion hinzufügen
 }

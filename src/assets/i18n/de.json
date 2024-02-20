@@ -1,24 +1,30 @@
 {
+  "alert_error": "Es ist ein Fehler aufgetreten. Für weitere Informationen öffnen Sie die Konsole.",
   "authorisation": {
     "alert_user_not_logged_in": "Sie sind nicht angemeldet.",
+    "alert_missing_credentials": "Bitte geben Sie sowohl Benutzername als auch Passwort ein.",
     "login": {
-      "text_sign_in": "Anmelden",
-      "label_username": "Benutzername:",
-      "placeholder_username": "Dein Benutzername",
-      "label_password": "Passwort:",
-      "placeholder_password": "Dein Password",
-      "text_create_account": "Registrieren",
+      "ui_headline/button_login": "Anmelden",
+      "ui_label_username": "Benutzername:",
+      "ui_placeholder_username": "Ihr Benutzername",
+      "ui_label_password": "Passwort:",
+      "ui_placeholder_password": "Ihr Passwort",
+      "ui_button_register": "Registrieren",
       "alert_wrong_credentials": "Falsche Anmeldedaten. Bitte versuchen Sie es erneut."
     },
     "register": {
-      "headline_sign_up": "Registrieren",
-      "placeholder_first_name": "Dein Vorname",
-      "placeholder_last_name": "Dein Nachname",
-      "placeholder_username": "Dein Benutzername",
-      "placeholder_email": "Deine E-Mail-Adresse",
-      "placeholder_password": "Dein Passwort",
-      "button_sign_up": "Registrieren",
-      "text_sign_in": "Ich habe bereits ein Konto."
+      "ui_headline/button_sign_up": "Registrieren",
+      "ui_label_first_name": "Vorname:",
+      "ui_placeholder_first_name": "Dein Vorname",
+      "ui_label_last_name": "Nachname:",
+      "ui_placeholder_last_name": "Dein Nachname",
+      "ui_label_username": "Benutzername:",
+      "ui_placeholder_username": "Dein Benutzername",
+      "ui_label_email": "E-Mail-Adresse:",
+      "ui_placeholder_email": "Deine E-Mail-Adresse",
+      "ui_label_password": "Passwort:",
+      "ui_placeholder_password": "Dein Passwort",
+      "ui_button_login": "Ich habe bereits ein Konto."
     }
   },
   "logged-in-homepage": {

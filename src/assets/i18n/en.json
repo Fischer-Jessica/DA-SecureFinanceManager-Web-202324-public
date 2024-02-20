@@ -1,24 +1,30 @@
 {
+  "alert_error": "An error occurred. Check the console for more information.",
   "authorisation": {
     "alert_user_not_logged_in": "You are not logged in.",
-    "sign-in": {
-      "text_sign_in": "Sign In",
-      "label_username": "Username:",
-      "placeholder_username": "Your username",
-      "label_password": "Password:",
-      "placeholder_password": "Your password",
-      "text_create_account": "Sign Up",
+    "alert_missing_credentials": "Please fill in both password and username fields.",
+    "login": {
+      "ui_headline/text_login": "Login",
+      "ui_label_username": "Username:",
+      "ui_placeholder_username": "Your username",
+      "ui_label_password": "Password:",
+      "ui_placeholder_password": "Your password",
+      "ui_button_register": "Register",
       "alert_wrong_credentials": "Incorrect login credentials. Please try again."
     },
     "register": {
-      "headline_sign_up": "Sign Up",
-      "placeholder_first_name": "Your first name",
-      "placeholder_last_name": "Your last name",
-      "placeholder_username": "Your username",
-      "placeholder_email": "Your email address",
-      "placeholder_password": "Your password",
-      "button_sign_up": "Sign Up",
-      "text_sign_in": "I already have an account."
+      "ui_headline/button_sign_up": "Register",
+      "ui_label_first_name": "First name:",
+      "ui_placeholder_first_name": "Your first name",
+      "ui_label_last_name": "Last Name:",
+      "ui_placeholder_last_name": "Your last name",
+      "ui_label_username": "Username:",
+      "ui_placeholder_username": "Your username",
+      "ui_label_email": "E-Mail-Address:",
+      "ui_placeholder_email": "Your e-mail-address",
+      "ui_label_password": "Password:",
+      "ui_placeholder_password": "Your password",
+      "ui_button_login": "I already have an account."
     }
   },
   "logged-in-homepage": {

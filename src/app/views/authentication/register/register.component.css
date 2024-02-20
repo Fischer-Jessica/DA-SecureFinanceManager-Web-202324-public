@@ -1,46 +1,50 @@
-.register-div {
+/** Represents the container for the registration component. */
+.register-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin-bottom: 50px;
 }
 
+/** Represents the section styling for the registration component. */
 .register-section {
   background-color: #3586ff;
   padding: 40px;
   border-radius: 10px;
 }
 
+/** Represents the content styling for the registration component. */
 .register-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+/** Represents the form styling for the registration component. */
 .register-form {
   font-weight: bolder;
-  width: 50%;
+  width: 60%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 40px;
   border-radius: 15px;
 }
 
-.form-title {
+/** Represents the styling for headings within the registration component. */
+h1 {
   text-align: center;
   color: #fff;
   margin-bottom: 20px;
 }
 
-form > div {
-  margin-bottom: 15px;
-}
-
+/** Represents the styling for labels within the registration form. */
 label {
   margin-top: 18px;
   display: block;
   color: #fff;
 }
 
+/** Represents the styling for input fields within the registration form. */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -54,6 +58,7 @@ input[type="submit"] {
   color: #2C5282;
 }
 
+/** Represents the styling for buttons within the registration component. */
 #register,
 #go-to-login {
   width: 100%;
@@ -66,33 +71,46 @@ input[type="submit"] {
   background-color: #4caf50;
 }
 
+/** Represents the styling for buttons within the registration component on hover. */
 #register:hover,
 #go-to-login:hover {
   background-color: #45a049;
 }
 
-.login-div {
+/** Represents the container for the login button within the registration component. */
+.login-button-container {
   margin-left: 22px;
-  width: 45%;
+  width: 30%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 @media screen and (max-width: 768px) {
+  /** Represents the responsive styling for the registration content on smaller screens. */
   .register-content {
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
 
-  .register-form {
-    width: 88%;
+  /** Represents the responsive styling for the registration section on smaller screens. */
+  .register-section {
+    width: 90%;
+    padding: 20px;
+    margin: 22px;
   }
 
-  .login-div {
+  /** Represents the responsive styling for the registration form on smaller screens. */
+  .register-form {
+    width: 90%;
+    padding: 20px;
+  }
+
+  /** Represents the responsive styling for the login button container on smaller screens. */
+  .login-button-container {
     margin-left: 0;
     margin-top: 20px;
-    width: 100%;
+    width: 90%;
   }
 }

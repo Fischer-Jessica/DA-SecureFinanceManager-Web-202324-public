@@ -1,25 +1,28 @@
-.login-div {
+/* Styles for the login container */
+.login-container {
   display: flex;
   padding: 1em;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin-bottom: 1em;
 }
 
+/* Styles for the login section */
 .login-section {
   background-color: #3586ff;
   padding: 40px;
   border-radius: 10px;
 }
 
+/* Styles for the login content */
 .login-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.register-div {
+/* Styles for the register button */
+.register-button-container {
   margin-right: 22px;
   width: 45%;
   display: flex;
@@ -27,30 +30,35 @@
   align-items: center;
 }
 
-.login-form {
+/* Styles for the login form */
+.login-form-container {
   width: 100%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 40px;
   border-radius: 15px;
 }
 
-.form-title {
+/* Styles for the form title */
+h1 {
   font-weight: bolder;
   text-align: center;
   color: #fff;
   margin-bottom: 20px;
 }
 
+/* Styles for form elements */
 form > div {
   margin-bottom: 15px;
 }
 
+/* Styles for labels */
 label {
   margin-top: 18px;
   display: block;
   color: #fff;
 }
 
+/* Styles for text input fields */
 input[type="text"],
 input[type="password"] {
   width: 100%;
@@ -62,6 +70,7 @@ input[type="password"] {
   color: #2C5282;
 }
 
+/* Styles for buttons */
 #login,
 #go-to-register {
   width: 100%;
@@ -74,11 +83,13 @@ input[type="password"] {
   background-color: #4caf50;
 }
 
+/* Hover styles for buttons */
 #login:hover,
 #go-to-register:hover {
   background-color: #45a049;
 }
 
+/* Media query for smaller screens */
 @media screen and (max-width: 768px) {
   .login-content {
     flex-direction: column;
@@ -86,11 +97,11 @@ input[type="password"] {
     justify-content: center;
   }
 
-  .login-form {
+  .login-form-container {
     width: 88%;
   }
 
-  .register-div {
+  .register-button-container {
     margin-right: 0;
     margin-bottom: 20px;
     width: 100%;
