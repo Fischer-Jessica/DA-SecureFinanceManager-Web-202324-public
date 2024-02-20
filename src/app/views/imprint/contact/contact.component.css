@@ -1,19 +1,29 @@
+/**
+ * Styles for the container of the business card section.
+ * Centers the content vertically and horizontally on the page.
+ */
 .page-div {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  padding-top: 1.5rem; /* Statt px eine relative Größe verwenden */
+  padding-top: 1.5vh;
 }
 
+/**
+ * Styles for the business card section.
+ * Sets the font size and border radius using relative units.
+ * Adjusts padding and width for responsiveness.
+ */
 .business-card {
   font-size: 1.8vw;
-  border-radius: 2.5vw; /* Reduziere den Border-Radius entsprechend */
+  border-radius: 2.5vw;
   background-color: #2b2b2b;
-  padding: 2.5vw; /* Nutze eine relative Größe für den Innenabstand */
+  padding: 2.5vw;
   width: 66%;
 }
 
+/* Media queries for smaller screens */
 @media (max-width: 768px) {
   .business-card {
     font-size: 2.5vw;

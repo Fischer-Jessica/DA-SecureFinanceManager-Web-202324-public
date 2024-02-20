@@ -129,28 +129,28 @@
     }
   },
   "imprint": {
-    "text_team": "Team",
-    "text_contact": "Contact",
-    "text_rights": "all rights reserved",
+    "ui_link_team": "Team",
+    "ui_link_contact": "Contact",
+    "ui_text_rights": "all rights reserved",
     "team": {
-      "headline_team": "Team",
-      "headline_project_team": "Project Team",
-      "text_project_member_founder": "Founder and Full Stack Developer",
-      "text_project_member_ios": "iOS Developer",
-      "text_project_member_android": "Android Developer",
-      "headline_website_team": "Website Team",
-      "text_website_member_programmer": "Website Developer",
-      "text_website_member_designer": "Website Designer",
-      "text_website_member_marketing": "Website Marketer",
-      "headline_backend_team": "Backend Team",
-      "text_backend_member_programmer": "Backend Developer",
-      "text_backend_member_database": "Database Developer",
-      "text_backend_member_support": "Support and Security"
+      "ui_headline_team": "Team",
+      "ui_headline_project_team": "Project Team",
+      "ui_caption_project_member__founder": "Founder and Full Stack Developer",
+      "ui_caption_project_member__ios": "iOS Developer",
+      "ui_caption_project_member__android": "Android Developer",
+      "ui_headline_website_team": "Website Team",
+      "ui_caption_website_member__programmer": "Website Developer",
+      "ui_caption_website_member__designer": "Website Designer",
+      "ui_caption_website_member__marketing": "Website Marketer",
+      "ui_headline_backend_team": "Backend Team",
+      "ui_caption_backend_member__programmer": "Backend Developer",
+      "ui_caption_backend_member__database": "Database Developer",
+      "ui_caption_backend_member__support": "Support and Security"
     },
     "contact": {
-      "text_business_card": "BusinessCard",
-      "text_programmer": "Programmer",
-      "text_education": "Education"
+      "ui_text_business_card": "BusinessCard",
+      "ui_text_programmer": "Programmer",
+      "ui_text_education": "Education"
     }
   }
 }

@@ -1,13 +1,17 @@
 <footer class="footer">
+  <!-- Wave background elements -->
   <div class="waves">
     <div class="wave" id="wave1"></div>
     <div class="wave" id="wave2"></div>
     <div class="wave" id="wave3"></div>
     <div class="wave" id="wave4"></div>
   </div>
+  <!-- Menu links -->
   <ul class="menu">
-    <li class="menu__item"><a class="menu__link" routerLink="/team">{{ 'imprint.text_team' | translate }}</a></li>
-    <li class="menu__item"><a class="menu__link" routerLink="/contact">{{ 'imprint.text_contact' | translate }}</a></li>
+    <li class="menu_item"><a class="menu_link" routerLink="/team">{{ 'imprint.ui_link_team' | translate }}</a></li>
+    <li class="menu_item"><a class="menu_link" routerLink="/contact">{{ 'imprint.ui_link_contact' | translate }}</a>
+    </li>
   </ul>
-  <p>&copy;2024 Fischer, Jessica Christina | {{ 'imprint.text_rights' | translate }}</p>
+  <!-- Copyright text -->
+  <p>&copy;2024 Fischer, Jessica Christina | {{ 'imprint.ui_text_rights' | translate }}</p>
 </footer>

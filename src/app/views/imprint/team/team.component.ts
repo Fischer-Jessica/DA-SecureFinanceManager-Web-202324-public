@@ -1,16 +1,16 @@
 import {Component} from '@angular/core';
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-team',
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.css']
 })
-export class TeamComponent {
-  constructor(private router: Router) {
-  }
 
-  goToBusinessCard() {
-    this.router.navigateByUrl('/contact');
-  }
+/**
+ * Component for displaying information about the development team.
+ * @class TeamComponent
+ * @author Fischer
+ * @fullName Fischer, Jessica Christina
+ */
+export class TeamComponent {
 }

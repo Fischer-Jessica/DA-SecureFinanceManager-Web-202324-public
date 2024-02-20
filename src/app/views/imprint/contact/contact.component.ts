@@ -5,6 +5,12 @@ import {Component} from '@angular/core';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
-export class ContactComponent {
 
+/**
+ * Component for the contact page.
+ * @class ContactComponent
+ * @author Fischer
+ * @fullName Fischer, Jessica Christina
+ */
+export class ContactComponent {
 }

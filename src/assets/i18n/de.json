@@ -129,28 +129,28 @@
     }
   },
   "imprint": {
-    "text_team": "Team",
-    "text_contact": "Kontakt",
-    "text_rights": "alle Rechte vorbehalten",
+    "ui_link_team": "Team",
+    "ui_link_contact": "Kontakt",
+    "ui_text_rights": "alle Rechte vorbehalten",
     "team": {
-      "headline_team": "Team",
-      "headline_project_team": "Projektteam",
-      "text_project_member_founder": "Gründer und Full-Stack-Entwickler",
-      "text_project_member_ios": "iOS-Entwickler",
-      "text_project_member_android": "Android-Entwickler",
-      "headline_website_team": "Webseitenteam",
-      "text_website_member_programmer": "Webseitenentwickler",
-      "text_website_member_designer": "Webseitendesigner",
-      "text_website_member_marketing": "Webseitenvermarkter",
-      "headline_backend_team": "Backend-Team",
-      "text_backend_member_programmer": "Backend-Entwickler",
-      "text_backend_member_database": "Datenbank-Entwickler",
-      "text_backend_member_support": "Support und Sicherheit"
+      "ui_headline_team": "Team",
+      "ui_headline_project_team": "Projektteam",
+      "ui_caption_project_member__founder": "Gründer und Full-Stack-Entwickler",
+      "ui_caption_project_member__ios": "iOS-Entwickler",
+      "ui_caption_project_member__android": "Android-Entwickler",
+      "ui_headline_backend_team": "Backend-Team",
+      "ui_caption_backend_member__programmer": "Backend-Entwickler",
+      "ui_caption_backend_member__database": "Datenbank-Entwickler",
+      "ui_caption_backend_member__support": "Support und Sicherheit",
+      "ui_headline_website_team": "Webseitenteam",
+      "ui_caption_website_member__programmer": "Webseitenentwickler",
+      "ui_caption_website_member__designer": "Webseitendesigner",
+      "ui_caption_website_member__marketing": "Webseitenvermarkter"
     },
     "contact": {
-      "text_business_card": "Visitenkarte",
-      "text_programmer": "Programmierer",
-      "text_education": "Ausbildung"
+      "ui_text_business_card": "Visitenkarte",
+      "ui_text_programmer": "Programmierer",
+      "ui_text_education": "Ausbildung"
     }
   }
 }

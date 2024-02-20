@@ -1,9 +1,11 @@
+/** Global CSS styles for the application. */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/** Styles for the footer component. */
 .footer {
   position: relative;
   width: 100%;
@@ -16,6 +18,7 @@
   flex-direction: column;
 }
 
+/** Styles for the menu within the footer component. */
 .menu {
   position: relative;
   display: flex;
@@ -25,11 +28,13 @@
   flex-wrap: wrap;
 }
 
-.menu__item {
+/** Styles for individual menu items within the footer component. */
+.menu_item {
   list-style: none;
 }
 
-.menu__link {
+/** Styles for links within the menu of the footer component. */
+.menu_link {
   font-size: 1.2rem;
   color: #fff;
   margin: 0 10px;
@@ -40,10 +45,12 @@
   font-weight: 300;
 }
 
-.menu__link:hover {
+/** Styles for hovered links within the menu of the footer component. */
+.menu_link:hover {
   opacity: 1;
 }
 
+/** Styles for paragraphs within the footer component. */
 .footer p {
   color: #fff;
   margin: 15px 0 10px 0;
@@ -51,6 +58,7 @@
   font-weight: 300;
 }
 
+/** Styles for the wave background element within the footer component. */
 .wave {
   position: absolute;
   top: -100px;
@@ -61,6 +69,7 @@
   background-size: 1000px 100px;
 }
 
+/** Styles for specific waves within the footer component. */
 .wave#wave1 {
   z-index: 1000;
   opacity: 1;
@@ -89,6 +98,7 @@
   animation: animate 3s linear infinite;
 }
 
+/** Keyframes for animating the wave background element. */
 @keyframes animateWaves {
   0% {
     background-position-x: 1000px;
@@ -107,6 +117,7 @@
   }
 }
 
+/** Media query for adjusting footer margin on smaller screens. */
 @media screen and (max-height: 800px) {
   .footer {
     margin-top: 100px;

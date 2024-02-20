@@ -6,7 +6,17 @@ import {Component} from '@angular/core';
   styleUrls: ['./imprint.component.css']
 })
 
+/**
+ * Component for displaying the imprint information.
+ * @class ImprintComponent
+ * @author Fischer
+ * @fullName Fischer, Jessica Christina
+ */
 export class ImprintComponent {
+  /**
+   * Creates an instance of ImprintComponent.
+   * @memberof ImprintComponent
+   */
   constructor() {
   }
 }
