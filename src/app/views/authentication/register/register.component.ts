@@ -62,7 +62,7 @@ export class RegisterComponent {
       },
       error: (err) => {
         this.snackBarService.showAlert(this.translate.instant('alert_error'));
-        console.log(err);
+        console.error(this.translate.instant('authorisation.register.console_error_register'), err);
       }
     });
   }

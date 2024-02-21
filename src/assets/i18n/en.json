@@ -10,7 +10,8 @@
       "ui_label_password": "Password:",
       "ui_placeholder_password": "Your password",
       "ui_button_register": "Register",
-      "alert_wrong_credentials": "Incorrect login credentials. Please try again."
+      "alert_wrong_credentials": "Incorrect login credentials. Please try again.",
+      "console_error_login": "Error logging in:"
     },
     "register": {
       "ui_headline/button_sign_up": "Register",
@@ -24,13 +25,15 @@
       "ui_placeholder_email": "Your e-mail-address",
       "ui_label_password": "Password:",
       "ui_placeholder_password": "Your password",
-      "ui_button_login": "I already have an account."
+      "ui_button_login": "I already have an account.",
+      "console_error_register": "Error registering: "
     }
   },
   "logged-in-homepage": {
     "cancel-action": "Cancel",
     "button_delete": "Delete",
     "button_update": "Update",
+    "alert_invalid_formData": "invalid form data",
     "navbar": {
       "ui_link_categories": "Categories",
       "ui_link_labels": "Labels",
@@ -116,14 +119,13 @@
       }
     },
     "user": {
-      "label_username": "Username:",
-      "label_password": "Password:",
-      "label_email": "Email Address:",
-      "label_first_name": "First Name:",
-      "label_last_name": "Last Name:",
-      "button_update_user": "Update User Data",
-      "button_delete_user": "Delete User",
-      "confirm_delete_user": "Are you sure you want to delete your account? This action cannot be undone. You will lose all categories, subcategories, entries and labels."
+      "ui_button_update_user": "Update User Data",
+      "ui_button_delete_user": "Delete User",
+      "ui_button_logout": "Logout",
+      "alert_confirm_delete_user": "Are you sure you want to delete your account? This action cannot be undone. You will lose all categories, subcategories, entries and labels.",
+      "console_error_fetching_user": "Error fetching user:",
+      "console_error_updating_user": "Error updating user:",
+      "console_error_deleting_user": "Error deleting user:"
     }
   },
   "imprint": {

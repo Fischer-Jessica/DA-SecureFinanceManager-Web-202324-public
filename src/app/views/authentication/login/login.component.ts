@@ -64,7 +64,7 @@ export class LoginComponent {
           this.snackBarService.showAlert(this.translate.instant('authorisation.login.alert_wrong_credentials'));
         } else {
           this.snackBarService.showAlert(this.translate.instant('alert_error'));
-          console.log(err);
+          console.error(this.translate.instant('authorisation.login.console_error_login'), err);
         }
       }
     });

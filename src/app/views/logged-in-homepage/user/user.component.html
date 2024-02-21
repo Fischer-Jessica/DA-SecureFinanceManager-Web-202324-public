@@ -1,35 +1,44 @@
-<form #userForm="ngForm" class="user-form" (ngSubmit)="onSubmit(userForm)">
+<!--
+  Form for updating user information.
+  Binds input fields to user object properties using ngModel for two-way data binding.
+  Calls onSubmit method on form submission.
+-->
+<form #userForm="ngForm" class="form" (ngSubmit)="onSubmit(userForm)">
   <div class="form-group">
-    <label for="username" class="form-label">{{ 'logged-in-homepage.user.label_username' | translate }}</label>
+    <label for="username" class="form-label">{{ 'authorisation.register.ui_label_username' | translate }}</label>
     <input type="text" id="username" name="username" [(ngModel)]="user.username" required class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="password" class="form-label">{{ 'logged-in-homepage.user.label_password' | translate }}</label>
+    <label for="password" class="form-label">{{ 'authorisation.register.ui_label_password' | translate }}</label>
     <input type="password" id="password" name="password" [(ngModel)]="user.password" required class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="email" class="form-label">{{ 'logged-in-homepage.user.label_email' | translate }}</label>
+    <label for="email" class="form-label">{{ 'authorisation.register.ui_label_email' | translate }}</label>
     <input type="email" id="email" name="email" [(ngModel)]="user.emailAddress" class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="firstName" class="form-label">{{ 'logged-in-homepage.user.label_first_name' | translate }}</label>
+    <label for="firstName" class="form-label">{{ 'authorisation.register.ui_label_first_name' | translate }}</label>
     <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" class="form-input">
   </div>
 
   <div class="form-group">
-    <label for="lastName" class="form-label">{{ 'logged-in-homepage.user.label_last_name' | translate }}</label>
+    <label for="lastName" class="form-label">{{ 'authorisation.register.ui_label_last_name' | translate }}</label>
     <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" class="form-input">
   </div>
 
+  <!-- Form actions including buttons for deleting user, updating user, and logging out -->
   <div class="form-actions">
-    <button type="submit" mat-raised-button
-            color="primary">{{ 'logged-in-homepage.user.button_update_user' | translate }}
+    <button class="delete-button form-button"
+            (click)="deleteUser()">{{ 'logged-in-homepage.user.ui_button_delete_user' | translate }}
     </button>
-    <button mat-raised-button color="warn" class="delete-user"
-            (click)="deleteUser()">{{ 'logged-in-homepage.user.button_delete_user' | translate }}
+    <button type="submit"
+            class="update-button form-button">{{ 'logged-in-homepage.user.ui_button_update_user' | translate }}
+    </button>
+    <button class="goBack-button form-button"
+            (click)="logout()">{{ 'logged-in-homepage.user.ui_button_logout' | translate }}
     </button>
   </div>
 </form>
