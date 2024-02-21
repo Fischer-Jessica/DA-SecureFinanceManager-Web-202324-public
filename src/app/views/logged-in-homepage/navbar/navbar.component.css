@@ -1,3 +1,4 @@
+/* Styles for the unordered list */
 ul {
   list-style-type: none;
   margin: 0px 10px 30px;
@@ -11,14 +12,17 @@ ul {
   flex-wrap: wrap;
 }
 
-img {
-  padding: 8px 10px;
-}
-
+/* Styles for list items */
 li {
   margin-left: 5px;
 }
 
+/* Styles for images */
+img {
+  padding: 8px 10px;
+}
+
+/* Styles for links within list items */
 li a {
   display: block;
   color: white;
@@ -29,28 +33,32 @@ li a {
   text-decoration: none;
 }
 
+/* Hover styles for links */
 li a:hover {
   border-radius: 33px;
   background-color: #3c76cc;
 }
 
+/* Styles for active list items */
 .active {
   border-radius: 33px;
   background-color: #2d5899;
 }
 
+/* Styles for user-specific list item */
 .user {
   margin-left: auto;
   margin-right: 10px;
 }
 
-@media screen and (max-width: 768px) {
+/* Media query for smaller screens */
+@media screen and (max-width: 500px) {
   ul {
     justify-content: flex-start;
   }
 
   li a {
-    padding: 7px;
-    font-size: 22px;
+    padding-left: 7px;
+    padding-right: 7px;
   }
 }

@@ -32,11 +32,9 @@
     "button_delete": "Delete",
     "button_update": "Update",
     "navbar": {
-      "link_overview": "Overview",
-      "link_categories": "Categories",
-      "link_labels": "Labels",
-      "link_diagrams": "Diagrams",
-      "link_user": "User"
+      "ui_link_categories": "Categories",
+      "ui_link_labels": "Labels",
+      "ui_link_user": "User"
     },
     "categories": {
       "headline_categories": "Categories",
