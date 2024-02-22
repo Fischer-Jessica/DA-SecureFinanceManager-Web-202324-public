@@ -1,43 +1,55 @@
-<form #entryForm="ngForm" (ngSubmit)="onSubmit(entryForm.value)" class="entry-form">
+<!-- Angular form with ngSubmit event -->
+<form #entryForm="ngForm" (ngSubmit)="onSubmit(entryForm.value)" class="form">
+
+  <!-- Input for entry name -->
   <div class="form-group">
     <label for="entryName"
-           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_name' | translate }}</label>
-    <input type="text" id="entryName" name="entryName" [(ngModel)]="entry.entryName" required class="form-input">
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_name' | translate }}</label>
+    <input type="text" id="entryName" name="entryName"
+           placeholder="{{ 'logged-in-homepage.categories.subcategories.entries.create-entry.ui_placeholder_entry_name' | translate }}"
+           [(ngModel)]="entry.entryName" required class="form-input">
   </div>
 
+  <!-- Textarea for entry description -->
   <div class="form-group">
     <label for="entryDescription"
-           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_description' | translate }}</label>
-    <textarea id="entryDescription" name="entryDescription" [(ngModel)]="entry.entryDescription"
-              class="form-textarea"></textarea>
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_description' | translate }}</label>
+    <textarea id="entryDescription" name="entryDescription"
+              placeholder="{{ 'logged-in-homepage.categories.subcategories.entries.create-entry.ui_placeholder_entry_description' | translate }}"
+              [(ngModel)]="entry.entryDescription"
+              class="form-input"></textarea>
   </div>
 
+  <!-- Input for entry amount -->
   <div class="form-group">
     <label for="entryAmount"
-           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount' | translate }}</label>
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_amount' | translate }}</label>
     <input type="number" id="entryAmount" name="entryAmount" [(ngModel)]="entry.entryAmount" required
            class="form-input">
   </div>
 
+  <!-- Input for entry time of transaction -->
   <div class="form-group">
     <label for="entryTimeOfTransaction"
-           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date' | translate }}</label>
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_time_of_transaction' | translate }}</label>
     <input type="datetime-local" id="entryTimeOfTransaction" name="entryTimeOfTransaction"
            [(ngModel)]="entry.entryTimeOfTransaction" required class="form-input">
   </div>
 
+  <!-- Input for entry attachment -->
   <div class="form-group">
     <label for="entryAttachment"
-           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.create-entry.label_entry_attachment' | translate }}</label>
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_attachment' | translate }}</label>
     <input type="file" id="entryAttachment" name="entryAttachment" [(ngModel)]="entry.entryAttachment"
            class="form-input">
   </div>
 
+  <!-- Form submission buttons -->
   <div class="form-actions">
-    <button type="submit" mat-raised-button
-            color="primary">{{ 'logged-in-homepage.categories.subcategories.entries.button_create_entry' | translate }}
+    <button type="submit"
+            class="create-button form-button">{{ 'logged-in-homepage.categories.subcategories.entries.create-entry.ui_button_create_entry' | translate }}
     </button>
-    <button type="button" mat-raised-button color="warn"
+    <button type="button" class="cancel-button form-button"
             (click)="returnToEntries()">{{ 'logged-in-homepage.cancel-action' | translate }}
     </button>
   </div>

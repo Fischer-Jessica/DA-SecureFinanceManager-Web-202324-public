@@ -84,15 +84,19 @@
           "button_return_subcategories": "Zurück zu Unterkategorien",
           "text_your_entries": "Ihre Einträge, der Unterkategorie mit folgender Id angehörig:",
           "text_no_entries": "Keine Einträge vorhanden.",
-          "label_entry_name": "Name des Eintrags:",
-          "label_entry_description": "Beschreibung des Eintrags:",
-          "label_entry_amount": "Wert des Eintrags:",
-          "label_entry_date": "Datum des Eintrags:",
+          "ui_label_entry_name": "Name des Eintrags:",
+          "ui_label_entry_description": "Beschreibung des Eintrags:",
+          "ui_label_entry_amount": "Wert des Eintrags:",
+          "ui_label_entry_time_of_transaction": "Datum des Eintrags:",
           "label_entry_creation_date": "Erstellungsdatum des Eintrags:",
-          "label_entry_attachment": "Anhang des Eintrags:",
+          "ui_label_entry_attachment": "Anhang des Eintrags:",
           "confirm_delete_entry": "Möchten Sie den Eintrag wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
           "create-entry": {
-            "label_entry_attachment": "Anhang des Eintrags:"
+            "ui_placeholder_entry_name": "Name des Eintrags",
+            "ui_placeholder_entry_description": "Beschreibung des Eintrags",
+            "ui_button_create_entry": "neuen Eintrag erstellen",
+            "alert_create_entry_missing_fields": "Sie müssen den Betrag und den Zeitpunkt des Eintrags eingeben.",
+            "console_error_creating_entry": "Fehler beim Erstellen des Eintrags:"
           },
           "update-entry": {
             "button_update_entry": "Eintrag aktualisieren"

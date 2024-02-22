@@ -3,28 +3,66 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {EntryService} from "../../../../../../logic/services/EntryService";
 import {Entry} from "../../../../../../logic/models/Entry";
 import {LocalStorageService} from "../../../../../../logic/LocalStorageService";
+import {TranslateService} from "@ngx-translate/core";
+import {SnackBarService} from "../../../../../../logic/services/SnackBarService";
 
 @Component({
   selector: 'app-create-entry',
   templateUrl: './create-entry.component.html',
-  styleUrls: ['./create-entry.component.css']
+  styleUrls: ['./create-entry.component.css', '../../../../logged-in-homepage.component.css']
 })
+/**
+ * Component for creating a new entry
+ * @class CreateEntryComponent
+ * @implements {OnInit}
+ * @author Fischer
+ * @fullName Fischer, Jessica Christina
+ */
 export class CreateEntryComponent implements OnInit {
+  /**
+   * The entry object to store entry details
+   * @type {Entry}
+   */
   entry: Entry = {
     subcategoryId: 0,
     entryAmount: 0,
     entryTimeOfTransaction: ''
   };
 
+  /**
+   * The categoryId in which the subcategory is located
+   * @type {number}
+   */
   private categoryId: number | undefined;
+
+  /**
+   * The subcategoryId in which the entry is located
+   * @type {number}
+   */
   private subcategoryId: number | undefined;
 
+  /**
+   * Constructor for CreateEntryComponent
+   * @param route The Angular ActivatedRoute service
+   * @param localStorageService The service for managing local storage
+   * @param router The Angular Router service
+   * @param translateService The service for translation
+   * @param snackBarService The service for displaying snack bar messages
+   * @param entryService The service for entry operations
+   * @memberOf CreateEntryComponent
+   */
   constructor(private route: ActivatedRoute,
               private localStorageService: LocalStorageService,
               private router: Router,
-              private apiService: EntryService) {
+              private translateService: TranslateService,
+              private snackBarService: SnackBarService,
+              private entryService: EntryService) {
   }
 
+  /**
+   * Lifecycle hook called after component initialization
+   * @memberOf CreateEntryComponent
+   */
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
@@ -37,6 +75,10 @@ export class CreateEntryComponent implements OnInit {
     }
   }
 
+  /**
+   * Method to set the initial date and time for the entry
+   * @memberOf CreateEntryComponent
+   */
   setInitialDateTime() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -50,10 +92,16 @@ export class CreateEntryComponent implements OnInit {
     this.entry.entryTimeOfTransaction = formattedDateTime;
   }
 
+  /**
+   * Method to handle form submission
+   * @param formData The form data submitted
+   * @memberOf CreateEntryComponent
+   */
   onSubmit(formData: Entry) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      console.error('User is not logged in');
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('authentication/login')
       return;
     }
 
@@ -64,17 +112,35 @@ export class CreateEntryComponent implements OnInit {
 
     formData.entryTimeOfTransaction = formattedDateTime;
 
+    if (formData.entryAmount === 0 || formData.entryTimeOfTransaction === '') {
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'));
+      return;
+    }
+
     const loggedInUser = JSON.parse(storedUser);
-    this.apiService.insertEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, formData).subscribe({
+    this.entryService.insertEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, formData).subscribe({
       next: (response) => {
         this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(this.subcategoryId)}`);
       },
       error: (err) => {
-        console.log(err);
+        if (err.status === 401) {
+          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+          this.localStorageService.removeItem('loggedInUser');
+          this.router.navigateByUrl('/authentication/login');
+        } else if (err.status === 400) {
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'));
+        } else {
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+          console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.console_error_creating_entry'), err);
+        }
       }
     });
   }
 
+  /**
+   * Method to navigate back to entries
+   * @memberOf CreateEntryComponent
+   */
   returnToEntries() {
     this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(this.subcategoryId)}`);
   }

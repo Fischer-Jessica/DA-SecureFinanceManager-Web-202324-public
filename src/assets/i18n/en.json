@@ -84,15 +84,19 @@
           "button_return_subcategories": "Back to Subcategories",
           "text_your_entries": "Your entries belonging to the subcategory with the following Id:",
           "text_no_entries": "No entries available.",
-          "label_entry_name": "Entry Name:",
-          "label_entry_description": "Entry Description:",
-          "label_entry_amount": "Entry Value:",
-          "label_entry_date": "Entry Date:",
+          "ui_label_entry_name": "Entry Name:",
+          "ui_label_entry_description": "Entry Description:",
+          "ui_label_entry_amount": "Entry Value:",
+          "ui_label_entry_time_of_transaction": "Entry Date:",
           "label_entry_creation_date": "Entry Creation Date:",
-          "label_entry_attachment": "Entry Attachment:",
+          "ui_label_entry_attachment": "Entry Attachment:",
           "confirm_delete_entry": "Are you sure you want to delete this entry? This action cannot be undone.",
           "create-entry": {
-            "label_entry_attachment": "Entry Attachment:"
+            "ui_placeholder_entry_name": "name of the entry",
+            "ui_placeholder_entry_description": "description of the entry",
+            "ui_button_create_entry": "create new entry",
+            "alert_create_entry_missing_fields": "You must provide the amount and the time of the entry.",
+            "console_error_creating_entry": "Error creating entry:"
           },
           "update-entry": {
             "button_update_entry": "Update Entry"
