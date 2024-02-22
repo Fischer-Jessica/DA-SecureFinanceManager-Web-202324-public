@@ -4,45 +4,70 @@ import {LabelService} from "../../../logic/services/LabelService";
 import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
 import {ColourService} from "../../../logic/services/ColourService";
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
+import {SnackBarService} from "../../../logic/services/SnackBarService";
 
 @Component({
   selector: 'logged-in-labels',
   templateUrl: './labels.component.html',
-  styleUrls: ['./labels.component.css']
+  styleUrls: ['./labels.component.css', '../logged-in-homepage.component.css']
 })
+
+/**
+ * Component for managing labels
+ * @class LabelsComponent
+ * @implements {OnInit}
+ * @author Fischer
+ * @fullName Fischer, Jessica Christina
+ */
 export class LabelsComponent implements OnInit {
+  /**
+   * Array to store label data along with their corresponding colours
+   * @type {{ label: Label; colourHex: string }[]}
+   */
   labelsData: { label: Label; colourHex: string }[] = [];
 
+  /**
+   * Constructor for LabelsComponent
+   * @param router The Angular Router service
+   * @param labelService The service for label operations
+   * @param localStorageService The service for managing local storage
+   * @param colourService The service for managing colours
+   * @param cdr The Angular ChangeDetectorRef service
+   * @param snackBarService The service for displaying snack bar messages
+   * @param translate The service for translation
+   * @memberOf LabelsComponent
+   */
   constructor(private router: Router,
-              private apiService: LabelService,
+              private labelService: LabelService,
               private localStorageService: LocalStorageService,
               private colourService: ColourService,
               private cdr: ChangeDetectorRef,
-              private snackBar: MatSnackBar,
+              private snackBarService: SnackBarService,
               private translate: TranslateService) {
   }
 
+  /**
+   * Lifecycle hook that is called after Angular has initialized all data-bound properties of a directive.
+   * @memberOf LabelsComponent
+   */
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
-    if (storedUser) {
-      const loggedInUser = JSON.parse(storedUser);
-      this.fetchLabels(loggedInUser.username, loggedInUser.password);
+    if (!storedUser) {
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
+      return;
     }
+    const loggedInUser = JSON.parse(storedUser);
+    this.fetchLabels(loggedInUser.username, loggedInUser.password);
   }
 
-  showAlert(message: string): void {
-    const config = new MatSnackBarConfig();
-    config.duration = 10000; // Anzeigedauer des Alerts in Millisekunden
-    config.horizontalPosition = 'center';
-    config.verticalPosition = 'top'; // Positionierung oben auf der Website
-
-    this.snackBar.open(message, 'Close', config);
-  }
-
+  /**
+   * Method to fetch labels data
+   * @memberOf LabelsComponent
+   */
   private fetchLabels(username: string, password: string): void {
-    this.apiService.getLabels(username, password)
+    this.labelService.getLabels(username, password)
       .subscribe(
         (result) => {
           this.labelsData = []; // Clear existing data
@@ -62,24 +87,36 @@ export class LabelsComponent implements OnInit {
                 });
               },
               (error) => {
-                console.error('Error fetching colour:', error);
-                // Handle error (e.g., display an error message)
+                if (error.status === 404) {
+                  this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.colours.alert_colours_not_found'));
+                } else {
+                  this.snackBarService.showAlert(this.translate.instant('alert_error'));
+                  console.error(this.translate.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
+                }
               }
             );
           }
         },
         (error) => {
           if (error.status === 404) {
-            this.showAlert(this.translate.instant('logged-in-homepage.labels.alert_create_label_first'));
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.alert_create_label_first'));
           } else if (error.status === 401) {
-            this.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
           } else {
-            this.showAlert(this.translate.instant('logged-in-homepage.labels.error_fetching_labels'));
+            this.snackBarService.showAlert(this.translate.instant('alert_error'));
+            console.error(this.translate.instant('logged-in-homepage.labels.console_error_fetching_labels'), error);
           }
         }
       );
   }
 
+  /**
+   * Method to delete a label
+   * @param labelId The ID of the label to delete
+   * @memberOf LabelsComponent
+   */
   deleteLabel(labelId: number | undefined) {
     const confirmDelete = confirm(this.translate.instant('logged-in-homepage.labels.confirm_delete_label'));
     if (!confirmDelete) {
@@ -88,22 +125,39 @@ export class LabelsComponent implements OnInit {
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
       return;
     }
     const loggedInUser = JSON.parse(storedUser);
-    this.apiService.deleteLabel(loggedInUser.username, loggedInUser.password, labelId)
+    this.labelService.deleteLabel(loggedInUser.username, loggedInUser.password, labelId)
       .subscribe(
         (result) => {
           this.labelsData = this.labelsData.filter((item) => item.label.labelId !== labelId);
           this.cdr.detectChanges(); // Trigger change detection
         },
         (error) => {
-          console.error('Error deleting label:', error);
-          // Handle error (e.g., display an error message)
+          if (error.status === 401) {
+            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
+          } else if (error.status === 400) {
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.alert_parameter_invalid'));
+          } else if (error.status === 404) {
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.alert_label_not_found'));
+          } else {
+            this.snackBarService.showAlert(this.translate.instant('alert_error'));
+            console.error(this.translate.instant('logged-in-homepage.labels.console_error_deleting_label'), error);
+          }
         }
       );
   }
 
+  /**
+   * Method to navigate to the entries associated with a label
+   * @param labelId The ID of the label
+   * @memberOf LabelsComponent
+   */
   showEntries(labelId: number | undefined) {
     this.router.navigateByUrl(`/logged-in-homepage/labels/${labelId}/entries`);
   }

@@ -115,14 +115,17 @@
       }
     },
     "labels": {
-      "headline_labels": "Labels",
-      "ui_button_create_label": "neues Label erstellen",
-      "text_your_labels": "Ihre Labels:",
-      "text_no_labels": "Keine Labels vorhanden.",
+      "ui_headline_labels": "Labels",
+      "ui_text_your_labels": "Ihre Labels:",
+      "ui_text_no_labels": "Keine Labels vorhanden.",
       "alert_create_label_first": "Sie haben noch kein Label erstellt.",
       "alert_user_not_logged_in": "Sie sind nicht angemeldet.",
       "alert_error_fetching_labels": "Fehler beim Laden der Labels.",
       "confirm_delete_label": "Möchten Sie das Label wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "console_error_fetching_labels": "Fehler beim Abrufen der Labels:",
+      "alert_parameter_invalid": "Die labelId ist weniger oder gleich 0.",
+      "alert_label_not_found": "Das ausgewählte Label konnte nicht gefunden werden.",
+      "console_error_deleting_label": "Fehler beim Löschen des Labels:",
       "create-label": {
         "ui_label_label_name": "Name des Labels:",
         "ui_placeholder_label_name": "Name des Labels",
@@ -146,6 +149,10 @@
         "text_no_label_entries": "Keine Label-Einträge vorhanden.",
         "button_remove_entry": "Eintrag entfernen"
       }
+    },
+    "colours": {
+      "alert_colours_not_found": "Es konnten keine Farben gefunden werden.",
+      "console_error_fetching_colours": "Fehler beim Abrufen der Farben:"
     },
     "user": {
       "ui_button_update_user": "Benutzerdaten aktualisieren",

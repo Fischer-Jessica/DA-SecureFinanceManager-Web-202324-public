@@ -1,25 +1,44 @@
-<h2>{{ 'logged-in-homepage.labels.headline_labels' | translate }}</h2>
-<button mat-raised-button color="primary"
-        routerLink='/logged-in-homepage/create-label'>{{ 'logged-in-homepage.labels.button_create_label' | translate }}
+<!-- Headline for labels -->
+<h2>{{ 'logged-in-homepage.labels.ui_headline_labels' | translate }}</h2>
+
+<!-- Button to create a new label -->
+<button class="create-button headline-button"
+        routerLink='/logged-in-homepage/create-label'>{{ 'logged-in-homepage.labels.create-label.ui_button_create_label' | translate }}
 </button>
-<p>{{ 'logged-in-homepage.labels.text_your_labels' | translate }}</p>
-<div *ngIf="labelsData && labelsData.length > 0; else noLabels" class="label-container">
-  <div *ngFor="let labelData of labelsData" class="label-item">
-    <mat-card class="card">
+
+<!-- Text describing the purpose of labels -->
+<p>{{ 'logged-in-homepage.labels.ui_text_your_labels' | translate }}</p>
+
+<!-- Container for displaying labels -->
+<div *ngIf="labelsData && labelsData.length > 0; else noLabels" class="item-container">
+
+  <!-- Iterate over each label data -->
+  <div *ngFor="let labelData of labelsData" class="item">
+
+    <!-- Material card for each label -->
+    <mat-card class="item-card">
+
+      <!-- Header of the card, clickable to show entries -->
       <mat-card-header (click)="showEntries(labelData.label.labelId)">
-        <div class="dot" [style.background-color]="'#' + labelData.colourHex"></div>
+        <div class="colour-dot" [style.background-color]="'#' + labelData.colourHex"></div>
         <mat-card-title>{{ labelData.label.labelName }}</mat-card-title>
         <mat-card-subtitle>{{ labelData.label.labelDescription }}</mat-card-subtitle>
       </mat-card-header>
-      <button class="delete"
+
+      <!-- Button to delete the label -->
+      <button class="delete-button item-button"
               (click)="deleteLabel(labelData.label.labelId)">{{ 'logged-in-homepage.button_delete' | translate }}
       </button>
+
+      <!-- Button to update the label -->
       <button routerLink="/logged-in-homepage/update-label/{{labelData.label.labelId}}"
-              class="edit">{{ 'logged-in-homepage.button_update' | translate }}
+              class="update-button item-button">{{ 'logged-in-homepage.button_update' | translate }}
       </button>
     </mat-card>
   </div>
 </div>
+
+<!-- Template for when there are no labels -->
 <ng-template #noLabels>
-  <p>{{ 'logged-in-homepage.labels.text_no_labels' | translate }}</p>
+  <p>{{ 'logged-in-homepage.labels.ui_text_no_labels' | translate }}</p>
 </ng-template>

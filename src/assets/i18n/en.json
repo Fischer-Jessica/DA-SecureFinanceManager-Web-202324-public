@@ -115,14 +115,17 @@
       }
     },
     "labels": {
-      "headline_labels": "Labels",
-      "ui_button_create_label": "Create new label",
-      "text_your_labels": "Your labels:",
-      "text_no_labels": "No labels available.",
+      "ui_headline_labels": "Labels",
+      "ui_text_your_labels": "Your labels:",
+      "ui_text_no_labels": "No labels available.",
       "alert_create_label_first": "You haven't created any labels yet.",
       "alert_user_not_logged_in": "You are not logged in.",
       "alert_error_fetching_labels": "Error fetching labels.",
       "confirm_delete_label": "Are you sure you want to delete this label? This action cannot be undone.",
+      "console_error_fetching_labels": "Error fetching labels:",
+      "alert_parameter_invalid": "The labelId is less than or equal to 0.",
+      "alert_label_not_found": "The chosen label could not be found.",
+      "console_error_deleting_label": "Error deleting label:",
       "create-label": {
         "ui_label_label_name": "Label Name:",
         "ui_placeholder_label_name": "name of the label",
@@ -146,6 +149,10 @@
         "text_no_label_entries": "No label entries available.",
         "button_remove_entry": "remove entry"
       }
+    },
+    "colours": {
+      "alert_colours_not_found": "No colours could be found.",
+      "console_error_fetching_colours": "Error fetching colours:"
     },
     "user": {
       "ui_button_update_user": "Update User Data",
