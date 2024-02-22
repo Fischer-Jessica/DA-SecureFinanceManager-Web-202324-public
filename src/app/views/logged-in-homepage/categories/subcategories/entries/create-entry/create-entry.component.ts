@@ -69,6 +69,10 @@ export class CreateEntryComponent implements OnInit {
       this.route.params.subscribe(params => {
         this.categoryId = +params['categoryId'];
         this.subcategoryId = +params['subcategoryId'];
+        if (isNaN(this.categoryId) || isNaN(this.subcategoryId)) {
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+          this.router.navigate([`/logged-in-homepage/categories`]);
+        }
       });
       this.setInitialDateTime();
     }

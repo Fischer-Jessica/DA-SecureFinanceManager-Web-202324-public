@@ -111,7 +111,7 @@ export class UpdateEntryComponent implements OnInit {
             this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
           } else {
             this.snackBarService.showAlert(this.transactionService.instant('alert_error'));
-            console.error(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.console_error_creating_entry'), error);
+            console.error(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.console_error_fetching_entry'), error);
           }
         }
       );
@@ -124,6 +124,11 @@ export class UpdateEntryComponent implements OnInit {
    * @memberOf UpdateEntryComponent
    */
   onSubmit(formData: any) {
+    if (formData.entryAmount === 0 || formData.entryTimeOfTransaction === '') {
+      this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'));
+      return;
+    }
+
     if (!formData.valid) {
       this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.alert_invalid_formData'));
       return;
@@ -146,11 +151,6 @@ export class UpdateEntryComponent implements OnInit {
 
     const user = JSON.parse(storedUser);
 
-    if (formData.entryAmount === 0 || formData.entryTimeOfTransaction === '') {
-      this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'));
-      return;
-    }
-
     if (this.entry.entryId != null) {
       this.entryService.updateEntry(
         user.username,
@@ -170,7 +170,7 @@ export class UpdateEntryComponent implements OnInit {
             this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
           } else {
             this.snackBarService.showAlert(this.transactionService.instant('alert_error'));
-            console.error(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.console_error_creating_entry'), error);
+            console.error(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.console_error_fetching_entry'), error);
           }
         }
       );

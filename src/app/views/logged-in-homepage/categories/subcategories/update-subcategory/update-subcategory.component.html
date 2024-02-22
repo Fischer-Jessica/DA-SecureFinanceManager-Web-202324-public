@@ -1,30 +1,40 @@
-<form #subcategoryForm="ngForm" (ngSubmit)="onSubmit(subcategoryForm)" class="subcategory-form">
+<!-- Angular form with ngSubmit event -->
+<form #subcategoryForm="ngForm" (ngSubmit)="onSubmit(subcategoryForm)" class="form">
+
+  <!-- Input for subcategory name -->
   <div class="form-group">
     <label for="subcategoryName"
-           class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.label_subcategory_name' | translate }}</label>
-    <input type="text" id="subcategoryName" name="subcategoryName" [(ngModel)]="subcategory.subcategoryName" required
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_label_subcategory_name' | translate }}</label>
+    <input type="text" id="subcategoryName" name="subcategoryName"
+           placeholder="{{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_placeholder_subcategory_name' | translate }}"
+           [(ngModel)]="subcategory.subcategoryName" required
            class="form-input">
   </div>
 
+  <!-- Textarea for subcategory description -->
   <div class="form-group">
     <label for="subcategoryDescription"
-           class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.label_subcategory_description' | translate }}</label>
-    <textarea id="subcategoryDescription" name="subcategoryDescription" [(ngModel)]="subcategory.subcategoryDescription"
-              class="form-textarea"></textarea>
+           class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_label_subcategory_description' | translate }}</label>
+    <textarea id="subcategoryDescription" name="subcategoryDescription"
+              placeholder="{{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_placeholder_subcategory_description' | translate }}"
+              [(ngModel)]="subcategory.subcategoryDescription"
+              class="form-input"></textarea>
   </div>
 
+  <!-- Color picker component -->
   <div class="form-group">
     <label
-      class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.label_subcategory_colour' | translate }}</label>
+      class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_label_subcategory_colour' | translate }}</label>
     <app-colour-picker [selectedColourId]="subcategory.subcategoryColourId"
                        (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
+  <!-- Form submission buttons -->
   <div class="form-actions">
-    <button type="submit" mat-raised-button
-            color="primary">{{ 'logged-in-homepage.categories.subcategories.update-subcategory.button_update_subcategory' | translate }}
+    <button type="submit"
+            class="update-button form-button">{{ 'logged-in-homepage.categories.subcategories.update-subcategory.ui_button_update_subcategory' | translate }}
     </button>
-    <button type="button" mat-raised-button color="warn"
+    <button type="button" class="cancel-button form-button"
             (click)="onCancel()">{{ 'logged-in-homepage.cancel-action' | translate }}
     </button>
   </div>

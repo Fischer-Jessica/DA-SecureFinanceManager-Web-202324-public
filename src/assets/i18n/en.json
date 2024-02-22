@@ -77,7 +77,10 @@
           "console_error_creating_subcategory": "Error creating subcategory:"
         },
         "update-subcategory": {
-          "button_update_subcategory": "Update Subcategory"
+          "ui_button_update_subcategory": "update subcategory",
+          "alert_subcategory_not_found": "Selected subcategory could not be found.",
+          "console_error_fetching_subcategory": "Error fetching subcategory:",
+          "console_error_updating_subcategory": "Error updating subcategory:"
         },
         "entries": {
           "headline_entries": "Entries",
