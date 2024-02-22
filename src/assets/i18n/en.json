@@ -59,7 +59,10 @@
         "console_error_creating_category": "Error creating category:"
       },
       "update-category": {
-        "button_update_category": "Update Category"
+        "ui_button_update_category": "Update Category",
+        "alert_category_not_found": "Selected category could not be found.",
+        "console_error_fetching_category": "Error fetching category:",
+        "console_error_updating_category": "Error updating category:"
       },
       "subcategories": {
         "headline_subcategories": "Subcategories",
