@@ -131,6 +131,7 @@ body {
   transition: background-color 0.3s ease;
   font-size: 22px;
   margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .item-container {

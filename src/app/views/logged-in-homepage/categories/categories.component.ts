@@ -154,7 +154,7 @@ export class CategoriesComponent implements OnInit {
             this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.alert_category_not_found'));
           } else {
             this.snackBarService.showAlert(this.translate.instant('alert_error'));
-            console.error(this.translate.instant('logged-in-homepage.labels.console_error_deleting_label'), error);
+            console.error(this.translate.instant('logged-in-homepage.categories.console_error_deleting_category'), error);
           }
         }
       );

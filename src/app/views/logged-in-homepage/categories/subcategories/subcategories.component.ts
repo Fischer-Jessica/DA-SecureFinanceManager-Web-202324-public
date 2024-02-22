@@ -4,50 +4,91 @@ import {Subcategory} from "../../../../logic/models/Subcategory";
 import {SubcategoryService} from "../../../../logic/services/SubcategoryService";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ColourService} from "../../../../logic/services/ColourService";
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
+import {SnackBarService} from "../../../../logic/services/SnackBarService";
 
 @Component({
   selector: 'app-subcategory',
   templateUrl: './subcategories.component.html',
-  styleUrls: ['./subcategories.component.css']
+  styleUrls: ['./subcategories.component.css', '../../logged-in-homepage.component.css']
 })
+/**
+ * Component for managing subcategories
+ * @class SubcategoriesComponent
+ * @implements {OnInit}
+ * @author Fischer
+ * @fullName Fischer, Jessica Christina
+ */
 export class SubcategoriesComponent implements OnInit {
+  /**
+   * Array to store subcategory data along with their corresponding colours
+   * @type {{ subcategory: Subcategory; colourHex: string }[]}
+   */
   subcategoriesData: { subcategory: Subcategory; colourHex: string }[] = [];
+
+  /**
+   * The categoryId in which the subcategory is located.
+   * @type {number | undefined}
+   */
   protected categoryId: number | undefined;
 
+  /**
+   * Constructor for SubcategoriesComponent
+   * @param route The Angular ActivatedRoute service
+   * @param router The Angular Router service
+   * @param colourService The service for managing colours
+   * @param subcategoryService The service for subcategory operations
+   * @param localStorageService The service for managing local storage
+   * @param cdr The Angular ChangeDetectorRef service
+   * @param snackBarService The service for displaying snack bar messages
+   * @param translate The service for translation
+   * @memberOf SubcategoriesComponent
+   */
   constructor(private route: ActivatedRoute,
               private router: Router,
               private colourService: ColourService,
-              private apiService: SubcategoryService,
+              private subcategoryService: SubcategoryService,
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
-              private snackBar: MatSnackBar,
+              private snackBarService: SnackBarService,
               private translate: TranslateService) {
   }
 
+  /**
+   * Lifecycle hook that is called after Angular has initialized all data-bound properties of a directive.
+   * @memberOf SubcategoriesComponent
+   */
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
       const user = JSON.parse(storedUser);
       this.route.params.subscribe(params => {
         this.categoryId = +params['categoryId'];
+
+        if (isNaN(this.categoryId)) {
+          this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+          this.router.navigateByUrl('/logged-in-homepage/categories');
+          return;
+        }
+
         this.fetchSubcategories(user.username, user.password, this.categoryId);
       });
+    } else {
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
+      return;
     }
   }
 
-  showAlert(message: string): void {
-    const config = new MatSnackBarConfig();
-    config.duration = 10000; // Anzeigedauer des Alerts in Millisekunden
-    config.horizontalPosition = 'center';
-    config.verticalPosition = 'top'; // Positionierung oben auf der Website
-
-    this.snackBar.open(message, 'Close', config);
-  }
-
+  /**
+   * Method to fetch subcategories data
+   * @param username The username for authentication
+   * @param password The password for authentication
+   * @param categoryId The ID of the category to fetch subcategories for
+   * @memberOf SubcategoriesComponent
+   */
   private fetchSubcategories(username: string, password: string, categoryId: number): void {
-    this.apiService.getSubcategories(username, password, categoryId)
+    this.subcategoryService.getSubcategories(username, password, categoryId)
       .subscribe(
         (result) => {
           this.subcategoriesData = []; // Clear existing data
@@ -68,8 +109,12 @@ export class SubcategoriesComponent implements OnInit {
                   });
                 },
                 (error) => {
-                  console.error('Error fetching colour:', error);
-                  // Handle error (e.g., display an error message)
+                  if (error.status === 404) {
+                    this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.colours.alert_colours_not_found'));
+                  } else {
+                    this.snackBarService.showAlert(this.translate.instant('alert_error'));
+                    console.error(this.translate.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
+                  }
                 }
               );
             }
@@ -77,16 +122,24 @@ export class SubcategoriesComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            this.showAlert('You need to create a subcategory.');
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.alert_create_subcategory_first'));
           } else if (error.status === 401) {
-            this.showAlert('You are not authorized.');
+            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
           } else {
-            this.showAlert('Error fetching subcategories');
+            this.snackBarService.showAlert(this.translate.instant('alert_error'));
+            console.error(this.translate.instant('logged-in-homepage.categories.subcategories.console_error_fetching_subcategories'), error);
           }
         }
       );
   }
 
+  /**
+   * Method to delete a subcategory
+   * @param subcategoryId The ID of the subcategory to delete
+   * @memberOf SubcategoriesComponent
+   */
   deleteSubcategory(subcategoryId: number | undefined) {
     const confirmDelete = confirm(this.translate.instant('logged-in-homepage.categories.subcategories.confirm_delete_subcategory'));
     if (!confirmDelete) {
@@ -96,7 +149,7 @@ export class SubcategoriesComponent implements OnInit {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
       const user = JSON.parse(storedUser);
-      this.apiService
+      this.subcategoryService
         .deleteSubcategory(user.username, user.password, this.categoryId, subcategoryId)
         .subscribe(
           (result) => {
@@ -104,17 +157,36 @@ export class SubcategoriesComponent implements OnInit {
             this.cdr.detectChanges(); // Trigger change detection
           },
           (error) => {
-            console.error('Error deleting subcategory:', error);
-            window.location.reload();
+            if (error.status === 401) {
+              this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+              this.localStorageService.removeItem('loggedInUser');
+              this.router.navigateByUrl('/authentication/login');
+            } else if (error.status === 400) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.alert_parameter_invalid'));
+            } else if (error.status === 404) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.alert_subcategory_not_found'));
+            } else {
+              this.snackBarService.showAlert(this.translate.instant('alert_error'));
+              console.error(this.translate.instant('logged-in-homepage.labels.console_error_deleting_label'), error);
+            }
           }
         );
     }
   }
 
+  /**
+   * Method to navigate to the page for adding a new subcategory
+   * @memberOf SubcategoriesComponent
+   */
   addSubcategory() {
     this.router.navigateByUrl(`/logged-in-homepage/create-subcategory/${(this.categoryId)}`);
   }
 
+  /**
+   * Method to navigate to the entries associated with a subcategory
+   * @param subcategoryId The ID of the subcategory
+   * @memberOf SubcategoriesComponent
+   */
   showEntries(subcategoryId: number | undefined) {
     this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(subcategoryId)}`);
   }

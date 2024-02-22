@@ -67,9 +67,15 @@
         "console_error_updating_category": "Fehler beim aktualisieren der Kategorie:"
       },
       "subcategories": {
-        "headline_subcategories": "Unterkategorien",
-        "button_return_categories": "Zurück zu Kategorien",
-        "text_your_subcategories": "Ihre Unterkategorien, der Kategorie mit folgender Id angehörig:",
+        "ui_headline_subcategories": "Unterkategorien",
+        "ui_button_return_categories": "Zurück zu Kategorien",
+        "ui_text_your_subcategories": "Ihre Unterkategorien, der Kategorie mit folgender Id angehörig:",
+        "ui_text_no_subcategories": "Keine Unterkategorien vorhanden.",
+        "alert_create_subcategory_first": "Sie haben noch keine Unterkategorie erstellt.",
+        "console_error_fetching_subcategories": "Fehler beim Abrufen der Unterkategorien:",
+        "alert_parameter_invalid": "Die subcategoryId ist weniger oder gleich 0.",
+        "alert_subcategory_not_found": "Die ausgewählte Unterkategorie konnte nicht gefunden werden.",
+        "console_error_deleting_subcategory": "Fehler beim Löschen der Unterkategorie:",
         "confirm_delete_subcategory": "Möchten Sie die Unterkategorie wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Alle Einträge, die dieser Unterkategorie angehören, werden ebenfalls gelöscht.",
         "create-subcategory": {
           "ui_label_subcategory_name": "Name der Unterkategorie:",
