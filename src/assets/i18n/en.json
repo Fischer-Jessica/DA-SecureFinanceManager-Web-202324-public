@@ -41,7 +41,6 @@
     },
     "categories": {
       "headline_categories": "Categories",
-      "button_create_category": "Create new category",
       "text_your_categories": "Your categories:",
       "text_no_categories": "No categories available.",
       "alert_create_category_first": "You haven't created any categories yet.",
@@ -49,9 +48,14 @@
       "alert_error_deleting_category": "Error deleting category.",
       "confirm_delete_category": "Are you sure you want to delete this category? This action cannot be undone. You will lose all subcategories and entries belonging to this category.",
       "create-category": {
-        "label_category_name": "Category Name:",
-        "label_category_description": "Category Description:",
-        "label_category_colour": "Category Color:"
+        "ui_label_category_name": "Category Name:",
+        "ui_placeholder_category_name": "name of the category",
+        "ui_label_category_description": "Category Description:",
+        "ui_placeholder_category_description": "description of the category",
+        "ui_label_category_colour": "Category Color:",
+        "ui_button_create_category": "create new category",
+        "alert_create_category_missing_fields": "You must provide a name for the category and select a colour",
+        "console_error_creating_category": "Error creating category:"
       },
       "update-category": {
         "button_update_category": "Update Category"
@@ -108,7 +112,7 @@
         "ui_placeholder_label_description": "description of the label",
         "ui_label_label_colour": "Label Color:",
         "ui_button_create_label": "Create Label",
-        "alert_missing_fields": "Provide a name for the label and select a colour.",
+        "alert_create_label_missing_fields": "You must provide a name for the label and select a colour.",
         "console_error_creating_label": "Error creating label:"
       },
       "update-label": {

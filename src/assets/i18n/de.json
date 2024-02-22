@@ -41,7 +41,6 @@
     },
     "categories": {
       "headline_categories": "Kategorien",
-      "button_create_category": "neue Kategorie erstellen",
       "text_your_categories": "Ihre Kategorien:",
       "text_no_categories": "Keine Kategorien vorhanden.",
       "alert_create_category_first": "Sie haben noch keine Kategorie erstellt.",
@@ -49,9 +48,14 @@
       "alert_error_deleting_category": "Fehler beim Löschen der Kategorie.",
       "confirm_delete_category": "Möchten Sie die Kategorie wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Alle Unterkategorien und Einträge, die dieser Kategorie angehören, werden ebenfalls gelöscht.",
       "create-category": {
-        "label_category_name": "Name der Kategorie:",
-        "label_category_description": "Beschreibung der Kategorie:",
-        "label_category_colour": "Farbe der Kategorie:"
+        "ui_label_category_name": "Name der Kategorie:",
+        "ui_placeholder_category_name": "Name der Kategorie",
+        "ui_label_category_description": "Beschreibung der Kategorie:",
+        "ui_placeholder_category_description": "Beschreibung der Kategorie",
+        "ui_label_category_colour": "Farbe der Kategorie:",
+        "ui_button_create_category": "neue Kategorie erstellen",
+        "alert_create_category_missing_fields": "Sie müssen der Kategorie einen Namen geben und eine Farbe auswählen.",
+        "console_error_creating_category": "Fehler beim Erstellen der Kategorie:"
       },
       "update-category": {
         "button_update_category": "Kategorie aktualisieren"
@@ -108,7 +112,7 @@
         "ui_placeholder_label_description": "Beschreibung des Labels",
         "ui_label_label_colour": "Farbe des Labels:",
         "ui_button_create_label": "Label erstellen",
-        "alert_missing_fields": "Sie müssen dem Label einen Namen geben und eine Farbe auswählen.",
+        "alert_create_label_missing_fields": "Sie müssen dem Label einen Namen geben und eine Farbe auswählen.",
         "console_error_creating_label": "Fehler beim Erstellen des Labels:"
       },
       "update-label": {

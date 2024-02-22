@@ -1,29 +1,39 @@
-<form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm.value)" class="category-form">
+<!-- Angular form with ngSubmit event -->
+<form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm.value)" class="form">
+
+  <!-- Input for category name -->
   <div class="form-group">
     <label for="categoryName"
-           class="form-label">{{ 'logged-in-homepage.categories.create-category.label_category_name' | translate }}</label>
-    <input type="text" id="categoryName" name="categoryName" [(ngModel)]="category.categoryName" required
+           class="form-label">{{ 'logged-in-homepage.categories.create-category.ui_label_category_name' | translate }}</label>
+    <input type="text" id="categoryName" name="categoryName"
+           placeholder="{{ 'logged-in-homepage.categories.create-category.ui_placeholder_category_name' | translate }}"
+           [(ngModel)]="category.categoryName" required
            class="form-input">
   </div>
 
+  <!-- Textarea for category description -->
   <div class="form-group">
     <label for="categoryDescription"
-           class="form-label">{{ 'logged-in-homepage.categories.create-category.label_category_description' | translate }}</label>
-    <textarea id="categoryDescription" name="categoryDescription" [(ngModel)]="category.categoryDescription"
-              class="form-textarea"></textarea>
+           class="form-label">{{ 'logged-in-homepage.categories.create-category.ui_label_category_description' | translate }}</label>
+    <textarea id="categoryDescription" name="categoryDescription"
+              placeholder="{{ 'logged-in-homepage.categories.create-category.ui_placeholder_category_description' | translate }}"
+              [(ngModel)]="category.categoryDescription"
+              class="form-input"></textarea>
   </div>
 
+  <!-- Color picker component -->
   <div class="form-group">
     <label
-      class="form-label">{{ 'logged-in-homepage.categories.create-category.label_category_colour' | translate }}</label>
+      class="form-label">{{ 'logged-in-homepage.categories.create-category.ui_label_category_colour' | translate }}</label>
     <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
+  <!-- Form submission buttons -->
   <div class="form-actions">
-    <button type="submit" mat-raised-button
-            color="primary">{{ 'logged-in-homepage.categories.button_create_category' | translate }}
+    <button type="submit"
+            class="create-button form-button">{{ 'logged-in-homepage.categories.create-category.ui_button_create_category' | translate }}
     </button>
-    <button type="cancel" mat-raised-button color="warn"
+    <button type="cancel" class="cancel-Button form-button"
             routerLink='/logged-in-homepage/categories'>{{ 'logged-in-homepage.cancel-action' | translate }}
     </button>
   </div>
