@@ -86,6 +86,11 @@ export class UpdateEntryComponent implements OnInit {
       this.subcategoryId = +params['subcategoryId'];
       const entryId = +params['entryId'];
 
+      if (isNaN(this.categoryId) || isNaN(this.subcategoryId) || isNaN(entryId)) {
+        this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+        this.router.navigate([`/logged-in-homepage/categories`]);
+      }
+
       this.entryService.getEntry(
         user.username,
         user.password,
@@ -100,7 +105,8 @@ export class UpdateEntryComponent implements OnInit {
             this.snackBarService.showAlert(this.transactionService.instant('authentication.alert_user_not_logged_in'));
             this.router.navigateByUrl('authentication/login')
           } else if (error.status === 400) {
-            // TODO: Fehler, wenn die Parameter der route nicht passen (vielleicht sogar generischer Alert)
+            this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+            this.router.navigate([`/logged-in-homepage/categories`]);
           } else if (error.status === 404) {
             this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
           } else {
@@ -158,7 +164,8 @@ export class UpdateEntryComponent implements OnInit {
             this.snackBarService.showAlert(this.transactionService.instant('authentication.alert_user_not_logged_in'));
             this.router.navigateByUrl('authentication/login')
           } else if (error.status === 400) {
-            // TODO: Fehler, wenn die Parameter der route nicht passen (vielleicht sogar generischer Alert)
+            this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+            this.router.navigate([`/logged-in-homepage/categories`]);
           } else if (error.status === 404) {
             this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
           } else {

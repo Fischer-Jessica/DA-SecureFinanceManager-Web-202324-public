@@ -34,6 +34,7 @@
     "button_delete": "löschen",
     "button_update": "ändern",
     "alert_invalid_formData": "ungültige Formulardaten",
+    "alert_error_path_parameter_invalid": "Das Klassifizierung-Objekt, in dem Sie sich befanden, konnte nicht gefunden werden. Sie wurden zu den Kategorien zurückgebracht.",
     "navbar": {
       "ui_link_categories": "Kategorien",
       "ui_link_labels": "Labels",

@@ -34,6 +34,7 @@
     "button_delete": "Delete",
     "button_update": "Update",
     "alert_invalid_formData": "invalid form data",
+    "alert_error_path_parameter_invalid": "The classification item you were in could not be found. You have been redirected back to the categories.",
     "navbar": {
       "ui_link_categories": "Categories",
       "ui_link_labels": "Labels",
