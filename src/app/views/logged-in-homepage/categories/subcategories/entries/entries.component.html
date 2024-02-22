@@ -86,7 +86,7 @@
           <div class="elements-right-column">
             <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="selected-labels">
               <div class="label-container" *ngFor="let label of getLabels(entry.entryId)">
-                <p class="selected-label"
+                <p class="selected-label" (click)="goToLabel(label.labelId)"
                    [style.background-color]="'#' + getLabelColour(label.labelId)">{{ label.labelName }}</p>
               </div>
             </div>

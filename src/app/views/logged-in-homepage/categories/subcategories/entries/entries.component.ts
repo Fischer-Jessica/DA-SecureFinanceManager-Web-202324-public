@@ -78,6 +78,7 @@ export class EntriesComponent implements OnInit {
    * @param {ChangeDetectorRef} cdr The Angular ChangeDetectorRef service
    * @param {SnackBarService} snackBarService The service for displaying snack bar messages
    * @param {TranslateService} translate The service for translation
+   * @memberOf EntriesComponent
    */
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -93,6 +94,7 @@ export class EntriesComponent implements OnInit {
 
   /**
    * Lifecycle hook that is called after Angular has initialized all data-bound properties of a directive.
+   * @memberOf EntriesComponent
    * @memberOf EntriesComponent
    */
   ngOnInit(): void {
@@ -123,6 +125,7 @@ export class EntriesComponent implements OnInit {
    * Method to fetch labels
    * @param {string} username The username for authentication
    * @param {string} password The password for authentication
+   * @memberOf EntriesComponent
    */
   fetchLabels(username: string, password: string): void {
     this.labelService.getLabels(username, password)
@@ -174,6 +177,7 @@ export class EntriesComponent implements OnInit {
    * Method to fetch labels of an entry
    * @param {string} username The username for authentication
    * @param {string} password The password for authentication
+   * @memberOf EntriesComponent
    */
   fetchLabelsOfEntry(username: string, password: string): void {
     for (const entry of this.entries) {
@@ -213,6 +217,7 @@ export class EntriesComponent implements OnInit {
   /**
    * Method to toggle dropdown for an entry
    * @param {number | undefined} entryId The ID of the entry
+   * @memberOf EntriesComponent
    */
   toggleDropdown(entryId: number | undefined) {
     if (entryId) {
@@ -228,6 +233,7 @@ export class EntriesComponent implements OnInit {
    * @param {number | undefined} entryId The ID of the entry
    * @param {number} labelId The ID of the label
    * @returns {boolean} True if the label is selected, false otherwise
+   * @memberOf EntriesComponent
    */
   isLabelSelected(entryId: number | undefined, labelId: number): boolean {
     if (entryId) {
@@ -243,6 +249,7 @@ export class EntriesComponent implements OnInit {
    * Method to toggle label selection for an entry
    * @param {number | undefined} entryId The ID of the entry
    * @param {*} label The label to toggle
+   * @memberOf EntriesComponent
    */
   toggleLabel(entryId: number | undefined, label: any) {
     if (entryId) {
@@ -265,6 +272,7 @@ export class EntriesComponent implements OnInit {
    * Method to add a label to an entry
    * @param {number} entryId The ID of the entry
    * @param {number} labelId The ID of the label
+   * @memberOf EntriesComponent
    */
   addLabelToEntry(entryId: number, labelId: number) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -321,6 +329,7 @@ export class EntriesComponent implements OnInit {
    * Method to remove a label from an entry
    * @param {number} entryId The ID of the entry
    * @param {number} labelId The ID of the label
+   * @memberOf EntriesComponent
    */
   removeLabelFromEntry(entryId: number, labelId: number) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
@@ -366,6 +375,7 @@ export class EntriesComponent implements OnInit {
    * @param {number | undefined} subcategoryId The ID of the subcategory
    * @param {string} username The username for authentication
    * @param {string} password The password for authentication
+   * @memberOf EntriesComponent
    */
   private fetchEntries(subcategoryId: number | undefined, username: string, password: string): void {
     if (this.labelId === undefined) {
@@ -432,6 +442,7 @@ export class EntriesComponent implements OnInit {
   /**
    * Method to delete an entry
    * @param {number | undefined} entryId The ID of the entry
+   * @memberOf EntriesComponent
    */
   deleteEntry(entryId: number | undefined) {
     const confirmDelete = confirm(this.translate.instant('logged-in-homepage.categories.subcategories.entries.confirm_delete_entry'));
@@ -472,6 +483,7 @@ export class EntriesComponent implements OnInit {
   /**
    * Method to update an entry
    * @param {number | undefined} entryId The ID of the entry
+   * @memberOf EntriesComponent
    */
   updateEntry(entryId: number | undefined) {
     this.router.navigateByUrl(`/logged-in-homepage/update-entry/${(this.categoryId)}/${(this.subcategoryId)}/${entryId}`);
@@ -479,6 +491,7 @@ export class EntriesComponent implements OnInit {
 
   /**
    * Method to navigate to the page for adding a new entry
+   * @memberOf EntriesComponent
    */
   addEntry() {
     this.router.navigateByUrl(`/logged-in-homepage/create-entry/${(this.categoryId)}/${(this.subcategoryId)}`);
@@ -486,6 +499,7 @@ export class EntriesComponent implements OnInit {
 
   /**
    * Method to return to the subcategory page
+   * @memberOf EntriesComponent
    */
   returnToSubcategory() {
     this.router.navigateByUrl(`/logged-in-homepage/subcategories/${(this.categoryId)}`);
@@ -495,6 +509,7 @@ export class EntriesComponent implements OnInit {
    * Method to get labels for an entry
    * @param {number | undefined} entryId The ID of the entry
    * @returns {Label[] | undefined} The labels for the entry
+   * @memberOf EntriesComponent
    */
   getLabels(entryId: number | undefined) {
     return this.selectedLabelForEntries.get(typeof entryId === "number" ? entryId : -1);
@@ -504,8 +519,18 @@ export class EntriesComponent implements OnInit {
    * Method to get the colour of a label
    * @param {number | undefined} labelId The ID of the label
    * @returns {string | undefined} The colour of the label
+   * @memberOf EntriesComponent
    */
   getLabelColour(labelId: number | undefined) {
     return this.availableLabels.find(item => item.labelId === labelId)?.colourHex;
+  }
+
+  /**
+   * Navigates to the entries page associated with a specific label.
+   * @param labelId The ID of the label for which to navigate to the entries page.
+   * @memberOf EntriesComponent
+   */
+  goToLabel(labelId: number | undefined) {
+    this.router.navigateByUrl(`/logged-in-homepage/labels/${labelId}/entries`);
   }
 }
