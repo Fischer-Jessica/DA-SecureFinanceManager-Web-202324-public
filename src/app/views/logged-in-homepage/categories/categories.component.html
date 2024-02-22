@@ -1,25 +1,41 @@
-<h2>{{ 'logged-in-homepage.categories.headline_categories' | translate }}</h2>
-<button mat-raised-button color="primary"
-        routerLink='/logged-in-homepage/create-category'>{{ 'logged-in-homepage.categories.button_create_category' | translate }}
+<!-- Headline for categories -->
+<h2>{{ 'logged-in-homepage.categories.ui_headline_categories' | translate }}</h2>
+
+<!-- Button to create a new category -->
+<button class="create-button headline-button" routerLink='/logged-in-homepage/create-category'>
+  {{ 'logged-in-homepage.categories.create-category.ui_button_create_category' | translate }}
 </button>
-<p>{{ 'logged-in-homepage.categories.text_your_categories' | translate }}</p>
-<div *ngIf="categoriesData && categoriesData.length > 0; else noCategories" class="category-container">
-  <div *ngFor="let category of categoriesData" class="category-item">
-    <mat-card class="card">
+
+<!-- Text describing the user's categories -->
+<p>{{ 'logged-in-homepage.categories.ui_text_your_categories' | translate }}</p>
+
+<!-- Container for displaying categories -->
+<div *ngIf="categoriesData && categoriesData.length > 0; else noCategories" class="item-container">
+  <!-- Loop through each category and display its details -->
+  <div *ngFor="let category of categoriesData" class="item">
+    <mat-card class="item-card">
+      <!-- Card header containing category details -->
       <mat-card-header id="header" (click)="showSubcategories(category.category.categoryId)">
-        <div class="dot" [style.background-color]="'#' + category.colourHex"></div>
+        <!-- Color dot representing category color -->
+        <div class="colour-dot" [style.background-color]="'#' + category.colourHex"></div>
+        <!-- Category name -->
         <mat-card-title>{{ category.category.categoryName }}</mat-card-title>
+        <!-- Category description -->
         <mat-card-subtitle>{{ category.category.categoryDescription }}</mat-card-subtitle>
       </mat-card-header>
-      <button class="delete"
-              (click)="deleteCategory(category.category.categoryId)">{{ 'logged-in-homepage.button_delete' | translate }}
+      <!-- Button to delete the category -->
+      <button class="delete-button item-button" (click)="deleteCategory(category.category.categoryId)">
+        {{ 'logged-in-homepage.button_delete' | translate }}
       </button>
+      <!-- Button to update the category -->
       <button routerLink='/logged-in-homepage/update-category/{{ category.category.categoryId }}'
-              class="edit">{{ 'logged-in-homepage.button_update' | translate }}
+              class="update-button item-button">{{ 'logged-in-homepage.button_update' | translate }}
       </button>
     </mat-card>
   </div>
 </div>
+
+<!-- Template for when there are no categories to display -->
 <ng-template #noCategories>
-  <p>{{ 'logged-in-homepage.categories.text_no_categories' | translate }}</p>
+  <p>{{ 'logged-in-homepage.categories.ui_text_no_categories' | translate }}</p>
 </ng-template>

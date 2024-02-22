@@ -41,12 +41,14 @@
       "ui_link_user": "Benutzer"
     },
     "categories": {
-      "headline_categories": "Kategorien",
-      "text_your_categories": "Ihre Kategorien:",
-      "text_no_categories": "Keine Kategorien vorhanden.",
+      "ui_headline_categories": "Kategorien",
+      "ui_text_your_categories": "Ihre Kategorien:",
+      "ui_text_no_categories": "Keine Kategorien vorhanden.",
       "alert_create_category_first": "Sie haben noch keine Kategorie erstellt.",
-      "alert_error_fetching_categories": "Fehler beim Laden der Kategorien.",
-      "alert_error_deleting_category": "Fehler beim Löschen der Kategorie.",
+      "alert_parameter_invalid": "Die categoryId is weniger oder gleich 0.",
+      "alert_category_not_found": "Die ausgewählte Kategorie konnte nicht gefunden werden.",
+      "console_error_fetching_categories": "Fehler beim Laden der Kategorien.",
+      "console_error_deleting_category": "Fehler beim Löschen der Kategorie.",
       "confirm_delete_category": "Möchten Sie die Kategorie wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Alle Unterkategorien und Einträge, die dieser Kategorie angehören, werden ebenfalls gelöscht.",
       "create-category": {
         "ui_label_category_name": "Name der Kategorie:",

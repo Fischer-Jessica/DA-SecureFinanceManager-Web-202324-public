@@ -4,49 +4,69 @@ import {CategoryService} from '../../../logic/services/CategoryService';
 import {LocalStorageService} from "../../../logic/LocalStorageService";
 import {Router} from "@angular/router";
 import {ColourService} from "../../../logic/services/ColourService";
-import {MatSnackBar, MatSnackBarConfig} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
+import {SnackBarService} from "../../../logic/services/SnackBarService";
 
 @Component({
   selector: 'logged-in-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.css'],
+  styleUrls: ['./categories.component.css', '../logged-in-homepage.component.css'],
 })
+/**
+ * Component for managing categories
+ * @class CategoriesComponent
+ * @implements {OnInit}
+ * @author Fischer
+ * @fullName Fischer, Jessica Christina
+ */
 export class CategoriesComponent implements OnInit {
+  /**
+   * Array to store category data along with their corresponding colours
+   * @type {{ category: Category; colourHex: string }[]}
+   */
   categoriesData: { category: Category; colourHex: string }[] = [];
 
+  /**
+   * Constructor for CategoriesComponent
+   * @param router The Angular Router service
+   * @param categoryService The service for category operations
+   * @param localStorageService The service for managing local storage
+   * @param colourService The service for managing colours
+   * @param cdr The Angular ChangeDetectorRef service
+   * @param snackBarService The service for displaying snack bar messages
+   * @param translate The service for translation
+   * @memberOf CategoriesComponent
+   */
   constructor(private router: Router,
               protected colourService: ColourService,
               private categoryService: CategoryService,
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
-              private snackBar: MatSnackBar,
+              private snackBarService: SnackBarService,
               private translate: TranslateService
   ) {
   }
 
+  /**
+   * Lifecycle hook that is called after Angular has initialized all data-bound properties of a directive.
+   * @memberOf CategoriesComponent
+   */
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
-    if (storedUser) {
-      const loggedInUser = JSON.parse(storedUser);
-      this.fetchCategories(loggedInUser);
-    }
-  }
-
-  showAlert(message: string): void {
-    const config = new MatSnackBarConfig();
-    config.duration = 10000; // Anzeigedauer des Alerts in Millisekunden
-    config.horizontalPosition = 'center';
-    config.verticalPosition = 'top'; // Positionierung oben auf der Website
-
-    this.snackBar.open(message, 'Close', config);
-  }
-
-  private fetchCategories(loggedInUser: any): void {
-    if (!loggedInUser) {
-      console.error('User is not logged in');
+    if (!storedUser) {
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
       return;
     }
+    const loggedInUser = JSON.parse(storedUser);
+    this.fetchCategories(loggedInUser);
+  }
+
+  /**
+   * Method to fetch categories data
+   * @memberOf CategoriesComponent
+   */
+  private fetchCategories(loggedInUser: any): void {
     this.categoryService
       .getCategories(loggedInUser.username, loggedInUser.password)
       .subscribe(
@@ -69,8 +89,12 @@ export class CategoriesComponent implements OnInit {
                   });
                 },
                 (error) => {
-                  console.error('Error fetching colour:', error);
-                  // Handle error (e.g., display an error message)
+                  if (error.status === 404) {
+                    this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.colours.alert_colours_not_found'));
+                  } else {
+                    this.snackBarService.showAlert(this.translate.instant('alert_error'));
+                    console.error(this.translate.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
+                  }
                 }
               );
             }
@@ -79,16 +103,24 @@ export class CategoriesComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            this.showAlert(this.translate.instant('logged-in-homepage.categories.alert_create_category_first'));
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.alert_create_category_first'));
           } else if (error.status === 401) {
-            this.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
           } else {
-            this.showAlert(this.translate.instant('logged-in-homepage.categories.alert_error_fetching_categories'));
+            this.snackBarService.showAlert(this.translate.instant('alert_error'));
+            console.error(this.translate.instant('logged-in-homepage.categories.console_error_fetching_categories'), error);
           }
         }
       );
   }
 
+  /**
+   * Method to delete a category
+   * @param categoryId The ID of the category to delete
+   * @memberOf CategoriesComponent
+   */
   deleteCategory(categoryId: number | undefined) {
     const confirmDelete = confirm(this.translate.instant('logged-in-homepage.categories.confirm_delete_category'));
     if (!confirmDelete) {
@@ -97,7 +129,8 @@ export class CategoriesComponent implements OnInit {
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      console.error('User is not logged in');
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
       return;
     }
 
@@ -111,13 +144,27 @@ export class CategoriesComponent implements OnInit {
           this.cdr.detectChanges(); // Trigger change detection
         },
         (error) => {
-          this.showAlert(this.translate.instant('categories.alert_error_deleting_category'));
-          window.location.reload();
+          if (error.status === 401) {
+            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
+          } else if (error.status === 400) {
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.alert_parameter_invalid'));
+          } else if (error.status === 404) {
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.alert_category_not_found'));
+          } else {
+            this.snackBarService.showAlert(this.translate.instant('alert_error'));
+            console.error(this.translate.instant('logged-in-homepage.labels.console_error_deleting_label'), error);
+          }
         }
       );
   }
 
-  // In deiner aufrufenden Komponente
+  /**
+   * Method to navigate to the subcategories of a category
+   * @param categoryId The ID of the category
+   * @memberOf CategoriesComponent
+   */
   showSubcategories(categoryId: number | undefined) {
     this.router.navigateByUrl(`/logged-in-homepage/subcategories/${categoryId}`);
   }
