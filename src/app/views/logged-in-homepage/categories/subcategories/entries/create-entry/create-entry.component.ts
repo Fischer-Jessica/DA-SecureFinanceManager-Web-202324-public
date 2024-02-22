@@ -66,7 +66,6 @@ export class CreateEntryComponent implements OnInit {
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
-      const loggedInUser = JSON.parse(storedUser);
       this.route.params.subscribe(params => {
         this.categoryId = +params['categoryId'];
         this.subcategoryId = +params['subcategoryId'];

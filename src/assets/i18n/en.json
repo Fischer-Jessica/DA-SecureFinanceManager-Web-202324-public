@@ -99,7 +99,10 @@
             "console_error_creating_entry": "Error creating entry:"
           },
           "update-entry": {
-            "button_update_entry": "Update Entry"
+            "ui_button_update_entry": "Update Entry",
+            "alert_entry_not_found": "Selected entry could not be found.",
+            "console_error_fetching_entry": "Error fetching entry:",
+            "console_error_updating_entry": "Error updating entry:"
           }
         }
       }
