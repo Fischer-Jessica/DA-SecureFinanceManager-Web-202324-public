@@ -62,14 +62,18 @@
       },
       "subcategories": {
         "headline_subcategories": "Unterkategorien",
-        "button_create_subcategory": "neue Unterkategorie erstellen",
         "button_return_categories": "Zurück zu Kategorien",
         "text_your_subcategories": "Ihre Unterkategorien, der Kategorie mit folgender Id angehörig:",
         "confirm_delete_subcategory": "Möchten Sie die Unterkategorie wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Alle Einträge, die dieser Unterkategorie angehören, werden ebenfalls gelöscht.",
         "create-subcategory": {
-          "label_subcategory_name": "Name der Unterkategorie:",
-          "label_subcategory_description": "Beschreibung der Unterkategorie:",
-          "label_subcategory_colour": "Farbe der Unterkategorie:"
+          "ui_label_subcategory_name": "Name der Unterkategorie:",
+          "ui_placeholder_subcategory_name": "Name der Unterkategorie",
+          "ui_label_subcategory_description": "Beschreibung der Unterkategorie:",
+          "ui_placeholder_subcategory_description": "Beschreibung der Unterkategorie",
+          "ui_label_subcategory_colour": "Farbe der Unterkategorie:",
+          "ui_button_create_subcategory": "neue Unterkategorie erstellen",
+          "alert_create_subcategory_missing_fields": "Sie müssen der Unterkategorie einen Namen geben und eine Farbe auswählen.",
+          "console_error_creating_subcategory": "Fehler beim Erstellen der Unterkategorie:"
         },
         "update-subcategory": {
           "button_update_subcategory": "Unterkategorie aktualisieren"
