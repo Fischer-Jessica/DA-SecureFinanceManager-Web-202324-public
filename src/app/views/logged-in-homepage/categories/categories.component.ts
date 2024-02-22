@@ -81,7 +81,7 @@ export class CategoriesComponent implements OnInit {
           if (error.status === 404) {
             this.showAlert(this.translate.instant('logged-in-homepage.categories.alert_create_category_first'));
           } else if (error.status === 401) {
-            this.showAlert(this.translate.instant('authorisation.alert_user_not_logged_in'));
+            this.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
           } else {
             this.showAlert(this.translate.instant('logged-in-homepage.categories.alert_error_fetching_categories'));
           }

@@ -51,7 +51,7 @@ export class RegisterComponent {
    */
   insertNewUserInAPI(): void {
     if (this.newUser.username === '' || this.newUser.password === '') {
-      this.snackBarService.showAlert(this.translate.instant('authorisation.alert_missing_credentials'));
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_missing_credentials'));
       return;
     }
 
@@ -62,7 +62,7 @@ export class RegisterComponent {
       },
       error: (err) => {
         this.snackBarService.showAlert(this.translate.instant('alert_error'));
-        console.error(this.translate.instant('authorisation.register.console_error_register'), err);
+        console.error(this.translate.instant('authentication.register.console_error_register'), err);
       }
     });
   }

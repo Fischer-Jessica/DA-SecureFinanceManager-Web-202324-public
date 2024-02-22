@@ -40,7 +40,7 @@ export class CreateCategoryComponent {
   onSubmit(formData: Category) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.showAlert(this.translate.instant('authorisation.alert_user_not_logged_in'));
+      this.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
       return;
     }
     const loggedInUser = JSON.parse(storedUser);

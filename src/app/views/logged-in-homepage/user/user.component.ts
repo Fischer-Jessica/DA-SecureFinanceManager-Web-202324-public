@@ -75,7 +75,7 @@ export class UserComponent implements OnInit {
         },
         error => {
           if (error.status === 401) {
-            this.snackBarService.showAlert(this.translate.instant('authorisation.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
             this.localStorageService.removeItem('loggedInUser');
             this.router.navigate(['/authentication/login']);
           } else {
@@ -85,7 +85,7 @@ export class UserComponent implements OnInit {
         }
       );
     } else {
-      this.snackBarService.showAlert(this.translate.instant('authorisation.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
       this.router.navigate(['/authentication/login']);
     }
   }
@@ -103,7 +103,7 @@ export class UserComponent implements OnInit {
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translate.instant('authorisation.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
       this.router.navigate(['/authentication/login']);
       return;
     }
@@ -119,7 +119,7 @@ export class UserComponent implements OnInit {
       },
       error => {
         if (error.status === 401) {
-          this.snackBarService.showAlert(this.translate.instant('authorisation.alert_user_not_logged_in'));
+          this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
           this.localStorageService.removeItem('loggedInUser');
           this.router.navigate(['/authentication/login']);
         } else {
@@ -144,7 +144,7 @@ export class UserComponent implements OnInit {
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert('authorisation.alert_user_not_logged_in');
+      this.snackBarService.showAlert('authentication.alert_user_not_logged_in');
       this.router.navigate(['/authentication/login']);
       return;
     }
@@ -161,7 +161,7 @@ export class UserComponent implements OnInit {
       },
       error => {
         if (error.status === 401) {
-          this.snackBarService.showAlert(this.translate.instant('authorisation.alert_user_not_logged_in'));
+          this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
           this.localStorageService.removeItem('loggedInUser');
           this.router.navigate(['/authentication/login']);
         } else {

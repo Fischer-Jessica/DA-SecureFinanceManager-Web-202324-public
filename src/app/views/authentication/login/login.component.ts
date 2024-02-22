@@ -51,7 +51,7 @@ export class LoginComponent {
    */
   logIntoTheOverview(): void {
     if (!this.username || !this.password) {
-      this.snackBarService.showAlert(this.translate.instant('authorisation.alert_missing_credentials'));
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_missing_credentials'));
       return;
     }
 
@@ -61,10 +61,10 @@ export class LoginComponent {
       },
       error: (err) => {
         if (err.status === 401) {
-          this.snackBarService.showAlert(this.translate.instant('authorisation.login.alert_wrong_credentials'));
+          this.snackBarService.showAlert(this.translate.instant('authentication.login.alert_wrong_credentials'));
         } else {
           this.snackBarService.showAlert(this.translate.instant('alert_error'));
-          console.error(this.translate.instant('authorisation.login.console_error_login'), err);
+          console.error(this.translate.instant('authentication.login.console_error_login'), err);
         }
       }
     });

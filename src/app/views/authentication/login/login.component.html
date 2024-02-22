@@ -7,31 +7,31 @@
       <!-- Register Button Container -->
       <div class="register-button-container">
         <button class="form-submit" id="go-to-register" routerLink="/authentication/register"
-                translate="authorisation.login.ui_button_register"></button>
+                translate="authentication.login.ui_button_register"></button>
       </div>
       <!-- End Register Button Container -->
 
       <!-- Login Form Container -->
       <div class="login-form-container">
         <!-- Form Title -->
-        <h1 translate="authorisation.login.ui_headline/button_login"></h1>
+        <h1 translate="authentication.login.ui_headline/button_login"></h1>
 
         <!-- Login Form -->
         <form (ngSubmit)="logIntoTheOverview()" id="login-form">
           <!-- Username Input Field -->
           <div class="form-group">
-            <label for="username"><i></i>{{ 'authorisation.login.ui_label_username' | translate }}</label>
+            <label for="username"><i></i>{{ 'authentication.login.ui_label_username' | translate }}</label>
             <input type="text" name="username" id="username"
-                   [(ngModel)]="username" placeholder="{{'authorisation.login.ui_placeholder_username' | translate}}"
+                   [(ngModel)]="username" placeholder="{{'authentication.login.ui_placeholder_username' | translate}}"
                    required>
           </div>
           <!-- End Username Input Field -->
 
           <!-- Password Input Field -->
           <div class="form-group">
-            <label for="password"><i></i>{{ 'authorisation.login.ui_label_password' | translate }}</label>
+            <label for="password"><i></i>{{ 'authentication.login.ui_label_password' | translate }}</label>
             <input [(ngModel)]="password" id="password" name="password"
-                   placeholder="{{'authorisation.login.ui_placeholder_password' | translate}}" type="password"
+                   placeholder="{{'authentication.login.ui_placeholder_password' | translate}}" type="password"
                    required>
           </div>
           <!-- End Password Input Field -->
@@ -39,7 +39,7 @@
           <!-- Login Button -->
           <div class="form-group">
             <input type="submit" name="sign-in" id="login"
-                   value="{{'authorisation.login.ui_headline/button_login' | translate}}">
+                   value="{{'authentication.login.ui_headline/button_login' | translate}}">
           </div>
           <!-- End Login Button -->
         </form>

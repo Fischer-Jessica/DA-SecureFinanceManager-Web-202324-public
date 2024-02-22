@@ -1,6 +1,6 @@
 {
   "alert_error": "Es ist ein Fehler aufgetreten. Für weitere Informationen öffnen Sie die Konsole.",
-  "authorisation": {
+  "authentication": {
     "alert_user_not_logged_in": "Sie sind nicht angemeldet.",
     "alert_missing_credentials": "Bitte geben Sie sowohl Benutzername als auch Passwort ein.",
     "login": {

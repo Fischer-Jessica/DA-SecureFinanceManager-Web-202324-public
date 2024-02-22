@@ -1,6 +1,6 @@
 {
   "alert_error": "An error occurred. Check the console for more information.",
-  "authorisation": {
+  "authentication": {
     "alert_user_not_logged_in": "You are not logged in.",
     "alert_missing_credentials": "Please fill in both password and username fields.",
     "login": {
