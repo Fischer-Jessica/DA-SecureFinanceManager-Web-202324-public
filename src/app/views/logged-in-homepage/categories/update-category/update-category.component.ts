@@ -118,6 +118,12 @@ export class UpdateCategoryComponent implements OnInit {
     if (this.category.categoryId != null) {
       const user = JSON.parse(<string>this.localStorageService.getItem('loggedInUser'));
 
+      if (!user) {
+        this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+        this.router.navigateByUrl('authentication/login')
+        return;
+      }
+
       this.categoryService.updateCategory(
         user.username,
         user.password,

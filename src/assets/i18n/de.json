@@ -134,7 +134,10 @@
         "console_error_creating_label": "Fehler beim Erstellen des Labels:"
       },
       "update-label": {
-        "button_update_label": "Label aktualisieren"
+        "ui_button_update_label": "Label aktualisieren",
+        "alert_label_not_found": "Ausgewähltes Label konnte nicht gefunden werden.",
+        "console_error_fetching_label": "Fehler beim Abrufen des Labels:",
+        "console_error_updating_label": "Fehler beim aktualisieren des Labels:"
       },
       "label-entries": {
         "headline_label_entries": "Label-Einträge",

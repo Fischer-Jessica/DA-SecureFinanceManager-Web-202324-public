@@ -1,28 +1,38 @@
-<form #labelForm="ngForm" (ngSubmit)="onSubmit(labelForm)" class="label-form">
+<!-- Angular form with ngSubmit event -->
+<form #labelForm="ngForm" (ngSubmit)="onSubmit(labelForm)" class="form">
+
+  <!-- Input for label name -->
   <div class="form-group">
     <label for="labelName"
-           class="form-label">{{ 'logged-in-homepage.labels.create-label.label_name' | translate }}</label>
-    <input type="text" id="labelName" name="labelName" [(ngModel)]="label.labelName" required class="form-input">
+           class="form-label">{{ 'logged-in-homepage.labels.create-label.ui_label_label_name' | translate }}</label>
+    <input type="text" id="labelName" name="labelName"
+           placeholder="{{ 'logged-in-homepage.labels.create-label.ui_placeholder_label_name' | translate }}"
+           [(ngModel)]="label.labelName" required class="form-input">
   </div>
 
+  <!-- Textarea for label description -->
   <div class="form-group">
     <label for="labelDescription"
-           class="form-label">{{ 'logged-in-homepage.labels.create-label.label_description' | translate }}</label>
-    <textarea id="labelDescription" name="labelDescription" [(ngModel)]="label.labelDescription"
-              class="form-textarea"></textarea>
+           class="form-label">{{ 'logged-in-homepage.labels.create-label.ui_label_label_description' | translate }}</label>
+    <textarea id="labelDescription" name="labelDescription"
+              placeholder="{{ 'logged-in-homepage.labels.create-label.ui_placeholder_label_description' | translate }}"
+              [(ngModel)]="label.labelDescription"
+              class="form-input"></textarea>
   </div>
 
+  <!-- Color picker component -->
   <div class="form-group">
-    <label class="form-label">{{ 'logged-in-homepage.labels.create-label.label_colour' | translate }}</label>
+    <label class="form-label">{{ 'logged-in-homepage.labels.create-label.ui_label_label_colour' | translate }}</label>
     <app-colour-picker [selectedColourId]="label.labelColourId"
                        (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
+  <!-- Form submission buttons -->
   <div class="form-actions">
-    <button type="submit" mat-raised-button
-            color="primary">{{ 'logged-in-homepage.labels.update-label.button_update_label' | translate }}
+    <button type="submit"
+            class="update-button form-button">{{ 'logged-in-homepage.labels.update-label.ui_button_update_label' | translate }}
     </button>
-    <button type="button" mat-raised-button color="warn"
+    <button type="button" class="cancel-button form-button"
             routerLink='/logged-in-homepage/labels'>{{ 'logged-in-homepage.cancel-action' | translate }}
     </button>
   </div>
