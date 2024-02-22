@@ -1,27 +1,37 @@
-<form #labelForm="ngForm" (ngSubmit)="onSubmit(labelForm.value)" class="label-form">
+<form #labelForm="ngForm" (ngSubmit)="onSubmit(labelForm.value)" class="form">
+  <!-- Form group for label name input -->
   <div class="form-group">
     <label for="labelName"
-           class="form-label">{{ 'logged-in-homepage.labels.create-label.label_name' | translate }}</label>
-    <input type="text" id="labelName" name="labelName" [(ngModel)]="label.labelName" required class="form-input">
+           class="form-label">{{ 'logged-in-homepage.labels.create-label.ui_label_label_name' | translate }}</label>
+    <input type="text" id="labelName" name="labelName"
+           placeholder="{{ 'logged-in-homepage.labels.create-label.ui_placeholder_label_name' | translate }}"
+           [(ngModel)]="label.labelName" required class="form-input">
   </div>
 
+  <!-- Form group for label description input -->
   <div class="form-group">
     <label for="labelDescription"
-           class="form-label">{{ 'logged-in-homepage.labels.create-label.label_description' | translate }}</label>
-    <textarea id="labelDescription" name="labelDescription" [(ngModel)]="label.labelDescription"
-              class="form-textarea"></textarea>
+           class="form-label">{{ 'logged-in-homepage.labels.create-label.ui_label_label_description' | translate }}</label>
+    <textarea id="labelDescription" name="labelDescription"
+              placeholder="{{ 'logged-in-homepage.labels.create-label.ui_placeholder_label_description' | translate }}"
+              [(ngModel)]="label.labelDescription"
+              class="form-input"></textarea>
   </div>
 
+  <!-- Form group for colour picker -->
   <div class="form-group">
-    <label class="form-label">{{ 'logged-in-homepage.labels.create-label.label_colour' | translate }}</label>
+    <label class="form-label">{{ 'logged-in-homepage.labels.create-label.ui_label_label_colour' | translate }}</label>
     <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
+  <!-- Form actions section -->
   <div class="form-actions">
-    <button type="submit" mat-raised-button
-            color="primary">{{ 'logged-in-homepage.labels.button_create_label' | translate }}
+    <!-- Button to submit the form -->
+    <button type="submit"
+            class="create-button form-button">{{ 'logged-in-homepage.labels.ui_button_create_label' | translate }}
     </button>
-    <button type="button" mat-raised-button color="warn"
+    <!-- Button to cancel the action and navigate to labels page -->
+    <button type="button" class="cancel-Button form-button"
             routerLink='/logged-in-homepage/labels'>{{ 'logged-in-homepage.cancel-action' | translate }}
     </button>
   </div>

@@ -6,27 +6,37 @@
 <form #userForm="ngForm" class="form" (ngSubmit)="onSubmit(userForm)">
   <div class="form-group">
     <label for="username" class="form-label">{{ 'authentication.register.ui_label_username' | translate }}</label>
-    <input type="text" id="username" name="username" [(ngModel)]="user.username" required class="form-input">
+    <input type="text" id="username" name="username"
+           placeholder="{{ 'authentication.register.ui_placeholder_username' | translate }}" [(ngModel)]="user.username"
+           required class="form-input">
   </div>
 
   <div class="form-group">
     <label for="password" class="form-label">{{ 'authentication.register.ui_label_password' | translate }}</label>
-    <input type="password" id="password" name="password" [(ngModel)]="user.password" required class="form-input">
+    <input type="password" id="password" name="password"
+           placeholder="{{ 'authentication.register.ui_placeholder_password' | translate }}" [(ngModel)]="user.password"
+           required class="form-input">
   </div>
 
   <div class="form-group">
     <label for="email" class="form-label">{{ 'authentication.register.ui_label_email' | translate }}</label>
-    <input type="email" id="email" name="email" [(ngModel)]="user.emailAddress" class="form-input">
+    <input type="email" id="email" name="email"
+           placeholder="{{ 'authentication.register.ui_placeholder_email' | translate }}"
+           [(ngModel)]="user.emailAddress" class="form-input">
   </div>
 
   <div class="form-group">
     <label for="firstName" class="form-label">{{ 'authentication.register.ui_label_first_name' | translate }}</label>
-    <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" class="form-input">
+    <input type="text" id="firstName" name="firstName"
+           placeholder="{{ 'authentication.register.ui_placeholder_first_name' | translate }}"
+           [(ngModel)]="user.firstName" class="form-input">
   </div>
 
   <div class="form-group">
     <label for="lastName" class="form-label">{{ 'authentication.register.ui_label_last_name' | translate }}</label>
-    <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" class="form-input">
+    <input type="text" id="lastName" name="lastName"
+           placeholder="{{ 'authentication.register.ui_placeholder_last_name' | translate }}"
+           [(ngModel)]="user.lastName" class="form-input">
   </div>
 
   <!-- Form actions including buttons for deleting user, updating user, and logging out -->
@@ -37,7 +47,7 @@
     <button type="submit"
             class="update-button form-button">{{ 'logged-in-homepage.user.ui_button_update_user' | translate }}
     </button>
-    <button class="goBack-button form-button"
+    <button class="cancel-Button form-button"
             (click)="logout()">{{ 'logged-in-homepage.user.ui_button_logout' | translate }}
     </button>
   </div>

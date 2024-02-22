@@ -16,15 +16,15 @@
     "register": {
       "ui_headline/button_sign_up": "Registrieren",
       "ui_label_first_name": "Vorname:",
-      "ui_placeholder_first_name": "Dein Vorname",
+      "ui_placeholder_first_name": "Ihr Vorname",
       "ui_label_last_name": "Nachname:",
-      "ui_placeholder_last_name": "Dein Nachname",
+      "ui_placeholder_last_name": "Ihr Nachname",
       "ui_label_username": "Benutzername:",
-      "ui_placeholder_username": "Dein Benutzername",
+      "ui_placeholder_username": "Ihr Benutzername",
       "ui_label_email": "E-Mail-Adresse:",
-      "ui_placeholder_email": "Deine E-Mail-Adresse",
+      "ui_placeholder_email": "Ihre E-Mail-Adresse",
       "ui_label_password": "Passwort:",
-      "ui_placeholder_password": "Dein Passwort",
+      "ui_placeholder_password": "Ihr Passwort",
       "ui_button_login": "Ich habe bereits ein Konto.",
       "console_error_register": "Fehler beim Registrieren: "
     }
@@ -94,7 +94,7 @@
     },
     "labels": {
       "headline_labels": "Labels",
-      "button_create_label": "neues Label erstellen",
+      "ui_button_create_label": "neues Label erstellen",
       "text_your_labels": "Ihre Labels:",
       "text_no_labels": "Keine Labels vorhanden.",
       "alert_create_label_first": "Sie haben noch kein Label erstellt.",
@@ -102,10 +102,14 @@
       "alert_error_fetching_labels": "Fehler beim Laden der Labels.",
       "confirm_delete_label": "Möchten Sie das Label wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
       "create-label": {
-        "label_name": "Name des Labels:",
-        "label_description": "Beschreibung des Labels:",
-        "label_colour": "Farbe des Labels:",
-        "button_create_label": "Label erstellen"
+        "ui_label_label_name": "Name des Labels:",
+        "ui_placeholder_label_name": "Name des Labels",
+        "ui_label_label_description": "Beschreibung des Labels:",
+        "ui_placeholder_label_description": "Beschreibung des Labels",
+        "ui_label_label_colour": "Farbe des Labels:",
+        "ui_button_create_label": "Label erstellen",
+        "alert_missing_fields": "Sie müssen dem Label einen Namen geben und eine Farbe auswählen.",
+        "console_error_creating_label": "Fehler beim Erstellen des Labels:"
       },
       "update-label": {
         "button_update_label": "Label aktualisieren"

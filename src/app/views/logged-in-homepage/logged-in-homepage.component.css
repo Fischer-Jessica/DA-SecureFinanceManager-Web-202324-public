@@ -40,14 +40,14 @@ body {
 .create-button:hover,
 .update-button:hover,
 .delete-button:hover,
-.goBack-button:hover {
+.cancel-Button:hover {
   filter: brightness(90%);
 }
 
 .create-button:focus,
 .update-button:focus,
 .delete-button:focus,
-.goBack-button:focus {
+.cancel-Button:focus {
   outline: none;
   box-shadow: 0 0 0 2px;
 }
@@ -68,7 +68,7 @@ body {
   background-color: #f44336;
 }
 
-.goBack-button {
+.cancel-Button {
   background-color: #607D8B;
 }
 
