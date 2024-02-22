@@ -3,28 +3,82 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {LocalStorageService} from "../../../../../logic/LocalStorageService";
 import {EntryService} from "../../../../../logic/services/EntryService";
 import {Entry} from "../../../../../logic/models/Entry";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {LabelService} from "../../../../../logic/services/LabelService";
 import {EntryLabelService} from "../../../../../logic/services/EntryLabelService";
 import {Label} from "../../../../../logic/models/Label";
 import {ColourService} from "../../../../../logic/services/ColourService";
 import {TranslateService} from "@ngx-translate/core";
+import {SnackBarService} from "../../../../../logic/services/SnackBarService";
 
 @Component({
   selector: 'app-entries',
   templateUrl: './entries.component.html',
-  styleUrls: ['./entries.component.css']
+  styleUrls: ['./entries.component.css', '../../../logged-in-homepage.component.css']
 })
 
+/**
+ * Component for managing entries
+ * @class EntriesComponent
+ * @implements {OnInit}
+ * @author Fischer
+ * @fullName Fischer, Jessica Christina
+ */
 export class EntriesComponent implements OnInit {
+  /**
+   * Array to store entry data
+   * @type {Entry[]}
+   */
   entries: Entry[] = [];
+
+  /**
+   * ID of the subcategory
+   * @type {(number | undefined)}
+   */
   protected subcategoryId: number | undefined;
+
+  /**
+   * ID of the category
+   * @type {(number | undefined)}
+   */
   protected categoryId: number | undefined;
+
+  /**
+   * Array to store available labels along with their IDs and colours
+   * @type {{ label: Label; labelId: number; colourHex: string }[]}
+   */
   protected availableLabels: { label: Label; labelId: number; colourHex: string }[] = [];
+
+  /**
+   * Map to store selected labels for entries
+   * @type {Map<number, Label[]>}
+   */
   protected selectedLabelForEntries: Map<number, Label[]> = new Map<number, Label[]>();
-  dropdownOpen: { [entryId: string]: boolean } = {}; // Objekt zur Verfolgung des Dropdown-Status für jeden Eintrag
+
+  /**
+   * Object to track the dropdown status for each entry
+   * @type {{[p: string]: boolean}}
+   */
+  dropdownOpen: { [entryId: string]: boolean } = {};
+
+  /**
+   * ID of the selected label
+   * @type {(number | undefined)}
+   */
   protected labelId: number | undefined = undefined;
 
+  /**
+   * Constructor for EntriesComponent
+   * @param {ActivatedRoute} route The Angular ActivatedRoute service
+   * @param {Router} router The Angular Router service
+   * @param {EntryService} entryService The service for entry operations
+   * @param {LabelService} labelService The service for label operations
+   * @param {EntryLabelService} entryLabelService The service for entry label operations
+   * @param {ColourService} colourService The service for managing colours
+   * @param {LocalStorageService} localStorageService The service for managing local storage
+   * @param {ChangeDetectorRef} cdr The Angular ChangeDetectorRef service
+   * @param {SnackBarService} snackBarService The service for displaying snack bar messages
+   * @param {TranslateService} translate The service for translation
+   */
   constructor(private route: ActivatedRoute,
               private router: Router,
               private entryService: EntryService,
@@ -33,10 +87,14 @@ export class EntriesComponent implements OnInit {
               private colourService: ColourService,
               private localStorageService: LocalStorageService,
               private cdr: ChangeDetectorRef,
-              private snackBar: MatSnackBar,
+              private snackBarService: SnackBarService,
               private translate: TranslateService) {
   }
 
+  /**
+   * Lifecycle hook that is called after Angular has initialized all data-bound properties of a directive.
+   * @memberOf EntriesComponent
+   */
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
@@ -45,56 +103,84 @@ export class EntriesComponent implements OnInit {
         this.categoryId = +params['categoryId'];
         this.subcategoryId = +params['subcategoryId'];
         this.labelId = isNaN(+params['labelId']) ? undefined : +params['labelId'];
-        console.log('labelId: ' + this.labelId);
-        console.log('subcategoryId: ' + this.subcategoryId);
-        console.log('categoryId: ' + this.categoryId);
+
+        if ((this.categoryId === undefined || this.subcategoryId === undefined) && this.labelId === undefined) {
+          this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+          this.router.navigateByUrl('/logged-in-homepage/categories');
+          return;
+        }
       });
       this.fetchEntries(this.subcategoryId, loggedInUser.username, loggedInUser.password);
       this.fetchLabels(loggedInUser.username, loggedInUser.password);
+    } else {
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
+      return;
     }
   }
 
+  /**
+   * Method to fetch labels
+   * @param {string} username The username for authentication
+   * @param {string} password The password for authentication
+   */
   fetchLabels(username: string, password: string): void {
     this.labelService.getLabels(username, password)
       .subscribe(
         (result) => {
-          this.availableLabels = []; // Clear existing data
+          this.availableLabels = [];
           for (let label of result) {
-            const labelId = label.labelId ?? 0; // Set labelId to 0 if it's undefined
-            if (labelId !== 0) { // Check if labelId is not 0
+            const labelId = label.labelId ?? 0;
+            if (labelId !== 0) {
               this.colourService.getColour(label.labelColourId).subscribe(
                 (result) => {
                   this.availableLabels.push({
                     label: label,
-                    labelId: labelId, // Use labelId here
+                    labelId: labelId,
                     colourHex: result.colourCode
                   });
-                  // Sort availableLabels after each new entry
                   this.availableLabels.sort((a, b) => {
                     return a.labelId - b.labelId;
                   });
                 },
                 (error) => {
-                  console.error('Error fetching colour:', error);
+                  if (error.status === 404) {
+                    this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.colours.alert_colours_not_found'));
+                  } else {
+                    this.snackBarService.showAlert(this.translate.instant('alert_error'));
+                    console.error(this.translate.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
+                  }
                 }
               );
             }
           }
         },
         (error) => {
-          console.error('Error fetching labels:', error);
-          // Handle error (e.g., display an error message)
+          if (error.status === 404) {
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.alert_create_label_first'));
+          } else if (error.status === 401) {
+            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
+          } else {
+            this.snackBarService.showAlert(this.translate.instant('alert_error'));
+            console.error(this.translate.instant('logged-in-homepage.labels.console_error_fetching_labels'), error);
+          }
         }
       );
   }
 
+  /**
+   * Method to fetch labels of an entry
+   * @param {string} username The username for authentication
+   * @param {string} password The password for authentication
+   */
   fetchLabelsOfEntry(username: string, password: string): void {
     for (const entry of this.entries) {
-      if (entry.entryId !== null && entry.entryId !== undefined) { // Check if entryId is not null or undefined
+      if (entry.entryId !== null && entry.entryId !== undefined) {
         this.entryLabelService.getLabelsByEntryId(username, password, entry.entryId)
           .subscribe(
             (result) => {
-              // Sort labels after receiving them
               result.sort((a, b) => {
                 if (a.labelId !== undefined && b.labelId !== undefined) {
                   return a.labelId - b.labelId;
@@ -106,15 +192,28 @@ export class EntriesComponent implements OnInit {
               }
             },
             (error) => {
-              console.error('Error fetching labels for entry:', error);
-              // Handle error (e.g., display an error message)
+              if (error.status === 404) {
+                console.info(this.translate.instant('logged-in-homepage.labels.label-entries.console_no_labels_for_entry_found') + entry.entryId);
+              } else if (error.status === 401) {
+                this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+                this.localStorageService.removeItem('loggedInUser');
+                this.router.navigateByUrl('/authentication/login');
+              } else if (error.status === 400) {
+                this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_invalid'));
+              } else {
+                this.snackBarService.showAlert(this.translate.instant('alert_error'));
+                console.error(this.translate.instant('logged-in-homepage.labels.label-entries.console_error_fetching_label_for_entry') + entry.entryId, error);
+              }
             }
           );
       }
     }
   }
 
-
+  /**
+   * Method to toggle dropdown for an entry
+   * @param {number | undefined} entryId The ID of the entry
+   */
   toggleDropdown(entryId: number | undefined) {
     if (entryId) {
       if (!this.dropdownOpen.hasOwnProperty(entryId)) {
@@ -124,6 +223,12 @@ export class EntriesComponent implements OnInit {
     }
   }
 
+  /**
+   * Method to check if a label is selected for an entry
+   * @param {number | undefined} entryId The ID of the entry
+   * @param {number} labelId The ID of the label
+   * @returns {boolean} True if the label is selected, false otherwise
+   */
   isLabelSelected(entryId: number | undefined, labelId: number): boolean {
     if (entryId) {
       const labelsForEntry = this.selectedLabelForEntries.get(entryId);
@@ -134,7 +239,11 @@ export class EntriesComponent implements OnInit {
       return false;
   }
 
-
+  /**
+   * Method to toggle label selection for an entry
+   * @param {number | undefined} entryId The ID of the entry
+   * @param {*} label The label to toggle
+   */
   toggleLabel(entryId: number | undefined, label: any) {
     if (entryId) {
       const labelsForEntry = this.selectedLabelForEntries.get(entryId) || [];
@@ -152,6 +261,11 @@ export class EntriesComponent implements OnInit {
     }
   }
 
+  /**
+   * Method to add a label to an entry
+   * @param {number} entryId The ID of the entry
+   * @param {number} labelId The ID of the label
+   */
   addLabelToEntry(entryId: number, labelId: number) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
 
@@ -161,18 +275,14 @@ export class EntriesComponent implements OnInit {
       this.entryLabelService.addLabelToEntry(loggedInUser.username, loggedInUser.password, entryId, labelId)
         .subscribe(
           (result) => {
-            this.cdr.detectChanges(); // Trigger change detection
-
-            // Find the label that was added
+            this.cdr.detectChanges();
             const addedLabel = this.availableLabels.find(availableLabel => availableLabel.labelId === labelId);
 
             if (addedLabel) {
-              // Add the label to the selected labels for the entry
               if (this.selectedLabelForEntries.has(entryId)) {
                 const labelList = this.selectedLabelForEntries.get(entryId);
                 if (labelList) {
                   labelList.push(addedLabel.label);
-                  // Sort the labels after adding the new one
                   labelList.sort((a, b) => {
                     if (a.labelId && b.labelId) {
                       return a.labelId - b.labelId;
@@ -186,15 +296,32 @@ export class EntriesComponent implements OnInit {
             }
           },
           (error) => {
-            console.error('Error adding label to entry:', error);
+            if (error.status === 401) {
+              this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+              this.localStorageService.removeItem('loggedInUser');
+              this.router.navigateByUrl('/authentication/login');
+            } else if (error.status === 400) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_labelId_invalid'));
+            } else if (error.status === 404) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.label-entries.alert_could_not_find_entry_label'));
+            } else {
+              this.snackBarService.showAlert(this.translate.instant('alert_error'));
+              console.error(this.translate.instant('logged-in-homepage.labels.label-entries.console_error_adding_label_to_entry'), error);
+            }
           }
         );
     } else {
-      console.error('No user logged in');
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
+      return;
     }
   }
 
-
+  /**
+   * Method to remove a label from an entry
+   * @param {number} entryId The ID of the entry
+   * @param {number} labelId The ID of the label
+   */
   removeLabelFromEntry(entryId: number, labelId: number) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
 
@@ -209,77 +336,113 @@ export class EntriesComponent implements OnInit {
       this.entryLabelService.removeLabelFromEntry(loggedInUser.username, loggedInUser.password, labelId, entryId)
         .subscribe(
           (result) => {
-            this.cdr.detectChanges(); // Trigger change detection
+            this.cdr.detectChanges();
           },
           (error) => {
-            console.error('Error removing label from entry:', error);
-            // Zurücksetzen von this.selectedLabelForEntries auf den vorherigen Stand im Fehlerfall
+            if (error.status === 401) {
+              this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+              this.localStorageService.removeItem('loggedInUser');
+              this.router.navigateByUrl('/authentication/login');
+            } else if (error.status === 400) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_labelId_invalid'));
+            } else if (error.status === 404) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.label-entries.alert_could_not_find_entry_label'));
+            } else {
+              this.snackBarService.showAlert(this.translate.instant('alert_error'));
+              console.error(this.translate.instant('logged-in-homepage.labels.label-entries.console_error_removing_label_from_entry'), error);
+            }
             this.selectedLabelForEntries.set(entryId, labelsForEntry);
-            // Handle error (e.g., display an error message)
           }
         );
     } else {
-      console.error('No user logged in');
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
+      return;
     }
   }
 
+  /**
+   * Method to fetch entries
+   * @param {number | undefined} subcategoryId The ID of the subcategory
+   * @param {string} username The username for authentication
+   * @param {string} password The password for authentication
+   */
   private fetchEntries(subcategoryId: number | undefined, username: string, password: string): void {
     if (this.labelId === undefined) {
       this.entryService.getEntriesBySubcategoryId(username, password, subcategoryId)
         .subscribe(
           (result) => {
-            // Create a copy of the result array
             const sortedEntries = [...result];
-            // Sort the copied array by entryTimeOfTransaction
             sortedEntries.sort((a, b) => {
               if (a.entryTimeOfTransaction && b.entryTimeOfTransaction) {
                 return new Date(b.entryTimeOfTransaction).getTime() - new Date(a.entryTimeOfTransaction).getTime();
               }
               return 0;
             });
-            // Assign the sorted entries to the original array
             this.entries = sortedEntries;
             this.fetchLabelsOfEntry(username, password);
           },
           (error) => {
-            console.error('Error fetching entries:', error);
-            // Handle error (e.g., display an error message)
+            if (error.status === 401) {
+              this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+              this.localStorageService.removeItem('loggedInUser');
+              this.router.navigateByUrl('/authentication/login');
+            } else if (error.status === 400) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.alert_parameter_subcategoryId_invalid'));
+            } else if (error.status === 404) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.entries.alert_no_entries_found'));
+            } else {
+              this.snackBarService.showAlert(this.translate.instant('alert_error'));
+              console.error(this.translate.instant('logged-in-homepage.categories.subcategories.entries.console_error_fetching_entries'), error);
+            }
           }
         );
     } else {
       this.entryLabelService.getEntriesByLabelId(username, password, this.labelId)
         .subscribe(
           (result) => {
-            // Create a copy of the result array
             const sortedEntries = [...result];
-            // Sort the copied array by entryTimeOfTransaction
             sortedEntries.sort((a, b) => {
               if (a.entryTimeOfTransaction && b.entryTimeOfTransaction) {
                 return new Date(b.entryTimeOfTransaction).getTime() - new Date(a.entryTimeOfTransaction).getTime();
               }
               return 0;
             });
-            // Assign the sorted entries to the original array
             this.entries = sortedEntries;
             this.fetchLabelsOfEntry(username, password);
           },
           (error) => {
-            console.error('Error fetching entries:', error);
-            // Handle error (e.g., display an error message)
+            if (error.status === 401) {
+              this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+              this.localStorageService.removeItem('loggedInUser');
+              this.router.navigateByUrl('/authentication/login');
+            } else if (error.status === 400) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.label-entries.alert_parameter_labelId_invalid'));
+            } else if (error.status === 404) {
+              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.labels.label-entries.alert_no_entries_for_label'));
+            } else {
+              this.snackBarService.showAlert(this.translate.instant('alert_error'));
+              console.error(this.translate.instant('logged-in-homepage.labels.label-entries.console_error_fetching_entries_for_label'), error);
+            }
           }
         );
     }
   }
 
+  /**
+   * Method to delete an entry
+   * @param {number | undefined} entryId The ID of the entry
+   */
   deleteEntry(entryId: number | undefined) {
     const confirmDelete = confirm(this.translate.instant('logged-in-homepage.categories.subcategories.entries.confirm_delete_entry'));
     if (!confirmDelete) {
-      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
+      return;
     }
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      console.error('User is not logged in');
+      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
       return;
     }
     const loggedInUser = JSON.parse(storedUser);
@@ -287,31 +450,61 @@ export class EntriesComponent implements OnInit {
       .subscribe(
         (result) => {
           this.entries = this.entries.filter((item) => item.entryId !== entryId);
-          this.cdr.detectChanges(); // Trigger change detection
+          this.cdr.detectChanges();
         },
         (error) => {
-          console.error('Error deleting entry:', error);
-          // Handle error (e.g., display an error message)
+          if (error.status === 401) {
+            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
+          } else if (error.status === 400) {
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.entries.alert_parameter_entryId_invalid'));
+          } else if (error.status === 404) {
+            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.entries.alert_entry_not_found'));
+          } else {
+            this.snackBarService.showAlert(this.translate.instant('alert_error'));
+            console.error(this.translate.instant('logged-in-homepage.categories.subcategories.entries.console_error_deleting_entry'), error);
+          }
         }
       );
   }
 
+  /**
+   * Method to update an entry
+   * @param {number | undefined} entryId The ID of the entry
+   */
   updateEntry(entryId: number | undefined) {
     this.router.navigateByUrl(`/logged-in-homepage/update-entry/${(this.categoryId)}/${(this.subcategoryId)}/${entryId}`);
   }
 
+  /**
+   * Method to navigate to the page for adding a new entry
+   */
   addEntry() {
     this.router.navigateByUrl(`/logged-in-homepage/create-entry/${(this.categoryId)}/${(this.subcategoryId)}`);
   }
 
+  /**
+   * Method to return to the subcategory page
+   */
   returnToSubcategory() {
     this.router.navigateByUrl(`/logged-in-homepage/subcategories/${(this.categoryId)}`);
   }
 
+  /**
+   * Method to get labels for an entry
+   * @param {number | undefined} entryId The ID of the entry
+   * @returns {Label[] | undefined} The labels for the entry
+   */
   getLabels(entryId: number | undefined) {
     return this.selectedLabelForEntries.get(typeof entryId === "number" ? entryId : -1);
   }
 
+  /**
+   * Method to get the colour of a label
+   * @param {number | undefined} labelId The ID of the label
+   * @returns {string | undefined} The colour of the label
+   */
   getLabelColour(labelId: number | undefined) {
     return this.availableLabels.find(item => item.labelId === labelId)?.colourHex;
   }

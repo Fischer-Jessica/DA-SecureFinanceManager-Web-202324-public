@@ -1,33 +1,33 @@
+/* Styles for the container of entry items */
 .entry-container {
   gap: 16px;
   overflow: scroll;
   height: 483px;
 }
 
-.go-back {
-  margin-left: 20px;
-}
-
+/* Styles for individual entry cards */
 .card {
+  min-height: 156px;
   border: #111111 2px solid;
-  color: black;
-  margin-bottom: 5px;
-  height: 156px;
   background: #a6accb;
+  margin-bottom: 5px;
 }
 
+/* Styles for subtitles within entry cards */
 mat-card-subtitle {
   margin-top: 22px;
   font-size: 19px;
   color: black;
 }
 
+/* Styles for content within entry cards */
 mat-card-content {
   margin-top: 17px;
   font-size: 17px;
   color: black;
 }
 
+/* Styles for the right column layout */
 .right-column {
   display: flex;
   flex-direction: column;
@@ -35,33 +35,52 @@ mat-card-content {
   align-items: center;
 }
 
+/* Additional styles for elements within the right column */
 .elements-right-column {
   padding: 25px;
 }
 
+/* Styles for delete and edit buttons */
 .delete,
 .edit {
   display: inline-block;
-  border: 3px solid;
+  border: none;
   width: 66px;
   height: 26px;
   position: absolute;
+  cursor: pointer;
   right: 0;
   transform: translateY(-50%);
   border-radius: 5px;
   font-weight: bold;
 }
 
+/* Styles for the remove button */
 .delete {
   margin-right: 10px;
-  background: red;
 }
 
+/* Styles for container of selected labels */
 .edit {
   margin-right: 80px;
-  background: green;
 }
 
+/* Styles for the remove button */
+.remove {
+  margin-right: 10px;
+  display: inline-block;
+  border: none;
+  width: 222px;
+  height: 26px;
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  transform: translateY(-50%);
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Styles for container of selected labels */
 .selected-labels {
   position: absolute;
   right: 0;
@@ -71,35 +90,48 @@ mat-card-content {
   flex-direction: row;
 }
 
+/* Styles for individual selected labels */
 .selected-label {
-  border: 2px solid;
+  border: none;
+  color: #808080;
   margin-right: 10px;
   padding: 5px;
   border-radius: 5px;
 }
 
+/* Grid layout styles for card content */
 .mat-card-content {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px; /* Abstand zwischen den Spalten */
+  gap: 20px;
 }
 
+/* Styles for paragraphs within cards */
+.card-p {
+  font-size: 18px;
+  color: black;
+}
+
+/* Styles for the dropdown button */
 .dropdown-button {
   position: absolute;
   background-color: #3586ff;
-  border: #111111 2px solid;
+  border: none;
   transform: translateY(-50%);
   right: 10px;
+  font-size: 16px;
+  padding: 5px;
   border-radius: 5px;
   font-weight: bold;
   z-index: 9999; /* Stellt sicher, dass der Button über anderen Elementen liegt */
 }
 
+/* Styles for the dropdown menu */
 .dropdown-menu {
   position: absolute;
   font-weight: bold;
   right: 15px;
-  top: 35px;
+  top: 40px;
   background-color: #cbcfe1;
   border: 1px solid;
   max-height: 88px;
@@ -110,32 +142,31 @@ mat-card-content {
   z-index: 9998;
 }
 
+/* Additional styles for dropdown menu within a label */
 .dropdown-menu-in-label {
   top: 53px;
   max-height: 77px;
 }
 
+/* Styles for individual items in the dropdown menu */
 .dropdown-menu-item {
   margin-bottom: 5px;
 }
 
+/* Font weight style for specific labels */
 .bold-label {
   font-weight: bold;
 }
 
-
-@media (max-width: 999px) {
+/* Media query for smaller screens */
+@media (max-width: 1588px) {
   .mat-card-content {
-    display: block; /* Ändere den Wert auf block, um die Elemente untereinander anzuzeigen */
-    gap: 20px; /* Abstand zwischen den Elementen */
+    display: block;
+    gap: 20px;
   }
 
   .entry-container {
     height: 422px;
-  }
-
-  .dropdown-menu {
-    top: 300px;
   }
 
   .card {
@@ -148,8 +179,13 @@ mat-card-content {
   }
 
   .dropdown-menu {
-    top: 282px;
+    top: 292px;
   }
 }
 
-/* TODO: Wenn die Höhe es nicht erlaubt soll der .category-container kleiner werden, damit alle Categories angezeigt werden können */
+/* Media query for even smaller screens */
+@media (max-width: 515px) {
+  .dropdown-menu {
+    top: 313px;
+  }
+}

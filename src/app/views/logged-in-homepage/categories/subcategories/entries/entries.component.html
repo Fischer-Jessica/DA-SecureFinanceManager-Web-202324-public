@@ -1,53 +1,76 @@
+<!-- Check if labelId is defined to determine the type of entries being displayed -->
 <div *ngIf="this.labelId !== undefined; else subcategoryBlock">
-  <h2>{{ 'logged-in-homepage.labels.label-entries.headline_label_entries' | translate }}</h2>
-  <button mat-raised-button color="warn"
-          routerLink='/logged-in-homepage/labels'>{{ 'logged-in-homepage.labels.label-entries.button_return_to_labels' | translate }}
+  <!-- Headline for label entries -->
+  <h1>{{ 'logged-in-homepage.labels.label-entries.ui_headline_label_entries' | translate }}</h1>
+  <!-- Button to return to labels -->
+  <button class="cancel-button headline-button" routerLink='/logged-in-homepage/labels'>
+    {{ 'logged-in-homepage.labels.label-entries.ui_button_return_to_labels' | translate }}
   </button>
-  <p>{{ 'logged-in-homepage.labels.label-entries.text_your_label_entries' | translate }} {{ labelId }}</p>
+  <!-- Text describing the label entries -->
+  <p>{{ 'logged-in-homepage.labels.label-entries.ui_text_your_label_entries' | translate }} {{ labelId }}</p>
 </div>
 
+<!-- Template for displaying subcategory entries -->
 <ng-template #subcategoryBlock>
-  <h2>{{ 'logged-in-homepage.categories.subcategories.entries.headline_entries' | translate }}</h2>
-  <button class="create" mat-raised-button color="primary"
-          (click)="addEntry()">{{ 'logged-in-homepage.categories.subcategories.entries.button_create_entry' | translate }}
+  <!-- Headline for subcategory entries -->
+  <h1>{{ 'logged-in-homepage.categories.subcategories.entries.ui_headline_entries' | translate }}</h1>
+  <!-- Button to create a new entry -->
+  <button class="create-button headline-button" (click)="addEntry()">
+    {{ 'logged-in-homepage.categories.subcategories.entries.create-entry.ui_button_create_entry' | translate }}
   </button>
-  <button class="go-back" mat-raised-button color="warn" routerLink='/logged-in-homepage/categories'
-          (click)="returnToSubcategory()">{{ 'logged-in-homepage.categories.subcategories.entries.button_return_subcategories' | translate }}
+  <!-- Button to return to subcategories -->
+  <button class="cancel-button headline-button" routerLink='/logged-in-homepage/categories'
+          (click)="returnToSubcategory()">
+    {{ 'logged-in-homepage.categories.subcategories.entries.ui_button_return_subcategories' | translate }}
   </button>
-  <p>{{ 'logged-in-homepage.categories.subcategories.entries.text_your_entries' | translate }} {{ subcategoryId }}</p>
+  <!-- Text describing the subcategory entries -->
+  <p>{{ 'logged-in-homepage.categories.subcategories.entries.ui_text_your_entries' | translate }} {{ subcategoryId }}</p>
 </ng-template>
 
+<!-- Container for displaying entries -->
 <div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
+  <!-- Loop through each entry and display its details -->
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
       <div class="mat-card-content">
+        <!-- Card header with entry details -->
         <mat-card-header>
-          <mat-card-title><span
-            class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_name' | translate }}</span> {{ entry.entryName }}
+          <mat-card-title>
+            <span
+              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_name' | translate }}</span> {{ entry.entryName }}
           </mat-card-title>
-          <mat-card-subtitle><span
-            class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_description' | translate }}</span> {{ entry.entryDescription }}
+          <mat-card-subtitle>
+            <span
+              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_description' | translate }}</span> {{ entry.entryDescription }}
           </mat-card-subtitle>
-          <mat-card-subtitle><span
-            class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_amount' | translate }}</span> {{ entry.entryAmount }}
+          <mat-card-subtitle>
+            <span
+              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_amount' | translate }}</span> {{ entry.entryAmount }}
             €
           </mat-card-subtitle>
         </mat-card-header>
+        <!-- Additional entry details -->
         <mat-card-content>
-          <p><span
-            class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_date' | translate }}</span> {{ entry.entryTimeOfTransaction }}
+          <p class="card-p">
+            <span
+              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_time_of_transaction' | translate }}</span> {{ entry.entryTimeOfTransaction }}
           </p>
-          <p><span
-            class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_creation_date' | translate }}</span> {{ entry.entryCreationTime }}
+          <p class="card-p">
+            <span
+              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_creation_date' | translate }}</span> {{ entry.entryCreationTime }}
           </p>
-          <!-- TODO: Herausfinden, wie ich ein Bild anzeigen lassen kann -->
-          <p><span
-            class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.label_entry_attachment' | translate }}</span> {{ entry.entryAttachment }}
+          <p class="card-p">
+            <span
+              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_attachment' | translate }}</span> {{ entry.entryAttachment }}
           </p>
         </mat-card-content>
+        <!-- Dropdown menu for selecting labels -->
         <div class="right-column">
           <div class="elements-right-column">
-            <button (click)="toggleDropdown(entry.entryId)" class="dropdown-button">Labels auswählen</button>
+            <button (click)="toggleDropdown(entry.entryId)"
+                    class="dropdown-button">{{ 'logged-in-homepage.categories.subcategories.entries.ui_button_chose_label' | translate }}
+            </button>
+            <!-- Dropdown menu to select labels -->
             <div class="dropdown-menu" [id]="'dropdown-' + (entry.entryId)"
                  [hidden]="!dropdownOpen[entry.entryId || '']"
                  [ngClass]="{'dropdown-menu-in-label': this.labelId !== undefined}">
@@ -59,25 +82,39 @@
               </div>
             </div>
           </div>
-
+          <!-- Display selected labels for entries -->
           <div class="elements-right-column">
-          <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="selected-labels">
-            <div class="label-container" *ngFor="let label of getLabels(entry.entryId)">
-              <p class="selected-label"
-                 [style.background-color]="'#' + getLabelColour(label.labelId)">{{ label.labelName }}</p>
+            <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="selected-labels">
+              <div class="label-container" *ngFor="let label of getLabels(entry.entryId)">
+                <p class="selected-label"
+                   [style.background-color]="'#' + getLabelColour(label.labelId)">{{ label.labelName }}</p>
+              </div>
             </div>
           </div>
+          <!-- Buttons for editing and deleting entries -->
+          <div class="elements-right-column" *ngIf="this.labelId === undefined; else entryLabelAction">
+            <button class="update-button edit"
+                    (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }}
+            </button>
+            <button class="delete-button delete"
+                    (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }}
+            </button>
           </div>
 
-          <div class="elements-right-column" *ngIf="this.labelId === undefined">
-          <button class="edit" (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }} </button>
-          <button class="delete" (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }} </button>
-        </div>
+          <!-- Buttons for editing and deleting entries with labels -->
+          <ng-template #entryLabelAction>
+            <div class="elements-right-column">
+              <button class="delete-button remove"
+                      (click)="removeLabelFromEntry(entry.entryId!, this.labelId!)">{{ 'logged-in-homepage.labels.label-entries.ui_button_remove_entry' | translate }}
+              </button>
+            </div>
+          </ng-template>
         </div>
       </div>
     </mat-card>
   </div>
 </div>
+<!-- Template for when there are no entries to display -->
 <ng-template #noEntries>
-  <p>{{ 'logged-in-homepage.categories.subcategories.entries.text_no_entries' | translate }}</p>
+  <p>{{ 'logged-in-homepage.categories.subcategories.entries.ui_text_no_entries' | translate }}</p>
 </ng-template>
