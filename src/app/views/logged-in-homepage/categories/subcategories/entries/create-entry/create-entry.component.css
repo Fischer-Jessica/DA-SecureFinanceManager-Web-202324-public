@@ -1,0 +1,17 @@
+/**
+ * Styles for input elements with Euro symbol.
+ */
+.input-with-euro {
+  position: relative;
+}
+
+/**
+ * Styles for the Euro symbol within input elements.
+ */
+.euro-symbol {
+  position: absolute;
+  right: 44px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #000; /* Farbe anpassen, falls nötig */
+}

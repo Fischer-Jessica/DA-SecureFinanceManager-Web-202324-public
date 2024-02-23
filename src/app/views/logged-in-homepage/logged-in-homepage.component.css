@@ -1,7 +1,6 @@
-/**
- * Global styles
- * Apply global styles such as font family and text color to all elements.
- */
+/*
+Global styles: Apply global styles such as font family and text color to all elements.
+*/
 * {
   font-family: 'Roboto', sans-serif;
 }
@@ -10,10 +9,9 @@ body {
   margin: 0;
 }
 
-/**
- * Page layout styles
- * Define styles for page layout elements.
- */
+/*
+Page layout styles: Define styles for page layout elements.
+*/
 .page-div {
   height: 100vh;
   padding-top: 10px;
@@ -27,10 +25,9 @@ h1, p {
   color: white;
 }
 
-/**
- * Button styles
- * Define common styles for buttons and specific styles for each button type.
- */
+/*
+Button styles: Define common styles for buttons and specific styles for each button type.
+*/
 
 .create-button:hover,
 .update-button:hover,
@@ -47,10 +44,9 @@ h1, p {
   box-shadow: 0 0 0 2px;
 }
 
-/**
- * Specific button styles
- * Define specific background colors for each button type.
- */
+/*
+Specific button styles: Define specific background colors for each button type.
+*/
 .create-button {
   background-color: #2196F3;
   color: #fff;
@@ -71,10 +67,9 @@ h1, p {
   color: #fff;
 }
 
-/**
- * Form styles
- * Define styles for form elements.
- */
+/*
+Form styles: Define styles for form elements.
+*/
 .form {
   max-width: 777px;
   margin: auto;
@@ -89,6 +84,7 @@ h1, p {
   font-weight: bold;
   margin-bottom: 5px;
   font-size: 22px;
+  color: white;
 }
 
 .form-input {
@@ -100,6 +96,7 @@ h1, p {
   border-radius: 5px;
   background-color: #c6e1ff;
   color: #2C5282;
+  resize: none;
 }
 
 .form-actions {
@@ -121,10 +118,9 @@ h1, p {
   margin-bottom: 10px;
 }
 
-/**
- * Label styles
- * Define styles for label elements.
- */
+/*
+Label styles: Define styles for label elements.
+*/
 
 .headline-button {
   border: none;
@@ -155,6 +151,11 @@ h1, p {
   border: #111111 2px solid;
   color: black;
   background: #a6accb;
+  cursor: pointer;
+}
+
+.item-card:hover {
+  background: #8489a2;
 }
 
 .colour-dot {

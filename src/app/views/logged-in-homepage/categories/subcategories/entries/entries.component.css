@@ -10,7 +10,15 @@
   min-height: 156px;
   border: #111111 2px solid;
   background: #a6accb;
+  cursor: pointer;
   margin-bottom: 5px;
+}
+
+/**
+ * Hover styles for cards.
+ */
+.card:hover {
+  background: #8489a2;
 }
 
 /* Styles for subtitles within entry cards */
@@ -97,6 +105,15 @@ mat-card-content {
   margin-right: 10px;
   padding: 5px;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+/**
+ * Styles for the hover effect on selected labels.
+ */
+.selected-label:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+  filter: brightness(60%);
 }
 
 /* Grid layout styles for card content */
@@ -123,7 +140,15 @@ mat-card-content {
   padding: 5px;
   border-radius: 5px;
   font-weight: bold;
-  z-index: 9999; /* Stellt sicher, dass der Button über anderen Elementen liegt */
+  cursor: pointer;
+  z-index: 9999;
+}
+
+/**
+ * Hover styles for dropdown buttons.
+ */
+.dropdown-button:hover {
+  background-color: #71aaff;
 }
 
 /* Styles for the dropdown menu */
