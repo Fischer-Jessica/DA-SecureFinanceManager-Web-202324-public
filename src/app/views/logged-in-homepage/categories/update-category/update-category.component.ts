@@ -27,20 +27,20 @@ export class UpdateCategoryComponent implements OnInit {
 
   /**
    * Constructor for UpdateCategoryComponent
-   * @param route The Angular ActivatedRoute service
    * @param router The Angular Router service
-   * @param translateService The service for translation
-   * @param snackBarService The service for displaying snack bar messages
+   * @param route The Angular ActivatedRoute service
    * @param categoryService The service for category operations
    * @param localStorageService The service for managing local storage
+   * @param translateService The service for translation
+   * @param snackBarService The service for displaying snack bar messages
    * @memberOf UpdateCategoryComponent
    */
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private translateService: TranslateService,
-              private snackBarService: SnackBarService,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private categoryService: CategoryService,
-              private localStorageService: LocalStorageService
+              private localStorageService: LocalStorageService,
+              private translateService: TranslateService,
+              private snackBarService: SnackBarService
   ) {
   }
 

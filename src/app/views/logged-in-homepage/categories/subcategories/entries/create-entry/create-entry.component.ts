@@ -43,20 +43,21 @@ export class CreateEntryComponent implements OnInit {
 
   /**
    * Constructor for CreateEntryComponent
-   * @param route The Angular ActivatedRoute service
-   * @param localStorageService The service for managing local storage
    * @param router The Angular Router service
+   * @param route The Angular ActivatedRoute service
+   * @param entryService The service for entry operations
+   * @param localStorageService The service for managing local storage
    * @param translateService The service for translation
    * @param snackBarService The service for displaying snack bar messages
-   * @param entryService The service for entry operations
    * @memberOf CreateEntryComponent
    */
-  constructor(private route: ActivatedRoute,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private entryService: EntryService,
               private localStorageService: LocalStorageService,
-              private router: Router,
               private translateService: TranslateService,
               private snackBarService: SnackBarService,
-              private entryService: EntryService) {
+  ) {
   }
 
   /**

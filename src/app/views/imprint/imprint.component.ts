@@ -13,10 +13,4 @@ import {Component} from '@angular/core';
  * @fullName Fischer, Jessica Christina
  */
 export class ImprintComponent {
-  /**
-   * Creates an instance of ImprintComponent.
-   * @memberof ImprintComponent
-   */
-  constructor() {
-  }
 }

@@ -34,24 +34,24 @@ export class SubcategoriesComponent implements OnInit {
 
   /**
    * Constructor for SubcategoriesComponent
-   * @param route The Angular ActivatedRoute service
    * @param router The Angular Router service
-   * @param colourService The service for managing colours
+   * @param route The Angular ActivatedRoute service
    * @param subcategoryService The service for subcategory operations
+   * @param colourService The service for managing colours
    * @param localStorageService The service for managing local storage
-   * @param cdr The Angular ChangeDetectorRef service
+   * @param translateService The service for translation
    * @param snackBarService The service for displaying snack bar messages
-   * @param translate The service for translation
+   * @param cdr The Angular ChangeDetectorRef service
    * @memberOf SubcategoriesComponent
    */
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private colourService: ColourService,
-              private subcategoryService: SubcategoryService,
-              private localStorageService: LocalStorageService,
-              private cdr: ChangeDetectorRef,
-              private snackBarService: SnackBarService,
-              private translate: TranslateService) {
+  constructor(
+    private router: Router, private route: ActivatedRoute,
+    private subcategoryService: SubcategoryService,
+    private colourService: ColourService,
+    private localStorageService: LocalStorageService,
+    private translateService: TranslateService,
+    private snackBarService: SnackBarService,
+    private cdr: ChangeDetectorRef) {
   }
 
   /**
@@ -66,7 +66,7 @@ export class SubcategoriesComponent implements OnInit {
         this.categoryId = +params['categoryId'];
 
         if (isNaN(this.categoryId)) {
-          this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
           this.router.navigateByUrl('/logged-in-homepage/categories');
           return;
         }
@@ -74,9 +74,48 @@ export class SubcategoriesComponent implements OnInit {
         this.fetchSubcategories(user.username, user.password, this.categoryId);
       });
     } else {
-      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
       this.router.navigateByUrl('/authentication/login');
       return;
+    }
+  }
+
+  /**
+   * Method to delete a subcategory
+   * @param subcategoryId The ID of the subcategory to delete
+   * @memberOf SubcategoriesComponent
+   */
+  deleteSubcategory(subcategoryId: number | undefined) {
+    const confirmDelete = confirm(this.translateService.instant('logged-in-homepage.categories.subcategories.confirm_delete_subcategory'));
+    if (!confirmDelete) {
+      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
+    }
+
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      this.subcategoryService
+        .deleteSubcategory(user.username, user.password, this.categoryId, subcategoryId)
+        .subscribe(
+          (result) => {
+            this.subcategoriesData = this.subcategoriesData.filter((item) => item.subcategory.subcategoryId !== subcategoryId);
+            this.cdr.detectChanges(); // Trigger change detection
+          },
+          (error) => {
+            if (error.status === 401) {
+              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+              this.localStorageService.removeItem('loggedInUser');
+              this.router.navigateByUrl('/authentication/login');
+            } else if (error.status === 400) {
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.alert_parameter_invalid'));
+            } else if (error.status === 404) {
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.alert_subcategory_not_found'));
+            } else {
+              this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+              console.error(this.translateService.instant('logged-in-homepage.labels.console_error_deleting_label'), error);
+            }
+          }
+        );
     }
   }
 
@@ -110,10 +149,10 @@ export class SubcategoriesComponent implements OnInit {
                 },
                 (error) => {
                   if (error.status === 404) {
-                    this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.colours.alert_colours_not_found'));
+                    this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'));
                   } else {
-                    this.snackBarService.showAlert(this.translate.instant('alert_error'));
-                    console.error(this.translate.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
+                    this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+                    console.error(this.translateService.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
                   }
                 }
               );
@@ -122,56 +161,17 @@ export class SubcategoriesComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.alert_create_subcategory_first'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.alert_create_subcategory_first'));
           } else if (error.status === 401) {
-            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
             this.localStorageService.removeItem('loggedInUser');
             this.router.navigateByUrl('/authentication/login');
           } else {
-            this.snackBarService.showAlert(this.translate.instant('alert_error'));
-            console.error(this.translate.instant('logged-in-homepage.categories.subcategories.console_error_fetching_subcategories'), error);
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.console_error_fetching_subcategories'), error);
           }
         }
       );
-  }
-
-  /**
-   * Method to delete a subcategory
-   * @param subcategoryId The ID of the subcategory to delete
-   * @memberOf SubcategoriesComponent
-   */
-  deleteSubcategory(subcategoryId: number | undefined) {
-    const confirmDelete = confirm(this.translate.instant('logged-in-homepage.categories.subcategories.confirm_delete_subcategory'));
-    if (!confirmDelete) {
-      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
-    }
-
-    const storedUser = this.localStorageService.getItem('loggedInUser');
-    if (storedUser) {
-      const user = JSON.parse(storedUser);
-      this.subcategoryService
-        .deleteSubcategory(user.username, user.password, this.categoryId, subcategoryId)
-        .subscribe(
-          (result) => {
-            this.subcategoriesData = this.subcategoriesData.filter((item) => item.subcategory.subcategoryId !== subcategoryId);
-            this.cdr.detectChanges(); // Trigger change detection
-          },
-          (error) => {
-            if (error.status === 401) {
-              this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
-              this.localStorageService.removeItem('loggedInUser');
-              this.router.navigateByUrl('/authentication/login');
-            } else if (error.status === 400) {
-              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.alert_parameter_invalid'));
-            } else if (error.status === 404) {
-              this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.subcategories.alert_subcategory_not_found'));
-            } else {
-              this.snackBarService.showAlert(this.translate.instant('alert_error'));
-              console.error(this.translate.instant('logged-in-homepage.labels.console_error_deleting_label'), error);
-            }
-          }
-        );
-    }
   }
 
   /**

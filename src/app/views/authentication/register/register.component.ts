@@ -34,13 +34,13 @@ export class RegisterComponent {
    * Creates an instance of RegisterComponent.
    * @param {Router} router - The Router service for navigation.
    * @param {UserService} userService - The UserService for user registration.
-   * @param {TranslateService} translate - The TranslateService for translation.
+   * @param {TranslateService} translateService - The TranslateService for translation.
    * @param {SnackBarService} snackBarService - The SnackBarService for displaying snackbar alerts.
    * @memberof RegisterComponent
    */
   constructor(private router: Router,
               private userService: UserService,
-              private translate: TranslateService,
+              private translateService: TranslateService,
               private snackBarService: SnackBarService) {
   }
 
@@ -49,20 +49,23 @@ export class RegisterComponent {
    * @returns {void}
    * @memberof RegisterComponent
    */
-  insertNewUserInAPI(): void {
+  insertNewUser(): void {
     if (this.newUser.username === '' || this.newUser.password === '') {
-      this.snackBarService.showAlert(this.translate.instant('authentication.alert_missing_credentials'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_missing_credentials'));
       return;
     }
 
-    // Attempt to register the new user
-    this.userService.registerUser(this.newUser).subscribe({
+    this.userService.insertUser(this.newUser).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/logged-in-homepage');
       },
       error: (err) => {
-        this.snackBarService.showAlert(this.translate.instant('alert_error'));
-        console.error(this.translate.instant('authentication.register.console_error_register'), err);
+        if (err.status === 400) {
+          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_missing_credentials'));
+        } else {
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+          console.error(this.translateService.instant('authentication.register.console_error_register'), err);
+        }
       }
     });
   }

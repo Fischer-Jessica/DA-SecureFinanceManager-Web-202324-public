@@ -35,20 +35,21 @@ export class UpdateSubcategoryComponent implements OnInit {
 
   /**
    * Constructor for UpdateSubcategoryComponent
-   * @param route The Angular ActivatedRoute service
    * @param router The Angular Router service
-   * @param snackBarService The service for displaying snack bar messages
-   * @param translateService The service for translation
+   * @param route The Angular ActivatedRoute service
    * @param subcategoryService The service for subcategory operations
    * @param localStorageService The service for managing local storage
+   * @param translateService The service for translation
+   * @param snackBarService The service for displaying snack bar messages
    * @memberOf UpdateSubcategoryComponent
    */
-  constructor(private route: ActivatedRoute,
-              private router: Router,
-              private snackBarService: SnackBarService,
-              private translateService: TranslateService,
-              private subcategoryService: SubcategoryService,
-              private localStorageService: LocalStorageService
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private subcategoryService: SubcategoryService,
+    private localStorageService: LocalStorageService,
+    private translateService: TranslateService,
+    private snackBarService: SnackBarService,
   ) {
   }
 
@@ -57,14 +58,14 @@ export class UpdateSubcategoryComponent implements OnInit {
    * @memberOf UpdateSubcategoryComponent
    */
   ngOnInit() {
-    this.loadSubcategoryData();
+    this.fetchSubcategory();
   }
 
   /**
    * Method to load subcategory data for updating
    * @memberOf UpdateSubcategoryComponent
    */
-  private loadSubcategoryData(): void {
+  private fetchSubcategory(): void {
     const loggedInUser = this.localStorageService.getItem('loggedInUser');
 
     if (!loggedInUser) {

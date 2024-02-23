@@ -30,20 +30,20 @@ export class CreateSubcategoryComponent {
 
   /**
    * Constructor for CreateSubcategoryComponent
-   * @param route The Angular ActivatedRoute service
    * @param router The Angular Router service
+   * @param route The Angular ActivatedRoute service
    * @param subcategoryService The service for subcategory operations
+   * @param localStorageService The service for managing local storage
    * @param translateService The service for translation
    * @param snackBarService The service for displaying snack bar messages
-   * @param localStorageService The service for managing local storage
    * @memberOf CreateSubcategoryComponent
    */
-  constructor(private route: ActivatedRoute,
-              private router: Router,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private subcategoryService: SubcategoryService,
+              private localStorageService: LocalStorageService,
               private translateService: TranslateService,
-              private snackBarService: SnackBarService,
-              private localStorageService: LocalStorageService) {
+              private snackBarService: SnackBarService) {
   }
 
   /**

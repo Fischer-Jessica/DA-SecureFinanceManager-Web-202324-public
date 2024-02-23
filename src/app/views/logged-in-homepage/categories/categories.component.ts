@@ -30,20 +30,20 @@ export class CategoriesComponent implements OnInit {
    * Constructor for CategoriesComponent
    * @param router The Angular Router service
    * @param categoryService The service for category operations
-   * @param localStorageService The service for managing local storage
    * @param colourService The service for managing colours
-   * @param cdr The Angular ChangeDetectorRef service
+   * @param localStorageService The service for managing local storage
+   * @param translateService The service for translation
    * @param snackBarService The service for displaying snack bar messages
-   * @param translate The service for translation
+   * @param cdr The Angular ChangeDetectorRef service
    * @memberOf CategoriesComponent
    */
   constructor(private router: Router,
-              protected colourService: ColourService,
               private categoryService: CategoryService,
+              protected colourService: ColourService,
               private localStorageService: LocalStorageService,
-              private cdr: ChangeDetectorRef,
+              private translateService: TranslateService,
               private snackBarService: SnackBarService,
-              private translate: TranslateService
+              private cdr: ChangeDetectorRef
   ) {
   }
 
@@ -54,12 +54,56 @@ export class CategoriesComponent implements OnInit {
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
       this.router.navigateByUrl('/authentication/login');
       return;
     }
     const loggedInUser = JSON.parse(storedUser);
     this.fetchCategories(loggedInUser);
+  }
+
+  /**
+   * Method to delete a category
+   * @param categoryId The ID of the category to delete
+   * @memberOf CategoriesComponent
+   */
+  deleteCategory(categoryId: number | undefined) {
+    const confirmDelete = confirm(this.translateService.instant('logged-in-homepage.categories.confirm_delete_category'));
+    if (!confirmDelete) {
+      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
+    }
+
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.router.navigateByUrl('/authentication/login');
+      return;
+    }
+
+    const loggedInUser = JSON.parse(storedUser);
+
+    this.categoryService
+      .deleteCategory(loggedInUser.username, loggedInUser.password, categoryId)
+      .subscribe(
+        (result) => {
+          this.categoriesData = this.categoriesData.filter((item) => item.category.categoryId !== categoryId);
+          this.cdr.detectChanges(); // Trigger change detection
+        },
+        (error) => {
+          if (error.status === 401) {
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
+          } else if (error.status === 400) {
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.alert_parameter_invalid'));
+          } else if (error.status === 404) {
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.alert_category_not_found'));
+          } else {
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            console.error(this.translateService.instant('logged-in-homepage.categories.console_error_deleting_category'), error);
+          }
+        }
+      );
   }
 
   /**
@@ -90,10 +134,10 @@ export class CategoriesComponent implements OnInit {
                 },
                 (error) => {
                   if (error.status === 404) {
-                    this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.colours.alert_colours_not_found'));
+                    this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'));
                   } else {
-                    this.snackBarService.showAlert(this.translate.instant('alert_error'));
-                    console.error(this.translate.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
+                    this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+                    console.error(this.translateService.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
                   }
                 }
               );
@@ -103,58 +147,14 @@ export class CategoriesComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.alert_create_category_first'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.alert_create_category_first'));
           } else if (error.status === 401) {
-            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
             this.localStorageService.removeItem('loggedInUser');
             this.router.navigateByUrl('/authentication/login');
           } else {
-            this.snackBarService.showAlert(this.translate.instant('alert_error'));
-            console.error(this.translate.instant('logged-in-homepage.categories.console_error_fetching_categories'), error);
-          }
-        }
-      );
-  }
-
-  /**
-   * Method to delete a category
-   * @param categoryId The ID of the category to delete
-   * @memberOf CategoriesComponent
-   */
-  deleteCategory(categoryId: number | undefined) {
-    const confirmDelete = confirm(this.translate.instant('logged-in-homepage.categories.confirm_delete_category'));
-    if (!confirmDelete) {
-      return; // Wenn der Benutzer die Aktion nicht bestätigt, breche den Löschvorgang ab
-    }
-
-    const storedUser = this.localStorageService.getItem('loggedInUser');
-    if (!storedUser) {
-      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
-      this.router.navigateByUrl('/authentication/login');
-      return;
-    }
-
-    const loggedInUser = JSON.parse(storedUser);
-
-    this.categoryService
-      .deleteCategory(loggedInUser.username, loggedInUser.password, categoryId)
-      .subscribe(
-        (result) => {
-          this.categoriesData = this.categoriesData.filter((item) => item.category.categoryId !== categoryId);
-          this.cdr.detectChanges(); // Trigger change detection
-        },
-        (error) => {
-          if (error.status === 401) {
-            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
-            this.localStorageService.removeItem('loggedInUser');
-            this.router.navigateByUrl('/authentication/login');
-          } else if (error.status === 400) {
-            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.alert_parameter_invalid'));
-          } else if (error.status === 404) {
-            this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.categories.alert_category_not_found'));
-          } else {
-            this.snackBarService.showAlert(this.translate.instant('alert_error'));
-            console.error(this.translate.instant('logged-in-homepage.categories.console_error_deleting_category'), error);
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            console.error(this.translateService.instant('logged-in-homepage.categories.console_error_fetching_categories'), error);
           }
         }
       );

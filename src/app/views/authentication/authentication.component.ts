@@ -13,5 +13,4 @@ import {Component} from '@angular/core';
  * @fullName Fischer, Jessica Christina
  */
 export class AuthenticationComponent {
-
 }

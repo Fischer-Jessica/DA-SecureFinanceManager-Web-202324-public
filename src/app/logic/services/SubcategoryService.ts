@@ -106,7 +106,7 @@ export class SubcategoryService {
    * @param {number | undefined} subcategoryId - The unique identifier of the subcategory.
    * @returns {Observable<number>} An observable of number.
    */
-  deleteSubcategory(username: string, password: string, categoryId: number | undefined, subcategoryId: number | undefined) {
+  deleteSubcategory(username: string, password: string, categoryId: number | undefined, subcategoryId: number | undefined): Observable<number> {
     const apiUrl = AppComponent.apiUrl + `categories/${categoryId}/subcategories/` + subcategoryId;
 
     const headers = new HttpHeaders({

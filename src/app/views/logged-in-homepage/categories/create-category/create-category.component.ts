@@ -29,18 +29,18 @@ export class CreateCategoryComponent {
 
   /**
    * Constructor for CreateCategoryComponent
-   * @param categoryService The service for category operations
    * @param router The Angular router service
+   * @param categoryService The service for category operations
+   * @param localStorageService The service for managing local storage
    * @param translateService The service for translation
    * @param snackBarService The service for displaying snack bar messages
-   * @param localStorageService The service for managing local storage
    * @memberOf CreateCategoryComponent
    */
-  constructor(private categoryService: CategoryService,
-              private router: Router,
+  constructor(private router: Router,
+              private categoryService: CategoryService,
+              private localStorageService: LocalStorageService,
               private translateService: TranslateService,
-              private snackBarService: SnackBarService,
-              private localStorageService: LocalStorageService) {
+              private snackBarService: SnackBarService) {
   }
 
   /**

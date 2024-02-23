@@ -40,20 +40,20 @@ export class UpdateEntryComponent implements OnInit {
 
   /**
    * Constructor for UpdateEntryComponent
-   * @param route The Angular ActivatedRoute service
    * @param router The Angular Router service
+   * @param route The Angular ActivatedRoute service
    * @param entryService The service for entry operations
+   * @param localStorageService The service for managing local storage
    * @param transactionService The service for translation
    * @param snackBarService The service for displaying snack bar messages
-   * @param localStorageService The service for managing local storage
    * @memberOf UpdateEntryComponent
    */
-  constructor(private route: ActivatedRoute,
-              private router: Router,
+  constructor(private router: Router,
+              private route: ActivatedRoute,
               private entryService: EntryService,
+              private localStorageService: LocalStorageService,
               private transactionService: TranslateService,
-              private snackBarService: SnackBarService,
-              private localStorageService: LocalStorageService
+              private snackBarService: SnackBarService
   ) {
   }
 
@@ -64,7 +64,6 @@ export class UpdateEntryComponent implements OnInit {
   ngOnInit(): void {
     this.fetchEntry();
   }
-
 
   /**
    * Method to load the entry to be updated

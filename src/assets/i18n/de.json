@@ -3,6 +3,7 @@
   "authentication": {
     "alert_user_not_logged_in": "Sie sind nicht angemeldet.",
     "alert_missing_credentials": "Bitte geben Sie sowohl Benutzername als auch Passwort ein.",
+    "alert_user_not_found": "Benutzer nicht gefunden.",
     "login": {
       "ui_headline/button_login": "Anmelden",
       "ui_label_username": "Benutzername:",

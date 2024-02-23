@@ -1,4 +1,12 @@
+<!--
+This HTML template represents a color picker component that contains a list of color balls.
+Each color ball represents a color from the `colours` list.
+Clicking on a color ball calls the `onColourSelected(colour.colourId)` method,
+passing the `colourId` of the selected color ball.
+-->
+
 <div class="color-picker">
+  <!-- Iterating over the colors in the `colours` list -->
   <div *ngFor="let colour of colours"
        class="color-ball"
        [style.background-color]="'#' + colour.colourCode"

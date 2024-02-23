@@ -25,7 +25,8 @@ import {SubcategoriesComponent} from "./views/logged-in-homepage/categories/subc
 import {ImprintComponent} from './views/imprint/imprint.component';
 
 // routing - imports
-import {AppRoutingModule} from './app-routing.module'; // Import the AppRoutingModule
+import {AppRoutingModule} from './app-routing.module';
+
 // forms - imports
 import {FormsModule} from '@angular/forms';
 
@@ -106,15 +107,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     AppRoutingModule,
     MatButtonModule,
-    // Add the AppRoutingModule to the imports array
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private translate: TranslateService) {
-    translate.addLangs(['en', 'de'])
-    translate.setDefaultLang('en');
-    translate.use('de');
+  constructor(private translateService: TranslateService) {
+    translateService.addLangs(['en', 'de'])
+    translateService.setDefaultLang('en');
+    translateService.use('de');
   }
 }

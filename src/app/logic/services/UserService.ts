@@ -29,7 +29,7 @@ export class UserService {
    * @param {string} password - The password for authentication.
    * @returns {Observable<User>} An observable of the logged-in user.
    */
-  loginUser(username: string, password: string): Observable<User> {
+  getUser(username: string, password: string): Observable<User> {
     const apiUrl = AppComponent.apiUrl + 'user';
 
     const headers = new HttpHeaders({
@@ -51,7 +51,7 @@ export class UserService {
    * @param {User} newUser - The user object to register.
    * @returns {Observable<User>} An observable of the registered user.
    */
-  registerUser(newUser: User): Observable<User> {
+  insertUser(newUser: User): Observable<User> {
     const apiUrl = AppComponent.apiUrl + 'users';
 
     return this.http.post<User>(apiUrl, newUser, {

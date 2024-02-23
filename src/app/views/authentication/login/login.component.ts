@@ -34,13 +34,13 @@ export class LoginComponent {
    * Creates an instance of LoginComponent.
    * @param {Router} router - The Router service for navigation.
    * @param {UserService} userService - The UserService for user authentication.
-   * @param {TranslateService} translate - The TranslateService for translation.
+   * @param {TranslateService} translateService - The TranslateService for translation.
    * @param {SnackBarService} snackBarService - The SnackBarService for displaying snackbar alerts.
    * @memberof LoginComponent
    */
   constructor(private router: Router,
               private userService: UserService,
-              private translate: TranslateService,
+              private translateService: TranslateService,
               private snackBarService: SnackBarService) {
   }
 
@@ -51,20 +51,22 @@ export class LoginComponent {
    */
   logIntoTheOverview(): void {
     if (!this.username || !this.password) {
-      this.snackBarService.showAlert(this.translate.instant('authentication.alert_missing_credentials'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_missing_credentials'));
       return;
     }
 
-    this.userService.loginUser(this.username, this.password).subscribe({
+    this.userService.getUser(this.username, this.password).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/logged-in-homepage');
       },
       error: (err) => {
         if (err.status === 401) {
-          this.snackBarService.showAlert(this.translate.instant('authentication.login.alert_wrong_credentials'));
+          this.snackBarService.showAlert(this.translateService.instant('authentication.login.alert_wrong_credentials'));
+        } else if (err.status === 404) {
+          this.snackBarService.showAlert(this.translateService.instant('authentication.login.alert_user_not_found'));
         } else {
-          this.snackBarService.showAlert(this.translate.instant('alert_error'));
-          console.error(this.translate.instant('authentication.login.console_error_login'), err);
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+          console.error(this.translateService.instant('authentication.login.console_error_login'), err);
         }
       }
     });

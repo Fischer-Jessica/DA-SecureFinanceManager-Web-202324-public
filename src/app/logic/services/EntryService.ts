@@ -31,7 +31,7 @@ export class EntryService {
    * @param {number | undefined} subcategoryId - The unique identifier of the subcategory.
    * @returns {Observable<Entry[]>} An observable of entry array.
    */
-  getEntriesBySubcategoryId(username: string, password: string, subcategoryId: number | undefined): Observable<Entry[]> {
+  getEntries(username: string, password: string, subcategoryId: number | undefined): Observable<Entry[]> {
     const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries`;
 
     const headers = new HttpHeaders({

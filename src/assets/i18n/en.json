@@ -3,6 +3,7 @@
   "authentication": {
     "alert_user_not_logged_in": "You are not logged in.",
     "alert_missing_credentials": "Please fill in both password and username fields.",
+    "alert_user_not_found": "The user could not be found.",
     "login": {
       "ui_headline/text_login": "Login",
       "ui_label_username": "Username:",

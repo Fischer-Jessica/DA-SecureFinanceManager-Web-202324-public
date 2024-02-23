@@ -35,17 +35,17 @@ export class UserComponent implements OnInit {
 
   /**
    * Creates an instance of UserComponent.
-   * @param {UserService} userService - The UserService for managing user data.
    * @param {Router} router - The Router service for navigation.
+   * @param {UserService} userService - The UserService for managing user data.
    * @param {LocalStorageService} localStorageService - The LocalStorageService for storing user data.
-   * @param {TranslateService} translate - The TranslateService for localization.
+   * @param {TranslateService} translateService - The TranslateService for localization.
    * @param {SnackBarService} snackBarService - The SnackBarService for displaying alerts.
    * @memberof UserComponent
    */
-  constructor(private userService: UserService,
-              private router: Router,
+  constructor(private router: Router,
+              private userService: UserService,
               private localStorageService: LocalStorageService,
-              private translate: TranslateService,
+              private translateService: TranslateService,
               private snackBarService: SnackBarService) {
   }
 
@@ -67,7 +67,7 @@ export class UserComponent implements OnInit {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (storedUser) {
       this.user = JSON.parse(storedUser);
-      this.userService.loginUser(this.user.username, this.user.password).subscribe(
+      this.userService.getUser(this.user.username, this.user.password).subscribe(
         loggedInUser => {
           this.localStorageService.setItem('loggedInUser', JSON.stringify(loggedInUser));
           this.user = loggedInUser;
@@ -75,17 +75,17 @@ export class UserComponent implements OnInit {
         },
         error => {
           if (error.status === 401) {
-            this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
             this.localStorageService.removeItem('loggedInUser');
             this.router.navigate(['/authentication/login']);
           } else {
-            this.snackBarService.showAlert(this.translate.instant('alert_error'));
-            console.error(this.translate.instant('logged-in-homepage.user.console_error_fetching_user'), error);
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            console.error(this.translateService.instant('logged-in-homepage.user.console_error_fetching_user'), error);
           }
         }
       );
     } else {
-      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
       this.router.navigate(['/authentication/login']);
     }
   }
@@ -96,14 +96,14 @@ export class UserComponent implements OnInit {
    * @memberof UserComponent
    */
   deleteUser() {
-    const confirmDelete = confirm(this.translate.instant('logged-in-homepage.user.alert_confirm_delete_user'));
+    const confirmDelete = confirm(this.translateService.instant('logged-in-homepage.user.alert_confirm_delete_user'));
     if (!confirmDelete) {
       return;
     }
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
       this.router.navigate(['/authentication/login']);
       return;
     }
@@ -119,12 +119,12 @@ export class UserComponent implements OnInit {
       },
       error => {
         if (error.status === 401) {
-          this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
           this.localStorageService.removeItem('loggedInUser');
           this.router.navigate(['/authentication/login']);
         } else {
-          this.snackBarService.showAlert(this.translate.instant('alert_error'));
-          console.error(this.translate.instant('logged-in-homepage.user.console_error_deleting_user'), error);
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+          console.error(this.translateService.instant('logged-in-homepage.user.console_error_deleting_user'), error);
         }
       }
     );
@@ -138,7 +138,7 @@ export class UserComponent implements OnInit {
    */
   onSubmit(formData: any): void {
     if (!formData.valid) {
-      this.snackBarService.showAlert(this.translate.instant('logged-in-homepage.alert_invalid_formData'));
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_invalid_formData'));
       return;
     }
 
@@ -161,12 +161,12 @@ export class UserComponent implements OnInit {
       },
       error => {
         if (error.status === 401) {
-          this.snackBarService.showAlert(this.translate.instant('authentication.alert_user_not_logged_in'));
+          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
           this.localStorageService.removeItem('loggedInUser');
           this.router.navigate(['/authentication/login']);
         } else {
-          this.snackBarService.showAlert(this.translate.instant('alert_error'));
-          console.error(this.translate.instant('logged-in-homepage.user.console_error_updating_user'), error);
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+          console.error(this.translateService.instant('logged-in-homepage.user.console_error_updating_user'), error);
         }
       }
     );

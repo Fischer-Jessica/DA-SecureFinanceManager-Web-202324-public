@@ -29,15 +29,15 @@ export class CreateLabelComponent {
 
   /**
    * Constructor for CreateLabelComponent
-   * @param labelService The service for label operations
    * @param router The Angular router service
+   * @param labelService The service for label operations
    * @param localStorageService The service for managing local storage
    * @param translationService The service for translation
    * @param snackBarService The service for displaying snack bar messages
    * @memberOf CreateLabelComponent
    */
-  constructor(private labelService: LabelService,
-              private router: Router,
+  constructor(private router: Router,
+              private labelService: LabelService,
               private localStorageService: LocalStorageService,
               private translationService: TranslateService,
               private snackBarService: SnackBarService) {

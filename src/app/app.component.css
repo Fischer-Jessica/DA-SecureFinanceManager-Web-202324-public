@@ -1,3 +1,4 @@
+/* Represents the host element of the component, which is the element that hosts the component's template. */
 :host {
   background-color: #40476D;
   display: block;

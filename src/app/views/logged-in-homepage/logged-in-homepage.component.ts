@@ -6,5 +6,4 @@ import {Component} from '@angular/core';
   styleUrls: ['./logged-in-homepage.component.css']
 })
 export class LoggedInHomepageComponent {
-
 }
