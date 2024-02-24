@@ -158,6 +158,7 @@ export class UserComponent implements OnInit {
       updatedUser => {
         updatedUser.password = this.user.password;
         this.localStorageService.setItem('loggedInUser', JSON.stringify(updatedUser));
+        this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.user.alert_successful_update'));
       },
       error => {
         if (error.status === 401) {

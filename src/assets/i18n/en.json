@@ -183,6 +183,7 @@
       "ui_button_delete_user": "Delete User",
       "ui_button_logout": "Logout",
       "alert_confirm_delete_user": "Are you sure you want to delete your account? This action cannot be undone. You will lose all categories, subcategories, entries and labels.",
+      "alert_successful_update": "User has been successfully updated.",
       "console_error_fetching_user": "Error fetching user:",
       "console_error_updating_user": "Error updating user:",
       "console_error_deleting_user": "Error deleting user:"

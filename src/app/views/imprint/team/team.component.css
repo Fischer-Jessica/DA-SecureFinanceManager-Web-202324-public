@@ -31,6 +31,7 @@ h2 {
 /** Styles for individual team members. */
 .team-member {
   margin: 1rem;
+  cursor: pointer;
 }
 
 /** Styles for figure elements. */

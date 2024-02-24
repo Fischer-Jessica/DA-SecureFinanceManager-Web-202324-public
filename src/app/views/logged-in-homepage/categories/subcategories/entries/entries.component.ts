@@ -431,6 +431,14 @@ export class EntriesComponent implements OnInit {
               return 0;
             });
             this.entries = sortedEntries;
+
+            this.entries.forEach(entry => {
+              if (entry.entryCreationTime) {
+                entry.entryCreationTime = this.formatTime(new Date(entry.entryCreationTime));
+              } else {
+                entry.entryCreationTime = 'N/A';
+              }
+            });
             this.fetchLabelsOfEntry(username, password);
           },
           (error) => {
@@ -478,6 +486,21 @@ export class EntriesComponent implements OnInit {
           }
         );
     }
+  }
+
+  /**
+   * Formats a given date into a string representation with the format "DD.MM.YYYY HH:MM".
+   * @param date The date to be formatted.
+   * @returns A string representing the formatted date and time.
+   */
+  formatTime(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+
+    return `${day}.${month}.${year} ${hours}:${minutes}`;
   }
 
   /**

@@ -8,18 +8,24 @@ It defines the layout and appearance of color balls within the color picker. */
   gap: 10px;
 }
 
-/* Represents an individual color ball. It has a width and height of 30px and a border-radius of 50% to create a circular shape. It also has a cursor pointer for interaction and a black border of 2px. */
+/* Represents an individual color ball. */
 .color-ball {
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid black;
+  border: 1px solid;
+  box-sizing: border-box;
 }
 
-/* Applies styles to the selected color ball. It increases the border width to 5px and sets the border color to black. */
+/* Styling for the color balls when hovered over. */
+.color-ball:hover {
+  filter: brightness(60%);
+}
+
+/* Applies styles to the selected color ball. */
 .selected-color {
-  border: 5px solid black !important;
+  border-width: 4px;
 }
 
 /* Modifies the layout of the color picker for smaller screens by changing the flex-direction to row and allowing the color balls to wrap onto multiple lines. */

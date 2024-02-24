@@ -90,9 +90,8 @@ export class CreateEntryComponent implements OnInit {
     const day = ('0' + currentDate.getDate()).slice(-2);
     const hours = ('0' + currentDate.getHours()).slice(-2);
     const minutes = ('0' + currentDate.getMinutes()).slice(-2);
-    const seconds = ('0' + currentDate.getSeconds()).slice(-2);
 
-    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
+    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
     this.entry.entryTimeOfTransaction = formattedDateTime;
   }
 

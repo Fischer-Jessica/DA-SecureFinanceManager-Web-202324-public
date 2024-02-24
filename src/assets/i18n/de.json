@@ -183,6 +183,7 @@
       "ui_button_delete_user": "Benutzer löschen",
       "ui_button_logout": "Abmelden",
       "alert_confirm_delete_user": "Möchten Sie Ihren Account wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Sie verlieren alle Kategorien, Unterkategorien, Einträge und Labels.",
+      "alert_successful_update": "Benutzer wurde erfolgreich aktualisiert.",
       "console_error_fetching_user": "Fehler beim Abrufen des Benutzers:",
       "console_error_updating_user": "Fehler beim Aktualisieren des Benutzers:",
       "console_error_deleting_user": "Fehler beim Löschen des Benutzers:"
