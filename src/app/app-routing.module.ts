@@ -60,7 +60,7 @@ const routes: Routes = [
       {path: 'user', component: UserComponent},
     ]
   },
-  {path: '', redirectTo: 'authentication', pathMatch: 'full'},
+  {path: '', redirectTo: 'logged-in-homepage', pathMatch: 'full'},
   {path: 'team', component: TeamComponent},
   {path: 'contact', component: ContactComponent},
 ];

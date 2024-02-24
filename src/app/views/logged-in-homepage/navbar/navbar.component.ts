@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {LocalStorageService} from "../../../logic/LocalStorageService";
 
 @Component({
   selector: 'logged-in-homepage-navbar',
@@ -18,8 +19,10 @@ export class NavbarComponent {
   /**
    * Creates an instance of NavbarComponent.
    * @param {Router} router - The Router service for navigation.
+   * @param {LocalStorageService} localStorageService - The LocalStorageService for storing user data.
    */
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private localStorageService: LocalStorageService) {
   }
 
   /**
@@ -29,5 +32,14 @@ export class NavbarComponent {
    */
   isActive(route: string): boolean {
     return this.router.url === route;
+  }
+
+  /**
+   * Logs out the user by removing user data from local storage and navigating to the login page.
+   * @memberof UserComponent
+   */
+  logout() {
+    this.localStorageService.removeItem('loggedInUser');
+    this.router.navigate(['/authentication/login']);
   }
 }

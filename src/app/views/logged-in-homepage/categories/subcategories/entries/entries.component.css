@@ -10,7 +10,6 @@
   min-height: 156px;
   border: #111111 2px solid;
   background: #a6accb;
-  cursor: pointer;
   margin-bottom: 5px;
 }
 
@@ -156,15 +155,27 @@ mat-card-content {
   position: absolute;
   font-weight: bold;
   right: 15px;
-  top: 40px;
+  top: 39px;
   background-color: #cbcfe1;
   border: 1px solid;
-  max-height: 88px;
+  max-height: 50px;
   border-radius: 5px;
   overflow-y: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
   z-index: 9998;
+  display: none;
+}
+
+/* Show dropdown menu when the dropdown button is focused or hovered over, or when the dropdown menu itself is hovered over. */
+.dropdown-button:focus + .dropdown-menu,
+.dropdown-menu:hover {
+  display: block;
+}
+
+/* Hide dropdown menu when neither the dropdown button nor the dropdown menu itself are hovered over. */
+.dropdown-button:not(:hover) + .dropdown-menu:not(:hover) {
+  display: none;
 }
 
 /* Additional styles for dropdown menu within a label */

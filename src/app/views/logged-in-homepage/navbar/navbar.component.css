@@ -35,26 +35,33 @@ li a {
 
 /* Hover styles for links */
 li a:hover {
-  border-radius: 33px;
+  border-radius: 22px;
   background-color: #3c76cc;
 }
 
 /* Styles for active list items */
 .active {
-  border-radius: 33px;
+  border-radius: 22px;
   background-color: #2d5899;
 }
 
 /* Styles for user-specific list item */
 .user {
   margin-left: auto;
-  margin-right: 10px;
 }
 
 /* Media query for smaller screens */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 666px) {
+  .logo {
+    display: none;
+  }
+
   ul {
     justify-content: flex-start;
+  }
+
+  li {
+    margin-left: 1px;
   }
 
   li a {

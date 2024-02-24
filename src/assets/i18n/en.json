@@ -193,6 +193,7 @@
     "ui_link_team": "Team",
     "ui_link_contact": "Contact",
     "ui_text_rights": "all rights reserved",
+    "ui_button_go-back": "Go Back",
     "team": {
       "ui_headline_team": "Team",
       "ui_headline_project_team": "Project Team",

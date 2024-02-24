@@ -172,13 +172,4 @@ export class UserComponent implements OnInit {
       }
     );
   }
-
-  /**
-   * Logs out the user by removing user data from local storage and navigating to the login page.
-   * @memberof UserComponent
-   */
-  logout() {
-    this.localStorageService.removeItem('loggedInUser');
-    this.router.navigate(['/authentication/login']);
-  }
 }

@@ -1,7 +1,7 @@
 <ul>
   <!-- Logo item -->
   <li>
-    <img src="../../../assets/logos/Logo.ico" width="45" height="45" routerLink="/logged-in-homepage/categories">
+    <img class="logo" src="../../../assets/logos/Logo.ico" width="44" height="44" routerLink="/logged-in-homepage/categories">
   </li>
   <!-- Navigation items with router links -->
   <li [class.active]="isActive('/logged-in-homepage/categories')">
@@ -13,5 +13,8 @@
   <!-- User navigation item with router link -->
   <li [class.active]="isActive('/logged-in-homepage/user')" class="user">
     <a routerLink="/logged-in-homepage/user">{{ 'logged-in-homepage.navbar.ui_link_user' | translate }}</a>
+  </li>
+  <li>
+    <img src="../../../assets/images/icons/logout.png" width="40" height="40" (click)="logout()">
   </li>
 </ul>
