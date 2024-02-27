@@ -44,7 +44,7 @@ export class UpdateEntryComponent implements OnInit {
    * @param route The Angular ActivatedRoute service
    * @param entryService The service for entry operations
    * @param localStorageService The service for managing local storage
-   * @param transactionService The service for translation
+   * @param translateService The service for translation
    * @param snackBarService The service for displaying snack bar messages
    * @memberOf UpdateEntryComponent
    */
@@ -52,7 +52,7 @@ export class UpdateEntryComponent implements OnInit {
               private route: ActivatedRoute,
               private entryService: EntryService,
               private localStorageService: LocalStorageService,
-              private transactionService: TranslateService,
+              private translateService: TranslateService,
               private snackBarService: SnackBarService
   ) {
   }
@@ -66,6 +66,22 @@ export class UpdateEntryComponent implements OnInit {
   }
 
   /**
+   * Sets the initial date and time for an entry based on the provided database date-time string.
+   * The database date-time string is expected to be in the format 'YYYY-MM-DD HH:mm'.
+   * @param databaseDateTime The date-time string retrieved from the database.
+   * @memberOf UpdateEntryComponent
+   */
+  setInitialDateTimeFromDatabase(databaseDateTime: string) {
+    const [datePart, timePart] = databaseDateTime.split(' ');
+    const [year, month, day] = datePart.split('-');
+    const [hours, minutes] = timePart.split(':');
+
+    const formattedDateTime = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+
+    this.entry.entryTimeOfTransaction = formattedDateTime;
+  }
+
+  /**
    * Method to load the entry to be updated
    * @memberOf UpdateEntryComponent
    */
@@ -73,7 +89,7 @@ export class UpdateEntryComponent implements OnInit {
     const storedUser = this.localStorageService.getItem('loggedInUser');
 
     if (!storedUser) {
-      this.snackBarService.showAlert(this.transactionService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
       this.router.navigateByUrl('authentication/login')
       return;
     }
@@ -86,7 +102,7 @@ export class UpdateEntryComponent implements OnInit {
       const entryId = +params['entryId'];
 
       if (isNaN(this.categoryId) || isNaN(this.subcategoryId) || isNaN(entryId)) {
-        this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+        this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
         this.router.navigate([`/logged-in-homepage/categories`]);
       }
 
@@ -97,20 +113,21 @@ export class UpdateEntryComponent implements OnInit {
         entryId
       ).subscribe(
         result => {
-          this.entry = result
+          this.entry = result;
+          this.setInitialDateTimeFromDatabase(this.entry.entryTimeOfTransaction);
         },
         error => {
           if (error.status === 401) {
-            this.snackBarService.showAlert(this.transactionService.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
             this.router.navigateByUrl('authentication/login')
           } else if (error.status === 400) {
-            this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
             this.router.navigate([`/logged-in-homepage/categories`]);
           } else if (error.status === 404) {
-            this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
           } else {
-            this.snackBarService.showAlert(this.transactionService.instant('alert_error'));
-            console.error(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.console_error_fetching_entry'), error);
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.console_error_fetching_entry'), error);
           }
         }
       );
@@ -122,21 +139,21 @@ export class UpdateEntryComponent implements OnInit {
    * @param formData The form data submitted
    * @memberOf UpdateEntryComponent
    */
-  onSubmit(formData: any) {
+  onSubmit(formData: Entry) {
     if (formData.entryAmount === 0 || formData.entryTimeOfTransaction === '') {
-      this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'));
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'));
       return;
     }
 
-    if (!formData.valid) {
-      this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.alert_invalid_formData'));
+    if (!formData.entryAmount.toString().match(/^\d+(\.\d{0,2})?$/)) {
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_invalid_amount'));
       return;
     }
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
 
     if (!storedUser) {
-      this.snackBarService.showAlert(this.transactionService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
       this.router.navigateByUrl('authentication/login')
       return;
     }
@@ -160,16 +177,16 @@ export class UpdateEntryComponent implements OnInit {
         result => this.router.navigate([`/logged-in-homepage/entries/${this.categoryId}/${this.subcategoryId}`]),
         error => {
           if (error.status === 401) {
-            this.snackBarService.showAlert(this.transactionService.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
             this.router.navigateByUrl('authentication/login')
           } else if (error.status === 400) {
-            this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
             this.router.navigate([`/logged-in-homepage/categories`]);
           } else if (error.status === 404) {
-            this.snackBarService.showAlert(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
           } else {
-            this.snackBarService.showAlert(this.transactionService.instant('alert_error'));
-            console.error(this.transactionService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.console_error_fetching_entry'), error);
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.console_error_fetching_entry'), error);
           }
         }
       );

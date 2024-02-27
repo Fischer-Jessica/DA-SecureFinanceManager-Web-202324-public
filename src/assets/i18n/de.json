@@ -27,7 +27,11 @@
       "ui_label_password": "Passwort:",
       "ui_placeholder_password": "Ihr Passwort",
       "ui_button_login": "Ich habe bereits ein Konto.",
-      "console_error_register": "Fehler beim Registrieren: "
+      "console_error_register": "Fehler beim Registrieren: ",
+      "alert_username_email_exists": "Sowohl der Benutzername als auch die E-Mail-Adresse existieren bereits.",
+      "alert_username_exists": "Benutzername existiert bereits.",
+      "alert_email_exits": "E-Mail-Adresse existiert bereits.",
+      "alert_password_requirements": "Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten."
     }
   },
   "logged-in-homepage": {
@@ -117,7 +121,8 @@
             "ui_placeholder_entry_description": "Beschreibung des Eintrags",
             "ui_button_create_entry": "neuen Eintrag erstellen",
             "alert_create_entry_missing_fields": "Sie müssen den Betrag und den Zeitpunkt des Eintrags eingeben.",
-            "console_error_creating_entry": "Fehler beim Erstellen des Eintrags:"
+            "console_error_creating_entry": "Fehler beim Erstellen des Eintrags:",
+            "alert_invalid_amount": "Der eingegebene Betrag muss eine gültige Dezimalzahl mit höchstens zwei Dezimalstellen sein."
           },
           "update-entry": {
             "ui_button_update_entry": "Eintrag aktualisieren",

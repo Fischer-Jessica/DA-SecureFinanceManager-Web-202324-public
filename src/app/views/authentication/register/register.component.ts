@@ -55,6 +55,11 @@ export class RegisterComponent {
       return;
     }
 
+    if (!this.newUser.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]|\:;"'<>,.?/])[A-Za-z\d!@#$%^&*()_+{}[\]|\:;"'<>,.?/]{8,20}$/)) {
+      alert(this.translateService.instant('authentication.register.alert_password_requirements'));
+      return;
+    }
+
     this.userService.insertUser(this.newUser).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/logged-in-homepage');
@@ -62,6 +67,18 @@ export class RegisterComponent {
       error: (err) => {
         if (err.status === 400) {
           this.snackBarService.showAlert(this.translateService.instant('authentication.alert_missing_credentials'));
+        } else if (err.status === 409) {
+          const errorMessage = err.error;
+          if (errorMessage.includes('Both username and email address already exist.')) {
+            this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_username_email_exists'));
+          } else if (errorMessage.includes('Username already exists.')) {
+            this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_username_exists'));
+          } else if (errorMessage.includes('Email address already exists.')) {
+            this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_email_exits'));
+          } else {
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            console.error(this.translateService.instant('authentication.register.console_error_register'), err);
+          }
         } else {
           this.snackBarService.showAlert(this.translateService.instant('alert_error'));
           console.error(this.translateService.instant('authentication.register.console_error_register'), err);

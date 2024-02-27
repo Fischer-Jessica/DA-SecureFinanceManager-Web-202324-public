@@ -4,7 +4,7 @@
   <!-- Input for label name -->
   <div class="form-group">
     <label for="labelName"
-           class="form-label">{{ 'logged-in-homepage.labels.create-label.ui_label_label_name' | translate }}</label>
+           class="form-label">* {{ 'logged-in-homepage.labels.create-label.ui_label_label_name' | translate }}</label>
     <input type="text" id="labelName" name="labelName"
            placeholder="{{ 'logged-in-homepage.labels.create-label.ui_placeholder_label_name' | translate }}"
            [(ngModel)]="label.labelName" required class="form-input">
@@ -22,7 +22,7 @@
 
   <!-- Color picker component -->
   <div class="form-group">
-    <label class="form-label">{{ 'logged-in-homepage.labels.create-label.ui_label_label_colour' | translate }}</label>
+    <label class="form-label">* {{ 'logged-in-homepage.labels.create-label.ui_label_label_colour' | translate }}</label>
     <app-colour-picker [selectedColourId]="label.labelColourId"
                        (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>

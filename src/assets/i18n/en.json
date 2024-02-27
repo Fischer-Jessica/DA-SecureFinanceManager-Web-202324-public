@@ -27,7 +27,11 @@
       "ui_label_password": "Password:",
       "ui_placeholder_password": "Your password",
       "ui_button_login": "I already have an account.",
-      "console_error_register": "Error registering: "
+      "console_error_register": "Error registering: ",
+      "alert_username_email_exists": "Both username and email address already exist.",
+      "alert_username_exists": "Username already exists.",
+      "alert_email_exits": "Email address already exists.",
+      "alert_password_requirements": "The password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character."
     }
   },
   "logged-in-homepage": {
@@ -117,7 +121,8 @@
             "ui_placeholder_entry_description": "description of the entry",
             "ui_button_create_entry": "create new entry",
             "alert_create_entry_missing_fields": "You must provide the amount and the time of the entry.",
-            "console_error_creating_entry": "Error creating entry:"
+            "console_error_creating_entry": "Error creating entry:",
+            "alert_invalid_amount": "The entered amount must be a valid decimal number with at most two decimal places."
           },
           "update-entry": {
             "ui_button_update_entry": "Update Entry",

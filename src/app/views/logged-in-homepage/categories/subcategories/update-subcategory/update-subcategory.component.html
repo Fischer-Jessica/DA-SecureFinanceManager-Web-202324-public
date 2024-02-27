@@ -4,7 +4,7 @@
   <!-- Input for subcategory name -->
   <div class="form-group">
     <label for="subcategoryName"
-           class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_label_subcategory_name' | translate }}</label>
+           class="form-label">* {{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_label_subcategory_name' | translate }}</label>
     <input type="text" id="subcategoryName" name="subcategoryName"
            placeholder="{{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_placeholder_subcategory_name' | translate }}"
            [(ngModel)]="subcategory.subcategoryName" required
@@ -24,7 +24,7 @@
   <!-- Color picker component -->
   <div class="form-group">
     <label
-      class="form-label">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_label_subcategory_colour' | translate }}</label>
+      class="form-label">* {{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_label_subcategory_colour' | translate }}</label>
     <app-colour-picker [selectedColourId]="subcategory.subcategoryColourId"
                        (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>

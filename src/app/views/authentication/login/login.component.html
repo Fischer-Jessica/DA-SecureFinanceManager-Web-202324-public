@@ -20,7 +20,7 @@
         <form (ngSubmit)="logIntoTheOverview()" id="login-form">
           <!-- Username Input Field -->
           <div class="form-group">
-            <label for="username"><i></i>{{ 'authentication.login.ui_label_username' | translate }}</label>
+            <label for="username"><i></i>* {{ 'authentication.login.ui_label_username' | translate }}</label>
             <input type="text" name="username" id="username"
                    [(ngModel)]="username" placeholder="{{'authentication.login.ui_placeholder_username' | translate}}"
                    required>
@@ -29,7 +29,7 @@
 
           <!-- Password Input Field -->
           <div class="form-group">
-            <label for="password"><i></i>{{ 'authentication.login.ui_label_password' | translate }}</label>
+            <label for="password"><i></i>* {{ 'authentication.login.ui_label_password' | translate }}</label>
             <input [(ngModel)]="password" id="password" name="password"
                    placeholder="{{'authentication.login.ui_placeholder_password' | translate}}" type="password"
                    required>

@@ -22,7 +22,8 @@
 
   <!-- Input for entry amount -->
   <div class="form-group">
-    <label for="entryAmount" class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_amount' | translate }}</label>
+    <label for="entryAmount"
+           class="form-label">* {{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_amount' | translate }}</label>
     <div class="input-with-euro">
       <input type="number" id="entryAmount" name="entryAmount" [(ngModel)]="entry.entryAmount" required
              class="form-input">
@@ -33,7 +34,7 @@
   <!-- Input for entry time of transaction -->
   <div class="form-group">
     <label for="entryTimeOfTransaction"
-           class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_time_of_transaction' | translate }}</label>
+           class="form-label">* {{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_time_of_transaction' | translate }}</label>
     <input type="datetime-local" id="entryTimeOfTransaction" name="entryTimeOfTransaction"
            [(ngModel)]="entry.entryTimeOfTransaction" required class="form-input">
   </div>
