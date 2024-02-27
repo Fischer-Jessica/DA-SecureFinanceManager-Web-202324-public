@@ -20,8 +20,16 @@
   font-size: 1.8vw;
   border-radius: 2.5vw;
   background-color: #2b2b2b;
-  padding: 2.5vw;
+  padding: 2.5vw 2.5vw 2.5vw 0;
   width: 66%;
+}
+
+/**
+ * Adjust the margin of <pre> elements to offset the default indentation.
+ * This ensures that <pre> blocks align correctly with surrounding content.
+ */
+pre {
+  margin-left: -20px;
 }
 
 /* Media queries for smaller screens */
