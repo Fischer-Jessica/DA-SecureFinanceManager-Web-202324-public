@@ -9,7 +9,7 @@ import {TranslateService} from "@ngx-translate/core";
 @Component({
   selector: 'app-update-subcategory',
   templateUrl: './update-subcategory.component.html',
-  styleUrls: ['./update-subcategory.component.css', '../../../logged-in-homepage.component.css']
+  styleUrls: ['./update-subcategory.component.css', '../../../logged-in-homepage.component.css', '../../../../../app.component.css']
 })
 
 /**

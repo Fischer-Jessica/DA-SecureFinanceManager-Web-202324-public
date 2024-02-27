@@ -9,7 +9,7 @@ import {TranslateService} from "@ngx-translate/core";
 @Component({
   selector: 'app-create-new-label',
   templateUrl: './create-label.component.html',
-  styleUrls: ['./create-label.component.css', '../../logged-in-homepage.component.css']
+  styleUrls: ['./create-label.component.css', '../../logged-in-homepage.component.css', '../../../../app.component.css']
 })
 /**
  * Component for creating a new label

@@ -9,7 +9,7 @@ import {SnackBarService} from "../../../logic/services/SnackBarService";
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css', '../logged-in-homepage.component.css']
+  styleUrls: ['./user.component.css', '../logged-in-homepage.component.css', '../../../app.component.css']
 })
 
 /**

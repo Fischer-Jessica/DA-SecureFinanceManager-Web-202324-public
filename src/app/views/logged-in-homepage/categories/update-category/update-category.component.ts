@@ -9,7 +9,7 @@ import {SnackBarService} from "../../../../logic/services/SnackBarService";
 @Component({
   selector: 'app-update-category',
   templateUrl: './update-category.component.html',
-  styleUrls: ['./update-category.component.css', '../../logged-in-homepage.component.css']
+  styleUrls: ['./update-category.component.css', '../../logged-in-homepage.component.css', '../../../../app.component.css']
 })
 /**
  * Component for updating a category

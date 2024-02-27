@@ -17,7 +17,8 @@
 
           <!-- Username Input -->
           <div class="form-group">
-            <label for="username">* {{ 'authentication.register.ui_label_username' | translate }}</label>
+            <label for="username"><i
+              class="required-field">*</i> {{ 'authentication.register.ui_label_username' | translate }}</label>
             <input type="text" name="username" id="username"
                    placeholder="{{ 'authentication.register.ui_placeholder_username' | translate }}"
                    [(ngModel)]="newUser.username" required>
@@ -25,7 +26,8 @@
 
           <!-- Password Input -->
           <div class="form-group">
-            <label for="password">* {{ 'authentication.register.ui_label_password' | translate }}</label>
+            <label for="password"><i
+              class="required-field">*</i> {{ 'authentication.register.ui_label_password' | translate }}</label>
             <input id="password" name="password"
                    placeholder="{{ 'authentication.register.ui_placeholder_password' | translate }}"
                    type="password"

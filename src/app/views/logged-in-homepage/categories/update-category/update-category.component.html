@@ -4,7 +4,8 @@
   <!-- Input for category name -->
   <div class="form-group">
     <label for="categoryName"
-           class="form-label">* {{ 'logged-in-homepage.categories.create-category.ui_label_category_name' | translate }}</label>
+           class="form-label"><i
+      class="required-field">*</i> {{ 'logged-in-homepage.categories.create-category.ui_label_category_name' | translate }}</label>
     <input type="text" id="categoryName" name="categoryName"
            placeholder="{{ 'logged-in-homepage.categories.create-category.ui_placeholder_category_name' | translate }}"
            [(ngModel)]="category.categoryName" required
@@ -24,7 +25,8 @@
   <!-- Color picker component -->
   <div class="form-group">
     <label
-      class="form-label">* {{ 'logged-in-homepage.categories.create-category.ui_label_category_colour' | translate }}</label>
+      class="form-label"><i
+      class="required-field">*</i> {{ 'logged-in-homepage.categories.create-category.ui_label_category_colour' | translate }}</label>
     <app-colour-picker [selectedColourId]="category.categoryColourId"
                        (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>

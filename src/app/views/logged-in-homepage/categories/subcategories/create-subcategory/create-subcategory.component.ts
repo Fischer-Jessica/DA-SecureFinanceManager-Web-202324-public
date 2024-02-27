@@ -9,7 +9,7 @@ import {SnackBarService} from "../../../../../logic/services/SnackBarService";
 @Component({
   selector: 'app-create-new-subcategory',
   templateUrl: './create-subcategory.component.html',
-  styleUrls: ['./create-subcategory.component.css', '../../../logged-in-homepage.component.css']
+  styleUrls: ['./create-subcategory.component.css', '../../../logged-in-homepage.component.css', '../../../../../app.component.css']
 })
 /**
  * Component for creating a new subcategory

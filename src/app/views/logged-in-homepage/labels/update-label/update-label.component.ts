@@ -9,7 +9,7 @@ import {SnackBarService} from "../../../../logic/services/SnackBarService";
 @Component({
   selector: 'app-update-label',
   templateUrl: './update-label.component.html',
-  styleUrls: ['./update-label.component.css', '../../logged-in-homepage.component.css']
+  styleUrls: ['./update-label.component.css', '../../logged-in-homepage.component.css', '../../../../app.component.css']
 })
 
 /**

@@ -9,7 +9,7 @@ import {SnackBarService} from "../../../../../../logic/services/SnackBarService"
 @Component({
   selector: 'app-create-entry',
   templateUrl: './create-entry.component.html',
-  styleUrls: ['./create-entry.component.css', '../../../../logged-in-homepage.component.css']
+  styleUrls: ['./create-entry.component.css', '../../../../logged-in-homepage.component.css', '../../../../../../app.component.css']
 })
 /**
  * Component for creating a new entry

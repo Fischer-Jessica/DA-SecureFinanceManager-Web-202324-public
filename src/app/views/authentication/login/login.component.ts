@@ -7,7 +7,7 @@ import {SnackBarService} from "../../../logic/services/SnackBarService";
 @Component({
   selector: 'login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css', '../../../app.component.css']
 })
 
 /**

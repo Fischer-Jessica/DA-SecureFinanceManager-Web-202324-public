@@ -9,7 +9,7 @@ import {SnackBarService} from "../../../../logic/services/SnackBarService";
 @Component({
   selector: 'app-create-new-category',
   templateUrl: './create-category.component.html',
-  styleUrls: ['./create-category.component.css', '../../logged-in-homepage.component.css']
+  styleUrls: ['./create-category.component.css', '../../logged-in-homepage.component.css', '../../../../app.component.css']
 })
 /**
  * Component for creating a new category
