@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AppComponent} from "../../app.component";
 import {Category} from "../models/Category";
+import {CONFIG} from "../../app.config";
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,7 @@ export class CategoryService {
    * @returns {Observable<Category[]>} An observable of category array.
    */
   getCategories(username: string, password: string): Observable<Category[]> {
-    const apiUrl = AppComponent.apiUrl + 'categories';
+    const apiUrl = CONFIG.apiURL + 'categories';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -48,7 +48,7 @@ export class CategoryService {
    * @returns {Observable<Category>} An observable of category.
    */
   getCategory(username: string, password: string, categoryId: number): Observable<Category> {
-    const apiUrl = AppComponent.apiUrl + 'categories/' + categoryId;
+    const apiUrl = CONFIG.apiURL + 'categories/' + categoryId;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -66,7 +66,7 @@ export class CategoryService {
    * @returns {Observable<Category>} An observable of category.
    */
   insertCategory(username: string, password: string, category: Category): Observable<Category> {
-    const apiUrl = AppComponent.apiUrl + 'categories';
+    const apiUrl = CONFIG.apiURL + 'categories';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -84,7 +84,7 @@ export class CategoryService {
    * @returns {Observable<any>} An observable of any.
    */
   updateCategory(username: string, password: string, categoryId: number, updatedCategory: Category): Observable<any> {
-    const url = AppComponent.apiUrl + `categories/${categoryId}`;
+    const url = CONFIG.apiURL + `categories/${categoryId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -102,7 +102,7 @@ export class CategoryService {
    * @returns {Observable<number>} An observable of number.
    */
   deleteCategory(username: string, password: string, categoryId: number | undefined): Observable<number> {
-    const apiUrl = AppComponent.apiUrl + 'categories/' + categoryId;
+    const apiUrl = CONFIG.apiURL + 'categories/' + categoryId;
 
     const headers = new HttpHeaders({
       'API-Version': '1',

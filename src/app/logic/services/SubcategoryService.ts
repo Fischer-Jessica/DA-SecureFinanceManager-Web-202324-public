@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AppComponent} from "../../app.component";
 import {Subcategory} from "../models/Subcategory";
+import {CONFIG} from "../../app.config";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class SubcategoryService {
    * @returns {Observable<Subcategory[]>} An observable of subcategory array.
    */
   getSubcategories(username: string, password: string, categoryId: number): Observable<Subcategory[]> {
-    const apiUrl = AppComponent.apiUrl + `categories/${categoryId}/subcategories`;
+    const apiUrl = CONFIG.apiURL + `categories/${categoryId}/subcategories`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -51,7 +51,7 @@ export class SubcategoryService {
    * @returns {Observable<Subcategory>} An observable of subcategory.
    */
   getSubcategory(username: string, password: string, categoryId: number, subcategoryId: number): Observable<Subcategory> {
-    const apiUrl = AppComponent.apiUrl + `categories/${categoryId}/subcategories/${subcategoryId}`;
+    const apiUrl = CONFIG.apiURL + `categories/${categoryId}/subcategories/${subcategoryId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -70,7 +70,7 @@ export class SubcategoryService {
    * @returns {Observable<Subcategory>} An observable of subcategory.
    */
   insertSubcategory(username: string, password: string, categoryId: number, subcategory: Subcategory): Observable<Subcategory> {
-    const apiUrl = AppComponent.apiUrl + `categories/${categoryId}/subcategories`;
+    const apiUrl = CONFIG.apiURL + `categories/${categoryId}/subcategories`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -88,7 +88,7 @@ export class SubcategoryService {
    * @returns {Observable<Subcategory>} An observable of subcategory.
    */
   updateSubcategory(username: string, password: string, subcategory: Subcategory): Observable<Subcategory> {
-    const apiUrl = AppComponent.apiUrl + `categories/${subcategory.subcategoryCategoryId}/subcategories/${subcategory.subcategoryId}`;
+    const apiUrl = CONFIG.apiURL + `categories/${subcategory.subcategoryCategoryId}/subcategories/${subcategory.subcategoryId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -107,7 +107,7 @@ export class SubcategoryService {
    * @returns {Observable<number>} An observable of number.
    */
   deleteSubcategory(username: string, password: string, categoryId: number | undefined, subcategoryId: number | undefined): Observable<number> {
-    const apiUrl = AppComponent.apiUrl + `categories/${categoryId}/subcategories/` + subcategoryId;
+    const apiUrl = CONFIG.apiURL + `categories/${categoryId}/subcategories/` + subcategoryId;
 
     const headers = new HttpHeaders({
       'API-Version': '1',

@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AppComponent} from "../../app.component";
 import {Label} from "../models/Label";
+import {CONFIG} from "../../app.config";
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +31,7 @@ export class LabelService {
    * @returns {Observable<Label[]>} An observable of label array.
    */
   getLabels(username: string, password: string): Observable<Label[]> {
-    const apiUrl = AppComponent.apiUrl + 'labels';
+    const apiUrl = CONFIG.apiURL + 'labels';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -49,7 +49,7 @@ export class LabelService {
    * @returns {Observable<Label>} An observable of label.
    */
   getLabel(username: string, password: string, labelId: number): Observable<Label> {
-    const apiUrl = AppComponent.apiUrl + `labels/${labelId}`;
+    const apiUrl = CONFIG.apiURL + `labels/${labelId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -67,7 +67,7 @@ export class LabelService {
    * @returns {Observable<Label>} An observable of label.
    */
   insertLabel(username: string, password: string, label: Label): Observable<Label> {
-    const apiUrl = AppComponent.apiUrl + 'labels';
+    const apiUrl = CONFIG.apiURL + 'labels';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -86,7 +86,7 @@ export class LabelService {
    * @returns {Observable<Label>} An observable of label.
    */
   updateLabel(username: string, password: string, labelId: number, label: Label): Observable<Label> {
-    const apiUrl = AppComponent.apiUrl + `labels/${labelId}`;
+    const apiUrl = CONFIG.apiURL + `labels/${labelId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -104,7 +104,7 @@ export class LabelService {
    * @returns {Observable<number>} An observable of number.
    */
   deleteLabel(username: string, password: string, labelId: number | undefined): Observable<number> {
-    const apiUrl = AppComponent.apiUrl + `labels/${labelId}`;
+    const apiUrl = CONFIG.apiURL + `labels/${labelId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',

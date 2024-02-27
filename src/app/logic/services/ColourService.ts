@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {Colour} from "../models/Colour";
-import {AppComponent} from "../../app.component";
+import {CONFIG} from "../../app.config";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +35,7 @@ export class ColourService {
    * @returns {Observable<Colour[]>} An observable of colour array.
    */
   getColours(): Observable<Colour[]> {
-    const apiUrl = AppComponent.apiUrl + 'colours';
+    const apiUrl = CONFIG.apiURL + 'colours';
 
     const headers = new HttpHeaders({
       'API-Version': '1'
@@ -55,7 +55,7 @@ export class ColourService {
    * @returns {Observable<Colour>} An observable of colour.
    */
   getColour(colourId: number): Observable<Colour> {
-    const apiUrl: string = AppComponent.apiUrl + 'colours/' + colourId;
+    const apiUrl: string = CONFIG.apiURL + 'colours/' + colourId;
 
     const headers = new HttpHeaders({
       'API-Version': '1'
@@ -74,7 +74,7 @@ export class ColourService {
    * @returns {Observable<string>} An observable of hexadecimal colour code.
    */
   getColourHex(colourId: number): Observable<string> {
-    const apiUrl: string = AppComponent.apiUrl + 'colours/' + colourId;
+    const apiUrl: string = CONFIG.apiURL + 'colours/' + colourId;
 
     const headers = new HttpHeaders({
       'API-Version': '1'

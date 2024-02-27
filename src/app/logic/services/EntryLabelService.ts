@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Entry} from "../models/Entry";
 import {Label} from "../models/Label";
-import {AppComponent} from "../../app.component";
+import {CONFIG} from "../../app.config";
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +33,7 @@ export class EntryLabelService {
    * @returns {Observable<Entry[]>} An observable of entry array.
    */
   getEntriesByLabelId(username: string, password: string, labelId: number | undefined): Observable<Entry[]> {
-    const apiUrl = AppComponent.apiUrl + `entry-labels/labels/${labelId}/entries`;
+    const apiUrl = CONFIG.apiURL + `entry-labels/labels/${labelId}/entries`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -51,7 +51,7 @@ export class EntryLabelService {
    * @returns {Observable<Label[]>} An observable of label array.
    */
   getLabelsByEntryId(username: string, password: string, entryId: number | undefined): Observable<Label[]> {
-    const apiUrl = AppComponent.apiUrl + `entry-labels/entries/${entryId}/labels`;
+    const apiUrl = CONFIG.apiURL + `entry-labels/entries/${entryId}/labels`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -70,7 +70,7 @@ export class EntryLabelService {
    * @returns {Observable<any>} An observable of any.
    */
   addLabelToEntry(username: string, password: string, entryId: number | undefined, labelId: number | undefined): Observable<any> {
-    const apiUrl: string = AppComponent.apiUrl + `entry-labels/entries/${entryId}/labels/${labelId}`;
+    const apiUrl: string = CONFIG.apiURL + `entry-labels/entries/${entryId}/labels/${labelId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -89,7 +89,7 @@ export class EntryLabelService {
    * @returns {Observable<number>} An observable of number.
    */
   removeLabelFromEntry(username: string, password: string, labelId: number | undefined, entryId: number | undefined): Observable<number> {
-    const apiUrl = AppComponent.apiUrl + `entry-labels/entries/${entryId}/labels/${labelId}`;
+    const apiUrl = CONFIG.apiURL + `entry-labels/entries/${entryId}/labels/${labelId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',

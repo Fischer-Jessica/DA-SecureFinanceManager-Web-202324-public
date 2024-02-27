@@ -1,8 +1,8 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AppComponent} from "../../app.component";
 import {Entry} from "../models/Entry";
+import {CONFIG} from "../../app.config";
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +32,7 @@ export class EntryService {
    * @returns {Observable<Entry[]>} An observable of entry array.
    */
   getEntries(username: string, password: string, subcategoryId: number | undefined): Observable<Entry[]> {
-    const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries`;
+    const apiUrl = CONFIG.apiURL + `categories/subcategories/${subcategoryId}/entries`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -51,7 +51,7 @@ export class EntryService {
    * @returns {Observable<Entry>} An observable of entry.
    */
   getEntry(username: string, password: string, subcategoryId: number | undefined, entryId: number | undefined): Observable<Entry> {
-    const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries/${entryId}`;
+    const apiUrl = CONFIG.apiURL + `categories/subcategories/${subcategoryId}/entries/${entryId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -70,7 +70,7 @@ export class EntryService {
    * @returns {Observable<Entry>} An observable of entry.
    */
   insertEntry(username: string, password: string, subcategoryId: number | undefined, entry: Entry): Observable<Entry> {
-    const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries`;
+    const apiUrl = CONFIG.apiURL + `categories/subcategories/${subcategoryId}/entries`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -89,7 +89,7 @@ export class EntryService {
    * @returns {Observable<Entry>} An observable of entry.
    */
   updateEntry(username: string, password: string, subcategoryId: number | undefined, entry: Entry): Observable<Entry> {
-    const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries/${entry.entryId}`;
+    const apiUrl = CONFIG.apiURL + `categories/subcategories/${subcategoryId}/entries/${entry.entryId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -108,7 +108,7 @@ export class EntryService {
    * @returns {Observable<number>} An observable of number.
    */
   deleteEntry(username: string, password: string, subcategoryId: number | undefined, entryId: number | undefined): Observable<number> {
-    const apiUrl = AppComponent.apiUrl + `categories/subcategories/${subcategoryId}/entries/${entryId}`;
+    const apiUrl = CONFIG.apiURL + `categories/subcategories/${subcategoryId}/entries/${entryId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',

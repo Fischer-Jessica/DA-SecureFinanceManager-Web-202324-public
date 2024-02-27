@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from '../models/User';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {AppComponent} from '../../app.component';
+import {CONFIG} from "../../app.config";
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +30,7 @@ export class UserService {
    * @returns {Observable<User>} An observable of the logged-in user.
    */
   getUser(username: string, password: string): Observable<User> {
-    const apiUrl = AppComponent.apiUrl + 'user';
+    const apiUrl = CONFIG.apiURL + 'user';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -52,7 +52,7 @@ export class UserService {
    * @returns {Observable<User>} An observable of the registered user.
    */
   insertUser(newUser: User): Observable<User> {
-    const apiUrl = AppComponent.apiUrl + 'users';
+    const apiUrl = CONFIG.apiURL + 'users';
 
     return this.http.post<User>(apiUrl, newUser, {
       headers: {
@@ -75,7 +75,7 @@ export class UserService {
    * @returns {Observable<User>} An observable of the updated user.
    */
   updateUser(username: string, password: string, updatedUser: User): Observable<User> {
-    const url = AppComponent.apiUrl + `users`;
+    const url = CONFIG.apiURL + `users`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
@@ -98,7 +98,7 @@ export class UserService {
    * @returns {Observable<number>} An observable indicating the success of deletion.
    */
   deleteUser(username: string, password: string): Observable<number> {
-    const url = AppComponent.apiUrl + `users`;
+    const url = CONFIG.apiURL + `users`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
