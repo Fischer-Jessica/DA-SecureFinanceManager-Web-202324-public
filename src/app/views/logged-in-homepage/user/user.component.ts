@@ -151,7 +151,7 @@ export class UserComponent implements OnInit {
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert('authentication.alert_user_not_logged_in');
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
       this.router.navigate(['/authentication/login']);
       return;
     }

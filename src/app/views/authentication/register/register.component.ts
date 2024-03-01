@@ -56,7 +56,7 @@ export class RegisterComponent {
     }
 
     if (!this.newUser.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
-      alert(this.translateService.instant('authentication.register.alert_password_requirements'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_password_requirements'));
       return;
     }
 
