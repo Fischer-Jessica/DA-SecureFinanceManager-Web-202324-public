@@ -28,7 +28,6 @@ h1, p {
 /*
 Button styles: Define common styles for buttons and specific styles for each button type.
 */
-
 .create-button:hover,
 .update-button:hover,
 .delete-button:hover,
@@ -119,9 +118,8 @@ Form styles: Define styles for form elements.
 }
 
 /*
-Label styles: Define styles for label elements.
+Card-Styles: Styles that have to do with the display of the cards.
 */
-
 .headline-button {
   border: none;
   border-radius: 4px;
@@ -137,7 +135,8 @@ Label styles: Define styles for label elements.
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 455px;
 }
 
@@ -152,6 +151,21 @@ Label styles: Define styles for label elements.
   color: black;
   background: #a6accb;
   cursor: pointer;
+}
+
+.item-card mat-card-title,
+.item-card mat-card-subtitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;;
+}
+
+.item-card mat-card-title {
+  max-width: 355px;
+}
+
+.item-card mat-card-subtitle {
+  max-width: 272px;
 }
 
 .item-card:hover {
@@ -194,13 +208,41 @@ Label styles: Define styles for label elements.
   margin-right: 80px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1500px) {
+  .item-card mat-card-title {
+    max-width: 9%;
+  }
+
+  .item-card mat-card-subtitle {
+    max-width: 5%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
   .item {
     flex: 1 1 100%;
     max-width: 100%;
   }
 
+  .item-card mat-card-title {
+    max-width: 602px;
+  }
+
+  .item-card mat-card-subtitle {
+    max-width: 300px;
+  }
+
   .item-container {
     height: calc(100vh - 45vh);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .item-card mat-card-title {
+    max-width: 355px;
+  }
+
+  .item-card mat-card-subtitle {
+    max-width: 244px;
   }
 }

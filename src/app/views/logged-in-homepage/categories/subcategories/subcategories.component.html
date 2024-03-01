@@ -22,7 +22,7 @@
       <!-- Card header containing subcategory details -->
       <mat-card-header (click)="showEntries(subcategoryData.subcategory.subcategoryId)">
         <!-- Dot representing subcategory color -->
-        <div class="dot" [style.background-color]="'#' + subcategoryData.colourHex"></div>
+        <div class="colour-dot" [style.background-color]="'#' + subcategoryData.colourHex"></div>
         <!-- Subcategory name -->
         <mat-card-title>{{ subcategoryData.subcategory.subcategoryName }}</mat-card-title>
         <!-- Subcategory description -->

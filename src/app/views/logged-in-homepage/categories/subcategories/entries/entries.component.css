@@ -20,6 +20,18 @@
   background: #8489a2;
 }
 
+/**
+ * Styles for title and subtitle within card.
+ */
+mat-card-title,
+mat-card-subtitle {
+  min-width: 525px;
+  max-width: 525px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* Styles for subtitles within entry cards */
 mat-card-subtitle {
   margin-top: 22px;
@@ -95,6 +107,9 @@ mat-card-content {
   display: flex;
   font-weight: bold;
   flex-direction: row;
+  white-space: nowrap;
+  overflow: scroll;
+  max-width: 655px;
 }
 
 /* Styles for individual selected labels */
@@ -105,6 +120,10 @@ mat-card-content {
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /**
@@ -187,6 +206,11 @@ mat-card-content {
 /* Styles for individual items in the dropdown menu */
 .dropdown-menu-item {
   margin-bottom: 5px;
+  max-width: 333px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Font weight style for specific labels */
@@ -199,6 +223,16 @@ mat-card-content {
   .mat-card-content {
     display: block;
     gap: 20px;
+  }
+
+  .selected-labels {
+    max-width: 100%;
+  }
+
+  mat-card-title,
+  mat-card-subtitle {
+    min-width: 1000px;
+    max-width: 1000px;
   }
 
   .entry-container {
@@ -219,9 +253,23 @@ mat-card-content {
   }
 }
 
+@media (max-width: 1111px) {
+  mat-card-title,
+  mat-card-subtitle {
+    min-width: 500px;
+    max-width: 500px;
+  }
+}
+
 /* Media query for even smaller screens */
 @media (max-width: 515px) {
   .dropdown-menu {
-    top: 313px;
+    top: 292px;
+  }
+
+  mat-card-title,
+  mat-card-subtitle {
+    min-width: 400px;
+    max-width: 400px;
   }
 }
