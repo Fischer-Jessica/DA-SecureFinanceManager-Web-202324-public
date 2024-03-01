@@ -189,7 +189,7 @@ Card-Styles: Styles that have to do with the display of the cards.
 .item-button {
   display: inline-block;
   border: none;
-  width: 66px;
+  width: 74px;
   height: 26px;
   position: absolute;
   cursor: pointer;
@@ -205,7 +205,7 @@ Card-Styles: Styles that have to do with the display of the cards.
 }
 
 .item-button.update-button {
-  margin-right: 80px;
+  margin-right: 88px;
 }
 
 @media screen and (max-width: 1500px) {

@@ -45,17 +45,17 @@
   <div class="form-group">
     <label for="entryAttachment"
            class="form-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_attachment' | translate }}</label>
-    <input type="file" id="entryAttachment" name="entryAttachment" [(ngModel)]="entry.entryAttachment"
-           class="form-input">
+    <p
+      id="entryAttachment">{{ 'logged-in-homepage.categories.subcategories.entries.ui_text_feature_not_available' | translate }}</p>
   </div>
 
   <!-- Form submission buttons -->
   <div class="form-actions">
-    <button type="submit"
-            class="update-button form-button">{{ 'logged-in-homepage.categories.subcategories.entries.update-entry.ui_button_update_entry' | translate }}
-    </button>
     <button type="button" class="cancel-button form-button"
             (click)="onCancel()">{{ 'logged-in-homepage.cancel-action' | translate }}
+    </button>
+    <button type="submit"
+            class="update-button form-button">{{ 'logged-in-homepage.categories.subcategories.entries.update-entry.ui_button_update_entry' | translate }}
     </button>
   </div>
 </form>

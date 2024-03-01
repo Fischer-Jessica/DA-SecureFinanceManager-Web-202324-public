@@ -121,7 +121,7 @@ export class LabelsComponent implements OnInit {
                 });
                 this.labelsData.sort((a, b) => {
                   if (a.label.labelId !== undefined && b.label.labelId !== undefined) {
-                    return a.label.labelId - b.label.labelId;
+                    return b.label.labelId - a.label.labelId;
                   }
                   return 0;
                 });

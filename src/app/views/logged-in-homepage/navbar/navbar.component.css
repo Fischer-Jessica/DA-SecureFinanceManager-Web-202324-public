@@ -15,6 +15,8 @@ ul {
 /* Styles for list items */
 li {
   margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 /* Styles for images */
@@ -34,7 +36,7 @@ li a {
 }
 
 /* Hover styles for links */
-li a:hover {
+li:hover {
   border-radius: 22px;
   background-color: #3c76cc;
 }

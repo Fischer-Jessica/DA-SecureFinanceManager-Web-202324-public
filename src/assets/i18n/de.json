@@ -31,13 +31,14 @@
       "alert_username_email_exists": "Sowohl der Benutzername als auch die E-Mail-Adresse existieren bereits.",
       "alert_username_exists": "Benutzername existiert bereits.",
       "alert_email_exits": "E-Mail-Adresse existiert bereits.",
-      "alert_password_requirements": "Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten."
+      "alert_password_requirements": "Das Passwort muss mindestens 8 Zeichen lang sein und mindestens einen Großbuchstaben, einen Kleinbuchstaben, eine Zahl und ein Sonderzeichen enthalten.",
+      "alert_email_invalid": "Ungültige E-Mail-Adresse."
     }
   },
   "logged-in-homepage": {
     "cancel-action": "Abbrechen",
-    "button_delete": "löschen",
-    "button_update": "ändern",
+    "button_delete": "LÖSCHEN",
+    "button_update": "ÄNDERN",
     "alert_invalid_formData": "ungültige Formulardaten",
     "alert_error_path_parameter_invalid": "Das Klassifizierung-Objekt, in dem Sie sich befanden, konnte nicht gefunden werden. Sie wurden zu den Kategorien zurückgebracht.",
     "navbar": {
@@ -116,6 +117,9 @@
           "alert_entry_not_found": "Der ausgewählte Eintrag konnte nicht gefunden werden.",
           "console_error_deleting_entry": "Fehler beim Löschen des Eintrags:",
           "confirm_delete_entry": "Möchten Sie den Eintrag wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+          "ui_text_feature_not_available": "Diese Funktion ist den mobile-Apps vorbehalten.",
+          "ui_text_attachment_existent": "Zu diesem Eintrag gibt es einen Anhang. Schauen Sie ihn sich in einer der mobilen Apps an.",
+          "ui_text_attachment_non_existent": "Kein Anhang vorhanden.",
           "create-entry": {
             "ui_placeholder_entry_name": "Name des Eintrags",
             "ui_placeholder_entry_description": "Beschreibung des Eintrags",

@@ -160,7 +160,7 @@ export class EntriesComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_create_label_first'));
+            console.info(this.translateService.instant('logged-in-homepage.labels.alert_create_label_first'));
           } else if (error.status === 401) {
             this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
             this.localStorageService.removeItem('loggedInUser');
@@ -220,6 +220,10 @@ export class EntriesComponent implements OnInit {
    * @memberOf EntriesComponent
    */
   toggleDropdown(entryId: number | undefined) {
+    if (this.availableLabels.length <= 0 || !this.availableLabels) {
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_create_label_first'));
+      return;
+    }
     if (entryId) {
       if (!this.dropdownOpen.hasOwnProperty(entryId)) {
         this.dropdownOpen[entryId] = false;

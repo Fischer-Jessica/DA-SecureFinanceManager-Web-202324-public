@@ -99,7 +99,7 @@ export class SubcategoriesComponent implements OnInit {
         .subscribe(
           (result) => {
             this.subcategoriesData = this.subcategoriesData.filter((item) => item.subcategory.subcategoryId !== subcategoryId);
-            this.cdr.detectChanges(); // Trigger change detection
+            this.cdr.detectChanges();
           },
           (error) => {
             if (error.status === 401) {
@@ -142,7 +142,7 @@ export class SubcategoriesComponent implements OnInit {
                   // Sort subcategoriesData after each new entry
                   this.subcategoriesData.sort((a, b) => {
                     if (a.subcategory.subcategoryId !== undefined && b.subcategory.subcategoryId !== undefined) {
-                      return a.subcategory.subcategoryId - b.subcategory.subcategoryId;
+                      return b.subcategory.subcategoryId - a.subcategory.subcategoryId;
                     }
                     return 0;
                   });

@@ -61,7 +61,16 @@
           </p>
           <p class="card-p">
             <span
-              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_attachment' | translate }}</span> {{ entry.entryAttachment }}
+              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_attachment' | translate }}</span><span>
+                <span *ngIf="entry.entryAttachment !== null; else noAttachment">
+                  {{ 'logged-in-homepage.categories.subcategories.entries.ui_text_attachment_existent' | translate }}
+                </span>
+                <ng-template #noAttachment>
+                  <span>
+                    {{ 'logged-in-homepage.categories.subcategories.entries.ui_text_attachment_non_existent' | translate }}
+                  </span>
+                </ng-template>
+              </span>
           </p>
         </mat-card-content>
         <!-- Dropdown menu for selecting labels -->
@@ -73,10 +82,12 @@
             <!-- Dropdown menu to select labels -->
             <div class="dropdown-menu" [id]="'dropdown-' + (entry.entryId)"
                  [hidden]="!dropdownOpen[entry.entryId || '']"
-                 [ngClass]="{'dropdown-menu-in-label': this.labelId !== undefined}">
+                 [ngClass]="{'dropdown-menu-in-label': this.labelId !== undefined}"
+                 *ngIf="availableLabels && availableLabels.length > 0">
               <div *ngFor="let label of availableLabels" class="dropdown-menu-item">
                 <label>
-                  <input type="checkbox" [checked]="isLabelSelected(entry.entryId, label.labelId)" (change)="toggleLabel(entry.entryId, label)">
+                  <input type="checkbox" [checked]="isLabelSelected(entry.entryId, label.labelId)"
+                         (change)="toggleLabel(entry.entryId, label)">
                   {{ label.label.labelName }}
                 </label>
               </div>

@@ -55,9 +55,16 @@ export class RegisterComponent {
       return;
     }
 
-    if (!this.newUser.password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]|\:;"'<>,.?/])[A-Za-z\d!@#$%^&*()_+{}[\]|\:;"'<>,.?/]{8,20}$/)) {
+    if (!this.newUser.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
       alert(this.translateService.instant('authentication.register.alert_password_requirements'));
       return;
+    }
+
+    if (this.newUser.emailAddress) {
+      if (!this.newUser.emailAddress.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+        this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_email_invalid'));
+        return;
+      }
     }
 
     this.userService.insertUser(this.newUser).subscribe({

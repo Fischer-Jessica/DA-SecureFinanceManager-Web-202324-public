@@ -136,10 +136,17 @@ export class UserComponent implements OnInit {
    * @param {any} formData - The form data submitted by the user.
    * @memberof UserComponent
    */
-  onSubmit(formData: any): void {
-    if (!formData.valid) {
-      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_invalid_formData'));
+  onSubmit(formData: User): void {
+    if (!formData.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
+      this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_password_requirements'));
       return;
+    }
+
+    if (this.user.emailAddress) {
+      if (!this.user.emailAddress.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+        this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_email_invalid'));
+        return;
+      }
     }
 
     const storedUser = this.localStorageService.getItem('loggedInUser');

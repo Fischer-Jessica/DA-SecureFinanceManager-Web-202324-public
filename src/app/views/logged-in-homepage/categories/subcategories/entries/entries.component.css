@@ -64,7 +64,7 @@ mat-card-content {
 .edit {
   display: inline-block;
   border: none;
-  width: 66px;
+  width: 74px;
   height: 26px;
   position: absolute;
   cursor: pointer;
@@ -81,7 +81,7 @@ mat-card-content {
 
 /* Styles for container of selected labels */
 .edit {
-  margin-right: 80px;
+  margin-right: 88px;
 }
 
 /* Styles for the remove button */
@@ -132,6 +132,10 @@ mat-card-content {
 .selected-label:hover {
   background-color: rgba(0, 0, 0, 0.5);
   filter: brightness(60%);
+}
+
+mat-card-content {
+  margin-top: 5px;
 }
 
 /* Grid layout styles for card content */

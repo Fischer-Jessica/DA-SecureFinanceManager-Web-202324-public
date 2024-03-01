@@ -124,10 +124,9 @@ export class CategoriesComponent implements OnInit {
                     category: category,
                     colourHex: result,
                   });
-                  // Sort categoriesData after each new entry
                   this.categoriesData.sort((a, b) => {
                     if (a.category.categoryId !== undefined && b.category.categoryId !== undefined) {
-                      return a.category.categoryId - b.category.categoryId;
+                      return b.category.categoryId - a.category.categoryId;
                     }
                     return 0;
                   });

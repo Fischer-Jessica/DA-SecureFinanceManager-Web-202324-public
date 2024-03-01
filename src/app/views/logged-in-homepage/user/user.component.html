@@ -3,7 +3,7 @@
   Binds input fields to user object properties using ngModel for two-way data binding.
   Calls onSubmit method on form submission.
 -->
-<form #userForm="ngForm" class="form" (ngSubmit)="onSubmit(userForm)">
+<form #userForm="ngForm" class="form" (ngSubmit)="onSubmit(userForm.value)">
   <div class="form-group">
     <label for="username" class="form-label"><i
       class="required-field">*</i> {{ 'authentication.register.ui_label_username' | translate }}</label>
