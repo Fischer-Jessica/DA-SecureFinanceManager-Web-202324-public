@@ -217,6 +217,11 @@ mat-card-content {
   text-overflow: ellipsis;
 }
 
+/* Styles for the label within the dropdown menu */
+.dropdown-menu-item label {
+  cursor: pointer;
+}
+
 /* Font weight style for specific labels */
 .bold-label {
   font-weight: bold;

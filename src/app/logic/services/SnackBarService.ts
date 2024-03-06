@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {MatSnackBar, MatSnackBarConfig} from '@angular/material/snack-bar';
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,10 @@ export class SnackBarService {
   /**
    * Creates an instance of SnackBarService.
    * @param {MatSnackBar} snackBar - The MatSnackBar service for displaying snack bar alerts.
+   * @param {TranslateService} translateService - The translation service for translating alert messages.
    */
-  constructor(private snackBar: MatSnackBar) {
+  constructor(private snackBar: MatSnackBar,
+              private translateService: TranslateService) {
   }
 
   /**
@@ -30,6 +33,6 @@ export class SnackBarService {
     config.horizontalPosition = 'center';
     config.verticalPosition = 'top';
 
-    this.snackBar.open(message, 'Close', config);
+    this.snackBar.open(message, this.translateService.instant('alert_close'), config);
   }
 }

@@ -1,11 +1,12 @@
 {
   "alert_error": "An error occurred. Check the console for more information.",
+  "alert_close": "Close",
   "authentication": {
     "alert_user_not_logged_in": "You are not logged in.",
     "alert_missing_credentials": "Please fill in both password and username fields.",
     "alert_user_not_found": "The user could not be found.",
     "login": {
-      "ui_headline/text_login": "Login",
+      "ui_headline/button_login": "Login",
       "ui_label_username": "Username:",
       "ui_placeholder_username": "Your username",
       "ui_label_password": "Password:",
