@@ -107,7 +107,7 @@ export class EntriesComponent implements OnInit {
         this.labelId = isNaN(+params['labelId']) ? undefined : +params['labelId'];
 
         if ((this.categoryId === undefined || this.subcategoryId === undefined) && this.labelId === undefined) {
-          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
           this.router.navigateByUrl('/logged-in-homepage/categories');
           return;
         }
@@ -115,7 +115,7 @@ export class EntriesComponent implements OnInit {
       this.fetchEntries(this.subcategoryId, loggedInUser.username, loggedInUser.password);
       this.fetchLabels(loggedInUser.username, loggedInUser.password);
     } else {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('/authentication/login');
       return;
     }
@@ -148,9 +148,9 @@ export class EntriesComponent implements OnInit {
                 },
                 (error) => {
                   if (error.status === 404) {
-                    this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'));
+                    this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'), 'error');
                   } else {
-                    this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+                    this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
                     console.error(this.translateService.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
                   }
                 }
@@ -160,13 +160,13 @@ export class EntriesComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            console.info(this.translateService.instant('logged-in-homepage.labels.alert_create_label_first'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_create_label_first'), 'info');
           } else if (error.status === 401) {
-            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
             this.localStorageService.removeItem('loggedInUser');
             this.router.navigateByUrl('/authentication/login');
           } else {
-            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
             console.error(this.translateService.instant('logged-in-homepage.labels.console_error_fetching_labels'), error);
           }
         }
@@ -199,13 +199,13 @@ export class EntriesComponent implements OnInit {
               if (error.status === 404) {
                 console.info(this.translateService.instant('logged-in-homepage.labels.label-entries.console_no_labels_for_entry_found') + entry.entryId);
               } else if (error.status === 401) {
-                this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+                this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
                 this.localStorageService.removeItem('loggedInUser');
                 this.router.navigateByUrl('/authentication/login');
               } else if (error.status === 400) {
-                this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_invalid'));
+                this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_invalid'), 'error');
               } else {
-                this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+                this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
                 console.error(this.translateService.instant('logged-in-homepage.labels.label-entries.console_error_fetching_label_for_entry') + entry.entryId, error);
               }
             }
@@ -221,7 +221,7 @@ export class EntriesComponent implements OnInit {
    */
   toggleDropdown(entryId: number | undefined) {
     if (this.availableLabels.length <= 0 || !this.availableLabels) {
-      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_create_label_first'));
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_create_label_first'), 'info');
       return;
     }
     if (entryId) {
@@ -309,21 +309,21 @@ export class EntriesComponent implements OnInit {
           },
           (error) => {
             if (error.status === 401) {
-              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
               this.localStorageService.removeItem('loggedInUser');
               this.router.navigateByUrl('/authentication/login');
             } else if (error.status === 400) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_labelId_invalid'));
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_labelId_invalid'), 'error');
             } else if (error.status === 404) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_could_not_find_entry_label'));
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_could_not_find_entry_label'), 'error');
             } else {
-              this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+              this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
               console.error(this.translateService.instant('logged-in-homepage.labels.label-entries.console_error_adding_label_to_entry'), error);
             }
           }
         );
     } else {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('/authentication/login');
       return;
     }
@@ -353,22 +353,22 @@ export class EntriesComponent implements OnInit {
           },
           (error) => {
             if (error.status === 401) {
-              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
               this.localStorageService.removeItem('loggedInUser');
               this.router.navigateByUrl('/authentication/login');
             } else if (error.status === 400) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_labelId_invalid'));
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_labelId_invalid'), 'error');
             } else if (error.status === 404) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_could_not_find_entry_label'));
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_could_not_find_entry_label'), 'error');
             } else {
-              this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+              this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
               console.error(this.translateService.instant('logged-in-homepage.labels.label-entries.console_error_removing_label_from_entry'), error);
             }
             this.selectedLabelForEntries.set(entryId, labelsForEntry);
           }
         );
     } else {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('/authentication/login');
       return;
     }
@@ -387,7 +387,7 @@ export class EntriesComponent implements OnInit {
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('/authentication/login');
       return;
     }
@@ -400,15 +400,15 @@ export class EntriesComponent implements OnInit {
         },
         (error) => {
           if (error.status === 401) {
-            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
             this.localStorageService.removeItem('loggedInUser');
             this.router.navigateByUrl('/authentication/login');
           } else if (error.status === 400) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_parameter_entryId_invalid'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_parameter_entryId_invalid'), 'error');
           } else if (error.status === 404) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_entry_not_found'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_entry_not_found'), 'error');
           } else {
-            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
             console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.console_error_deleting_entry'), error);
           }
         }
@@ -447,15 +447,15 @@ export class EntriesComponent implements OnInit {
           },
           (error) => {
             if (error.status === 401) {
-              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
               this.localStorageService.removeItem('loggedInUser');
               this.router.navigateByUrl('/authentication/login');
             } else if (error.status === 400) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.alert_parameter_subcategoryId_invalid'));
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.alert_parameter_subcategoryId_invalid'), 'error');
             } else if (error.status === 404) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_no_entries_found'));
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_no_entries_found'), 'info');
             } else {
-              this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+              this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
               console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.console_error_fetching_entries'), error);
             }
           }
@@ -476,15 +476,15 @@ export class EntriesComponent implements OnInit {
           },
           (error) => {
             if (error.status === 401) {
-              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
               this.localStorageService.removeItem('loggedInUser');
               this.router.navigateByUrl('/authentication/login');
             } else if (error.status === 400) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_labelId_invalid'));
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_labelId_invalid'), 'error');
             } else if (error.status === 404) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_no_entries_for_label'));
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_no_entries_for_label'), 'info');
             } else {
-              this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+              this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
               console.error(this.translateService.instant('logged-in-homepage.labels.label-entries.console_error_fetching_entries_for_label'), error);
             }
           }

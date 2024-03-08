@@ -71,7 +71,7 @@ export class CreateEntryComponent implements OnInit {
         this.categoryId = +params['categoryId'];
         this.subcategoryId = +params['subcategoryId'];
         if (isNaN(this.categoryId) || isNaN(this.subcategoryId)) {
-          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
           this.router.navigate([`/logged-in-homepage/categories`]);
         }
       });
@@ -103,7 +103,7 @@ export class CreateEntryComponent implements OnInit {
   onSubmit(formData: Entry) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('authentication/login')
       return;
     }
@@ -116,12 +116,12 @@ export class CreateEntryComponent implements OnInit {
     formData.entryTimeOfTransaction = formattedDateTime;
 
     if (formData.entryAmount === 0 || formData.entryTimeOfTransaction === '') {
-      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'));
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'), 'missing');
       return;
     }
 
     if (!formData.entryAmount.toString().match(/^(-)?\d+(\.\d{0,2})?$/)) {
-      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_invalid_amount'));
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_invalid_amount'), 'invalid');
       return;
     }
 
@@ -132,13 +132,13 @@ export class CreateEntryComponent implements OnInit {
       },
       error: (err) => {
         if (err.status === 401) {
-          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
           this.localStorageService.removeItem('loggedInUser');
           this.router.navigateByUrl('/authentication/login');
         } else if (err.status === 400) {
-          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'));
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'), 'missing');
         } else {
-          this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
           console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.console_error_creating_entry'), err);
         }
       }

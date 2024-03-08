@@ -89,7 +89,7 @@ export class UpdateEntryComponent implements OnInit {
     const storedUser = this.localStorageService.getItem('loggedInUser');
 
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('authentication/login')
       return;
     }
@@ -102,7 +102,7 @@ export class UpdateEntryComponent implements OnInit {
       const entryId = +params['entryId'];
 
       if (isNaN(this.categoryId) || isNaN(this.subcategoryId) || isNaN(entryId)) {
-        this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+        this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
         this.router.navigate([`/logged-in-homepage/categories`]);
       }
 
@@ -118,15 +118,15 @@ export class UpdateEntryComponent implements OnInit {
         },
         error => {
           if (error.status === 401) {
-            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
             this.router.navigateByUrl('authentication/login')
           } else if (error.status === 400) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
             this.router.navigate([`/logged-in-homepage/categories`]);
           } else if (error.status === 404) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'), 'error');
           } else {
-            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
             console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.console_error_fetching_entry'), error);
           }
         }
@@ -141,19 +141,19 @@ export class UpdateEntryComponent implements OnInit {
    */
   onSubmit(formData: Entry) {
     if (formData.entryAmount === 0 || formData.entryTimeOfTransaction === '') {
-      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'));
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'), 'missing');
       return;
     }
 
     if (!formData.entryAmount.toString().match(/^(-)?\d+(\.\d{0,2})?$/)) {
-      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_invalid_amount'));
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_invalid_amount'), 'invalid');
       return;
     }
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
 
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('authentication/login')
       return;
     }
@@ -177,15 +177,15 @@ export class UpdateEntryComponent implements OnInit {
         result => this.router.navigate([`/logged-in-homepage/entries/${this.categoryId}/${this.subcategoryId}`]),
         error => {
           if (error.status === 401) {
-            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
             this.router.navigateByUrl('authentication/login')
           } else if (error.status === 400) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
             this.router.navigate([`/logged-in-homepage/categories`]);
           } else if (error.status === 404) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.alert_entry_not_found'), 'error');
           } else {
-            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
             console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.update-entry.console_error_fetching_entry'), error);
           }
         }

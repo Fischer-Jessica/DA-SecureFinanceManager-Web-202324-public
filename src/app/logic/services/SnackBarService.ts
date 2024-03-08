@@ -25,13 +25,23 @@ export class SnackBarService {
   /**
    * Shows a snackbar alert with the given message.
    * @param {string} message - The message to display in the alert.
+   * @param type - The type of the alert.
    * @returns {void}
    */
-  showAlert(message: string): void {
+  showAlert(message: string, type: 'error' | 'info' | 'missing' | 'invalid'): void {
     const config = new MatSnackBarConfig();
     config.duration = 10000;
     config.horizontalPosition = 'center';
     config.verticalPosition = 'top';
+    if (type == 'error') {
+      config.panelClass = ['error-snackbar'];
+    } else if (type == 'info') {
+      config.panelClass = ['info-snackbar'];
+    } else if (type == 'missing') {
+      config.panelClass = ['missing-snackbar'];
+    } else if (type == 'invalid') {
+      config.panelClass = ['invalid-snackbar'];
+    }
 
     this.snackBar.open(message, this.translateService.instant('alert_close'), config);
   }

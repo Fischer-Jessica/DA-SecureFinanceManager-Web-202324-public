@@ -60,7 +60,7 @@ export class CreateCategoryComponent {
   onSubmit(formData: Category) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('/authentication/login');
       return;
     }
@@ -69,7 +69,7 @@ export class CreateCategoryComponent {
     formData.categoryColourId = this.category.categoryColourId;
 
     if (formData.categoryName === '' || formData.categoryColourId === 0) {
-      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.create-category.alert_create_category_missing_fields'));
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.create-category.alert_create_category_missing_fields'), 'missing');
       return;
     }
 
@@ -79,13 +79,13 @@ export class CreateCategoryComponent {
       },
       error: (err) => {
         if (err.status === 401) {
-          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
           this.localStorageService.removeItem('loggedInUser');
           this.router.navigateByUrl('/authentication/login');
         } else if (err.status === 400) {
-          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.create-category.alert_create_category_missing_fields'));
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.create-category.alert_create_category_missing_fields'), 'missing');
         } else {
-          this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
           console.error(this.translateService.instant('logged-in-homepage.categories.create-category.console_error_creating_category'), err);
         }
       }

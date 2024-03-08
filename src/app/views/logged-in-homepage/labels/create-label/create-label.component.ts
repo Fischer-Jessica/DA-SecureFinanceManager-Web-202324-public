@@ -62,12 +62,12 @@ export class CreateLabelComponent {
     const storedUser = this.localStorageService.getItem('loggedInUser');
 
     if (formData.labelName === '' || formData.labelColourId === 0) {
-      this.snackBarService.showAlert(this.translationService.instant('logged-in-homepage.labels.create-label.alert_create_label_missing_fields'));
+      this.snackBarService.showAlert(this.translationService.instant('logged-in-homepage.labels.create-label.alert_create_label_missing_fields'), 'missing');
       return;
     }
 
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translationService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translationService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('/authentication/login');
       return;
     }
@@ -81,13 +81,13 @@ export class CreateLabelComponent {
         },
         error: (err) => {
           if (err.status === 401) {
-            this.snackBarService.showAlert(this.translationService.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translationService.instant('authentication.alert_user_not_logged_in'), 'info');
             this.localStorageService.removeItem('loggedInUser');
             this.router.navigateByUrl('/authentication/login');
           } else if (err.status === 400) {
-            this.snackBarService.showAlert(this.translationService.instant('logged-in-homepage.labels.create-label.alert_create_label_missing_fields'));
+            this.snackBarService.showAlert(this.translationService.instant('logged-in-homepage.labels.create-label.alert_create_label_missing_fields'), 'missing');
           } else {
-            this.snackBarService.showAlert(this.translationService.instant('alert_error'));
+            this.snackBarService.showAlert(this.translationService.instant('alert_error'), 'error');
             console.error(this.translationService.instant('logged-in-homepage.label.create-label.console_error_creating_label'), err);
           }
         }

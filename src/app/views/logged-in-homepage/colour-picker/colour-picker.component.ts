@@ -73,9 +73,9 @@ export class ColourPickerComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'), 'error');
           } else {
-            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
             console.error(this.translateService.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
           }
         }

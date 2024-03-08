@@ -63,7 +63,7 @@ export class CreateSubcategoryComponent {
   onSubmit(formData: Subcategory) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('authentication/login')
       return;
     }
@@ -71,7 +71,7 @@ export class CreateSubcategoryComponent {
 
     formData.subcategoryColourId = this.subcategory.subcategoryColourId;
     if (formData.subcategoryName === '' || formData.subcategoryColourId === 0) {
-      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.create-subcategory.alert_create_subcategory_missing_fields'));
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.create-subcategory.alert_create_subcategory_missing_fields'), 'missing');
       return;
     }
     let categoryId = 0;
@@ -84,13 +84,13 @@ export class CreateSubcategoryComponent {
       },
       error: (err) => {
         if (err.status === 401) {
-          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
           this.localStorageService.removeItem('loggedInUser');
           this.router.navigateByUrl('/authentication/login');
         } else if (err.status === 400) {
-          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.create-subcategory.alert_create_subcategory_missing_fields'));
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.create-subcategory.alert_create_subcategory_missing_fields'), 'missing');
         } else {
-          this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
           console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.create-subcategory.console_error_creating_subcategory'), err);
         }
       }

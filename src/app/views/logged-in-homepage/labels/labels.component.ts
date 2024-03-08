@@ -54,7 +54,7 @@ export class LabelsComponent implements OnInit {
   ngOnInit(): void {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('/authentication/login');
       return;
     }
@@ -75,7 +75,7 @@ export class LabelsComponent implements OnInit {
 
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('/authentication/login');
       return;
     }
@@ -88,15 +88,15 @@ export class LabelsComponent implements OnInit {
         },
         (error) => {
           if (error.status === 401) {
-            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
             this.localStorageService.removeItem('loggedInUser');
             this.router.navigateByUrl('/authentication/login');
           } else if (error.status === 400) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_parameter_invalid'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_parameter_labelId_invalid'), 'error');
           } else if (error.status === 404) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_label_not_found'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_label_not_found'), 'error');
           } else {
-            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
             console.error(this.translateService.instant('logged-in-homepage.labels.console_error_deleting_label'), error);
           }
         }
@@ -128,9 +128,9 @@ export class LabelsComponent implements OnInit {
               },
               (error) => {
                 if (error.status === 404) {
-                  this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'));
+                  this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'), 'error');
                 } else {
-                  this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+                  this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
                   console.error(this.translateService.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
                 }
               }
@@ -139,13 +139,13 @@ export class LabelsComponent implements OnInit {
         },
         (error) => {
           if (error.status === 404) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_create_label_first'));
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.alert_create_label_first'), 'info');
           } else if (error.status === 401) {
-            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'));
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
             this.localStorageService.removeItem('loggedInUser');
             this.router.navigateByUrl('/authentication/login');
           } else {
-            this.snackBarService.showAlert(this.translateService.instant('alert_error'));
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
             console.error(this.translateService.instant('logged-in-homepage.labels.console_error_fetching_labels'), error);
           }
         }
