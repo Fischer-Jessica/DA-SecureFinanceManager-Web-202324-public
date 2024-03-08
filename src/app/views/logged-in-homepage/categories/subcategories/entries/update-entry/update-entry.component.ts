@@ -145,7 +145,7 @@ export class UpdateEntryComponent implements OnInit {
       return;
     }
 
-    if (!formData.entryAmount.toString().match(/^\d+(\.\d{0,2})?$/)) {
+    if (!formData.entryAmount.toString().match(/^(-)?\d+(\.\d{0,2})?$/)) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_invalid_amount'));
       return;
     }

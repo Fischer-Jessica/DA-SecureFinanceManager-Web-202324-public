@@ -262,6 +262,15 @@ mat-card-content {
   }
 }
 
+.positive {
+  color: green; /* grüne Farbe für positive Beträge */
+}
+
+.negative {
+  color: red; /* rote Farbe für negative Beträge */
+}
+
+
 @media (max-width: 1111px) {
   mat-card-title,
   mat-card-subtitle {

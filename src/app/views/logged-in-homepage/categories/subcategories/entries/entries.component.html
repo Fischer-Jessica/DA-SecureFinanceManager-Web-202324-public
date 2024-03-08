@@ -45,8 +45,9 @@
           </mat-card-subtitle>
           <mat-card-subtitle>
             <span
-              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_amount' | translate }}</span> {{ entry.entryAmount }}
-            €
+              class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_amount' | translate }}</span>
+            <span [ngClass]="{'positive': entry.entryAmount > 0, 'negative': entry.entryAmount < 0}">
+              {{ entry.entryAmount }} € </span>
           </mat-card-subtitle>
         </mat-card-header>
         <!-- Additional entry details -->
