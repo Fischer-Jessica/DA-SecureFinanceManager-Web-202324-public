@@ -137,6 +137,11 @@ export class UserComponent implements OnInit {
    * @memberof UserComponent
    */
   onSubmit(formData: User): void {
+    if (formData.username === '' || formData.password === '') {
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_missing_credentials'), 'missing');
+      return;
+    }
+
     if (!formData.password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/)) {
       this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_password_requirements'), 'invalid');
       return;
