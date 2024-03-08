@@ -3,5 +3,5 @@ export interface ApplicationConfig {
 }
 
 export const CONFIG: ApplicationConfig = {
-  apiURL: 'http://172.18.10.192:8080/secure-finance-manager/'
+  apiURL: 'http://192.168.8.66:8080/secure-finance-manager/'
 };

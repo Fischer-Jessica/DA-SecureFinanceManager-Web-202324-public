@@ -27,6 +27,16 @@
         <mat-card-title>{{ subcategoryData.subcategory.subcategoryName }}</mat-card-title>
         <!-- Subcategory description -->
         <mat-card-subtitle>{{ subcategoryData.subcategory.subcategoryDescription }}</mat-card-subtitle>
+        <!-- Subcategory value -->
+        <mat-card-subtitle
+          *ngIf="subcategoryData.subcategorySum !== undefined && subcategoryData.subcategorySum !== null; else noValue"
+          [ngClass]="{'positive': subcategoryData.subcategorySum > 0, 'negative': subcategoryData.subcategorySum < 0, 'neutral': subcategoryData.subcategorySum === 0}">
+          {{ subcategoryData.subcategorySum }} €
+        </mat-card-subtitle>
+        <ng-template #noValue>
+          <mat-card-subtitle>{{ 'logged-in-homepage.categories.subcategories.ui_text_no_subcategory_sum' | translate }}</mat-card-subtitle>
+        </ng-template>
+
       </mat-card-header>
       <!-- Button to delete the subcategory -->
       <button class="delete-button item-button" (click)="deleteSubcategory(subcategoryData.subcategory.subcategoryId)">

@@ -24,7 +24,7 @@ export class CategoriesComponent implements OnInit {
    * Array to store category data along with their corresponding colours
    * @type {{ category: Category; colourHex: string }[]}
    */
-  categoriesData: { category: Category; colourHex: string }[] = [];
+  categoriesData: { category: Category; colourHex: string; categorySum: number | undefined }[] = [];
 
   /**
    * Constructor for CategoriesComponent
@@ -119,10 +119,11 @@ export class CategoriesComponent implements OnInit {
           for (let category of result) {
             if (category.categoryId !== null) { // Check if categoryId is not null
               this.colourService.getColourHex(category.categoryColourId).subscribe(
-                (result) => {
+                (colourResult) => {
                   this.categoriesData.push({
                     category: category,
-                    colourHex: result,
+                    colourHex: colourResult,
+                    categorySum: undefined // Set value to undefined initially
                   });
                   this.categoriesData.sort((a, b) => {
                     if (a.category.categoryId !== undefined && b.category.categoryId !== undefined) {
@@ -130,6 +131,33 @@ export class CategoriesComponent implements OnInit {
                     }
                     return 0;
                   });
+                  // Now fetch the value
+                  if (category.categoryId != null) {
+                    this.categoryService.getCategorySum(category.categoryId, loggedInUser.username, loggedInUser.password).subscribe(
+                      (sumResult) => {
+                        // Find the corresponding entry in categoriesData and update its value
+                        const index = this.categoriesData.findIndex(data => data.category.categoryId === category.categoryId);
+                        if (index !== -1) {
+                          this.categoriesData[index].categorySum = sumResult;
+                          this.cdr.detectChanges(); // Trigger change detection after updating the value
+                        }
+                      },
+                      (error) => {
+                        if (error.status === 404) {
+                          console.info(this.translateService.instant('logged-in-homepage.categories.subcategories.console_information_category_sum'));
+                        } else if (error.status === 401) {
+                          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+                          this.localStorageService.removeItem('loggedInUser');
+                          this.router.navigateByUrl('/authentication/login');
+                        } else if (error.status === 400) {
+                          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.alert_parameter_categoryId_invalid'), 'error');
+                        } else {
+                          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+                          console.error(this.translateService.instant('logged-in-homepage.categories.console_error_category_sum'), error);
+                        }
+                      }
+                    );
+                  }
                 },
                 (error) => {
                   if (error.status === 404) {

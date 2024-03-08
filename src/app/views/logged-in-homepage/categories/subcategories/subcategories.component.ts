@@ -24,7 +24,7 @@ export class SubcategoriesComponent implements OnInit {
    * Array to store subcategory data along with their corresponding colours
    * @type {{ subcategory: Subcategory; colourHex: string }[]}
    */
-  subcategoriesData: { subcategory: Subcategory; colourHex: string }[] = [];
+  subcategoriesData: { subcategory: Subcategory; colourHex: string, subcategorySum: number | undefined }[] = [];
 
   /**
    * The categoryId in which the subcategory is located.
@@ -135,9 +135,11 @@ export class SubcategoriesComponent implements OnInit {
             if (subcategory.subcategoryId !== null && subcategory.subcategoryId !== undefined) { // Check if subcategoryId is not null or undefined
               this.colourService.getColourHex(subcategory.subcategoryColourId).subscribe(
                 (result) => {
+                  // Initially set value to undefined
                   this.subcategoriesData.push({
                     subcategory: subcategory,
-                    colourHex: result
+                    colourHex: result,
+                    subcategorySum: undefined
                   });
                   // Sort subcategoriesData after each new entry
                   this.subcategoriesData.sort((a, b) => {
@@ -146,6 +148,33 @@ export class SubcategoriesComponent implements OnInit {
                     }
                     return 0;
                   });
+                  // Now fetch the value
+                  if (subcategory.subcategoryId != null) {
+                    this.subcategoryService.getSubcategorySum(categoryId, subcategory.subcategoryId, username, password).subscribe(
+                      (sumResult) => {
+                        // Find the corresponding entry in subcategoriesData and update its value
+                        const index = this.subcategoriesData.findIndex(data => data.subcategory.subcategoryId === subcategory.subcategoryId);
+                        if (index !== -1) {
+                          this.subcategoriesData[index].subcategorySum = sumResult;
+                          this.cdr.detectChanges(); // Trigger change detection after updating the value
+                        }
+                      },
+                      (error) => {
+                        if (error.status === 404) {
+                          console.info(this.translateService.instant('logged-in-homepage.categories.subcategories.console_information_subcategory_sum'));
+                        } else if (error.status === 401) {
+                          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+                          this.localStorageService.removeItem('loggedInUser');
+                          this.router.navigateByUrl('/authentication/login');
+                        } else if (error.status === 400) {
+                          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.alert_parameter_subcategoryId_invalid'), 'error');
+                        } else {
+                          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+                          console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.console_error_subcategory_sum'), error);
+                        }
+                      }
+                    );
+                  }
                 },
                 (error) => {
                   if (error.status === 404) {

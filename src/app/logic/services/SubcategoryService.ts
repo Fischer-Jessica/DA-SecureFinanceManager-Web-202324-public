@@ -62,6 +62,25 @@ export class SubcategoryService {
   }
 
   /**
+   * Retrieves the sum of a specific subcategory within a category from the backend.
+   * @param {number} categoryId - The unique identifier of the category.
+   * @param {number} subcategoryId - The unique identifier of the subcategory.
+   * @param {string} username - The username for authentication.
+   * @param {string} password - The password for authentication.
+   * @returns {Observable<number>} An observable of subcategory sum.
+   */
+  getSubcategorySum(categoryId: number, subcategoryId: number, username: string, password: string): Observable<number> {
+    const apiUrl = CONFIG.apiURL + `categories/${categoryId}/subcategories/${subcategoryId}/sum`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.get<number>(apiUrl, {headers});
+  }
+
+  /**
    * Inserts a new subcategory into the backend.
    * @param {string} username - The username for authentication.
    * @param {string} password - The password for authentication.

@@ -59,6 +59,24 @@ export class CategoryService {
   }
 
   /**
+   * Retrieves the sum of a specific category from the backend.
+   * @param {number} categoryId - The unique identifier of the category.
+   * @param {string} username - The username for authentication.
+   * @param {string} password - The password for authentication.
+   * @returns {Observable<number>} An observable of category sum.
+   */
+  getCategorySum(categoryId: number, username: string, password: string): Observable<number> {
+    const apiUrl = CONFIG.apiURL + 'categories/' + categoryId + '/sum';
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.get<number>(apiUrl, {headers});
+  }
+
+  /**
    * Inserts a new category into the backend.
    * @param {string} username - The username for authentication.
    * @param {string} password - The password for authentication.

@@ -22,6 +22,16 @@
         <mat-card-title>{{ category.category.categoryName }}</mat-card-title>
         <!-- Category description -->
         <mat-card-subtitle>{{ category.category.categoryDescription }}</mat-card-subtitle>
+        <!-- Category value -->
+        <mat-card-subtitle
+          *ngIf="category.categorySum !== undefined && category.categorySum !== null; else noCategoryValue"
+          [ngClass]="{'positive': category.categorySum > 0, 'negative': category.categorySum < 0, 'neutral': category.categorySum === 0}">
+          {{ category.categorySum }} €
+        </mat-card-subtitle>
+        <ng-template #noCategoryValue>
+          <mat-card-subtitle>{{ 'logged-in-homepage.categories.ui_text_no_category_sum' | translate }}</mat-card-subtitle>
+        </ng-template>
+
       </mat-card-header>
       <!-- Button to delete the category -->
       <button class="delete-button item-button" (click)="deleteCategory(category.category.categoryId)">

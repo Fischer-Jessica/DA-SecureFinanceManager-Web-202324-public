@@ -153,6 +153,10 @@ Card-Styles: Styles that have to do with the display of the cards.
   cursor: pointer;
 }
 
+.item-card mat-card-header {
+  padding-top: 5px;
+}
+
 .item-card mat-card-title,
 .item-card mat-card-subtitle {
   white-space: nowrap;
@@ -166,6 +170,25 @@ Card-Styles: Styles that have to do with the display of the cards.
 
 .item-card mat-card-subtitle {
   max-width: 272px;
+}
+
+.positive,
+.neutral,
+.negative {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.positive {
+  color: green;
+}
+
+.negative {
+  color: red;
+}
+
+.neutral {
+  color: black;
 }
 
 .item-card:hover {
