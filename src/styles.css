@@ -6,27 +6,32 @@ body {
 }
 
 .mat-mdc-snack-bar-container {
+  .mdc-button .mdc-button__label {
+    color: black;
+  }
+
   &.error-snackbar {
-    --mdc-snackbar-container-color: #FADDDD;
-    --mat-mdc-snack-bar-button-color: #893232;
-    --mdc-snackbar-supporting-text-color: #893232;
+    --mdc-snackbar-container-color: #893232;
+    --mdc-snackbar-supporting-text-color: #FADDDD;
   }
 
   &.info-snackbar {
-    --mdc-snackbar-container-color: #D5F1DE;
-    --mat-mdc-snack-bar-button-color: #1C6E37;
-    --mdc-snackbar-supporting-text-color: #1C6E37;
+    --mdc-snackbar-container-color: #D6D2F8;
+    --mdc-snackbar-supporting-text-color: #1E1383;
   }
 
   &.missing-snackbar {
     --mdc-snackbar-container-color: #FEEFD0;
-    --mat-mdc-snack-bar-button-color: #866E39;
     --mdc-snackbar-supporting-text-color: #866E39;
   }
 
   &.invalid-snackbar {
     --mdc-snackbar-container-color: #FADDDD;
-    --mat-mdc-snack-bar-button-color: #893232;
     --mdc-snackbar-supporting-text-color: #893232;
+  }
+
+  &.success-snackbar {
+    --mdc-snackbar-container-color: #D5F1DE;
+    --mdc-snackbar-supporting-text-color: #1C6E37;
   }
 }

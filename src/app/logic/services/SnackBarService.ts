@@ -28,9 +28,9 @@ export class SnackBarService {
    * @param type - The type of the alert.
    * @returns {void}
    */
-  showAlert(message: string, type: 'error' | 'info' | 'missing' | 'invalid'): void {
+  showAlert(message: string, type: 'error' | 'info' | 'missing' | 'invalid' | 'success'): void {
     const config = new MatSnackBarConfig();
-    config.duration = 10000;
+    config.duration = 10000000;
     config.horizontalPosition = 'center';
     config.verticalPosition = 'top';
     if (type == 'error') {
@@ -41,6 +41,8 @@ export class SnackBarService {
       config.panelClass = ['missing-snackbar'];
     } else if (type == 'invalid') {
       config.panelClass = ['invalid-snackbar'];
+    } else if (type == 'success') {
+      config.panelClass = ['success-snackbar'];
     }
 
     this.snackBar.open(message, this.translateService.instant('alert_close'), config);
