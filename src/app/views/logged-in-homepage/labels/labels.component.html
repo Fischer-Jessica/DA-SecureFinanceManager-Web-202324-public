@@ -20,8 +20,17 @@
 
       <!-- Header of the card, clickable to show entries -->
       <mat-card-header (click)="goToLabelEntriesPage(labelData.label.labelId)">
-        <div class="colour-dot" [style.background-color]="'#' + labelData.colourHex"></div>
+        <div class="colour-dot" [style.background-color]="'#' + labelData.labelColourHex"></div>
         <mat-card-title>{{ labelData.label.labelName }}</mat-card-title>
+        <!-- Label value -->
+        <mat-card-subtitle class="sub-category-value"
+                           *ngIf="labelData.labelSum !== undefined && labelData.labelSum !== null; else noLabelValue"
+                           [ngClass]="{'positive': labelData.labelSum > 0, 'negative': labelData.labelSum < 0, 'neutral': labelData.labelSum === 0}">
+          {{ labelData.labelSum }} €
+        </mat-card-subtitle>
+        <ng-template #noLabelValue>
+          <mat-card-subtitle>{{ 'logged-in-homepage.ui_text_no_sum' | translate }}</mat-card-subtitle>
+        </ng-template>
         <mat-card-subtitle>{{ labelData.label.labelDescription }}</mat-card-subtitle>
       </mat-card-header>
 

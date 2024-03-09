@@ -120,7 +120,7 @@ export class CategoriesComponent implements OnInit {
           return 0;
         });
         if (category.categoryId != null) {
-          this.fetchValueOfCategory(category.categoryId);
+          this.fetchCategorySum(category.categoryId);
         } else {
           this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
           this.router.navigate([`/logged-in-homepage/categories`]);
@@ -143,7 +143,7 @@ export class CategoriesComponent implements OnInit {
    * @param categoryId The ID of the category for which the sum value is to be fetched.
    * @memberOf CategoriesComponent
    */
-  fetchValueOfCategory(categoryId: number) {
+  fetchCategorySum(categoryId: number) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
       this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');

@@ -42,6 +42,7 @@
     "button_update": "ÄNDERN",
     "alert_invalid_formData": "ungültige Formulardaten",
     "alert_error_path_parameter_invalid": "Das Klassifizierung-Objekt, in dem Sie sich befanden, konnte nicht gefunden werden. Sie wurden zu den Kategorien zurückgebracht.",
+    "ui_text_no_sum": "Keine Summe verfügbar.",
     "navbar": {
       "ui_link_categories": "Kategorien",
       "ui_link_labels": "Labels",
@@ -59,7 +60,6 @@
       "confirm_delete_category": "Möchten Sie die Kategorie wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Alle Unterkategorien und Einträge, die dieser Kategorie angehören, werden ebenfalls gelöscht.",
       "console_information_category_sum": "Es konnte keine Summe für die Kategorie mit der folgenden ID ermittelt werden:",
       "console_error_category_sum": "Fehler beim Ermitteln der Summe für die Kategorie mit der folgenden ID:",
-      "ui_text_no_category_sum": "Keine Summe vorhanden.",
       "create-category": {
         "ui_label_category_name": "Name der Kategorie:",
         "ui_placeholder_category_name": "Name der Kategorie",
@@ -89,7 +89,6 @@
         "confirm_delete_subcategory": "Möchten Sie die Unterkategorie wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden. Alle Einträge, die dieser Unterkategorie angehören, werden ebenfalls gelöscht.",
         "console_information_subcategory_sum": "Es konnte keine Summe für die Unterkategorie mit der folgenden ID ermittelt werden:",
         "console_error_subcategory_sum": "Fehler beim Ermitteln der Summe für die Unterkategorie mit der folgenden ID:",
-        "ui_text_no_subcategory_sum": "Für diese Unterkategorie ist keine Summe verfügbar.",
         "create-subcategory": {
           "ui_label_subcategory_name": "Name der Unterkategorie:",
           "ui_placeholder_subcategory_name": "Name der Unterkategorie",

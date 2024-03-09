@@ -23,9 +23,9 @@ import {SnackBarService} from "../../../logic/services/SnackBarService";
 export class LabelsComponent implements OnInit {
   /**
    * Array to store label data along with their corresponding colours
-   * @type {{ label: Label; colourHex: string }[]}
+   * @type {{ label: Label; labelColourHex: string, labelSum: number | undefined }[]}
    */
-  labelsData: { label: Label; colourHex: string }[] = [];
+  labelsData: { label: Label; labelColourHex: string, labelSum: number | undefined }[] = [];
 
   /**
    * Constructor for LabelsComponent
@@ -70,30 +70,9 @@ export class LabelsComponent implements OnInit {
     this.labelService.getLabels(username, password)
       .subscribe(
         (result) => {
-          this.labelsData = []; // Clear existing data
+          this.labelsData = [];
           for (let label of result) {
-            this.colourService.getColourHex(label.labelColourId).subscribe(
-              (colourResult) => {
-                this.labelsData.push({
-                  label: label,
-                  colourHex: colourResult
-                });
-                this.labelsData.sort((a, b) => {
-                  if (a.label.labelId !== undefined && b.label.labelId !== undefined) {
-                    return b.label.labelId - a.label.labelId;
-                  }
-                  return 0;
-                });
-              },
-              (error) => {
-                if (error.status === 404) {
-                  this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'), 'error');
-                } else {
-                  this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
-                  console.error(this.translateService.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
-                }
-              }
-            );
+            this.fetchColourHexOfLabel(label);
           }
         },
         (error) => {
@@ -109,6 +88,84 @@ export class LabelsComponent implements OnInit {
           }
         }
       );
+  }
+
+  /**
+   * Fetches the color hex code of a label.
+   * This method retrieves the color hex code of a label from the backend.
+   * @param label The label object for which the color hex code is to be fetched.
+   * @memberOf CategoriesComponent
+   */
+  fetchColourHexOfLabel(label: Label) {
+    this.colourService.getColourHex(label.labelColourId).subscribe(
+      (colourResult) => {
+        this.labelsData.push({
+          label: label,
+          labelColourHex: colourResult,
+          labelSum: undefined
+        });
+        this.labelsData.sort((a, b) => {
+          if (a.label.labelId !== undefined && b.label.labelId !== undefined) {
+            return b.label.labelId - a.label.labelId;
+          }
+          return 0;
+        });
+        if (label.labelId != null) {
+          this.fetchLabelSum(label.labelId);
+        } else {
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
+          this.router.navigate([`/logged-in-homepage/categories`]);
+        }
+      },
+      (error) => {
+        if (error.status === 404) {
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'), 'error');
+        } else {
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+          console.error(this.translateService.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
+        }
+      }
+    );
+  }
+
+  /**
+   * Fetches the sum value of a label.
+   * This method retrieves the sum value of a label from the backend and updates the labelsData array.
+   * @param labelId The ID of the label for which the sum value is to be fetched.
+   * @memberOf CategoriesComponent
+   */
+  private fetchLabelSum(labelId: number) {
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+      this.router.navigateByUrl('/authentication/login');
+      return;
+    }
+    const loggedInUser = JSON.parse(storedUser);
+
+    this.labelService.getLabelSum(loggedInUser.username, loggedInUser.password, labelId).subscribe(
+      (valueResult) => {
+        const index = this.labelsData.findIndex(data => data.label.labelId === labelId);
+        if (index !== -1) {
+          this.labelsData[index].labelSum = valueResult;
+          this.cdr.detectChanges();
+        }
+      },
+      (error) => {
+        if (error.status === 404) {
+          console.info(this.translateService.instant('logged-in-homepage.labels.console_information_label_sum'));
+        } else if (error.status === 401) {
+          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+          this.localStorageService.removeItem('loggedInUser');
+          this.router.navigateByUrl('/authentication/login');
+        } else if (error.status === 400) {
+          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.subcategories.alert_parameter_labelId_invalid'), 'error');
+        } else {
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+          console.error(this.translateService.instant('logged-in-homepage.labels.console_error_label_sum'), error);
+        }
+      }
+    );
   }
 
   /**

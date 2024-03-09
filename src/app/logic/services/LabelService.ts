@@ -59,6 +59,24 @@ export class LabelService {
   }
 
   /**
+   * Retrieves the sum associated with a specific label from the backend.
+   * @param {string} username - The username for authentication.
+   * @param {string} password - The password for authentication.
+   * @param {number} labelId - The unique identifier of the label.
+   * @returns {Observable<number>} An observable of number representing the sum.
+   */
+  getLabelSum(username: string, password: string, labelId: number): Observable<number> {
+    const getLabelUrl = CONFIG.apiURL + `labels/${labelId}/sum`;
+
+    const headers = new HttpHeaders({
+      'API-Version': '1',
+      'Authorization': `Basic ${btoa(`${username}:${password}`)}`
+    });
+
+    return this.http.get<number>(getLabelUrl, {headers});
+  }
+
+  /**
    * Inserts a new label into the backend.
    * @param {string} username - The username for authentication.
    * @param {string} password - The password for authentication.
