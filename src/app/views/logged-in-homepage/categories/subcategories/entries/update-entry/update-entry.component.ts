@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {LocalStorageService} from "../../../../../../logic/LocalStorageService";
+import {LocalStorageService} from "../../../../../../logic/services/LocalStorageService";
 import {EntryService} from "../../../../../../logic/services/EntryService";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Entry} from "../../../../../../logic/models/Entry";
@@ -53,8 +53,7 @@ export class UpdateEntryComponent implements OnInit {
               private entryService: EntryService,
               private localStorageService: LocalStorageService,
               private translateService: TranslateService,
-              private snackBarService: SnackBarService
-  ) {
+              private snackBarService: SnackBarService) {
   }
 
   /**
@@ -63,22 +62,6 @@ export class UpdateEntryComponent implements OnInit {
    */
   ngOnInit(): void {
     this.fetchEntry();
-  }
-
-  /**
-   * Sets the initial date and time for an entry based on the provided database date-time string.
-   * The database date-time string is expected to be in the format 'YYYY-MM-DD HH:mm'.
-   * @param databaseDateTime The date-time string retrieved from the database.
-   * @memberOf UpdateEntryComponent
-   */
-  setInitialDateTimeFromDatabase(databaseDateTime: string) {
-    const [datePart, timePart] = databaseDateTime.split(' ');
-    const [year, month, day] = datePart.split('-');
-    const [hours, minutes] = timePart.split(':');
-
-    const formattedDateTime = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
-
-    this.entry.entryTimeOfTransaction = formattedDateTime;
   }
 
   /**
@@ -135,17 +118,31 @@ export class UpdateEntryComponent implements OnInit {
   }
 
   /**
-   * Method to handle form submission
-   * @param formData The form data submitted
+   * Sets the initial date and time for an entry based on the provided database date-time string.
+   * The database date-time string is expected to be in the format 'YYYY-MM-DD HH:mm'.
+   * @param databaseDateTime The date-time string retrieved from the database.
    * @memberOf UpdateEntryComponent
    */
-  onSubmit(formData: Entry) {
-    if (formData.entryAmount === 0 || formData.entryTimeOfTransaction === '') {
+  setInitialDateTimeFromDatabase(databaseDateTime: string) {
+    const [datePart, timePart] = databaseDateTime.split(' ');
+    const [year, month, day] = datePart.split('-');
+    const [hours, minutes] = timePart.split(':');
+
+    this.entry.entryTimeOfTransaction = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
+  }
+
+  /**
+   * Method to handle form submission
+   * @param updatedEntryFormData The form data submitted
+   * @memberOf UpdateEntryComponent
+   */
+  onSubmit(updatedEntryFormData: Entry) {
+    if (updatedEntryFormData.entryAmount === null || updatedEntryFormData.entryTimeOfTransaction === '') {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'), 'missing');
       return;
     }
 
-    if (!formData.entryAmount.toString().match(/^(-)?\d+(\.\d{0,2})?$/)) {
+    if (!updatedEntryFormData.entryAmount.toString().match(/^(-)?\d+(\.\d{0,2})?$/)) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_invalid_amount'), 'invalid');
       return;
     }
@@ -161,13 +158,11 @@ export class UpdateEntryComponent implements OnInit {
     const date = this.entry.entryTimeOfTransaction.split('T')[0];
     const time = this.entry.entryTimeOfTransaction.split('T')[1];
 
-    const formattedDateTime = date + ' ' + time;
-
-    this.entry.entryTimeOfTransaction = formattedDateTime;
+    this.entry.entryTimeOfTransaction = date + ' ' + time;
 
     const user = JSON.parse(storedUser);
 
-    if (this.entry.entryId != null) {
+    if (this.entry.entryId != null && this.subcategoryId != null) {
       this.entryService.updateEntry(
         user.username,
         user.password,
@@ -190,6 +185,9 @@ export class UpdateEntryComponent implements OnInit {
           }
         }
       );
+    } else {
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
+      this.router.navigate([`/logged-in-homepage/categories`]);
     }
   }
 
@@ -197,7 +195,7 @@ export class UpdateEntryComponent implements OnInit {
    * Method to cancel the update operation and navigate back
    * @memberOf UpdateEntryComponent
    */
-  onCancel(): void {
+  goToEntriesPage(): void {
     this.router.navigate([`/logged-in-homepage/entries/${this.categoryId}/${this.subcategoryId}`]);
   }
 }

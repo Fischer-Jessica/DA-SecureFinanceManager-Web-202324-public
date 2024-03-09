@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../../../logic/models/User";
 import {UserService} from "../../../logic/services/UserService";
-import {LocalStorageService} from "../../../logic/LocalStorageService";
+import {LocalStorageService} from "../../../logic/services/LocalStorageService";
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../../logic/services/SnackBarService";
@@ -91,46 +91,6 @@ export class UserComponent implements OnInit {
   }
 
   /**
-   * Deletes the user account after confirmation.
-   * Shows appropriate alerts and navigates to login page if user is not logged in or encounters errors.
-   * @memberof UserComponent
-   */
-  deleteUser() {
-    const confirmDelete = confirm(this.translateService.instant('logged-in-homepage.user.alert_confirm_delete_user'));
-    if (!confirmDelete) {
-      return;
-    }
-
-    const storedUser = this.localStorageService.getItem('loggedInUser');
-    if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
-      this.router.navigate(['/authentication/login']);
-      return;
-    }
-
-    const loggedInUser: User = JSON.parse(storedUser);
-    this.userService.deleteUser(
-      loggedInUser.username,
-      loggedInUser.password
-    ).subscribe(
-      () => {
-        this.localStorageService.removeItem('loggedInUser');
-        this.router.navigate(['/authentication/register']);
-      },
-      error => {
-        if (error.status === 401) {
-          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
-          this.localStorageService.removeItem('loggedInUser');
-          this.router.navigate(['/authentication/login']);
-        } else {
-          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
-          console.error(this.translateService.instant('logged-in-homepage.user.console_error_deleting_user'), error);
-        }
-      }
-    );
-  }
-
-  /**
    * Handles form submission to update user data.
    * Shows appropriate alerts and navigates to login page if user is not logged in or encounters errors.
    * @param {any} formData - The form data submitted by the user.
@@ -180,6 +140,46 @@ export class UserComponent implements OnInit {
         } else {
           this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
           console.error(this.translateService.instant('logged-in-homepage.user.console_error_updating_user'), error);
+        }
+      }
+    );
+  }
+
+  /**
+   * Deletes the user account after confirmation.
+   * Shows appropriate alerts and navigates to login page if user is not logged in or encounters errors.
+   * @memberof UserComponent
+   */
+  deleteUser() {
+    const confirmDelete = confirm(this.translateService.instant('logged-in-homepage.user.alert_confirm_delete_user'));
+    if (!confirmDelete) {
+      return;
+    }
+
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+      this.router.navigate(['/authentication/login']);
+      return;
+    }
+
+    const loggedInUser: User = JSON.parse(storedUser);
+    this.userService.deleteUser(
+      loggedInUser.username,
+      loggedInUser.password
+    ).subscribe(
+      () => {
+        this.localStorageService.removeItem('loggedInUser');
+        this.router.navigate(['/authentication/register']);
+      },
+      error => {
+        if (error.status === 401) {
+          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+          this.localStorageService.removeItem('loggedInUser');
+          this.router.navigate(['/authentication/login']);
+        } else {
+          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+          console.error(this.translateService.instant('logged-in-homepage.user.console_error_deleting_user'), error);
         }
       }
     );

@@ -33,8 +33,8 @@
 
   <!-- Form submission buttons -->
   <div class="form-actions">
-    <button type="button" class="cancel-button form-button"
-            (click)="onCancel()">{{ 'logged-in-homepage.cancel-action' | translate }}
+    <button type="button" class="cancel-button form-button" routerLink='/logged-in-homepage/categories'>
+      {{ 'logged-in-homepage.cancel-action' | translate }}
     </button>
     <button type="submit"
             class="update-button form-button">{{ 'logged-in-homepage.categories.update-category.ui_button_update_category' | translate }}

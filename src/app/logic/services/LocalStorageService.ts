@@ -11,7 +11,6 @@ import {Injectable} from "@angular/core";
  * @fullName Fischer, Jessica Christina
  */
 export class LocalStorageService {
-
   /**
    * Retrieves an item from the local storage.
    * @param {string} key - The key of the item to retrieve.

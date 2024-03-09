@@ -15,12 +15,12 @@
   <!-- Headline for subcategory entries -->
   <h1>{{ 'logged-in-homepage.categories.subcategories.entries.ui_headline_entries' | translate }}</h1>
   <!-- Button to create a new entry -->
-  <button class="create-button headline-button" (click)="addEntry()">
+  <button class="create-button headline-button" (click)="goToCreateEntryPage()">
     {{ 'logged-in-homepage.categories.subcategories.entries.create-entry.ui_button_create_entry' | translate }}
   </button>
   <!-- Button to return to subcategories -->
   <button class="cancel-button headline-button" routerLink='/logged-in-homepage/categories'
-          (click)="returnToSubcategory()">
+          (click)="goToSubcategoriesPage()">
     {{ 'logged-in-homepage.categories.subcategories.entries.ui_button_return_subcategories' | translate }}
   </button>
   <!-- Text describing the subcategory entries -->
@@ -98,16 +98,16 @@
           <!-- Display selected labels for entries -->
           <div class="elements-right-column">
             <div *ngIf="selectedLabelForEntries && selectedLabelForEntries.size > 0" class="selected-labels">
-              <div class="label-container" *ngFor="let label of getLabels(entry.entryId)">
-                <p class="selected-label" (click)="goToLabel(label.labelId)"
-                   [style.background-color]="'#' + getLabelColour(label.labelId)">{{ label.labelName }}</p>
+              <div class="label-container" *ngFor="let label of getLabelsForEntry(entry.entryId)">
+                <p class="selected-label" (click)="goToLabelEntriesPage(label.labelId)"
+                   [style.background-color]="'#' + getLabelHexOfLabel(label.labelId)">{{ label.labelName }}</p>
               </div>
             </div>
           </div>
           <!-- Buttons for editing and deleting entries -->
           <div class="elements-right-column" *ngIf="this.labelId === undefined; else entryLabelAction">
             <button class="update-button edit"
-                    (click)="updateEntry(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }}
+                    (click)="goToUpdateEntryPage(entry.entryId)">{{ 'logged-in-homepage.button_update' | translate }}
             </button>
             <button class="delete-button delete"
                     (click)="deleteEntry(entry.entryId)">{{ 'logged-in-homepage.button_delete' | translate }}

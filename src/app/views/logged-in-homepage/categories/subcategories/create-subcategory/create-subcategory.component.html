@@ -30,10 +30,10 @@
     <app-colour-picker (colourSelected)="onColourSelected($event)"></app-colour-picker>
   </div>
 
-  <!-- Form submission buttons -->
+  <!-- Form buttons -->
   <div class="form-actions">
     <button type="button" class="cancel-button form-button"
-            (click)="returnToSubcategories()">{{ 'logged-in-homepage.cancel-action' | translate }}
+            (click)="goToSubcategoriesPage()">{{ 'logged-in-homepage.cancel-action' | translate }}
     </button>
     <button type="submit"
             class="create-button form-button">{{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_button_create_subcategory' | translate }}

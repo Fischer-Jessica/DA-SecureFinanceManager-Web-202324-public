@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubcategoryService} from "../../../../../logic/services/SubcategoryService";
-import {LocalStorageService} from "../../../../../logic/LocalStorageService";
+import {LocalStorageService} from "../../../../../logic/services/LocalStorageService";
 import {Subcategory} from "../../../../../logic/models/Subcategory";
 import {TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../../../../logic/services/SnackBarService";
@@ -11,6 +11,7 @@ import {SnackBarService} from "../../../../../logic/services/SnackBarService";
   templateUrl: './create-subcategory.component.html',
   styleUrls: ['./create-subcategory.component.css', '../../../logged-in-homepage.component.css', '../../../../../app.component.css']
 })
+
 /**
  * Component for creating a new subcategory
  * @class CreateSubcategoryComponent
@@ -57,10 +58,10 @@ export class CreateSubcategoryComponent {
 
   /**
    * Method to handle form submission
-   * @param formData The form data submitted
+   * @param newSubcategoryFormData The form data submitted
    * @memberOf CreateSubcategoryComponent
    */
-  onSubmit(formData: Subcategory) {
+  onSubmit(newSubcategoryFormData: Subcategory) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
       this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
@@ -69,8 +70,8 @@ export class CreateSubcategoryComponent {
     }
     const loggedInUser = JSON.parse(storedUser);
 
-    formData.subcategoryColourId = this.subcategory.subcategoryColourId;
-    if (formData.subcategoryName === '' || formData.subcategoryColourId === 0) {
+    newSubcategoryFormData.subcategoryColourId = this.subcategory.subcategoryColourId;
+    if (newSubcategoryFormData.subcategoryName === '' || newSubcategoryFormData.subcategoryColourId === 0) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.create-subcategory.alert_create_subcategory_missing_fields'), 'missing');
       return;
     }
@@ -78,7 +79,7 @@ export class CreateSubcategoryComponent {
     this.route.params.subscribe(params => {
       categoryId = +params['categoryId'];
     });
-    this.subcategoryService.insertSubcategory(loggedInUser.username, loggedInUser.password, categoryId, formData).subscribe({
+    this.subcategoryService.insertSubcategory(loggedInUser.username, loggedInUser.password, categoryId, newSubcategoryFormData).subscribe({
       next: (response) => {
         this.router.navigateByUrl(`/logged-in-homepage/subcategories/${categoryId}`)
       },
@@ -101,7 +102,7 @@ export class CreateSubcategoryComponent {
    * Method to navigate back to subcategories
    * @memberOf CreateSubcategoryComponent
    */
-  returnToSubcategories() {
+  goToSubcategoriesPage() {
     this.route.params.subscribe(params => {
       let categoryId = +params['categoryId'];
       this.router.navigateByUrl(`/logged-in-homepage/subcategories/${categoryId}`)

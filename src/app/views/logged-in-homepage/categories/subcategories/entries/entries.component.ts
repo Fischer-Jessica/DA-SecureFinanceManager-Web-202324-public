@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {LocalStorageService} from "../../../../../logic/LocalStorageService";
+import {LocalStorageService} from "../../../../../logic/services/LocalStorageService";
 import {EntryService} from "../../../../../logic/services/EntryService";
 import {Entry} from "../../../../../logic/models/Entry";
 import {LabelService} from "../../../../../logic/services/LabelService";
@@ -112,12 +112,150 @@ export class EntriesComponent implements OnInit {
           return;
         }
       });
-      this.fetchEntries(this.subcategoryId, loggedInUser.username, loggedInUser.password);
-      this.fetchLabels(loggedInUser.username, loggedInUser.password);
+      this.fetchEntriesBySubcategoryOrLabel(this.subcategoryId, loggedInUser.username, loggedInUser.password);
+      this.fetchAvailableLabels(loggedInUser.username, loggedInUser.password);
     } else {
       this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
       this.router.navigateByUrl('/authentication/login');
       return;
+    }
+  }
+
+  /**
+   * Method to fetch entries
+   * @param {number | undefined} subcategoryId The ID of the subcategory
+   * @param {string} username The username for authentication
+   * @param {string} password The password for authentication
+   * @memberOf EntriesComponent
+   */
+  private fetchEntriesBySubcategoryOrLabel(subcategoryId: number | undefined, username: string, password: string): void {
+    if (this.labelId === undefined) {
+      if (subcategoryId != null) {
+        this.entryService.getEntries(username, password, subcategoryId)
+          .subscribe(
+            (result) => {
+              const sortedEntries = [...result];
+              sortedEntries.sort((a, b) => {
+                if (a.entryTimeOfTransaction && b.entryTimeOfTransaction) {
+                  return new Date(b.entryTimeOfTransaction).getTime() - new Date(a.entryTimeOfTransaction).getTime();
+                }
+                return 0;
+              });
+              this.entries = sortedEntries;
+
+              this.entries.forEach(entry => {
+                if (entry.entryCreationTime) {
+                  entry.entryCreationTime = this.formatTheEntryCreationTime(new Date(entry.entryCreationTime));
+                } else {
+                  entry.entryCreationTime = 'N/A';
+                }
+              });
+              this.fetchLabelsOfEntry(username, password);
+            },
+            (error) => {
+              if (error.status === 401) {
+                this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+                this.localStorageService.removeItem('loggedInUser');
+                this.router.navigateByUrl('/authentication/login');
+              } else if (error.status === 400) {
+                this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.alert_parameter_subcategoryId_invalid'), 'error');
+              } else if (error.status === 404) {
+                this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_no_entries_found'), 'info');
+              } else {
+                this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+                console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.console_error_fetching_entries'), error);
+              }
+            }
+          );
+      } else {
+        this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
+        this.router.navigateByUrl('/logged-in-homepage/categories');
+      }
+    } else {
+      this.entryLabelService.getEntriesByLabelId(username, password, this.labelId)
+        .subscribe(
+          (result) => {
+            const sortedEntries = [...result];
+            sortedEntries.sort((a, b) => {
+              if (a.entryTimeOfTransaction && b.entryTimeOfTransaction) {
+                return new Date(b.entryTimeOfTransaction).getTime() - new Date(a.entryTimeOfTransaction).getTime();
+              }
+              return 0;
+            });
+            this.entries = sortedEntries;
+            this.fetchLabelsOfEntry(username, password);
+          },
+          (error) => {
+            if (error.status === 401) {
+              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+              this.localStorageService.removeItem('loggedInUser');
+              this.router.navigateByUrl('/authentication/login');
+            } else if (error.status === 400) {
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_labelId_invalid'), 'error');
+            } else if (error.status === 404) {
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_no_entries_for_label'), 'info');
+            } else {
+              this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+              console.error(this.translateService.instant('logged-in-homepage.labels.label-entries.console_error_fetching_entries_for_label'), error);
+            }
+          }
+        );
+    }
+  }
+
+  /**
+   * Formats a given date into a string representation with the format "DD.MM.YYYY HH:MM".
+   * @param date The date to be formatted.
+   * @returns A string representing the formatted date and time.
+   */
+  formatTheEntryCreationTime(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+
+    return `${day}.${month}.${year} ${hours}:${minutes}`;
+  }
+
+  /**
+   * Method to fetch labels of an entry
+   * @param {string} username The username for authentication
+   * @param {string} password The password for authentication
+   * @memberOf EntriesComponent
+   */
+  fetchLabelsOfEntry(username: string, password: string): void {
+    for (const entry of this.entries) {
+      if (entry.entryId !== null && entry.entryId !== undefined) {
+        this.entryLabelService.getLabelsByEntryId(username, password, entry.entryId)
+          .subscribe(
+            (result) => {
+              result.sort((a, b) => {
+                if (a.labelId !== undefined && b.labelId !== undefined) {
+                  return a.labelId - b.labelId;
+                }
+                return 0;
+              });
+              if (entry.entryId != null) {
+                this.selectedLabelForEntries.set(entry.entryId, result);
+              }
+            },
+            (error) => {
+              if (error.status === 404) {
+                console.info(this.translateService.instant('logged-in-homepage.labels.label-entries.console_no_labels_for_entry_found') + entry.entryId);
+              } else if (error.status === 401) {
+                this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+                this.localStorageService.removeItem('loggedInUser');
+                this.router.navigateByUrl('/authentication/login');
+              } else if (error.status === 400) {
+                this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_invalid'), 'error');
+              } else {
+                this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+                console.error(this.translateService.instant('logged-in-homepage.labels.label-entries.console_error_fetching_label_for_entry') + entry.entryId, error);
+              }
+            }
+          );
+      }
     }
   }
 
@@ -127,7 +265,7 @@ export class EntriesComponent implements OnInit {
    * @param {string} password The password for authentication
    * @memberOf EntriesComponent
    */
-  fetchLabels(username: string, password: string): void {
+  fetchAvailableLabels(username: string, password: string): void {
     this.labelService.getLabels(username, password)
       .subscribe(
         (result) => {
@@ -174,43 +312,49 @@ export class EntriesComponent implements OnInit {
   }
 
   /**
-   * Method to fetch labels of an entry
-   * @param {string} username The username for authentication
-   * @param {string} password The password for authentication
+   * Method to delete an entry
+   * @param {number | undefined} entryId The ID of the entry
    * @memberOf EntriesComponent
    */
-  fetchLabelsOfEntry(username: string, password: string): void {
-    for (const entry of this.entries) {
-      if (entry.entryId !== null && entry.entryId !== undefined) {
-        this.entryLabelService.getLabelsByEntryId(username, password, entry.entryId)
-          .subscribe(
-            (result) => {
-              result.sort((a, b) => {
-                if (a.labelId !== undefined && b.labelId !== undefined) {
-                  return a.labelId - b.labelId;
-                }
-                return 0;
-              });
-              if (entry.entryId != null) {
-                this.selectedLabelForEntries.set(entry.entryId, result);
-              }
-            },
-            (error) => {
-              if (error.status === 404) {
-                console.info(this.translateService.instant('logged-in-homepage.labels.label-entries.console_no_labels_for_entry_found') + entry.entryId);
-              } else if (error.status === 401) {
-                this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
-                this.localStorageService.removeItem('loggedInUser');
-                this.router.navigateByUrl('/authentication/login');
-              } else if (error.status === 400) {
-                this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_entryId_invalid'), 'error');
-              } else {
-                this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
-                console.error(this.translateService.instant('logged-in-homepage.labels.label-entries.console_error_fetching_label_for_entry') + entry.entryId, error);
-              }
+  deleteEntry(entryId: number | undefined) {
+    const confirmDelete = confirm(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.confirm_delete_entry'));
+    if (!confirmDelete) {
+      return;
+    }
+
+    const storedUser = this.localStorageService.getItem('loggedInUser');
+    if (!storedUser) {
+      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+      this.router.navigateByUrl('/authentication/login');
+      return;
+    }
+    const loggedInUser = JSON.parse(storedUser);
+    if (this.subcategoryId != null && entryId != null) {
+      this.entryService.deleteEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, entryId)
+        .subscribe(
+          (result) => {
+            this.entries = this.entries.filter((item) => item.entryId !== entryId);
+            this.cdr.detectChanges();
+          },
+          (error) => {
+            if (error.status === 401) {
+              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+              this.localStorageService.removeItem('loggedInUser');
+              this.router.navigateByUrl('/authentication/login');
+            } else if (error.status === 400) {
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_parameter_entryId_invalid'), 'error');
+            } else if (error.status === 404) {
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_entry_not_found'), 'error');
+            } else {
+              this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+              console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.console_error_deleting_entry'), error);
             }
-          );
-      }
+          }
+        );
+    } else {
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
+      this.router.navigateByUrl('/logged-in-homepage/categories');
+      return;
     }
   }
 
@@ -246,7 +390,7 @@ export class EntriesComponent implements OnInit {
         return labelsForEntry.some(label => label.labelId === labelId);
       }
     }
-      return false;
+    return false;
   }
 
   /**
@@ -375,161 +519,13 @@ export class EntriesComponent implements OnInit {
   }
 
   /**
-   * Method to delete an entry
-   * @param {number | undefined} entryId The ID of the entry
+   * Method to get the colour of a label
+   * @param {number | undefined} labelId The ID of the label
+   * @returns {string | undefined} The colour of the label
    * @memberOf EntriesComponent
    */
-  deleteEntry(entryId: number | undefined) {
-    const confirmDelete = confirm(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.confirm_delete_entry'));
-    if (!confirmDelete) {
-      return;
-    }
-
-    const storedUser = this.localStorageService.getItem('loggedInUser');
-    if (!storedUser) {
-      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
-      this.router.navigateByUrl('/authentication/login');
-      return;
-    }
-    const loggedInUser = JSON.parse(storedUser);
-    this.entryService.deleteEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, entryId)
-      .subscribe(
-        (result) => {
-          this.entries = this.entries.filter((item) => item.entryId !== entryId);
-          this.cdr.detectChanges();
-        },
-        (error) => {
-          if (error.status === 401) {
-            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
-            this.localStorageService.removeItem('loggedInUser');
-            this.router.navigateByUrl('/authentication/login');
-          } else if (error.status === 400) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_parameter_entryId_invalid'), 'error');
-          } else if (error.status === 404) {
-            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_entry_not_found'), 'error');
-          } else {
-            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
-            console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.console_error_deleting_entry'), error);
-          }
-        }
-      );
-  }
-
-  /**
-   * Method to fetch entries
-   * @param {number | undefined} subcategoryId The ID of the subcategory
-   * @param {string} username The username for authentication
-   * @param {string} password The password for authentication
-   * @memberOf EntriesComponent
-   */
-  private fetchEntries(subcategoryId: number | undefined, username: string, password: string): void {
-    if (this.labelId === undefined) {
-      this.entryService.getEntries(username, password, subcategoryId)
-        .subscribe(
-          (result) => {
-            const sortedEntries = [...result];
-            sortedEntries.sort((a, b) => {
-              if (a.entryTimeOfTransaction && b.entryTimeOfTransaction) {
-                return new Date(b.entryTimeOfTransaction).getTime() - new Date(a.entryTimeOfTransaction).getTime();
-              }
-              return 0;
-            });
-            this.entries = sortedEntries;
-
-            this.entries.forEach(entry => {
-              if (entry.entryCreationTime) {
-                entry.entryCreationTime = this.formatTime(new Date(entry.entryCreationTime));
-              } else {
-                entry.entryCreationTime = 'N/A';
-              }
-            });
-            this.fetchLabelsOfEntry(username, password);
-          },
-          (error) => {
-            if (error.status === 401) {
-              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
-              this.localStorageService.removeItem('loggedInUser');
-              this.router.navigateByUrl('/authentication/login');
-            } else if (error.status === 400) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.alert_parameter_subcategoryId_invalid'), 'error');
-            } else if (error.status === 404) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.alert_no_entries_found'), 'info');
-            } else {
-              this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
-              console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.console_error_fetching_entries'), error);
-            }
-          }
-        );
-    } else {
-      this.entryLabelService.getEntriesByLabelId(username, password, this.labelId)
-        .subscribe(
-          (result) => {
-            const sortedEntries = [...result];
-            sortedEntries.sort((a, b) => {
-              if (a.entryTimeOfTransaction && b.entryTimeOfTransaction) {
-                return new Date(b.entryTimeOfTransaction).getTime() - new Date(a.entryTimeOfTransaction).getTime();
-              }
-              return 0;
-            });
-            this.entries = sortedEntries;
-            this.fetchLabelsOfEntry(username, password);
-          },
-          (error) => {
-            if (error.status === 401) {
-              this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
-              this.localStorageService.removeItem('loggedInUser');
-              this.router.navigateByUrl('/authentication/login');
-            } else if (error.status === 400) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_parameter_labelId_invalid'), 'error');
-            } else if (error.status === 404) {
-              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.label-entries.alert_no_entries_for_label'), 'info');
-            } else {
-              this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
-              console.error(this.translateService.instant('logged-in-homepage.labels.label-entries.console_error_fetching_entries_for_label'), error);
-            }
-          }
-        );
-    }
-  }
-
-  /**
-   * Formats a given date into a string representation with the format "DD.MM.YYYY HH:MM".
-   * @param date The date to be formatted.
-   * @returns A string representing the formatted date and time.
-   */
-  formatTime(date: Date): string {
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
-    const hours = ('0' + date.getHours()).slice(-2);
-    const minutes = ('0' + date.getMinutes()).slice(-2);
-
-    return `${day}.${month}.${year} ${hours}:${minutes}`;
-  }
-
-  /**
-   * Method to update an entry
-   * @param {number | undefined} entryId The ID of the entry
-   * @memberOf EntriesComponent
-   */
-  updateEntry(entryId: number | undefined) {
-    this.router.navigateByUrl(`/logged-in-homepage/update-entry/${(this.categoryId)}/${(this.subcategoryId)}/${entryId}`);
-  }
-
-  /**
-   * Method to navigate to the page for adding a new entry
-   * @memberOf EntriesComponent
-   */
-  addEntry() {
-    this.router.navigateByUrl(`/logged-in-homepage/create-entry/${(this.categoryId)}/${(this.subcategoryId)}`);
-  }
-
-  /**
-   * Method to return to the subcategory page
-   * @memberOf EntriesComponent
-   */
-  returnToSubcategory() {
-    this.router.navigateByUrl(`/logged-in-homepage/subcategories/${(this.categoryId)}`);
+  getLabelHexOfLabel(labelId: number | undefined) {
+    return this.availableLabels.find(item => item.labelId === labelId)?.colourHex;
   }
 
   /**
@@ -538,18 +534,33 @@ export class EntriesComponent implements OnInit {
    * @returns {Label[] | undefined} The labels for the entry
    * @memberOf EntriesComponent
    */
-  getLabels(entryId: number | undefined) {
+  getLabelsForEntry(entryId: number | undefined) {
     return this.selectedLabelForEntries.get(typeof entryId === "number" ? entryId : -1);
   }
 
   /**
-   * Method to get the colour of a label
-   * @param {number | undefined} labelId The ID of the label
-   * @returns {string | undefined} The colour of the label
+   * Method to return to the subcategory page
    * @memberOf EntriesComponent
    */
-  getLabelColour(labelId: number | undefined) {
-    return this.availableLabels.find(item => item.labelId === labelId)?.colourHex;
+  goToSubcategoriesPage() {
+    this.router.navigateByUrl(`/logged-in-homepage/subcategories/${(this.categoryId)}`);
+  }
+
+  /**
+   * Method to navigate to the page for adding a new entry
+   * @memberOf EntriesComponent
+   */
+  goToCreateEntryPage() {
+    this.router.navigateByUrl(`/logged-in-homepage/create-entry/${(this.categoryId)}/${(this.subcategoryId)}`);
+  }
+
+  /**
+   * Method to update an entry
+   * @param {number | undefined} entryId The ID of the entry
+   * @memberOf EntriesComponent
+   */
+  goToUpdateEntryPage(entryId: number | undefined) {
+    this.router.navigateByUrl(`/logged-in-homepage/update-entry/${(this.categoryId)}/${(this.subcategoryId)}/${entryId}`);
   }
 
   /**
@@ -557,7 +568,7 @@ export class EntriesComponent implements OnInit {
    * @param labelId The ID of the label for which to navigate to the entries page.
    * @memberOf EntriesComponent
    */
-  goToLabel(labelId: number | undefined) {
+  goToLabelEntriesPage(labelId: number | undefined) {
     this.router.navigateByUrl(`/logged-in-homepage/labels/${labelId}/entries`);
   }
 }

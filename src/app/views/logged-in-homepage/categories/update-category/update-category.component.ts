@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CategoryService} from '../../../../logic/services/CategoryService';
-import {LocalStorageService} from '../../../../logic/LocalStorageService';
+import {LocalStorageService} from '../../../../logic/services/LocalStorageService';
 import {Category} from '../../../../logic/models/Category';
 import {TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../../../logic/services/SnackBarService";
@@ -40,8 +40,7 @@ export class UpdateCategoryComponent implements OnInit {
               private categoryService: CategoryService,
               private localStorageService: LocalStorageService,
               private translateService: TranslateService,
-              private snackBarService: SnackBarService
-  ) {
+              private snackBarService: SnackBarService) {
   }
 
   /**
@@ -100,17 +99,26 @@ export class UpdateCategoryComponent implements OnInit {
   }
 
   /**
-   * Method to handle form submission for updating category
-   * @param formData The form data submitted
+   * Callback function invoked when a colour is selected
+   * @param colourId The ID of the selected colour
    * @memberOf UpdateCategoryComponent
    */
-  onSubmit(formData: any): void {
+  onColourSelected(colourId: number): void {
+    this.category.categoryColourId = colourId;
+  }
+
+  /**
+   * Method to handle form submission for updating category
+   * @param updatedCategoryFormData The form data submitted
+   * @memberOf UpdateCategoryComponent
+   */
+  onSubmit(updatedCategoryFormData: any): void {
     if (this.category.categoryName === '' || this.category.categoryColourId === 0) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.create-category.alert_create_category_missing_fields'), 'missing');
       return;
     }
 
-    if (!formData.valid) {
+    if (!updatedCategoryFormData.valid) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_invalid_formData'), 'invalid');
       return;
     }
@@ -147,22 +155,5 @@ export class UpdateCategoryComponent implements OnInit {
         }
       );
     }
-  }
-
-  /**
-   * Method to cancel the update operation and navigate back
-   * @memberOf UpdateCategoryComponent
-   */
-  onCancel(): void {
-    this.router.navigateByUrl(`/logged-in-homepage/categories`);
-  }
-
-  /**
-   * Callback function invoked when a colour is selected
-   * @param colourId The ID of the selected colour
-   * @memberOf UpdateCategoryComponent
-   */
-  onColourSelected(colourId: number): void {
-    this.category.categoryColourId = colourId;
   }
 }

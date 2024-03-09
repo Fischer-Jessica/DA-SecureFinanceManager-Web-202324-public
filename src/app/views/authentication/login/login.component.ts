@@ -17,7 +17,6 @@ import {SnackBarService} from "../../../logic/services/SnackBarService";
  * @fullName Fischer, Jessica Christina
  */
 export class LoginComponent {
-
   /**
    * The username entered by the user.
    * @type {string}

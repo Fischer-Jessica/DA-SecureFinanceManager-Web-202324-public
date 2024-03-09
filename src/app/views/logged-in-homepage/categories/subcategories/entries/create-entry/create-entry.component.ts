@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {EntryService} from "../../../../../../logic/services/EntryService";
 import {Entry} from "../../../../../../logic/models/Entry";
-import {LocalStorageService} from "../../../../../../logic/LocalStorageService";
+import {LocalStorageService} from "../../../../../../logic/services/LocalStorageService";
 import {TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../../../../../logic/services/SnackBarService";
 
@@ -11,6 +11,7 @@ import {SnackBarService} from "../../../../../../logic/services/SnackBarService"
   templateUrl: './create-entry.component.html',
   styleUrls: ['./create-entry.component.css', '../../../../logged-in-homepage.component.css', '../../../../../../app.component.css']
 })
+
 /**
  * Component for creating a new entry
  * @class CreateEntryComponent
@@ -56,8 +57,7 @@ export class CreateEntryComponent implements OnInit {
               private entryService: EntryService,
               private localStorageService: LocalStorageService,
               private translateService: TranslateService,
-              private snackBarService: SnackBarService,
-  ) {
+              private snackBarService: SnackBarService) {
   }
 
   /**
@@ -91,16 +91,15 @@ export class CreateEntryComponent implements OnInit {
     const hours = ('0' + currentDate.getHours()).slice(-2);
     const minutes = ('0' + currentDate.getMinutes()).slice(-2);
 
-    const formattedDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
-    this.entry.entryTimeOfTransaction = formattedDateTime;
+    this.entry.entryTimeOfTransaction = `${year}-${month}-${day}T${hours}:${minutes}`;
   }
 
   /**
    * Method to handle form submission
-   * @param formData The form data submitted
+   * @param newEntryFormData The form data submitted
    * @memberOf CreateEntryComponent
    */
-  onSubmit(formData: Entry) {
+  onSubmit(newEntryFormData: Entry) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
       this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
@@ -108,48 +107,51 @@ export class CreateEntryComponent implements OnInit {
       return;
     }
 
-    const date = formData.entryTimeOfTransaction.split('T')[0];
-    const time = formData.entryTimeOfTransaction.split('T')[1];
+    const date = newEntryFormData.entryTimeOfTransaction.split('T')[0];
+    const time = newEntryFormData.entryTimeOfTransaction.split('T')[1];
 
-    const formattedDateTime = date + ' ' + time;
+    newEntryFormData.entryTimeOfTransaction = date + ' ' + time;
 
-    formData.entryTimeOfTransaction = formattedDateTime;
-
-    if (formData.entryAmount === 0 || formData.entryTimeOfTransaction === '') {
+    if (newEntryFormData.entryAmount === null || newEntryFormData.entryTimeOfTransaction === '') {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'), 'missing');
       return;
     }
 
-    if (!formData.entryAmount.toString().match(/^(-)?\d+(\.\d{0,2})?$/)) {
+    if (!newEntryFormData.entryAmount.toString().match(/^(-)?\d+(\.\d{0,2})?$/)) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_invalid_amount'), 'invalid');
       return;
     }
 
     const loggedInUser = JSON.parse(storedUser);
-    this.entryService.insertEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, formData).subscribe({
-      next: (response) => {
-        this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(this.subcategoryId)}`);
-      },
-      error: (err) => {
-        if (err.status === 401) {
-          this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
-          this.localStorageService.removeItem('loggedInUser');
-          this.router.navigateByUrl('/authentication/login');
-        } else if (err.status === 400) {
-          this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'), 'missing');
-        } else {
-          this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
-          console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.console_error_creating_entry'), err);
+    if (this.subcategoryId != null) {
+      this.entryService.insertEntry(loggedInUser.username, loggedInUser.password, this.subcategoryId, newEntryFormData).subscribe({
+        next: () => {
+          this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(this.subcategoryId)}`);
+        },
+        error: (err) => {
+          if (err.status === 401) {
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
+          } else if (err.status === 400) {
+            this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'), 'missing');
+          } else {
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+            console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.console_error_creating_entry'), err);
+          }
         }
-      }
-    });
+      });
+    } else {
+      this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
+      this.router.navigate([`/logged-in-homepage/categories`]);
+    }
   }
 
   /**
    * Method to navigate back to entries
    * @memberOf CreateEntryComponent
    */
-  returnToEntries() {
+  goToEntriesPage() {
     this.router.navigateByUrl(`/logged-in-homepage/entries/${(this.categoryId)}/${(this.subcategoryId)}`);
   }
 }

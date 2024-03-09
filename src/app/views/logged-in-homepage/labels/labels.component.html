@@ -19,7 +19,7 @@
     <mat-card class="item-card">
 
       <!-- Header of the card, clickable to show entries -->
-      <mat-card-header (click)="showEntries(labelData.label.labelId)">
+      <mat-card-header (click)="goToLabelEntriesPage(labelData.label.labelId)">
         <div class="colour-dot" [style.background-color]="'#' + labelData.colourHex"></div>
         <mat-card-title>{{ labelData.label.labelName }}</mat-card-title>
         <mat-card-subtitle>{{ labelData.label.labelDescription }}</mat-card-subtitle>

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Label} from '../../../../logic/models/Label';
 import {LabelService} from '../../../../logic/services/LabelService';
 import {Router} from '@angular/router';
-import {LocalStorageService} from '../../../../logic/LocalStorageService';
+import {LocalStorageService} from '../../../../logic/services/LocalStorageService';
 import {SnackBarService} from "../../../../logic/services/SnackBarService";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -11,6 +11,7 @@ import {TranslateService} from "@ngx-translate/core";
   templateUrl: './create-label.component.html',
   styleUrls: ['./create-label.component.css', '../../logged-in-homepage.component.css', '../../../../app.component.css']
 })
+
 /**
  * Component for creating a new label
  * @class CreateLabelComponent
@@ -54,14 +55,14 @@ export class CreateLabelComponent {
 
   /**
    * Method to handle form submission
-   * @param formData The form data submitted
+   * @param createdLabelFormData The form data submitted
    * @memberOf CreateLabelComponent
    */
-  onSubmit(formData: Label) {
-    formData.labelColourId = this.label.labelColourId;
+  onSubmit(createdLabelFormData: Label) {
+    createdLabelFormData.labelColourId = this.label.labelColourId;
     const storedUser = this.localStorageService.getItem('loggedInUser');
 
-    if (formData.labelName === '' || formData.labelColourId === 0) {
+    if (createdLabelFormData.labelName === '' || createdLabelFormData.labelColourId === 0) {
       this.snackBarService.showAlert(this.translationService.instant('logged-in-homepage.labels.create-label.alert_create_label_missing_fields'), 'missing');
       return;
     }
@@ -74,7 +75,7 @@ export class CreateLabelComponent {
 
     const loggedInUser = JSON.parse(storedUser);
 
-    this.labelService.insertLabel(loggedInUser.username, loggedInUser.password, formData)
+    this.labelService.insertLabel(loggedInUser.username, loggedInUser.password, createdLabelFormData)
       .subscribe({
         next: (response) => {
           this.router.navigateByUrl('/logged-in-homepage/labels');

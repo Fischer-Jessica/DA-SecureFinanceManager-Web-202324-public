@@ -30,14 +30,14 @@ export class CategoryService {
    * @returns {Observable<Category[]>} An observable of category array.
    */
   getCategories(username: string, password: string): Observable<Category[]> {
-    const apiUrl = CONFIG.apiURL + 'categories';
+    const getCategoriesUrl = CONFIG.apiURL + 'categories';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Category[]>(apiUrl, {headers});
+    return this.http.get<Category[]>(getCategoriesUrl, {headers});
   }
 
   /**
@@ -48,49 +48,49 @@ export class CategoryService {
    * @returns {Observable<Category>} An observable of category.
    */
   getCategory(username: string, password: string, categoryId: number): Observable<Category> {
-    const apiUrl = CONFIG.apiURL + 'categories/' + categoryId;
+    const getCategoryUrl = CONFIG.apiURL + 'categories/' + categoryId;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Category>(apiUrl, {headers});
+    return this.http.get<Category>(getCategoryUrl, {headers});
   }
 
   /**
    * Retrieves the sum of a specific category from the backend.
-   * @param {number} categoryId - The unique identifier of the category.
    * @param {string} username - The username for authentication.
    * @param {string} password - The password for authentication.
+   * @param {number} categoryId - The unique identifier of the category.
    * @returns {Observable<number>} An observable of category sum.
    */
-  getCategorySum(categoryId: number, username: string, password: string): Observable<number> {
-    const apiUrl = CONFIG.apiURL + 'categories/' + categoryId + '/sum';
+  getCategorySum(username: string, password: string, categoryId: number): Observable<number> {
+    const getCategorySumUrl = CONFIG.apiURL + 'categories/' + categoryId + '/sum';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<number>(apiUrl, {headers});
+    return this.http.get<number>(getCategorySumUrl, {headers});
   }
 
   /**
    * Inserts a new category into the backend.
    * @param {string} username - The username for authentication.
    * @param {string} password - The password for authentication.
-   * @param {Category} category - The category object to insert.
+   * @param {Category} newCategory - The category object to insert.
    * @returns {Observable<Category>} An observable of category.
    */
-  insertCategory(username: string, password: string, category: Category): Observable<Category> {
-    const apiUrl = CONFIG.apiURL + 'categories';
+  insertCategory(username: string, password: string, newCategory: Category): Observable<Category> {
+    const insertCategoryUrl = CONFIG.apiURL + 'categories';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.post<Category>(apiUrl, category, {headers});
+    return this.http.post<Category>(insertCategoryUrl, newCategory, {headers});
   }
 
   /**
@@ -102,14 +102,14 @@ export class CategoryService {
    * @returns {Observable<any>} An observable of any.
    */
   updateCategory(username: string, password: string, categoryId: number, updatedCategory: Category): Observable<any> {
-    const url = CONFIG.apiURL + `categories/${categoryId}`;
+    const updateCategoryUrl = CONFIG.apiURL + `categories/${categoryId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.patch(url, updatedCategory, {headers});
+    return this.http.patch(updateCategoryUrl, updatedCategory, {headers});
   }
 
   /**
@@ -119,13 +119,13 @@ export class CategoryService {
    * @param {number} categoryId - The unique identifier of the category to delete.
    * @returns {Observable<number>} An observable of number.
    */
-  deleteCategory(username: string, password: string, categoryId: number | undefined): Observable<number> {
-    const apiUrl = CONFIG.apiURL + 'categories/' + categoryId;
+  deleteCategory(username: string, password: string, categoryId: number): Observable<number> {
+    const deleteCategoryUrl = CONFIG.apiURL + 'categories/' + categoryId;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
-    return this.http.delete<number>(apiUrl, {headers});
+    return this.http.delete<number>(deleteCategoryUrl, {headers});
   }
 }

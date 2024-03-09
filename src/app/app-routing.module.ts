@@ -1,32 +1,37 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {RegisterComponent} from "./views/authentication/register/register.component";
-import {LoginComponent} from "./views/authentication/login/login.component";
-import {AuthenticationComponent} from "./views/authentication/authentication.component";
-import {LoggedInHomepageComponent} from "./views/logged-in-homepage/logged-in-homepage.component";
-import {CategoriesComponent} from "./views/logged-in-homepage/categories/categories.component";
-import {CreateCategoryComponent} from "./views/logged-in-homepage/categories/create-category/create-category.component";
-import {SubcategoriesComponent} from "./views/logged-in-homepage/categories/subcategories/subcategories.component";
+
+import {AuthenticationComponent} from './views/authentication/authentication.component';
+import {RegisterComponent} from './views/authentication/register/register.component';
+import {LoginComponent} from './views/authentication/login/login.component';
+
+import {LoggedInHomepageComponent} from './views/logged-in-homepage/logged-in-homepage.component';
+import {CategoriesComponent} from './views/logged-in-homepage/categories/categories.component';
+import {CreateCategoryComponent} from './views/logged-in-homepage/categories/create-category/create-category.component';
+import {UpdateCategoryComponent} from './views/logged-in-homepage/categories/update-category/update-category.component';
+import {SubcategoriesComponent} from './views/logged-in-homepage/categories/subcategories/subcategories.component';
 import {
   CreateSubcategoryComponent
-} from "./views/logged-in-homepage/categories/subcategories/create-subcategory/create-subcategory.component";
-import {LabelsComponent} from "./views/logged-in-homepage/labels/labels.component";
-import {EntriesComponent} from "./views/logged-in-homepage/categories/subcategories/entries/entries.component";
-import {
-  CreateEntryComponent
-} from "./views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component";
-import {CreateLabelComponent} from "./views/logged-in-homepage/labels/create-label/create-label.component";
-import {UpdateCategoryComponent} from "./views/logged-in-homepage/categories/update-category/update-category.component";
-import {UpdateLabelComponent} from "./views/logged-in-homepage/labels/update-label/update-label.component";
+} from './views/logged-in-homepage/categories/subcategories/create-subcategory/create-subcategory.component';
 import {
   UpdateSubcategoryComponent
-} from "./views/logged-in-homepage/categories/subcategories/update-subcategory/update-subcategory.component";
-import {UserComponent} from "./views/logged-in-homepage/user/user.component";
+} from './views/logged-in-homepage/categories/subcategories/update-subcategory/update-subcategory.component';
+import {EntriesComponent} from './views/logged-in-homepage/categories/subcategories/entries/entries.component';
+import {
+  CreateEntryComponent
+} from './views/logged-in-homepage/categories/subcategories/entries/create-entry/create-entry.component';
 import {
   UpdateEntryComponent
-} from "./views/logged-in-homepage/categories/subcategories/entries/update-entry/update-entry.component";
-import {TeamComponent} from "./views/imprint/team/team.component";
-import {ContactComponent} from "./views/imprint/contact/contact.component";
+} from './views/logged-in-homepage/categories/subcategories/entries/update-entry/update-entry.component';
+
+import {LabelsComponent} from './views/logged-in-homepage/labels/labels.component';
+import {CreateLabelComponent} from './views/logged-in-homepage/labels/create-label/create-label.component';
+import {UpdateLabelComponent} from './views/logged-in-homepage/labels/update-label/update-label.component';
+
+import {UserComponent} from './views/logged-in-homepage/user/user.component';
+
+import {TeamComponent} from './views/imprint/team/team.component';
+import {ContactComponent} from './views/imprint/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -35,8 +40,7 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'login', pathMatch: 'full'},
       {path: 'register', component: RegisterComponent},
-      {path: 'login', component: LoginComponent},
-      {path: 'logged-in-homepage', component: LoggedInHomepageComponent}
+      {path: 'login', component: LoginComponent}
     ]
   },
   {
@@ -57,16 +61,14 @@ const routes: Routes = [
       {path: 'create-label', component: CreateLabelComponent},
       {path: 'update-label/:labelId', component: UpdateLabelComponent},
       {path: 'labels/:labelId/entries', component: EntriesComponent},
-      {path: 'user', component: UserComponent},
+      {path: 'user', component: UserComponent}
     ]
   },
   {path: '', redirectTo: 'logged-in-homepage', pathMatch: 'full'},
   {path: 'team', component: TeamComponent},
-  {path: 'contact', component: ContactComponent},
+  {path: 'contact', component: ContactComponent}
 ];
 
-
-// configures NgModule imports and exports
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {Category} from "../../../../logic/models/Category";
 import {CategoryService} from "../../../../logic/services/CategoryService";
 import {Router} from "@angular/router";
-import {LocalStorageService} from "../../../../logic/LocalStorageService";
+import {LocalStorageService} from "../../../../logic/services/LocalStorageService";
 import {TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../../../logic/services/SnackBarService";
 
@@ -11,6 +11,7 @@ import {SnackBarService} from "../../../../logic/services/SnackBarService";
   templateUrl: './create-category.component.html',
   styleUrls: ['./create-category.component.css', '../../logged-in-homepage.component.css', '../../../../app.component.css']
 })
+
 /**
  * Component for creating a new category
  * @class CreateCategoryComponent
@@ -54,10 +55,10 @@ export class CreateCategoryComponent {
 
   /**
    * Method to handle form submission
-   * @param formData The form data submitted
+   * @param newCategoryFormData The form data submitted
    * @memberOf CreateCategoryComponent
    */
-  onSubmit(formData: Category) {
+  onSubmit(newCategoryFormData: Category) {
     const storedUser = this.localStorageService.getItem('loggedInUser');
     if (!storedUser) {
       this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
@@ -66,14 +67,14 @@ export class CreateCategoryComponent {
     }
     const loggedInUser = JSON.parse(storedUser);
 
-    formData.categoryColourId = this.category.categoryColourId;
+    newCategoryFormData.categoryColourId = this.category.categoryColourId;
 
-    if (formData.categoryName === '' || formData.categoryColourId === 0) {
+    if (newCategoryFormData.categoryName === '' || newCategoryFormData.categoryColourId === 0) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.create-category.alert_create_category_missing_fields'), 'missing');
       return;
     }
 
-    this.categoryService.insertCategory(loggedInUser.username, loggedInUser.password, formData).subscribe({
+    this.categoryService.insertCategory(loggedInUser.username, loggedInUser.password, newCategoryFormData).subscribe({
       next: (response) => {
         this.router.navigateByUrl('/logged-in-homepage/categories')
       },

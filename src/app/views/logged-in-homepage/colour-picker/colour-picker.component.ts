@@ -53,7 +53,7 @@ export class ColourPickerComponent implements OnInit {
    * It is used to retrieve the list of available colours when the component is initialized.
    */
   ngOnInit(): void {
-    this.getColours();
+    this.fetchColours();
   }
 
   /**
@@ -61,7 +61,7 @@ export class ColourPickerComponent implements OnInit {
    * If successful, updates the `colours` property with the retrieved data.
    * If an error occurs, logs the error to the console.
    */
-  getColours(): void {
+  fetchColours(): void {
     this.colourService
       .getColours()
       .subscribe(

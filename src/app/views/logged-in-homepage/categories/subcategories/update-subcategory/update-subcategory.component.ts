@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Subcategory} from "../../../../../logic/models/Subcategory";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SubcategoryService} from "../../../../../logic/services/SubcategoryService";
-import {LocalStorageService} from "../../../../../logic/LocalStorageService";
+import {LocalStorageService} from "../../../../../logic/services/LocalStorageService";
 import {SnackBarService} from "../../../../../logic/services/SnackBarService";
 import {TranslateService} from "@ngx-translate/core";
 
@@ -32,7 +32,6 @@ export class UpdateSubcategoryComponent implements OnInit {
    */
   subcategoryId: number | undefined = 0;
 
-
   /**
    * Constructor for UpdateSubcategoryComponent
    * @param router The Angular Router service
@@ -49,8 +48,7 @@ export class UpdateSubcategoryComponent implements OnInit {
     private subcategoryService: SubcategoryService,
     private localStorageService: LocalStorageService,
     private translateService: TranslateService,
-    private snackBarService: SnackBarService,
-  ) {
+    private snackBarService: SnackBarService) {
   }
 
   /**
@@ -114,17 +112,26 @@ export class UpdateSubcategoryComponent implements OnInit {
   }
 
   /**
-   * Method to handle form submission for updating subcategory
-   * @param formData The form data submitted
+   * Callback function invoked when a colour is selected
+   * @param colourId The ID of the selected colour
    * @memberOf UpdateSubcategoryComponent
    */
-  onSubmit(formData: any): void {
+  onColourSelected(colourId: number): void {
+    this.subcategory.subcategoryColourId = colourId;
+  }
+
+  /**
+   * Method to handle form submission for updating subcategory
+   * @param updatedSubcategoryFormData The form data submitted
+   * @memberOf UpdateSubcategoryComponent
+   */
+  onSubmit(updatedSubcategoryFormData: any): void {
     if (this.subcategory.subcategoryName === '' || this.subcategory.subcategoryColourId === 0) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.create-subcategory.alert_create_subcategory_missing_fields'), 'missing');
       return;
     }
 
-    if (!formData.valid) {
+    if (!updatedSubcategoryFormData.valid) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_invalid_formData'), 'invalid');
       return;
     }
@@ -161,16 +168,7 @@ export class UpdateSubcategoryComponent implements OnInit {
    * Method to cancel the update operation and navigate back
    * @memberOf UpdateSubcategoryComponent
    */
-  onCancel(): void {
+  goToSubcategoriesPage(): void {
     this.router.navigateByUrl(`logged-in-homepage/subcategories/${this.subcategory.subcategoryCategoryId}`);
-  }
-
-  /**
-   * Callback function invoked when a colour is selected
-   * @param colourId The ID of the selected colour
-   * @memberOf UpdateSubcategoryComponent
-   */
-  onColourSelected(colourId: number): void {
-    this.subcategory.subcategoryColourId = colourId;
   }
 }

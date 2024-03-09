@@ -9,6 +9,7 @@ export interface Colour {
    * The unique identifier of the color.
    * @type {number}
    * @memberof Colour
+   * @required
    */
   colourId: number;
 

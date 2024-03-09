@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Label} from "../../../../logic/models/Label";
 import {ActivatedRoute, Router} from "@angular/router";
 import {LabelService} from "../../../../logic/services/LabelService";
-import {LocalStorageService} from "../../../../logic/LocalStorageService";
+import {LocalStorageService} from "../../../../logic/services/LocalStorageService";
 import {TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../../../logic/services/SnackBarService";
 
@@ -101,16 +101,16 @@ export class UpdateLabelComponent implements OnInit {
 
   /**
    * Method to handle form submission for updating label
-   * @param formData The form data submitted
+   * @param updatedLabelFormData The form data submitted
    * @memberOf UpdateLabelComponent
    */
-  onSubmit(formData: any): void {
+  onSubmit(updatedLabelFormData: any): void {
     if (this.label.labelName === '' || this.label.labelColourId === 0) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.labels.create-label.alert_create_label_missing_fields'), 'missing');
       return;
     }
 
-    if (!formData.valid) {
+    if (!updatedLabelFormData.valid) {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_invalid_formData'), 'invalid');
       return;
     }

@@ -25,25 +25,24 @@ export class SnackBarService {
   /**
    * Shows a snackbar alert with the given message.
    * @param {string} message - The message to display in the alert.
-   * @param type - The type of the alert.
+   * @param {'error' | 'info' | 'missing' | 'invalid' | 'success'} type - The type of the alert.
    * @returns {void}
    */
   showAlert(message: string, type: 'error' | 'info' | 'missing' | 'invalid' | 'success'): void {
     const config = new MatSnackBarConfig();
-    config.duration = 10000000;
+    config.duration = 10000;
     config.horizontalPosition = 'center';
     config.verticalPosition = 'top';
-    if (type == 'error') {
-      config.panelClass = ['error-snackbar'];
-    } else if (type == 'info') {
-      config.panelClass = ['info-snackbar'];
-    } else if (type == 'missing') {
-      config.panelClass = ['missing-snackbar'];
-    } else if (type == 'invalid') {
-      config.panelClass = ['invalid-snackbar'];
-    } else if (type == 'success') {
-      config.panelClass = ['success-snackbar'];
-    }
+
+    const typeClassMap = {
+      'error': 'error-snackbar',
+      'info': 'info-snackbar',
+      'missing': 'missing-snackbar',
+      'invalid': 'invalid-snackbar',
+      'success': 'success-snackbar'
+    };
+
+    config.panelClass = [typeClassMap[type]];
 
     this.snackBar.open(message, this.translateService.instant('alert_close'), config);
   }

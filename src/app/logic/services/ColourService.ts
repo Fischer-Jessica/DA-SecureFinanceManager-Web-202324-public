@@ -16,13 +16,6 @@ import {CONFIG} from "../../app.config";
  */
 export class ColourService {
   /**
-   * The array containing colours fetched from the backend.
-   * @type {Colour[] | null}
-   * @memberof ColourService
-   */
-  colours: Colour[] | null = null;
-
-  /**
    * Creates an instance of ColourService.
    * @param {HttpClient} http - The HttpClient instance used for HTTP requests.
    * @memberof ColourService
@@ -35,15 +28,14 @@ export class ColourService {
    * @returns {Observable<Colour[]>} An observable of colour array.
    */
   getColours(): Observable<Colour[]> {
-    const apiUrl = CONFIG.apiURL + 'colours';
+    const getColoursUrl = CONFIG.apiURL + 'colours';
 
     const headers = new HttpHeaders({
       'API-Version': '1'
     });
 
-    return this.http.get<Colour[]>(apiUrl, {headers}).pipe(
+    return this.http.get<Colour[]>(getColoursUrl, {headers}).pipe(
       map((result) => {
-        this.colours = result;
         return result;
       })
     );
@@ -55,13 +47,13 @@ export class ColourService {
    * @returns {Observable<Colour>} An observable of colour.
    */
   getColour(colourId: number): Observable<Colour> {
-    const apiUrl: string = CONFIG.apiURL + 'colours/' + colourId;
+    const getColourUrl: string = CONFIG.apiURL + 'colours/' + colourId;
 
     const headers = new HttpHeaders({
       'API-Version': '1'
     });
 
-    return this.http.get<Colour>(apiUrl, {headers}).pipe(
+    return this.http.get<Colour>(getColourUrl, {headers}).pipe(
       map((result) => {
         return result;
       })
@@ -74,13 +66,13 @@ export class ColourService {
    * @returns {Observable<string>} An observable of hexadecimal colour code.
    */
   getColourHex(colourId: number): Observable<string> {
-    const apiUrl: string = CONFIG.apiURL + 'colours/' + colourId;
+    const getColourHexUrl: string = CONFIG.apiURL + 'colours/' + colourId;
 
     const headers = new HttpHeaders({
       'API-Version': '1'
     });
 
-    return this.http.get<Colour>(apiUrl, {headers}).pipe(
+    return this.http.get<Colour>(getColourHexUrl, {headers}).pipe(
       map((result) => {
         return result.colourCode;
       })

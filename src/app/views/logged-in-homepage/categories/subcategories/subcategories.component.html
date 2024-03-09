@@ -2,7 +2,7 @@
 <h1>{{ 'logged-in-homepage.categories.subcategories.ui_headline_subcategories' | translate }}</h1>
 
 <!-- Button to add a new subcategory -->
-<button class="create-button headline-button" (click)="addSubcategory()">
+<button class="create-button headline-button" (click)="goToCreateSubcategoryPage()">
   {{ 'logged-in-homepage.categories.subcategories.create-subcategory.ui_button_create_subcategory' | translate }}
 </button>
 
@@ -20,9 +20,9 @@
   <div *ngFor="let subcategoryData of subcategoriesData" class="item">
     <mat-card class="item-card">
       <!-- Card header containing subcategory details -->
-      <mat-card-header (click)="showEntries(subcategoryData.subcategory.subcategoryId)">
+      <mat-card-header (click)="goToEntriesPage(subcategoryData.subcategory.subcategoryId)">
         <!-- Dot representing subcategory color -->
-        <div class="colour-dot" [style.background-color]="'#' + subcategoryData.colourHex"></div>
+        <div class="colour-dot" [style.background-color]="'#' + subcategoryData.subcategoryColourHex"></div>
         <!-- Subcategory name -->
         <mat-card-title>{{ subcategoryData.subcategory.subcategoryName }}</mat-card-title>
         <!-- Subcategory value -->

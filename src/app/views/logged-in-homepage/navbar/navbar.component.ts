@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {LocalStorageService} from "../../../logic/LocalStorageService";
+import {LocalStorageService} from "../../../logic/services/LocalStorageService";
 
 @Component({
   selector: 'logged-in-homepage-navbar',

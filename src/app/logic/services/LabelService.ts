@@ -15,7 +15,6 @@ import {CONFIG} from "../../app.config";
  * @fullName Fischer, Jessica Christina
  */
 export class LabelService {
-
   /**
    * Creates an instance of LabelService.
    * @param {HttpClient} http - The HttpClient instance used for HTTP requests.
@@ -31,14 +30,14 @@ export class LabelService {
    * @returns {Observable<Label[]>} An observable of label array.
    */
   getLabels(username: string, password: string): Observable<Label[]> {
-    const apiUrl = CONFIG.apiURL + 'labels';
+    const getLabelsUrl = CONFIG.apiURL + 'labels';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Label[]>(apiUrl, {headers});
+    return this.http.get<Label[]>(getLabelsUrl, {headers});
   }
 
   /**
@@ -49,32 +48,32 @@ export class LabelService {
    * @returns {Observable<Label>} An observable of label.
    */
   getLabel(username: string, password: string, labelId: number): Observable<Label> {
-    const apiUrl = CONFIG.apiURL + `labels/${labelId}`;
+    const getLabelUrl = CONFIG.apiURL + `labels/${labelId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.get<Label>(apiUrl, {headers});
+    return this.http.get<Label>(getLabelUrl, {headers});
   }
 
   /**
    * Inserts a new label into the backend.
    * @param {string} username - The username for authentication.
    * @param {string} password - The password for authentication.
-   * @param {Label} label - The label object to insert.
+   * @param {Label} newLabel - The label object to insert.
    * @returns {Observable<Label>} An observable of label.
    */
-  insertLabel(username: string, password: string, label: Label): Observable<Label> {
-    const apiUrl = CONFIG.apiURL + 'labels';
+  insertLabel(username: string, password: string, newLabel: Label): Observable<Label> {
+    const insertLabelUrl = CONFIG.apiURL + 'labels';
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.post<Label>(apiUrl, label, {headers});
+    return this.http.post<Label>(insertLabelUrl, newLabel, {headers});
   }
 
   /**
@@ -82,35 +81,35 @@ export class LabelService {
    * @param {string} username - The username for authentication.
    * @param {string} password - The password for authentication.
    * @param {number} labelId - The unique identifier of the label.
-   * @param {Label} label - The updated label object.
+   * @param {Label} updatedLabel - The updated label object.
    * @returns {Observable<Label>} An observable of label.
    */
-  updateLabel(username: string, password: string, labelId: number, label: Label): Observable<Label> {
-    const apiUrl = CONFIG.apiURL + `labels/${labelId}`;
+  updateLabel(username: string, password: string, labelId: number, updatedLabel: Label): Observable<Label> {
+    const updateLabelUrl = CONFIG.apiURL + `labels/${labelId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.patch<Label>(apiUrl, label, {headers});
+    return this.http.patch<Label>(updateLabelUrl, updatedLabel, {headers});
   }
 
   /**
    * Deletes a label from the backend.
    * @param {string} username - The username for authentication.
    * @param {string} password - The password for authentication.
-   * @param {number | undefined} labelId - The unique identifier of the label.
+   * @param {number} labelId - The unique identifier of the label.
    * @returns {Observable<number>} An observable of number.
    */
-  deleteLabel(username: string, password: string, labelId: number | undefined): Observable<number> {
-    const apiUrl = CONFIG.apiURL + `labels/${labelId}`;
+  deleteLabel(username: string, password: string, labelId: number): Observable<number> {
+    const deleteLabelUrl = CONFIG.apiURL + `labels/${labelId}`;
 
     const headers = new HttpHeaders({
       'API-Version': '1',
       'Authorization': `Basic ${btoa(`${username}:${password}`)}`
     });
 
-    return this.http.delete<number>(apiUrl, {headers});
+    return this.http.delete<number>(deleteLabelUrl, {headers});
   }
 }
