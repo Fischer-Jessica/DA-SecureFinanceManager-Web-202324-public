@@ -40,5 +40,5 @@ export interface Category {
    * @type {number}
    * @memberof Category
    */
-  userId?: number;
+  categoryUserId?: number;
 }

@@ -39,6 +39,19 @@ mat-card-subtitle {
   color: black;
 }
 
+.subcategory {
+  max-width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: none;
+  cursor: pointer;
+  color: #917669;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 0;
+}
+
 /* Styles for content within entry cards */
 mat-card-content {
   margin-top: 17px;
@@ -115,7 +128,7 @@ mat-card-content {
 /* Styles for individual selected labels */
 .selected-label {
   border: none;
-  color: #808080;
+  color: #917669;
   margin-right: 10px;
   padding: 5px;
   border-radius: 5px;
@@ -188,6 +201,11 @@ mat-card-content {
   padding: 10px;
   z-index: 9998;
   display: none;
+}
+
+/* adjusting the dropdown menu's position when the entry label page is open */
+.label-entry-page-dropdown {
+  margin-top: 7px;
 }
 
 /* Show dropdown menu when the dropdown button is focused or hovered over, or when the dropdown menu itself is hovered over. */
@@ -274,6 +292,10 @@ mat-card-content {
 @media (max-width: 515px) {
   .dropdown-menu {
     top: 292px;
+  }
+
+  .label-entry-page-dropdown {
+    margin-top: 70px;
   }
 
   mat-card-title,

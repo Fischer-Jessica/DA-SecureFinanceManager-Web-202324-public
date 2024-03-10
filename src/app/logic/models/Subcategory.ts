@@ -48,5 +48,5 @@ export interface Subcategory {
    * @type {number}
    * @memberof Subcategory
    */
-  userId?: number;
+  subcategoryUserId?: number;
 }

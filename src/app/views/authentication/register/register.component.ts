@@ -25,7 +25,7 @@ export class RegisterComponent {
   newUser: User = {
     username: '',
     password: '',
-    emailAddress: undefined,
+    eMailAddress: undefined,
     firstName: undefined,
     lastName: undefined,
   };
@@ -60,8 +60,8 @@ export class RegisterComponent {
       return;
     }
 
-    if (this.newUser.emailAddress) {
-      if (!this.newUser.emailAddress.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+    if (this.newUser.eMailAddress) {
+      if (!this.newUser.eMailAddress.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
         this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_email_invalid'), 'invalid');
         return;
       }

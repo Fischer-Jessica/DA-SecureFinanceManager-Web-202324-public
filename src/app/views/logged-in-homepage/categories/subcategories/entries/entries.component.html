@@ -50,6 +50,13 @@
             <span
               class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_description' | translate }}</span> {{ entry.entryDescription }}
           </mat-card-subtitle>
+          <mat-card-subtitle *ngIf="this.labelId !== undefined">
+            <p class="subcategory" [style.background-color]="'#' + getSubcategoryColourHex(entry.entrySubcategoryId)"
+               *ngIf="entry.entrySubcategoryId && getSubcategoryForEntry(entry.entrySubcategoryId)"
+               [routerLink]="['/logged-in-homepage/entries', getSubcategoryForEntry(entry.entrySubcategoryId)?.subcategoryCategoryId, entry.entrySubcategoryId]">
+              {{ getSubcategoryForEntry(entry.entrySubcategoryId)?.subcategoryName }}
+            </p>
+          </mat-card-subtitle>
         </mat-card-header>
         <!-- Additional entry details -->
         <mat-card-content>
@@ -82,7 +89,8 @@
                     class="dropdown-button">{{ 'logged-in-homepage.categories.subcategories.entries.ui_button_chose_label' | translate }}
             </button>
             <!-- Dropdown menu to select labels -->
-            <div class="dropdown-menu" [id]="'dropdown-' + (entry.entryId)"
+            <div class="dropdown-menu" [class.label-entry-page-dropdown]="this.labelId !== undefined"
+                 [id]="'dropdown-' + (entry.entryId)"
                  [hidden]="!dropdownOpen[entry.entryId || '']"
                  [ngClass]="{'dropdown-menu-in-label': this.labelId !== undefined}"
                  *ngIf="availableLabels && availableLabels.length > 0">
@@ -90,7 +98,9 @@
                 <label>
                   <input type="checkbox" [checked]="isLabelSelected(entry.entryId, label.labelId)"
                          (change)="toggleLabel(entry.entryId, label)">
-                  {{ label.label.labelName }}
+                  <span [style.color]="'#' + getLabelHexOfLabel(label.labelId)">
+                    {{ label.label.labelName }}
+                  </span>
                 </label>
               </div>
             </div>

@@ -33,7 +33,7 @@ export interface User {
    * @type {string}
    * @memberof User
    */
-  emailAddress?: string;
+  eMailAddress?: string;
 
   /**
    * The first name of the user.

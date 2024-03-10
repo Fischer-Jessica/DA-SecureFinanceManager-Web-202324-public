@@ -9,6 +9,9 @@ import {Label} from "../../../../../logic/models/Label";
 import {ColourService} from "../../../../../logic/services/ColourService";
 import {TranslateService} from "@ngx-translate/core";
 import {SnackBarService} from "../../../../../logic/services/SnackBarService";
+import {SubcategoryService} from "../../../../../logic/services/SubcategoryService";
+import {CategoryService} from "../../../../../logic/services/CategoryService";
+import {Subcategory} from "../../../../../logic/models/Subcategory";
 
 @Component({
   selector: 'app-entries',
@@ -66,6 +69,11 @@ export class EntriesComponent implements OnInit {
    */
   protected labelId: number | undefined = undefined;
 
+  subcategoriesData: {
+    subcategory: Subcategory;
+    subcategoryColourHex: string,
+  }[] = [];
+
   /**
    * Constructor for EntriesComponent
    * @param {Router} router The Angular Router service
@@ -85,6 +93,8 @@ export class EntriesComponent implements OnInit {
               private entryService: EntryService,
               private labelService: LabelService,
               private entryLabelService: EntryLabelService,
+              private categoryService: CategoryService,
+              private subcategoryService: SubcategoryService,
               private colourService: ColourService,
               private localStorageService: LocalStorageService,
               private translateService: TranslateService,
@@ -184,6 +194,7 @@ export class EntriesComponent implements OnInit {
             });
             this.entries = sortedEntries;
             this.fetchLabelsOfEntry(username, password);
+            this.fetchSubcategoriesWithoutCategoryId(username, password);
           },
           (error) => {
             if (error.status === 401) {
@@ -306,6 +317,72 @@ export class EntriesComponent implements OnInit {
           } else {
             this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
             console.error(this.translateService.instant('logged-in-homepage.labels.console_error_fetching_labels'), error);
+          }
+        }
+      );
+  }
+
+  fetchSubcategoriesWithoutCategoryId(username: string, password: string) {
+    this.categoryService
+      .getCategories(username, password)
+      .subscribe(
+        (result) => {
+          for (let category of result) {
+            if (category.categoryId != null) {
+              this.subcategoryService.getSubcategories(username, password, category.categoryId)
+                .subscribe(
+                  (result) => {
+                    for (let subcategory of result) {
+                      if (subcategory.subcategoryId !== null && subcategory.subcategoryId !== undefined) {
+                        this.colourService.getColourHex(subcategory.subcategoryColourId).subscribe(
+                          (result) => {
+                            this.subcategoriesData.push({
+                              subcategory: subcategory,
+                              subcategoryColourHex: result
+                            });
+                          },
+                          (error) => {
+                            if (error.status === 404) {
+                              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.colours.alert_colours_not_found'), 'error');
+                            } else {
+                              this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+                              console.error(this.translateService.instant('logged-in-homepage.colours.console_error_fetching_colours'), error);
+                            }
+                          }
+                        );
+                      }
+                    }
+                  },
+                  (error) => {
+                    if (error.status === 404) {
+                      console.info(this.translateService.instant('logged-in-homepage.categories.subcategories.alert_create_subcategory_first'));
+                    } else if (error.status === 401) {
+                      this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+                      this.localStorageService.removeItem('loggedInUser');
+                      this.router.navigateByUrl('/authentication/login');
+                    } else {
+                      this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+                      console.error(this.translateService.instant('logged-in-homepage.categories.subcategories.console_error_fetching_subcategories'), error);
+                    }
+                  }
+                );
+            } else {
+              this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.alert_error_path_parameter_invalid'), 'error');
+              this.router.navigate([`/logged-in-homepage/categories`]);
+            }
+          }
+          this.cdr.detectChanges();
+        },
+        (error) => {
+          if (error.status === 404) {
+            console.info(this.translateService.instant('logged-in-homepage.categories.alert_create_category_first'));
+          } else if (error.status === 401) {
+            this.snackBarService.showAlert(this.translateService.instant('authentication.alert_user_not_logged_in'), 'info');
+            this.localStorageService.removeItem('loggedInUser');
+            this.router.navigateByUrl('/authentication/login');
+          } else {
+            this.snackBarService.showAlert(this.translateService.instant('alert_error'), 'error');
+            console.error(this.translateService.instant('logged-in-homepage.categories.console_error_fetching_categories'), error);
           }
         }
       );
@@ -536,6 +613,14 @@ export class EntriesComponent implements OnInit {
    */
   getLabelsForEntry(entryId: number | undefined) {
     return this.selectedLabelForEntries.get(typeof entryId === "number" ? entryId : -1);
+  }
+
+  getSubcategoryForEntry(entrySubcategoryId: number) {
+    return this.subcategoriesData.find(item => item.subcategory.subcategoryId === entrySubcategoryId)?.subcategory;
+  }
+
+  getSubcategoryColourHex(entrySubcategoryId: number) {
+    return this.subcategoriesData.find(item => item.subcategory.subcategoryId === entrySubcategoryId)?.subcategoryColourHex;
   }
 
   /**

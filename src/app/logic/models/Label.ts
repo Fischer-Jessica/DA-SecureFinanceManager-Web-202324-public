@@ -40,5 +40,5 @@ export interface Label {
    * @type {number}
    * @memberof Label
    */
-  userId?: number;
+  labelUserId?: number;
 }

@@ -107,8 +107,8 @@ export class UserComponent implements OnInit {
       return;
     }
 
-    if (this.user.emailAddress) {
-      if (!this.user.emailAddress.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
+    if (this.user.eMailAddress) {
+      if (!this.user.eMailAddress.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/)) {
         this.snackBarService.showAlert(this.translateService.instant('authentication.register.alert_email_invalid'), 'invalid');
         return;
       }

@@ -25,7 +25,7 @@ export class CreateEntryComponent implements OnInit {
    * @type {Entry}
    */
   entry: Entry = {
-    subcategoryId: 0,
+    entrySubcategoryId: 0,
     entryAmount: 0,
     entryTimeOfTransaction: ''
   };

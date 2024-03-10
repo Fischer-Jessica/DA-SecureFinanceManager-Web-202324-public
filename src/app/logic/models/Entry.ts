@@ -62,12 +62,12 @@ export interface Entry {
    * @memberof Entry
    * @required
    */
-  subcategoryId: number;
+  entrySubcategoryId: number;
 
   /**
    * The unique identifier of the user who owns the entry.
    * @type {number}
    * @memberof Entry
    */
-  userId?: number;
+  entryUserId?: number;
 }
