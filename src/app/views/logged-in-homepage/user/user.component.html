@@ -3,7 +3,7 @@
   Binds input fields to user object properties using ngModel for two-way data binding.
   Calls onSubmit method on form submission.
 -->
-<form #userForm="ngForm" class="form" (ngSubmit)="onSubmit(userForm.value)">
+<form #userForm="ngForm" class="form" (ngSubmit)="updateUser(userForm.value)">
   <div class="form-group">
     <label for="username" class="form-label"><i
       class="required-field">*</i> {{ 'authentication.register.ui_label_username' | translate }}</label>
@@ -43,7 +43,7 @@
 
   <!-- Form actions including buttons for deleting user, updating user, and logging out -->
   <div class="form-actions">
-    <button class="delete-button form-button"
+    <button class="delete-button form-button" type="button"
             (click)="deleteUser()">{{ 'logged-in-homepage.user.ui_button_delete_user' | translate }}
     </button>
     <button type="submit"

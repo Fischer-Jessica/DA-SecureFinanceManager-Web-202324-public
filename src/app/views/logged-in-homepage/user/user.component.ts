@@ -96,7 +96,7 @@ export class UserComponent implements OnInit {
    * @param {any} formData - The form data submitted by the user.
    * @memberof UserComponent
    */
-  onSubmit(formData: User): void {
+  updateUser(formData: User): void {
     if (formData.username === '' || formData.password === '') {
       this.snackBarService.showAlert(this.translateService.instant('authentication.alert_missing_credentials'), 'missing');
       return;
