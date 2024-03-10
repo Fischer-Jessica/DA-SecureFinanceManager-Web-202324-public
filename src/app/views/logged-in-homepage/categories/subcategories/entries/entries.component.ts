@@ -69,6 +69,12 @@ export class EntriesComponent implements OnInit {
    */
   protected labelId: number | undefined = undefined;
 
+  /**
+   * Array containing objects representing subcategories and their associated color hex codes.
+   * Each object in the array has the following structure:
+   * - subcategory: The subcategory object.
+   * - subcategoryColourHex: The color hex code associated with the subcategory.
+   */
   subcategoriesData: {
     subcategory: Subcategory;
     subcategoryColourHex: string,
@@ -81,6 +87,8 @@ export class EntriesComponent implements OnInit {
    * @param {EntryService} entryService The service for entry operations
    * @param {LabelService} labelService The service for label operations
    * @param {EntryLabelService} entryLabelService The service for entry label operations
+   * @param {CategoryService} categoryService The service for managing categories
+   * @param {SubcategoryService} subcategoryService The service for managing subcategories
    * @param {ColourService} colourService The service for managing colours
    * @param {LocalStorageService} localStorageService The service for managing local storage
    * @param {TranslateService} translateService The service for translation
@@ -322,6 +330,13 @@ export class EntriesComponent implements OnInit {
       );
   }
 
+  /**
+   * Fetches subcategories without a specified category ID.
+   * Retrieves subcategories from the backend service using provided credentials.
+   * Populates a data structure with subcategory information along with associated color hex codes.
+   * @param {string} username - Username used for authentication.
+   * @param {string} password - Password used for authentication.
+   */
   fetchSubcategoriesWithoutCategoryId(username: string, password: string) {
     this.categoryService
       .getCategories(username, password)
@@ -615,10 +630,20 @@ export class EntriesComponent implements OnInit {
     return this.selectedLabelForEntries.get(typeof entryId === "number" ? entryId : -1);
   }
 
+  /**
+   * Retrieves the subcategory object associated with the given subcategory ID from the stored subcategories data.
+   * @param entrySubcategoryId The ID of the subcategory to retrieve.
+   * @returns The subcategory object if found, otherwise undefined.
+   */
   getSubcategoryForEntry(entrySubcategoryId: number) {
     return this.subcategoriesData.find(item => item.subcategory.subcategoryId === entrySubcategoryId)?.subcategory;
   }
 
+  /**
+   * Retrieves the color hex code associated with the given subcategory ID from the stored subcategories data.
+   * @param entrySubcategoryId The ID of the subcategory to retrieve the color hex code for.
+   * @returns The color hex code if found, otherwise undefined.
+   */
   getSubcategoryColourHex(entrySubcategoryId: number) {
     return this.subcategoriesData.find(item => item.subcategory.subcategoryId === entrySubcategoryId)?.subcategoryColourHex;
   }

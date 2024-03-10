@@ -50,6 +50,7 @@
             <span
               class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_description' | translate }}</span> {{ entry.entryDescription }}
           </mat-card-subtitle>
+          <!-- showing the subcategory the entry is part of if the label-entries-page is opened -->
           <mat-card-subtitle *ngIf="this.labelId !== undefined">
             <p class="subcategory" [style.background-color]="'#' + getSubcategoryColourHex(entry.entrySubcategoryId)"
                *ngIf="entry.entrySubcategoryId && getSubcategoryForEntry(entry.entrySubcategoryId)"

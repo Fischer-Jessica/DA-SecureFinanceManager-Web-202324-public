@@ -39,6 +39,7 @@ mat-card-subtitle {
   color: black;
 }
 
+/* Styles for the connection to the subcategory in which the entry is located */
 .subcategory {
   max-width: 500px;
   white-space: nowrap;
