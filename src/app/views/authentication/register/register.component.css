@@ -71,6 +71,14 @@ input[type="submit"] {
   background-color: #4caf50;
 }
 
+#info {
+  width: 310px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+}
+
 /** Represents the styling for buttons within the registration component on hover. */
 #register:hover,
 #go-to-login:hover {
