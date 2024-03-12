@@ -130,7 +130,8 @@ mat-card-content {
 .selected-label {
   border: none;
   color: #917669;
-  margin-right: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
@@ -191,11 +192,11 @@ mat-card-content {
 .dropdown-menu {
   position: absolute;
   font-weight: bold;
-  right: 15px;
+  right: 10px;
   top: 39px;
   background-color: #808080;
   border: 1px solid;
-  max-height: 50px;
+  max-height: 84px;
   border-radius: 5px;
   overflow-y: auto;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -214,12 +215,13 @@ mat-card-content {
   transition: background-color 0.3s ease;
   font-size: 16px;
   margin-top: 10px;
-
 }
 
 /* adjusting the dropdown menu's position when the entry label page is open */
-.label-entry-page-dropdown {
-  margin-top: 7px;
+.label-entry-page-dropdown,
+.dropdown-menu-in-label[_ngcontent-ng-c438964712] {
+  top: 69px;
+  max-height: 111px;
 }
 
 /* Show dropdown menu when the dropdown button is focused or hovered over, or when the dropdown menu itself is hovered over. */
@@ -308,8 +310,10 @@ mat-card-content {
     top: 292px;
   }
 
-  .label-entry-page-dropdown {
-    margin-top: 70px;
+  .label-entry-page-dropdown,
+  .dropdown-menu-in-label[_ngcontent-ng-c438964712] {
+    top: 365px;
+    max-height: 86px;
   }
 
   mat-card-title,
