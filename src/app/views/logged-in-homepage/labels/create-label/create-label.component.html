@@ -34,7 +34,7 @@
     </button>
     <!-- Button to cancel the action and navigate to labels page -->
     <button type="button" class="cancel-button form-button"
-            routerLink='/logged-in-homepage/labels'>{{ 'logged-in-homepage.cancel-action' | translate }}
+            (click)="goBackToLastPage()">{{ 'logged-in-homepage.cancel-action' | translate }}
     </button>
   </div>
 </form>

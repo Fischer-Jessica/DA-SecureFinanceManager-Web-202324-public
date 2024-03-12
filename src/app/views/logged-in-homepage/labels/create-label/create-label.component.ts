@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {LocalStorageService} from '../../../../logic/services/LocalStorageService';
 import {SnackBarService} from "../../../../logic/services/SnackBarService";
 import {TranslateService} from "@ngx-translate/core";
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-create-new-label',
@@ -35,13 +36,15 @@ export class CreateLabelComponent {
    * @param localStorageService The service for managing local storage
    * @param translationService The service for translation
    * @param snackBarService The service for displaying snack bar messages
+   * @param location The Angular location service
    * @memberOf CreateLabelComponent
    */
   constructor(private router: Router,
               private labelService: LabelService,
               private localStorageService: LocalStorageService,
               private translationService: TranslateService,
-              private snackBarService: SnackBarService) {
+              private snackBarService: SnackBarService,
+              private location: Location) {
   }
 
   /**
@@ -78,7 +81,7 @@ export class CreateLabelComponent {
     this.labelService.insertLabel(loggedInUser.username, loggedInUser.password, createdLabelFormData)
       .subscribe({
         next: (response) => {
-          this.router.navigateByUrl('/logged-in-homepage/labels');
+          this.location.back();
         },
         error: (err) => {
           if (err.status === 401) {
@@ -93,5 +96,15 @@ export class CreateLabelComponent {
           }
         }
       });
+  }
+
+  /**
+   * Navigates back to the previous page in the browser history.
+   * Utilizes the browser's built-in back navigation.
+   *
+   * @returns {void}
+   */
+  goBackToLastPage() {
+    this.location.back();
   }
 }
