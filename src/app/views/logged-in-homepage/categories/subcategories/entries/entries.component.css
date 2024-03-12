@@ -124,6 +124,7 @@ mat-card-content {
   white-space: nowrap;
   overflow: scroll;
   max-width: 655px;
+  margin-right: 5px;
 }
 
 /* Styles for individual selected labels */
@@ -269,7 +270,7 @@ mat-card-content {
   }
 
   .selected-labels {
-    max-width: 100%;
+    max-width: 97%;
   }
 
   mat-card-title,
