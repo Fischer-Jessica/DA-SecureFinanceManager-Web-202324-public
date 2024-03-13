@@ -28,11 +28,12 @@
 </ng-template>
 
 <!-- Container for displaying entries -->
-<div *ngIf="entries && entries.length > 0; else noEntries" class="entry-container">
+<div *ngIf="entries && entries.length > 0; else noEntries" class="entries-container"
+     [class.entries-container-on-label-entries]="this.labelId !== undefined">
   <!-- Loop through each entry and display its details -->
   <div *ngFor="let entry of entries" class="entry-item">
     <mat-card class="card">
-      <div class="mat-card-content">
+      <div class="card-paragraph-column">
         <!-- Card header with entry details -->
         <mat-card-header>
           <mat-card-title>
@@ -52,7 +53,8 @@
           </mat-card-subtitle>
           <!-- showing the subcategory the entry is part of if the label-entries-page is opened -->
           <mat-card-subtitle *ngIf="this.labelId !== undefined">
-            <p class="subcategory" [style.background-color]="'#' + getSubcategoryColourHex(entry.entrySubcategoryId)"
+            <p class="subcategory-link-on-label-entries"
+               [style.background-color]="'#' + getSubcategoryColourHex(entry.entrySubcategoryId)"
                *ngIf="entry.entrySubcategoryId && getSubcategoryForEntry(entry.entrySubcategoryId)"
                [routerLink]="['/logged-in-homepage/entries', getSubcategoryForEntry(entry.entrySubcategoryId)?.subcategoryCategoryId, entry.entrySubcategoryId]">
               {{ getSubcategoryForEntry(entry.entrySubcategoryId)?.subcategoryName }}
@@ -61,15 +63,15 @@
         </mat-card-header>
         <!-- Additional entry details -->
         <mat-card-content>
-          <p class="card-p">
+          <p class="card-paragraphs">
             <span
               class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_time_of_transaction' | translate }}</span> {{ entry.entryTimeOfTransaction }}
           </p>
-          <p class="card-p">
+          <p class="card-paragraphs">
             <span
               class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_creation_date' | translate }}</span> {{ entry.entryCreationTime }}
           </p>
-          <p class="card-p">
+          <p class="card-paragraphs">
             <span
               class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_attachment' | translate }}</span><span>
                 <span *ngIf="entry.entryAttachment !== null; else noAttachment">
@@ -87,10 +89,10 @@
         <div class="right-column">
           <div class="elements-right-column">
             <button (click)="toggleDropdown(entry.entryId)"
-                    class="dropdown-button">{{ 'logged-in-homepage.categories.subcategories.entries.ui_button_chose_label' | translate }}
+                    class="create-button dropdown-button">{{ 'logged-in-homepage.categories.subcategories.entries.ui_button_chose_label' | translate }}
             </button>
             <!-- Dropdown menu to select labels -->
-            <div class="dropdown-menu" [class.label-entry-page-dropdown]="this.labelId !== undefined"
+            <div class="dropdown-menu" [class.dropdown-on-label-entries]="this.labelId !== undefined"
                  [id]="'dropdown-' + (entry.entryId)"
                  [hidden]="!dropdownOpen[entry.entryId || '']"
                  [ngClass]="{'dropdown-menu-in-label': this.labelId !== undefined}"
@@ -104,7 +106,7 @@
                   </span>
                 </label>
               </div>
-              <span><button class="create-button dropdown-menu-button"
+              <span><button class="create-button button-inside-dropdown-menu"
                             routerLink="/logged-in-homepage/create-label">{{ 'logged-in-homepage.labels.create-label.ui_button_create_label' | translate }}</button></span>
             </div>
           </div>
@@ -130,7 +132,7 @@
           <!-- Buttons for editing and deleting entries with labels -->
           <ng-template #entryLabelAction>
             <div class="elements-right-column">
-              <button class="delete-button remove"
+              <button class="delete-button remove-on-label-entries"
                       (click)="removeLabelFromEntry(entry.entryId!, this.labelId!)">{{ 'logged-in-homepage.labels.label-entries.ui_button_remove_entry' | translate }}
               </button>
             </div>

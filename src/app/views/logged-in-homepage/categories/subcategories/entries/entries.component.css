@@ -1,5 +1,5 @@
 /* Styles for the container of entry items */
-.entry-container {
+.entries-container {
   gap: 16px;
   overflow: scroll;
   height: 483px;
@@ -13,16 +13,29 @@
   margin-bottom: 5px;
 }
 
-/**
- * Hover styles for cards.
- */
+/* Hover styles for cards. */
 .card:hover {
-  background: #8489a2;
+  background: #8489A2;
 }
 
-/**
- * Styles for title and subtitle within card.
- */
+/* Grid layout styles for card content */
+.card-paragraph-column {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Styles for the mat-card-header */
+mat-card-header {
+  margin-top: -10px;
+}
+
+/* Styles for the mat-card-content */
+mat-card-content {
+  margin-top: 8px !important;
+}
+
+/* Styles for title and subtitle within card. */
 mat-card-title,
 mat-card-subtitle {
   min-width: 525px;
@@ -39,8 +52,13 @@ mat-card-subtitle {
   color: black;
 }
 
+/* Font weight style for specific labels */
+.bold-label {
+  font-weight: bold;
+}
+
 /* Styles for the connection to the subcategory in which the entry is located */
-.subcategory {
+.subcategory-link-on-label-entries {
   max-width: 500px;
   white-space: nowrap;
   overflow: hidden;
@@ -64,7 +82,7 @@ mat-card-content {
 .right-column {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Zentriert die Elemente vertikal */
+  justify-content: center;
   align-items: center;
 }
 
@@ -99,7 +117,7 @@ mat-card-content {
 }
 
 /* Styles for the remove button */
-.remove {
+.remove-on-label-entries {
   margin-right: 10px;
   display: inline-block;
   border: none;
@@ -123,7 +141,7 @@ mat-card-content {
   flex-direction: row;
   white-space: nowrap;
   overflow: scroll;
-  max-width: 655px;
+  max-width: 555px;
   margin-right: 5px;
 }
 
@@ -142,27 +160,14 @@ mat-card-content {
   text-overflow: ellipsis;
 }
 
-/**
- * Styles for the hover effect on selected labels.
- */
+/* Styles for the hover effect on selected labels. */
 .selected-label:hover {
   background-color: rgba(0, 0, 0, 0.5);
   filter: brightness(60%);
 }
 
-mat-card-content {
-  margin-top: 5px;
-}
-
-/* Grid layout styles for card content */
-.mat-card-content {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
 /* Styles for paragraphs within cards */
-.card-p {
+.card-paragraphs {
   font-size: 18px;
   color: black;
 }
@@ -170,7 +175,6 @@ mat-card-content {
 /* Styles for the dropdown button */
 .dropdown-button {
   position: absolute;
-  background-color: #3586ff;
   border: none;
   transform: translateY(-50%);
   right: 10px;
@@ -182,32 +186,24 @@ mat-card-content {
   z-index: 9999;
 }
 
-/**
- * Hover styles for dropdown buttons.
- */
-.dropdown-button:hover {
-  background-color: #71aaff;
-}
-
 /* Styles for the dropdown menu */
 .dropdown-menu {
   position: absolute;
   font-weight: bold;
   right: 10px;
-  top: 39px;
-  background-color: #808080;
+  top: 40px;
+  background-color: #8489A2;
   border: 1px solid;
   max-height: 84px;
   border-radius: 5px;
   overflow-y: auto;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 10px;
   z-index: 9998;
   display: none;
 }
 
 /* Styles for the button in the dropdown menu */
-.dropdown-menu-button {
+.button-inside-dropdown-menu {
   width: 100%;
   border: none;
   border-radius: 4px;
@@ -219,9 +215,8 @@ mat-card-content {
 }
 
 /* adjusting the dropdown menu's position when the entry label page is open */
-.label-entry-page-dropdown,
-.dropdown-menu-in-label[_ngcontent-ng-c438964712] {
-  top: 69px;
+.dropdown-on-label-entries {
+  top: 74px;
   max-height: 111px;
 }
 
@@ -236,35 +231,24 @@ mat-card-content {
   display: none;
 }
 
-/* Additional styles for dropdown menu within a label */
-.dropdown-menu-in-label {
-  top: 53px;
-  max-height: 77px;
-}
-
 /* Styles for individual items in the dropdown menu */
 .dropdown-menu-item {
   margin-bottom: 5px;
   max-width: 333px;
-  cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 /* Styles for the label within the dropdown menu */
+.dropdown-menu-item input,
 .dropdown-menu-item label {
   cursor: pointer;
 }
 
-/* Font weight style for specific labels */
-.bold-label {
-  font-weight: bold;
-}
-
 /* Media query for smaller screens */
 @media (max-width: 1588px) {
-  .mat-card-content {
+  .card-paragraph-column {
     display: block;
     gap: 20px;
   }
@@ -279,8 +263,12 @@ mat-card-content {
     max-width: 1000px;
   }
 
-  .entry-container {
-    height: 422px;
+  .entries-container {
+    height: 416px;
+  }
+
+  .entries-container-on-label-entries {
+    height: 488px;
   }
 
   .card {
@@ -290,6 +278,11 @@ mat-card-content {
   .go-back,
   .create {
     padding: 10px;
+  }
+
+  .dropdown-on-label-entries {
+    margin-top: 73px;
+    max-height: 86px;
   }
 
   .dropdown-menu {
@@ -308,12 +301,11 @@ mat-card-content {
 /* Media query for even smaller screens */
 @media (max-width: 515px) {
   .dropdown-menu {
-    top: 292px;
+    top: 291px;
   }
 
-  .label-entry-page-dropdown,
-  .dropdown-menu-in-label[_ngcontent-ng-c438964712] {
-    top: 365px;
+  .dropdown-on-label-entries {
+    top: 296px;
     max-height: 86px;
   }
 

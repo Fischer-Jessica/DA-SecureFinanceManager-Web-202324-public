@@ -118,7 +118,7 @@
 }
 
 /** Media query for adjusting footer margin on smaller screens. */
-@media screen and (max-height: 800px) {
+@media screen and (max-height: 850px) {
   .footer {
     margin-top: 100px;
   }

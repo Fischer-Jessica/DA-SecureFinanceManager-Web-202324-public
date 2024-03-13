@@ -38,13 +38,18 @@ li a {
 /* Hover styles for links */
 li:hover {
   border-radius: 22px;
-  background-color: #3c76cc;
+  background-color: #2A6BCC;
 }
 
 /* Styles for active list items */
 .active {
   border-radius: 22px;
-  background-color: #2d5899;
+  background-color: #1F5099;
+}
+
+/* Hover styles for active list items */
+.active:hover {
+  background-color: #1F5099;
 }
 
 /* Styles for user-specific list item */

@@ -153,6 +153,10 @@ Card-Styles: Styles that have to do with the display of the cards.
   cursor: pointer;
 }
 
+.item-card:hover {
+  background: #8489a2;
+}
+
 .item-card mat-card-header {
   padding-top: 5px;
 }
@@ -187,10 +191,6 @@ Card-Styles: Styles that have to do with the display of the cards.
 
 .neutral {
   color: black;
-}
-
-.item-card:hover {
-  background: #8489a2;
 }
 
 .colour-dot {
