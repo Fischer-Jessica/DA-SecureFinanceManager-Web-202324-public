@@ -30,11 +30,6 @@ mat-card-header {
   margin-top: -10px;
 }
 
-/* Styles for the mat-card-content */
-mat-card-content {
-  margin-top: 8px !important;
-}
-
 /* Styles for title and subtitle within card. */
 mat-card-title,
 mat-card-subtitle {
@@ -73,7 +68,7 @@ mat-card-subtitle {
 
 /* Styles for content within entry cards */
 mat-card-content {
-  margin-top: 17px;
+  margin-top: 8px;
   font-size: 17px;
   color: black;
 }
@@ -191,7 +186,7 @@ mat-card-content {
   position: absolute;
   font-weight: bold;
   right: 10px;
-  top: 40px;
+  top: 39px;
   background-color: #8489A2;
   border: 1px solid;
   max-height: 84px;
@@ -216,7 +211,7 @@ mat-card-content {
 
 /* adjusting the dropdown menu's position when the entry label page is open */
 .dropdown-on-label-entries {
-  top: 74px;
+  top: 63px;
   max-height: 111px;
 }
 
@@ -281,12 +276,12 @@ mat-card-content {
   }
 
   .dropdown-on-label-entries {
-    margin-top: 73px;
+    margin-top: 72px;
     max-height: 86px;
   }
 
   .dropdown-menu {
-    top: 292px;
+    top: 277px;
   }
 }
 
@@ -301,11 +296,11 @@ mat-card-content {
 /* Media query for even smaller screens */
 @media (max-width: 515px) {
   .dropdown-menu {
-    top: 291px;
+    top: 277px;
   }
 
   .dropdown-on-label-entries {
-    top: 296px;
+    top: 277px;
     max-height: 86px;
   }
 
