@@ -13,5 +13,5 @@ export interface ApplicationConfig {
  * @const CONFIG
  */
 export const CONFIG: ApplicationConfig = {
-  apiURL: 'http://localhost:8080/secure-finance-manager/'
+  apiURL: 'http://TheIpAddressOfYourBackend/secure-finance-manager/'
 };
