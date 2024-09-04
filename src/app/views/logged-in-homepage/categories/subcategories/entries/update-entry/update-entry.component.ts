@@ -124,10 +124,16 @@ export class UpdateEntryComponent implements OnInit {
    * @memberOf UpdateEntryComponent
    */
   setInitialDateTimeFromDatabase(databaseDateTime: string) {
+    // Split the input string into the date and time parts
     const [datePart, timePart] = databaseDateTime.split(' ');
-    const [year, month, day] = datePart.split('-');
+
+    // Split the date part into day, month, year
+    const [day, month, year] = datePart.split('.');
+
+    // Split the time part into hours and minutes
     const [hours, minutes] = timePart.split(':');
 
+    // Format and set the ISO datetime string (YYYY-MM-DDTHH:MM)
     this.entry.entryTimeOfTransaction = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}T${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}`;
   }
 
@@ -155,10 +161,10 @@ export class UpdateEntryComponent implements OnInit {
       return;
     }
 
-    const date = this.entry.entryTimeOfTransaction.split('T')[0];
-    const time = this.entry.entryTimeOfTransaction.split('T')[1];
+    const [date, time] = this.entry.entryTimeOfTransaction.split('T');
+    const [year, month, day] = date.split('-');
 
-    this.entry.entryTimeOfTransaction = date + ' ' + time;
+    this.entry.entryTimeOfTransaction = `${day.padStart(2, '0')}.${month.padStart(2, '0')}.${year} ${time}`;
 
     const user = JSON.parse(storedUser);
 
