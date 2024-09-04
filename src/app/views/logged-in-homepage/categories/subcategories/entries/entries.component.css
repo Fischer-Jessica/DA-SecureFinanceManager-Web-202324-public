@@ -211,8 +211,8 @@ mat-card-content {
 
 /* adjusting the dropdown menu's position when the entry label page is open */
 .dropdown-on-label-entries {
-  top: 63px;
-  max-height: 111px;
+  top: 55px;
+  max-height: 105px;
 }
 
 /* Show dropdown menu when the dropdown button is focused or hovered over, or when the dropdown menu itself is hovered over. */
@@ -291,16 +291,20 @@ mat-card-content {
     min-width: 500px;
     max-width: 500px;
   }
+
+  .dropdown-menu {
+    top: 268px;
+  }
 }
 
 /* Media query for even smaller screens */
 @media (max-width: 515px) {
   .dropdown-menu {
-    top: 277px;
+    top: 268px;
   }
 
   .dropdown-on-label-entries {
-    top: 277px;
+    top: 268px;
     max-height: 86px;
   }
 

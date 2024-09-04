@@ -107,10 +107,14 @@ export class CreateEntryComponent implements OnInit {
       return;
     }
 
-    const date = newEntryFormData.entryTimeOfTransaction.split('T')[0];
-    const time = newEntryFormData.entryTimeOfTransaction.split('T')[1];
+    const dateTime = newEntryFormData.entryTimeOfTransaction;
+    const date = dateTime.split('T')[0]; // YYYY-MM-DD
+    const time = dateTime.split('T')[1]; // HH:MM
 
-    newEntryFormData.entryTimeOfTransaction = date + ' ' + time;
+    const [year, month, day] = date.split('-');
+    const formattedDate = `${day}.${month}.${year}`;
+
+    newEntryFormData.entryTimeOfTransaction = `${formattedDate} ${time}`;
 
     if (newEntryFormData.entryAmount === null || newEntryFormData.entryTimeOfTransaction === '') {
       this.snackBarService.showAlert(this.translateService.instant('logged-in-homepage.categories.subcategories.entries.create-entry.alert_create_entry_missing_fields'), 'missing');
