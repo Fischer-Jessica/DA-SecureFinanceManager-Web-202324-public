@@ -155,7 +155,13 @@ export class EntriesComponent implements OnInit {
               const sortedEntries = [...result];
               sortedEntries.sort((a, b) => {
                 if (a.entryTimeOfTransaction && b.entryTimeOfTransaction) {
-                  return new Date(b.entryTimeOfTransaction).getTime() - new Date(a.entryTimeOfTransaction).getTime();
+                  const dateA = this.parseDate(a.entryTimeOfTransaction);
+                  const dateB = this.parseDate(b.entryTimeOfTransaction);
+
+                  if (dateA === null || dateB === null) {
+                    return 0;
+                  }
+                  return dateB.getTime() - dateA.getTime();
                 }
                 return 0;
               });
@@ -563,6 +569,29 @@ export class EntriesComponent implements OnInit {
       this.router.navigateByUrl('/authentication/login');
       return;
     }
+  }
+
+  /**
+   * Parses a date string into a Date object.
+   * @param dateString The date string to parse.
+   * @returns A Date object or null if parsing fails.
+   */
+  private parseDate(dateString: string): Date | null {
+    const parts = dateString.split(' '); // Angenommen, das Format ist "DD.MM.YYYY HH:MM"
+    if (parts.length !== 2) return null;
+
+    const dateParts = parts[0].split('.');
+    const timeParts = parts[1].split(':');
+
+    if (dateParts.length !== 3 || timeParts.length !== 2) return null;
+
+    const day = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10) - 1; // Monate sind 0-indexiert
+    const year = parseInt(dateParts[2], 10);
+    const hours = parseInt(timeParts[0], 10);
+    const minutes = parseInt(timeParts[1], 10);
+
+    return new Date(year, month, day, hours, minutes);
   }
 
   /**
