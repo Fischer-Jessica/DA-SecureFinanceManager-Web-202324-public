@@ -314,3 +314,14 @@ mat-card-content {
     max-width: 400px;
   }
 }
+
+/* Media query for smartphone screens */
+@media (max-width: 500px) {
+  .dropdown-menu {
+    top: 288px;
+  }
+
+  .dropdown-on-label-entries {
+    top: 290px;
+  }
+}
