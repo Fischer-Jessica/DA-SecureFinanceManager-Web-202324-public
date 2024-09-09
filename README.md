@@ -15,10 +15,6 @@ The repository consists of two branches:
 - `secure_finance_manager`: This is the primary branch housing the application's codebase.
 - `test_program_to_check_the_connection_with_the_backend`: This branch was created for testing the connection between nodes and is not essential for regular use.
 
-### Changing Files
-
-To use this application, you need to change the `apiURL` in the `app.config.ts` file to the URL of the backend server.
-
 ### Running the Application
 
 #### Development Server
@@ -32,3 +28,5 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 #### Further Help
 
 To get more help on the Angular CLI, use `ng help` or refer to the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+[More Information on how to use the application.](https://github.com/Fischer-Jessica/DA-SecureFinanceManager-Web-202324-public/blob/secure_finance_manager/Installation_Guide.md)
