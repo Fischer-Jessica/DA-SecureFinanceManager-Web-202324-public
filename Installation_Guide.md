@@ -1,5 +1,25 @@
 # Installation Guide
 
+## Table of contents
+
+- [Preprinting a laptop to use as a server](#preprinting-a-laptop-to-use-as-a-server)
+- [Adjusting the configuration files](#adjusting-the-configuration-files)
+  - [Backend-repository](#backend-repository)
+    - [Branch `database`](#branch-database)
+    - [Branch `secure_finance_manager`](#branch-secure_finance_manager)
+  - [Frontend-repository](#frontend-repository)
+    - [Branch `secure_finance_manager`](#branch-secure_finance_manager-1)
+- [Setting up the applications on the server](#setting-up-the-applications-on-the-server)
+  - [Database](#database)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+  - [Webserver for the Frontend](#webserver-for-the-frontend)
+- [Router Configuration](#router-configuration)
+- [Routine Tasks](#routine-tasks)
+  - [Create backups of the database](#create-backups-of-the-database)
+  - [Respond to a new backend version](#respond-to-a-new-backend-version)
+  - [Respond to a new frontend version](#respond-to-a-new-frontend-version)
+
 ## Preprinting a laptop to use as a server
 
 I recommend using Linux, but it is possible to use another operating system to set up the application.
@@ -136,9 +156,7 @@ sudo apt update
     ng serve --host privateIpAddress --port 4200
     ```
 
-## Webserver for the Frontend
-
-### Webserver
+### Webserver for the Frontend
 
 1. Install Apache:
     ```Bash
