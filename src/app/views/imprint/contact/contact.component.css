@@ -40,8 +40,10 @@ pre {
   }
 }
 
+/* Media queries for phone screens */
 @media (max-width: 480px) {
   .business-card {
-    width: 90%;
+    width: 96%;
+    overflow: auto;
   }
 }
