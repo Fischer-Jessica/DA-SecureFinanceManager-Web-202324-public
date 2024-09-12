@@ -306,7 +306,10 @@ export class EntriesComponent implements OnInit {
                     colourHex: result.colourCode
                   });
                   this.availableLabels.sort((a, b) => {
-                    return a.labelId - b.labelId;
+                    if (a.label.labelName !== undefined && b.label.labelName !== undefined) {
+                      return a.label.labelName.localeCompare(b.label.labelName, undefined, {numeric: true});
+                    }
+                    return 0;
                   });
                 },
                 (error) => {

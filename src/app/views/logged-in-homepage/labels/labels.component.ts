@@ -105,8 +105,8 @@ export class LabelsComponent implements OnInit {
           labelSum: undefined
         });
         this.labelsData.sort((a, b) => {
-          if (a.label.labelId !== undefined && b.label.labelId !== undefined) {
-            return b.label.labelId - a.label.labelId;
+          if (a.label.labelName !== undefined && b.label.labelName !== undefined) {
+            return a.label.labelName.localeCompare(b.label.labelName, undefined, {numeric: true});
           }
           return 0;
         });
