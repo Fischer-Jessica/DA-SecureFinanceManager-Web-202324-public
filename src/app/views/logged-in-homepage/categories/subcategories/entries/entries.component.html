@@ -45,7 +45,7 @@
               class="bold-label">{{ 'logged-in-homepage.categories.subcategories.entries.ui_label_entry_amount' | translate }}</span>
             <span [ngClass]="{'positive': entry.entryAmount > 0, 'negative': entry.entryAmount < 0}"
                   style="font-weight: bold;">
-              {{ entry.entryAmount }} € </span>
+              {{ entry.entryAmount }} {{ 'currency' | translate }} </span>
           </mat-card-subtitle>
           <mat-card-subtitle>
             <span

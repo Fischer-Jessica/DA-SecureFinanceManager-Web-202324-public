@@ -28,7 +28,7 @@
     <div class="input-with-euro">
       <input type="number" id="entryAmount" name="entryAmount" [(ngModel)]="entry.entryAmount" required
              class="form-input">
-      <span class="euro-symbol">€</span>
+      <span class="euro-symbol">{{ 'currency' | translate }}</span>
     </div>
   </div>
 

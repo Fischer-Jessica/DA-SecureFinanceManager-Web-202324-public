@@ -29,7 +29,7 @@
         <mat-card-subtitle class="sub-category-value"
                            *ngIf="subcategoryData.subcategorySum !== undefined && subcategoryData.subcategorySum !== null; else noValue"
                            [ngClass]="{'positive': subcategoryData.subcategorySum > 0, 'negative': subcategoryData.subcategorySum < 0, 'neutral': subcategoryData.subcategorySum === 0}">
-          {{ subcategoryData.subcategorySum }} €
+          {{ subcategoryData.subcategorySum }} {{ 'currency' | translate }}
         </mat-card-subtitle>
         <ng-template #noValue>
           <mat-card-subtitle>{{ 'logged-in-homepage.ui_text_no_sum' | translate }}</mat-card-subtitle>
