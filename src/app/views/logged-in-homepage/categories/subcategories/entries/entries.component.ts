@@ -167,13 +167,6 @@ export class EntriesComponent implements OnInit {
               });
               this.entries = sortedEntries;
 
-              this.entries.forEach(entry => {
-                if (entry.entryCreationTime) {
-                  entry.entryCreationTime = this.formatTheEntryCreationTime(new Date(entry.entryCreationTime));
-                } else {
-                  entry.entryCreationTime = 'N/A';
-                }
-              });
               this.fetchLabelsOfEntry(username, password);
             },
             (error) => {
@@ -229,21 +222,6 @@ export class EntriesComponent implements OnInit {
   }
 
   /**
-   * Formats a given date into a string representation with the format "DD.MM.YYYY HH:MM".
-   * @param date The date to be formatted.
-   * @returns A string representing the formatted date and time.
-   */
-  formatTheEntryCreationTime(date: Date): string {
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
-    const hours = ('0' + date.getHours()).slice(-2);
-    const minutes = ('0' + date.getMinutes()).slice(-2);
-
-    return `${day}.${month}.${year} ${hours}:${minutes}`;
-  }
-
-  /**
    * Method to fetch labels of an entry
    * @param {string} username The username for authentication
    * @param {string} password The password for authentication
@@ -256,8 +234,8 @@ export class EntriesComponent implements OnInit {
           .subscribe(
             (result) => {
               result.sort((a, b) => {
-                if (a.labelId !== undefined && b.labelId !== undefined) {
-                  return a.labelId - b.labelId;
+                if (a.labelName !== undefined && b.labelName !== undefined) {
+                  return a.labelName.localeCompare(b.labelName, undefined, {numeric: true});
                 }
                 return 0;
               });
@@ -541,8 +519,8 @@ export class EntriesComponent implements OnInit {
                 if (labelList) {
                   labelList.push(addedLabel.label);
                   labelList.sort((a, b) => {
-                    if (a.labelId && b.labelId) {
-                      return a.labelId - b.labelId;
+                    if (a.labelName !== undefined && b.labelName !== undefined) {
+                      return a.labelName.localeCompare(b.labelName, undefined, {numeric: true});
                     }
                     return 0;
                   });
